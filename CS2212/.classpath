@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="CSCpasstheJ.java|CSCGui.java|WeatherGui.java" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/Colin/Desktop/SE2012/json.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
