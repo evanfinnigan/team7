@@ -19,6 +19,7 @@ public class Time {
 		return convertedTimeData;
 	}
 	
+	//Format time
 	private static String formatTime(long utc){
 		utc = utc*1000;
 		TimeZone est = TimeZone.getTimeZone("EST");
