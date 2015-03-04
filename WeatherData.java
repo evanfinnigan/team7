@@ -777,10 +777,15 @@ public class WeatherData {
 		frame.setVisible(true);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		
-		WeatherData test = new WeatherData("London,ON");
-		
+		//Read from console
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	        System.out.print("Enter City: ");
+	        String s = br.readLine();
+	     
+	    WeatherData test = new WeatherData(s);
+	    
 		// Test cityName methods
 		System.out.println("City: " + test.getCityName());
 		
