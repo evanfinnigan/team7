@@ -100,8 +100,15 @@ public class WeatherData {
 		setTemp24h();
 		setSkyCondition24h();
 		setDescription24h();
+		setIcon24h();
 		
 		//Initialize 5 day forecast variables
+		setTemp5d();
+		setSkyCondition5d();
+		setDescription5d();
+		setIcon5d();
+		setLow5d();
+		setHigh5d();
 		
 	}
 
@@ -529,12 +536,118 @@ public class WeatherData {
 	this.forecast5dJSONObject = requestData(city, forcast5dURL);
 	}
 
-//	private double[] temp5d;
-//	private String[] skyCondition5d;
+	private void setTemp5d() {
+		try{
+			double[] array = new double[5];
+			JSONArray list = forecast5dJSONObject.getJSONArray("list");
+			for (int i = 0; i < 5; i++) {
+				JSONObject jInfo2 = list.getJSONObject(i);
+				JSONObject jInfo3 = jInfo2.getJSONObject("temp");
+				double jInfo4 = jInfo3.getDouble("day");
+				jInfo4 -= 273.15; //Convert to celsius
+				double arrayInput = Math.round(jInfo4 * 100.0) / 100.0;
+				array[i] = arrayInput;
+			}
+			this.temp5d = array;
+		}
+		catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void setLow5d() {
+		try{
+			double[] array = new double[5];
+			JSONArray list = forecast5dJSONObject.getJSONArray("list");
+			for (int i = 0; i < 5; i++) {
+				JSONObject jInfo2 = list.getJSONObject(i);
+				JSONObject jInfo3 = jInfo2.getJSONObject("temp");
+				double jInfo4 = jInfo3.getDouble("min");
+				jInfo4 -= 273.15; //Convert to celsius
+				double arrayInput = Math.round(jInfo4 * 100.0) / 100.0;
+				array[i] = arrayInput;
+			}
+			this.low5d = array;
+		}
+		catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void setHigh5d() {
+		try{
+			double[] array = new double[5];
+			JSONArray list = forecast5dJSONObject.getJSONArray("list");
+			for (int i = 0; i < 5; i++) {
+				JSONObject jInfo2 = list.getJSONObject(i);
+				JSONObject jInfo3 = jInfo2.getJSONObject("temp");
+				double jInfo4 = jInfo3.getDouble("max");
+				jInfo4 -= 273.15; //Convert to celsius
+				double arrayInput = Math.round(jInfo4 * 100.0) / 100.0;
+				array[i] = arrayInput;
+			}
+			this.high5d = array;
+		}
+		catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void setSkyCondition5d() {
+		try{
+			String[] array = new String[5];
+			JSONArray list = forecast5dJSONObject.getJSONArray("list");
+			for (int i = 0; i < 5; i++) {
+				JSONObject jInfo2 = list.getJSONObject(i);
+				JSONArray jInfo3 = jInfo2.getJSONArray("weather");
+				JSONObject jInfo4 = jInfo3.getJSONObject(0);
+				String jInfo5 = jInfo4.getString("main");
+				array[i] = jInfo5;
+			}
+			this.skyCondition5d = array;
+		}
+		catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private void setDescription5d() {
+		try{
+			String[] array = new String[5];
+			JSONArray list = forecast5dJSONObject.getJSONArray("list");
+			for (int i = 0; i < 5; i++) {
+				JSONObject jInfo2 = list.getJSONObject(i);
+				JSONArray jInfo3 = jInfo2.getJSONArray("weather");
+				JSONObject jInfo4 = jInfo3.getJSONObject(0);
+				String jInfo5 = jInfo4.getString("description");
+				array[i] = jInfo5;
+			}
+			this.description5d = array;
+		}
+		catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void setIcon5d() {
+		try{
+			Image[] array = new Image[5];
+			JSONArray list = forecast5dJSONObject.getJSONArray("list");
+			for (int i = 0; i < 5; i++) {
+				JSONObject jInfo2 = list.getJSONObject(i);
+				JSONArray jInfo3 = jInfo2.getJSONArray("weather");
+				JSONObject jInfo4 = jInfo3.getJSONObject(0);
+				String jInfo5 = jInfo4.getString("icon");
+				array[i] = requestImage(jInfo5);
+			}
+			this.icon5d = array;
+		}
+		catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
 //	private int[] percentPrecipitation5d;
-//	private Image[] icon5d;
-//	private double[] low5d;
-//	private double[] high5d;;
 
 	//Mars Weather Setters
 	private void refreshMarsJSONObject(){
@@ -652,6 +765,17 @@ public class WeatherData {
 		}
 		return jstring.toString();
 	}
+	
+	// Helper Test method for displaying icons
+	private static void iconTest(Image im){
+		JLabel lblimg = new JLabel(new ImageIcon(im));
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel();
+		panel.add(lblimg);
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
+	}
 
 	public static void main(String[] args) {
 		
@@ -693,14 +817,9 @@ public class WeatherData {
 		// Test low methods
 		System.out.println("Low: " + test.getLow());
 		
-//		// Test icon methods
-//		Image im = test.getIcon();
-//		JLabel lblimg = new JLabel(new ImageIcon(im));
-//		JFrame frame = new JFrame();
-//		JPanel panel = new JPanel();
-//		panel.add(lblimg);
-//		frame.add(panel);
-//		frame.setVisible(true);
+		// Test icon methods
+		Image im = test.getIcon();
+		iconTest(im);
 		
 		// Test temp24h methods
 		double[] temp24array = test.getTemp24h();
@@ -717,7 +836,46 @@ public class WeatherData {
 			System.out.println("Sky Condition in " + j + " hours: " + skyCondition24array[i] + " (" + description24array[i] + ")");
 		}
 		
+		// Test 24h icon array
+		Image[] icon24array = test.getIcon24h();
+		for (int i = 0; i < 8; i++){
+			iconTest(icon24array[i]);
+		}
 		
+		// Test temp5d methods
+		double[] temp5darray = test.getTemp5d();
+		for (int i = 0; i < 5; i++){
+			int j = i+1;
+			System.out.println("Temperature in " + j + " days: " + temp5darray[i] + " degrees Celsius");
+		}
+		
+		// Test skyCondition5d & description5d methods
+		String[] skyCondition5darray = test.getSkyCondition5d();
+		String[] description5darray = test.getDescription5d();
+		for (int i = 0; i < 5; i++){
+			int j = i+1;
+			System.out.println("Sky Condition in " + j + " days: " + skyCondition5darray[i] + " (" + description5darray[i] + ")");
+		}
+				
+		// Test 5d icon array
+		Image[] icon5darray = test.getIcon5d();
+		for (int i = 0; i < 5; i++){
+			iconTest(icon24array[i]);
+		}
+		
+		// Test low5d methods
+		double[] low5darray = test.getLow5d();
+		for (int i = 0; i < 5; i++){
+			int j = i+1;
+			System.out.println("Low in " + j + " days: " + low5darray[i] + " degrees Celsius");
+		}
+				
+		// Test high5d methods
+		double[] high5darray = test.getTemp5d();
+		for (int i = 0; i < 5; i++){
+			int j = i+1;
+			System.out.println("High in " + j + " days: " + high5darray[i] + " degrees Celsius");
+		}
 		
 		// Test timeOfLastRequest
 		System.out.println("Most Recent Update: " + test.getTimeOfLastRequest());
