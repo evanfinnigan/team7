@@ -123,6 +123,7 @@ public class WeatherData {
 		setPressureMars();
 		setHumidityMars();
 		setSkyConditionMars();
+		setMarsIcon();
 	}
 
 	// Getters
@@ -744,7 +745,22 @@ public class WeatherData {
 		}
 	}
 	
-//	private ImageIO iconMars;
+	private void setMarsIcon(){
+		try {
+			JSONObject jInfo = marsJSONObject.getJSONObject("report");
+			String jInfo2 = jInfo.getString("atmo_opacity");
+			Image marsIcon;
+			if (jInfo2 == "Sunny"){
+				marsIcon = requestImage("01d");
+			} else {
+				marsIcon = requestImage("11d");
+				System.out.println("But it's always sunny on Mars!");
+			}
+			this.iconMars = marsIcon;
+		} catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
 
 	// Method to test if the City Name is correct and returns a valid JSON object
 	public static boolean testValidity(JSONObject object) {
@@ -906,6 +922,7 @@ public class WeatherData {
 		setPressureMars();
 		setHumidityMars();
 		setSkyConditionMars();
+		setMarsIcon();
 	}
 	
 	// Main Test Method
@@ -1032,6 +1049,9 @@ public class WeatherData {
 		
 		// Test timeOfLastRequest
 		System.out.println("Most Recent Update: " + test.getTimeOfLastRequest());
+		
+		// Test setMarsIcon
+		iconTest(test.getIconMars());
 		
 	}
 
