@@ -750,7 +750,7 @@ public class WeatherData {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			String jInfo2 = jInfo.getString("atmo_opacity");
 			Image marsIcon;
-			if (jInfo2 == "Sunny"){
+			if (jInfo2.equalsIgnoreCase("Sunny")){
 				marsIcon = requestImage("01d");
 			} else {
 				marsIcon = requestImage("11d");
