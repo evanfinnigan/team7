@@ -701,7 +701,7 @@ public class WeatherData {
 			double jInfo3 = Math.round(jInfo2 * 100.0) / 100.0;
 			this.windSpeedMars = jInfo3;
 		} catch (JSONException e){
-			System.out.println(e.getMessage());
+			this.windSpeedMars = 0;
 		}
 	}
 
@@ -731,7 +731,7 @@ public class WeatherData {
 			int jInfo2 = jInfo.getInt("abs_humidity");
 			this.humidityMars = jInfo2;
 		} catch (JSONException e){
-			System.out.println(e.getMessage());
+			this.humidityMars = 0;
 		}
 	}
 	
