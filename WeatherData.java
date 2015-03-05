@@ -19,6 +19,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 
+/**
+ * @author Evan
+ * 
+ */
 public class WeatherData {
 
 	final static String currentURL = "http://api.openweathermap.org/data/2.5/weather?q=";
@@ -27,7 +31,7 @@ public class WeatherData {
 	final static String imgURL = "http://openweathermap.org/img/w/";
 	final static String marsURL = "http://marsweather.ingenology.com/v1/latest/?format=json";
 
-	// Attributes for how old the data is
+	//Attributes
 	private String timeOfLastRequest;
 
 	// Current Weather Attributes
@@ -66,12 +70,13 @@ public class WeatherData {
 
 	// Mars Weather Attributes
 	private JSONObject marsJSONObject;
-	private double tempMars;
+	private double minTempMars;
+	private double maxTempMars;
 	private double windSpeedMars;
-	private double windDirectionMars;
-	private int pressureMars;
+	private String windDirectionMars;
+	private double pressureMars;
 	private int humidityMars;
-	private int skyConditionMars;
+	private String skyConditionMars;
 	private Image iconMars;
 
 	// Constructor
@@ -110,6 +115,14 @@ public class WeatherData {
 		setLow5d();
 		setHigh5d();
 		
+		//Initialize Mars variables
+		setMinTempMars();
+		setMaxTempMars();
+		setWindSpeedMars();
+		setWindDirectionMars();
+		setPressureMars();
+		setHumidityMars();
+		setSkyConditionMars();
 	}
 
 	// Getters
@@ -238,19 +251,23 @@ public class WeatherData {
 		return marsJSONObject;
 	}
 
-	public double getTempMars() {
-		return tempMars;
+	public double getMinTempMars() {
+		return minTempMars;
 	}
 
+	public double getMaxTempMars() {
+		return maxTempMars;
+	}
+	
 	public double getWindSpeedMars() {
 		return windSpeedMars;
 	}
 
-	public double getWindDirectionMars() {
+	public String getWindDirectionMars() {
 		return windDirectionMars;
 	}
 
-	public int getPressureMars() {
+	public double getPressureMars() {
 		return pressureMars;
 	}
 
@@ -258,7 +275,7 @@ public class WeatherData {
 		return humidityMars;
 	}
 
-	public int getSkyConditionMars() {
+	public String getSkyConditionMars() {
 		return skyConditionMars;
 	}
 
@@ -654,12 +671,79 @@ public class WeatherData {
 	this.marsJSONObject = requestMarsData(marsURL);
 	}
 
-//	private double tempMars;
-//	private int windSpeedMars;
-//	private int windDirectionMars;
-//	private int pressureMars;
-//	private int humidityMars;
-//	private int skyConditionMars;
+	private void setMinTempMars(){
+		try {
+			JSONObject jInfo = marsJSONObject.getJSONObject("report");
+			double jInfo2 = jInfo.getDouble("min_temp");
+			double jInfo3 = Math.round(jInfo2 * 100.0) / 100.0;
+			this.minTempMars = jInfo3;
+		} catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void setMaxTempMars(){
+		try {
+			JSONObject jInfo = marsJSONObject.getJSONObject("report");
+			double jInfo2 = jInfo.getDouble("max_temp");
+			double jInfo3 = Math.round(jInfo2 * 100.0) / 100.0;
+			this.maxTempMars = jInfo3;
+		} catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void setWindSpeedMars(){
+		try {
+			JSONObject jInfo = marsJSONObject.getJSONObject("report");
+			double jInfo2 = jInfo.getDouble("wind_speed");
+			double jInfo3 = Math.round(jInfo2 * 100.0) / 100.0;
+			this.windSpeedMars = jInfo3;
+		} catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private void setWindDirectionMars(){
+		try {
+			JSONObject jInfo = marsJSONObject.getJSONObject("report");
+			String jInfo2 = jInfo.getString("wind_direction");
+			this.windDirectionMars = jInfo2;
+		} catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void setPressureMars(){
+		try{
+			JSONObject jInfo = marsJSONObject.getJSONObject("report");
+			double jInfo2 = jInfo.getDouble("pressure");
+			this.pressureMars = jInfo2;
+		} catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void setHumidityMars(){
+		try{
+			JSONObject jInfo = marsJSONObject.getJSONObject("report");
+			int jInfo2 = jInfo.getInt("abs_humidity");
+			this.humidityMars = jInfo2;
+		} catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void setSkyConditionMars(){
+		try {
+			JSONObject jInfo = marsJSONObject.getJSONObject("report");
+			String jInfo2 = jInfo.getString("atmo_opacity");
+			this.skyConditionMars = jInfo2;
+		} catch (JSONException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
 //	private ImageIO iconMars;
 
 	// Method to test if the City Name is correct and returns a valid JSON object
@@ -777,6 +861,54 @@ public class WeatherData {
 		frame.setVisible(true);
 	}
 
+	// Method to update the data
+	public void refreshAndUpdate(String city){
+		
+		refreshCurrentJSONObject(city);
+		refreshForecast24hJSONObject(city);
+		refreshForecast5dJSONObject(city);
+		refreshMarsJSONObject();
+		
+		//Initialize Current Weather Variables
+		setCityName();
+		setSkyConditionCurrent();
+		setDescription();
+		setTempCurrent();
+		setSunset();
+		setSunrise();
+		setIcon();
+		setPressure();
+		setHumidity();
+		setWindSpeed();
+		setWindDirection();
+		setHigh();
+		setLow();
+		
+		//Initialize 24 hour forecast variables
+		setTemp24h();
+		setSkyCondition24h();
+		setDescription24h();
+		setIcon24h();
+				
+		//Initialize 5 day forecast variables
+		setTemp5d();
+		setSkyCondition5d();
+		setDescription5d();
+		setIcon5d();
+		setLow5d();
+		setHigh5d();
+				
+		//Initialize Mars variables
+		setMinTempMars();
+		setMaxTempMars();
+		setWindSpeedMars();
+		setWindDirectionMars();
+		setPressureMars();
+		setHumidityMars();
+		setSkyConditionMars();
+	}
+	
+	// Main Test Method
 	public static void main(String[] args) {
 		
 		WeatherData test = new WeatherData("London,ON");
@@ -860,7 +992,7 @@ public class WeatherData {
 		// Test 5d icon array
 		Image[] icon5darray = test.getIcon5d();
 		for (int i = 0; i < 5; i++){
-			iconTest(icon24array[i]);
+			iconTest(icon5darray[i]);
 		}
 		
 		// Test low5d methods
@@ -876,6 +1008,21 @@ public class WeatherData {
 			int j = i+1;
 			System.out.println("High in " + j + " days: " + high5darray[i] + " degrees Celsius");
 		}
+		
+		// Test Mars Sky Condition
+		System.out.println("Mars Sky Condition: " + test.getSkyConditionMars());
+		
+		// Test Mars temp min & max
+		System.out.println("Mars Temperature >>> MIN: " + test.getMinTempMars() + " degrees Celsius, MAX: " + test.getMaxTempMars() + " degrees Celsius");
+		
+		// Test Mars Windspeed & direction
+		System.out.println("Mars Wind Speed: " + test.getWindSpeedMars() + " Direction: " + test.getWindDirectionMars());
+		
+		// Test Pressure Mars
+		System.out.println("Mars Pressure: " + test.getPressureMars() + " units? ATM, kPa, hPa, ???");
+		
+		// Test Humidity Mars
+		System.out.println("Mars Humidity: " + test.getHumidityMars() + "%");
 		
 		// Test timeOfLastRequest
 		System.out.println("Most Recent Update: " + test.getTimeOfLastRequest());
