@@ -1,18 +1,17 @@
 package team7;
 
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Group;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import javax.swing.JFrame;// used in the test to be removed
-
 import javax.swing.WindowConstants;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
@@ -36,114 +35,146 @@ public class Currentweather extends JPanel{
 	private JLabel airpressure_l;
 
 	public Currentweather(WeatherData data, WeatherPreferences prefs){
-		currentData = data;
-		currentPrefs = prefs;
+		this.currentData = data;
+		this.currentPrefs = prefs;
 		initComponents();
-		createLayout();
+		creategridLayout();
+		//createLayout();
 		applyPrefs(prefs);
+		this.add(pane);
+	}
+	// helper method to convert celcius to fahrenheit
+    private double convertctof(double temp){
+		double n = ((temp*1.8)+32);
+		return n;
 	}
 
 	private void initComponents() {
 		// create fonts for text
-		Font mainfont = new Font("lrg", Font.PLAIN, 30);
-		Font minorfont = new Font("sml", Font.PLAIN, 15);
-		
+		Font lrgfont = new Font("lrg", Font.PLAIN, 24);
+		Font medfont = new Font("med", Font.PLAIN, 15);
+		Font smlfont = new Font("sml", Font.PLAIN, 10);
 		// create labels to display basic data
-		
-		this.pane = new JPanel();
-		
-		this.sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
-		sunrise_l.setFont(minorfont);
-		
-		this.sunset_l = new JLabel("Sunset: " + currentData.getSunset());
-		sunset_l.setFont(minorfont);
-		
-		this.windspeed_l = new JLabel("Wind Speed: " + currentData.getWindSpeed());
-		windspeed_l.setFont(minorfont);
-		
-		this.winddirection_l = new JLabel("Wind Direction: "
+		pane = new TransparentPanel();
+		pane.setPreferredSize(new Dimension(800,200)); 
+		sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
+		sunrise_l.setFont(medfont);
+		sunset_l = new JLabel("Sunset: " + currentData.getSunset());
+		sunset_l.setFont(medfont);
+		windspeed_l = new JLabel("Wind Speed: " + currentData.getWindSpeed());
+		windspeed_l.setFont(medfont);
+		winddirection_l = new JLabel("Wind Direction: "
 				+ currentData.getWindDirection());
-		winddirection_l.setFont(minorfont);
-		
-		this.weatherdescription_l = new JLabel("Current Conditions: "
-				+ currentData.getDescription());
-		weatherdescription_l.setFont(minorfont);
-		
-		this.skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
+		winddirection_l.setFont(medfont);
+		weatherdescription_l = new JLabel("" + currentData.getDescription());
+		weatherdescription_l.setFont(medfont);
 		skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
-		skycondition_l.setFont(minorfont);
-		
-		this.temp_l = new JLabel("Current Temperature: "
-				+ currentData.getTempCurrent());
-		temp_l.setFont(mainfont);
-		
-		this.tempmax_l = new JLabel("High: " + currentData.getHigh());
-		tempmax_l.setFont(minorfont);
-		
-		this.tempmin_l = new JLabel("Low: " + currentData.getLow());
-		tempmin_l.setFont(minorfont);
-		
-		this.humidity_l = new JLabel("Humidity: " + currentData.getHumidity());
-		humidity_l.setFont(minorfont);
-		
-		this.airpressure_l = new JLabel("Air Pressure: " + currentData.getPressure());
-		airpressure_l.setFont(minorfont);
-		
-		this.image_l = new JLabel(new ImageIcon(currentData.getIcon()));
+		skycondition_l.setFont(medfont);
+		temp_l = new JLabel(currentData.getTempCurrent() +"\u00b0" + currentPrefs.getUnits());
+		temp_l.setFont(lrgfont);
+		tempmax_l = new JLabel("High: " + currentData.getHigh());
+		tempmax_l.setFont(medfont);
+		tempmax_l.setForeground(Color.RED);
+		tempmin_l = new JLabel("Low: " + currentData.getLow());
+		tempmin_l.setFont(medfont);
+		tempmin_l.setForeground(Color.BLUE);
+		humidity_l = new JLabel("Humidity: " + currentData.getHumidity());
+		humidity_l.setFont(medfont);
+		airpressure_l = new JLabel("Air Pressure: " + currentData.getPressure());
+		airpressure_l.setFont(medfont);
+		image_l = new JLabel(new ImageIcon(currentData.getIcon()));
 	}
-	
+	private void creategridLayout(){
+		GridLayout glayout = new GridLayout(1,3);
+		
+		pane.setLayout(glayout);
+		pane.add(temp_l);
+		pane.add(tempmin_l);
+		pane.add(tempmax_l);
+		pane.add(image_l);
+		pane.add(skycondition_l);
+		pane.add(weatherdescription_l);
+		pane.add(windspeed_l);
+		pane.add(winddirection_l);
+		pane.add(humidity_l);
+		pane.add(airpressure_l);
+		pane.add(sunrise_l);
+		pane.add(sunset_l);
+		pane.validate();
+	}
 	private void createLayout(){
 		
 		GroupLayout panelayout = new GroupLayout(pane);
-		ParallelGroup hmiddle = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-	      
-        hmiddle.addComponent(temp_l);
-        hmiddle.addComponent(tempmin_l);
-        hmiddle.addComponent(tempmax_l);
-        hmiddle.addGap(10);
-        hmiddle.addComponent(weatherdescription_l);
-        hmiddle.addComponent(skycondition_l);
-        hmiddle.addComponent(image_l);  
-        hmiddle.addGap(10);
-        hmiddle.addComponent(windspeed_l);
-        hmiddle.addComponent(winddirection_l);
-        hmiddle.addGap(10);
-        hmiddle.addComponent(sunrise_l);
-        hmiddle.addComponent(sunset_l);
-        hmiddle.addGap(10);
-        hmiddle.addComponent(humidity_l);
-        hmiddle.addComponent(airpressure_l);
+		panelayout.setAutoCreateContainerGaps(true);
+		panelayout.setAutoCreateGaps(true);
+		
+		ParallelGroup x_axis_left = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);  
+		ParallelGroup x_axis_middle = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+		ParallelGroup x_axis_right = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);  
+		
+		x_axis_left.addComponent(temp_l);
+	    x_axis_left.addComponent(weatherdescription_l);
+		x_axis_left.addComponent(skycondition_l);
+		x_axis_left.addComponent(image_l);
+		
+		x_axis_middle.addComponent(tempmax_l);
+		x_axis_middle.addComponent(tempmin_l);
+	    x_axis_middle.addComponent(windspeed_l);
+		x_axis_middle.addComponent(winddirection_l);
+		
+		x_axis_right.addComponent(humidity_l);
+		x_axis_right.addComponent(airpressure_l);
+		x_axis_right.addComponent(sunrise_l);
+		x_axis_right.addComponent(sunset_l);
+	
+        ParallelGroup y_axis_1 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        ParallelGroup y_axis_2 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        ParallelGroup y_axis_3 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        ParallelGroup y_axis_4 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        ParallelGroup y_axis_5 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        ParallelGroup y_axis_6 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
         
-        SequentialGroup toplabels = panelayout.createSequentialGroup();
-        SequentialGroup bottomlabels = panelayout.createSequentialGroup();
+        y_axis_1.addComponent(temp_l);
+     
+        y_axis_2.addComponent(tempmax_l);
+        y_axis_2.addComponent(sunrise_l);
+        y_axis_2.addComponent(skycondition_l);
         
-        toplabels.addComponent(temp_l);
-        toplabels.addComponent(tempmin_l);
-        toplabels.addComponent(tempmax_l);
-        toplabels.addComponent(skycondition_l);
-        toplabels.addComponent(image_l);
-        toplabels.addComponent(windspeed_l);
-        toplabels.addComponent(winddirection_l);
+        y_axis_3.addComponent(tempmin_l);
+        y_axis_3.addComponent(sunset_l);
         
-        bottomlabels.addComponent(sunrise_l);
-	    bottomlabels.addComponent(sunset_l);
-        bottomlabels.addComponent(humidity_l);
-        bottomlabels.addComponent(airpressure_l);
-        bottomlabels.addComponent(weatherdescription_l);
+        y_axis_4.addComponent(image_l);
         
-        ParallelGroup hGroup = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        ParallelGroup vGroup = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        y_axis_5.addComponent(windspeed_l);
+        y_axis_5.addComponent(humidity_l);
+        y_axis_5.addComponent(weatherdescription_l);
         
-        hGroup.addGroup(toplabels);
-        hGroup.addGroup(bottomlabels);
-        vGroup.addGroup(toplabels);
-        vGroup.addGroup(bottomlabels);
-      
+        y_axis_6.addComponent(winddirection_l);
+        y_axis_6.addComponent(airpressure_l);
+        
+        
+        SequentialGroup hGroup = panelayout.createSequentialGroup();
+        SequentialGroup vGroup = panelayout.createSequentialGroup();
+         
+        hGroup.addGroup(x_axis_left);
+        hGroup.addGap(25);
+        hGroup.addGroup(x_axis_middle);
+        hGroup.addGap(25);
+        hGroup.addGroup(x_axis_right);
+        
+        vGroup.addGroup(y_axis_1);
+        vGroup.addGroup(y_axis_2);
+        vGroup.addGroup(y_axis_3);
+        vGroup.addGroup(y_axis_4);
+        vGroup.addGroup(y_axis_5);
+        vGroup.addGroup(y_axis_6);
+        
         panelayout.setHorizontalGroup(hGroup);
         panelayout.setVerticalGroup(vGroup);
         pane.setLayout(panelayout);
-        
+        pane.validate();
   }
+	
 	private void applyPrefs(WeatherPreferences prefs){
 		
 		temp_l.setVisible(prefs.showTemperature());
@@ -164,15 +195,19 @@ public class Currentweather extends JPanel{
 	// Test
 
 	public static void main(String[] args){
+		
 		JFrame frame = new JFrame();
 		frame.setTitle("Weather for London, Canada");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setPreferredSize(null);
 		WeatherPreferences prefs = new WeatherPreferences();
 		WeatherData data = new WeatherData("London,ca");
-		JPanel test = new Currentweather(data, prefs);
-		frame.add(test);
-		frame.setVisible(true);
-		frame.pack();
 		
+		System.out.println(data.getCityName());
+		JPanel test = new Currentweather(data, prefs);
+		frame.getContentPane().add(test);
+		System.out.println("finished");
+		frame.pack();
+		frame.show();
 	}
 }
