@@ -17,7 +17,7 @@ public class Forecast24Hour {
 		private JPanel pane;
 		private JLabel[] image_l;
 		private JLabel[] weatherdescription_l;
-		//private JLabel[] skycondition_l;
+		private JLabel[] skycondition_l;
 		private JLabel[] temp_l;
 		//private JLabel[] percentPrecipitation_l;
 
@@ -55,13 +55,13 @@ public class Forecast24Hour {
 			for (int i = 0; i < 8; i++){
 				int j = (i+1)*3;
 				wdlabel[i] = new JLabel("Conditions in " + j + " hours: "
-						+ skyConditionArray[i] + ".    Details: " + descriptionArray[i]);
+						 + descriptionArray[i]);
 				wdlabel[i].setFont(minorfont);
 				
-//				sclabel[i] = new JLabel("Sky Condition in " + j + " hours: " + skyConditionArray[i]);
-//				sclabel[i].setFont(minorfont);
+				sclabel[i] = new JLabel("    Sky:  " + skyConditionArray[i]);
+				sclabel[i].setFont(minorfont);
 				
-				templabel[i] = new JLabel("Temperature in " + j +" hours: "
+				templabel[i] = new JLabel("Temperature :"
 						+ tempArray[i]);
 				templabel[i].setFont(minorfont);
 				
@@ -69,14 +69,14 @@ public class Forecast24Hour {
 			}
 			
 			this.weatherdescription_l = wdlabel;
-			//this.skycondition_l = sclabel;
+			this.skycondition_l = sclabel;
 			this.temp_l = templabel;
 			this.image_l = imagelabel;
 		}
 
 		private void createDisplay(Preferences prefs) {
 
-			GridLayout panelayout = new GridLayout(0, 3);
+			GridLayout panelayout = new GridLayout(0, 4);
 			pane.setLayout(panelayout);
 			for (int i = 0; i < 8; i++){
 				
@@ -91,6 +91,12 @@ public class Forecast24Hour {
 				if (prefs.showTemperature() == true) {
 					pane.add(temp_l[i]);
 				}
+				
+				if (prefs.showSky() == true) {
+					pane.add(skycondition_l[i]);
+				}
+				
+				
 			}
 		}
 

@@ -93,12 +93,12 @@ public class Forecast5Day {
 				pane.add(weatherdescription_l[i]);
 			}
 			
-			if (prefs.showSky() == true) {
-				pane.add(skycondition_l[i]);
-			}
-
 			if (prefs.showIcon() == true) {
 				pane.add(image_l[i]);
+			}
+			
+			if (prefs.showSky() == true) {
+				pane.add(skycondition_l[i]);
 			}
 
 			if (prefs.showTemperature() == true) {
