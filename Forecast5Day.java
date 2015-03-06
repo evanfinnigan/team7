@@ -116,17 +116,18 @@ public class Forecast5Day {
 
 	}
 
-//	// Test
-//	public static void main(String[] args) {
-//
-//		Preferences p = new Preferences();
-//		WeatherData d = new WeatherData();
-//		Forecast5Day test = new Forecast5Day(d, p);
-//		JFrame frame = new JFrame();
-//		frame.add(test.getPanel());
-//		frame.setVisible(true);
-//		frame.pack();
-//		frame.setTitle("5 Day Weather Forecast for London, Canada");
-//	}
+	// Test
+	public static void main(String[] args) {
+
+		Preferences p = new Preferences();
+		InputTest t = new InputTest("London, Canada");
+		WeatherData d = new WeatherData(t);
+		Forecast5Day test = new Forecast5Day(d, p);
+		JFrame frame = new JFrame();
+		frame.add(test.getPanel());
+		frame.setVisible(true);
+		frame.pack();
+		frame.setTitle("5 Day Weather Forecast for London, Canada");
+	}
 
 }

@@ -100,17 +100,18 @@ public class Forecast24Hour {
 			}
 		}
 
-//		// Test
-//		public static void main(String[] args){
-//			
-//			Preferences p = new Preferences();
-//			WeatherData d = new WeatherData();
-//			Forecast24Hour test = new Forecast24Hour(d, p);
-//			JFrame frame = new JFrame();
-//			frame.add(test.getPanel());
-//			frame.setVisible(true);
-//			frame.pack();
-//			frame.setTitle("24 Hour Weather Forecast for London, Canada");
-//		}
+		// Test
+		public static void main(String[] args){
+			
+			Preferences p = new Preferences();
+			InputTest t = new InputTest("London, Canada");
+			WeatherData d = new WeatherData(t);
+			Forecast24Hour test = new Forecast24Hour(d, p);
+			JFrame frame = new JFrame();
+			frame.add(test.getPanel());
+			frame.setVisible(true);
+			frame.pack();
+			frame.setTitle("24 Hour Weather Forecast for London, Canada");
+		}
 	
 }
