@@ -39,50 +39,62 @@ public class Currentweather extends JPanel{
 		currentData = data;
 		currentPrefs = prefs;
 		initComponents();
-		createDisplay(prefs);
+		createLayout();
+		applyPrefs(prefs);
 	}
 
 	private void initComponents() {
-		// create labels to display basic data
-		this.pane = new JPanel();
+		// create fonts for text
 		Font mainfont = new Font("lrg", Font.PLAIN, 30);
 		Font minorfont = new Font("sml", Font.PLAIN, 15);
+		
+		// create labels to display basic data
+		
+		this.pane = new JPanel();
+		
 		this.sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
 		sunrise_l.setFont(minorfont);
+		
 		this.sunset_l = new JLabel("Sunset: " + currentData.getSunset());
 		sunset_l.setFont(minorfont);
+		
 		this.windspeed_l = new JLabel("Wind Speed: " + currentData.getWindSpeed());
 		windspeed_l.setFont(minorfont);
+		
 		this.winddirection_l = new JLabel("Wind Direction: "
 				+ currentData.getWindDirection());
 		winddirection_l.setFont(minorfont);
+		
 		this.weatherdescription_l = new JLabel("Current Conditions: "
 				+ currentData.getDescription());
 		weatherdescription_l.setFont(minorfont);
+		
 		this.skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
 		skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
 		skycondition_l.setFont(minorfont);
+		
 		this.temp_l = new JLabel("Current Temperature: "
 				+ currentData.getTempCurrent());
 		temp_l.setFont(mainfont);
-		this.tempmax_l = new JLabel("High: " + currentData.getLow());
+		
+		this.tempmax_l = new JLabel("High: " + currentData.getHigh());
 		tempmax_l.setFont(minorfont);
-		this.tempmin_l = new JLabel("Low: " + currentData.getHigh());
-		//tempmax_l.setFont(minorfont);
-		tempmax_l = new JLabel("High:" + currentData.getLow());
-		tempmax_l.setFont(minorfont);
-		tempmin_l = new JLabel("Low:"+ currentData.getHigh());
+		
+		this.tempmin_l = new JLabel("Low: " + currentData.getLow());
 		tempmin_l.setFont(minorfont);
+		
 		this.humidity_l = new JLabel("Humidity: " + currentData.getHumidity());
 		humidity_l.setFont(minorfont);
+		
 		this.airpressure_l = new JLabel("Air Pressure: " + currentData.getPressure());
 		airpressure_l.setFont(minorfont);
+		
 		this.image_l = new JLabel(new ImageIcon(currentData.getIcon()));
 	}
 	
-	private void createDisplay(WeatherPreferences prefs){
-		GroupLayout panelayout = new GroupLayout(pane);
+	private void createLayout(){
 		
+		GroupLayout panelayout = new GroupLayout(pane);
 		ParallelGroup hmiddle = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
 	      
         hmiddle.addComponent(temp_l);
@@ -130,8 +142,6 @@ public class Currentweather extends JPanel{
         panelayout.setHorizontalGroup(hGroup);
         panelayout.setVerticalGroup(vGroup);
         pane.setLayout(panelayout);
-        pane.validate();
-        pane.setVisible(true);
         
   }
 	private void applyPrefs(WeatherPreferences prefs){
