@@ -1,4 +1,5 @@
 package team7;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,7 +32,7 @@ public class WeatherData {
 	final static String imgURL = "http://openweathermap.org/img/w/";
 	final static String marsURL = "http://marsweather.ingenology.com/v1/latest/?format=json";
 
-	//Attributes
+	// Attributes
 	private String timeOfLastRequest;
 
 	// Current Weather Attributes
@@ -85,8 +86,8 @@ public class WeatherData {
 		this.forecast24hJSONObject = requestData(city, forcast24hURL);
 		this.forecast5dJSONObject = requestData(city, forcast5dURL);
 		this.marsJSONObject = requestMarsData(marsURL);
-		
-		//Initialize Current Weather Variables
+
+		// Initialize Current Weather Variables
 		setCityName();
 		setSkyConditionCurrent();
 		setDescription();
@@ -100,22 +101,22 @@ public class WeatherData {
 		setWindDirection();
 		setHigh();
 		setLow();
-		
-		//Initialize 24 hour forecast variables
+
+		// Initialize 24 hour forecast variables
 		setTemp24h();
 		setSkyCondition24h();
 		setDescription24h();
 		setIcon24h();
-		
-		//Initialize 5 day forecast variables
+
+		// Initialize 5 day forecast variables
 		setTemp5d();
 		setSkyCondition5d();
 		setDescription5d();
 		setIcon5d();
 		setLow5d();
 		setHigh5d();
-		
-		//Initialize Mars variables
+
+		// Initialize Mars variables
 		setMinTempMars();
 		setMaxTempMars();
 		setWindSpeedMars();
@@ -201,12 +202,12 @@ public class WeatherData {
 	public String[] getSkyCondition24h() {
 		return skyCondition24h;
 	}
-	
+
 	public String[] getDescription24h() {
 		return description24h;
 	}
-	
-	public int[] getPercentPreicipitation24h(){
+
+	public int[] getPercentPreicipitation24h() {
 		return percentPrecipitation24h;
 	}
 
@@ -226,12 +227,12 @@ public class WeatherData {
 	public String[] getSkyCondition5d() {
 		return skyCondition5d;
 	}
-	
+
 	public String[] getDescription5d() {
 		return description5d;
 	}
-	
-	public int[] getPercentPreicipitation5d(){
+
+	public int[] getPercentPreicipitation5d() {
 		return percentPrecipitation5d;
 	}
 
@@ -259,7 +260,7 @@ public class WeatherData {
 	public double getMaxTempMars() {
 		return maxTempMars;
 	}
-	
+
 	public double getWindSpeedMars() {
 		return windSpeedMars;
 	}
@@ -292,209 +293,198 @@ public class WeatherData {
 	}
 
 	private void setCityName() {
-		try{
+		try {
 			String jInfo = currentJSONObject.getString("name");
-			jInfo = jInfo + ", " + currentJSONObject.getJSONObject("sys").getString("country");
+			jInfo = jInfo
+					+ ", "
+					+ currentJSONObject.getJSONObject("sys").getString(
+							"country");
 			this.cityName = jInfo;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
 	private void setSkyConditionCurrent() {
-		try{
+		try {
 			JSONArray jInfo = currentJSONObject.getJSONArray("weather");
 			JSONObject jInfo2 = jInfo.getJSONObject(0);
 			String jInfo3 = jInfo2.getString("main");
 			this.skyConditionCurrent = jInfo3;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setDescription() {
-		try{
+		try {
 			JSONArray jInfo = currentJSONObject.getJSONArray("weather");
 			JSONObject jInfo2 = jInfo.getJSONObject(0);
 			String jInfo3 = jInfo2.getString("description");
 			this.description = jInfo3;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setTempCurrent() {
-		try{
+		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
 			double jInfo2 = jInfo.getDouble("temp");
 			jInfo2 -= 273.15;
 			double tempInput = Math.round(jInfo2 * 100.0) / 100.0;
 			this.tempCurrent = tempInput;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setSunset() {
-		try{
+		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("sys");
 			long jInfo2 = jInfo.getLong("sunset");
 			Time t = new Time(jInfo2);
 			this.sunset = t.getConverted();
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setSunrise() {
-		try{
+		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("sys");
 			long jInfo2 = jInfo.getLong("sunrise");
 			Time t = new Time(jInfo2);
 			this.sunrise = t.getConverted();
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setPressure() {
-		try{
+		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
 			double jInfo2 = jInfo.getDouble("pressure");
-			jInfo2 *= 0.1; //Convert to kPa
+			jInfo2 *= 0.1; // Convert to kPa
 			double pressureInput = Math.round(jInfo2 * 100.0) / 100.0;
 			this.pressure = pressureInput;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setHumidity() {
-		try{
+		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
 			int jInfo2 = jInfo.getInt("humidity");
 			this.humidity = jInfo2;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setWindSpeed() {
-		try{
+		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("wind");
 			double jInfo2 = jInfo.getDouble("speed");
 			this.windSpeed = jInfo2;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setWindDirection() {
-		try{
+		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("wind");
 			double jInfo2 = jInfo.getDouble("deg");
 			String direction = "";
-			if (jInfo2 >= 0 && jInfo2 < 22.5){
+			if (jInfo2 >= 0 && jInfo2 < 22.5) {
 				direction = "North";
-			} else if (jInfo2 >= 22.5 && jInfo2 < 67.5){
+			} else if (jInfo2 >= 22.5 && jInfo2 < 67.5) {
 				direction = "Northeast";
-			} else if (jInfo2 >= 67.5 && jInfo2 < 112.5){
+			} else if (jInfo2 >= 67.5 && jInfo2 < 112.5) {
 				direction = "East";
-			} else if (jInfo2 >= 112.5 && jInfo2 < 157.5){
+			} else if (jInfo2 >= 112.5 && jInfo2 < 157.5) {
 				direction = "Southeast";
-			} else if (jInfo2 >= 157.5 && jInfo2 < 202.5){
+			} else if (jInfo2 >= 157.5 && jInfo2 < 202.5) {
 				direction = "South";
-			} else if (jInfo2 >= 202.5 && jInfo2 < 247.5){
+			} else if (jInfo2 >= 202.5 && jInfo2 < 247.5) {
 				direction = "Southwest";
-			} else if (jInfo2 >= 247.5 && jInfo2 < 292.5){
+			} else if (jInfo2 >= 247.5 && jInfo2 < 292.5) {
 				direction = "West";
-			} else if (jInfo2 >= 292.5 && jInfo2 < 337.5){
+			} else if (jInfo2 >= 292.5 && jInfo2 < 337.5) {
 				direction = "Northwest";
-			} else if (jInfo2 >= 337.5 && jInfo2 <= 360){
+			} else if (jInfo2 >= 337.5 && jInfo2 <= 360) {
 				direction = "North";
 			} else {
 				direction = "Up";
 			}
 			this.windDirection = direction;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setHigh() {
-		try{
+		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
 			double jInfo2 = jInfo.getDouble("temp_max");
 			jInfo2 -= 273.15;
 			this.high = jInfo2;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setLow() {
-		try{
+		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
 			double jInfo2 = jInfo.getDouble("temp_min");
 			jInfo2 -= 273.15;
 			this.low = jInfo2;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setIcon() {
-		try{
+		try {
 			JSONArray jInfo = currentJSONObject.getJSONArray("weather");
 			JSONObject jInfo2 = jInfo.getJSONObject(0);
 			String jInfo3 = jInfo2.getString("icon");
 			Image image = requestImage(jInfo3);
 			this.icon = image;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
 	// //24 hour Forecast Setters
-	private void refreshForecast24hJSONObject(String city){
-	this.forecast24hJSONObject = requestData(city, forcast24hURL);
+	private void refreshForecast24hJSONObject(String city) {
+		this.forecast24hJSONObject = requestData(city, forcast24hURL);
 	}
 
-	//get temperature for the next 24 hours in 3 hour increments
+	// get temperature for the next 24 hours in 3 hour increments
 	private void setTemp24h() {
-		try{
+		try {
 			double[] array = new double[8];
 			JSONArray list = forecast24hJSONObject.getJSONArray("list");
 			for (int i = 0; i < 8; i++) {
 				JSONObject jInfo2 = list.getJSONObject(i);
 				JSONObject jInfo3 = jInfo2.getJSONObject("main");
 				double jInfo4 = jInfo3.getDouble("temp");
-				jInfo4 -= 273.15; //Convert to celsius
+				jInfo4 -= 273.15; // Convert to celsius
 				double arrayInput = Math.round(jInfo4 * 100.0) / 100.0;
 				array[i] = arrayInput;
 			}
 			this.temp24h = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setSkyCondition24h() {
-		try{
+		try {
 			String[] array = new String[8];
 			JSONArray list = forecast24hJSONObject.getJSONArray("list");
 			for (int i = 0; i < 8; i++) {
@@ -505,14 +495,13 @@ public class WeatherData {
 				array[i] = jInfo5;
 			}
 			this.skyCondition24h = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setDescription24h() {
-		try{
+		try {
 			String[] array = new String[8];
 			JSONArray list = forecast24hJSONObject.getJSONArray("list");
 			for (int i = 0; i < 8; i++) {
@@ -523,14 +512,13 @@ public class WeatherData {
 				array[i] = jInfo5;
 			}
 			this.description24h = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setIcon24h() {
-		try{
+		try {
 			Image[] array = new Image[8];
 			JSONArray list = forecast24hJSONObject.getJSONArray("list");
 			for (int i = 0; i < 8; i++) {
@@ -541,78 +529,74 @@ public class WeatherData {
 				array[i] = requestImage(jInfo5);
 			}
 			this.icon24h = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-//	private int[] percentPrecipitation24h;
 
-	//5 day Forecast Setters
-	private void refreshForecast5dJSONObject(String city){
-	this.forecast5dJSONObject = requestData(city, forcast5dURL);
+	// private int[] percentPrecipitation24h;
+
+	// 5 day Forecast Setters
+	private void refreshForecast5dJSONObject(String city) {
+		this.forecast5dJSONObject = requestData(city, forcast5dURL);
 	}
 
 	private void setTemp5d() {
-		try{
+		try {
 			double[] array = new double[5];
 			JSONArray list = forecast5dJSONObject.getJSONArray("list");
 			for (int i = 0; i < 5; i++) {
 				JSONObject jInfo2 = list.getJSONObject(i);
 				JSONObject jInfo3 = jInfo2.getJSONObject("temp");
 				double jInfo4 = jInfo3.getDouble("day");
-				jInfo4 -= 273.15; //Convert to celsius
+				jInfo4 -= 273.15; // Convert to celsius
 				double arrayInput = Math.round(jInfo4 * 100.0) / 100.0;
 				array[i] = arrayInput;
 			}
 			this.temp5d = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setLow5d() {
-		try{
+		try {
 			double[] array = new double[5];
 			JSONArray list = forecast5dJSONObject.getJSONArray("list");
 			for (int i = 0; i < 5; i++) {
 				JSONObject jInfo2 = list.getJSONObject(i);
 				JSONObject jInfo3 = jInfo2.getJSONObject("temp");
 				double jInfo4 = jInfo3.getDouble("min");
-				jInfo4 -= 273.15; //Convert to celsius
+				jInfo4 -= 273.15; // Convert to celsius
 				double arrayInput = Math.round(jInfo4 * 100.0) / 100.0;
 				array[i] = arrayInput;
 			}
 			this.low5d = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setHigh5d() {
-		try{
+		try {
 			double[] array = new double[5];
 			JSONArray list = forecast5dJSONObject.getJSONArray("list");
 			for (int i = 0; i < 5; i++) {
 				JSONObject jInfo2 = list.getJSONObject(i);
 				JSONObject jInfo3 = jInfo2.getJSONObject("temp");
 				double jInfo4 = jInfo3.getDouble("max");
-				jInfo4 -= 273.15; //Convert to celsius
+				jInfo4 -= 273.15; // Convert to celsius
 				double arrayInput = Math.round(jInfo4 * 100.0) / 100.0;
 				array[i] = arrayInput;
 			}
 			this.high5d = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setSkyCondition5d() {
-		try{
+		try {
 			String[] array = new String[5];
 			JSONArray list = forecast5dJSONObject.getJSONArray("list");
 			for (int i = 0; i < 5; i++) {
@@ -623,14 +607,13 @@ public class WeatherData {
 				array[i] = jInfo5;
 			}
 			this.skyCondition5d = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
 	private void setDescription5d() {
-		try{
+		try {
 			String[] array = new String[5];
 			JSONArray list = forecast5dJSONObject.getJSONArray("list");
 			for (int i = 0; i < 5; i++) {
@@ -641,14 +624,13 @@ public class WeatherData {
 				array[i] = jInfo5;
 			}
 			this.description5d = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private void setIcon5d() {
-		try{
+		try {
 			Image[] array = new Image[5];
 			JSONArray list = forecast5dJSONObject.getJSONArray("list");
 			for (int i = 0; i < 5; i++) {
@@ -659,120 +641,119 @@ public class WeatherData {
 				array[i] = requestImage(jInfo5);
 			}
 			this.icon5d = array;
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-//	private int[] percentPrecipitation5d;
 
-	//Mars Weather Setters
-	private void refreshMarsJSONObject(){
-	this.marsJSONObject = requestMarsData(marsURL);
+	// private int[] percentPrecipitation5d;
+
+	// Mars Weather Setters
+	private void refreshMarsJSONObject() {
+		this.marsJSONObject = requestMarsData(marsURL);
 	}
 
-	private void setMinTempMars(){
+	private void setMinTempMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			double jInfo2 = jInfo.getDouble("min_temp");
 			double jInfo3 = Math.round(jInfo2 * 100.0) / 100.0;
 			this.minTempMars = jInfo3;
-		} catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	private void setMaxTempMars(){
+
+	private void setMaxTempMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			double jInfo2 = jInfo.getDouble("max_temp");
 			double jInfo3 = Math.round(jInfo2 * 100.0) / 100.0;
 			this.maxTempMars = jInfo3;
-		} catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	private void setWindSpeedMars(){
+
+	private void setWindSpeedMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			double jInfo2 = jInfo.getDouble("wind_speed");
 			double jInfo3 = Math.round(jInfo2 * 100.0) / 100.0;
 			this.windSpeedMars = jInfo3;
-		} catch (JSONException e){
+		} catch (JSONException e) {
 			this.windSpeedMars = 0;
 		}
 	}
 
-	private void setWindDirectionMars(){
+	private void setWindDirectionMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			String jInfo2 = jInfo.getString("wind_direction");
 			this.windDirectionMars = jInfo2;
-		} catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	private void setPressureMars(){
-		try{
+
+	private void setPressureMars() {
+		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			double jInfo2 = jInfo.getDouble("pressure");
 			this.pressureMars = jInfo2;
-		} catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	private void setHumidityMars(){
-		try{
+
+	private void setHumidityMars() {
+		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			int jInfo2 = jInfo.getInt("abs_humidity");
 			this.humidityMars = jInfo2;
-		} catch (JSONException e){
+		} catch (JSONException e) {
 			this.humidityMars = 0;
 		}
 	}
-	
-	private void setSkyConditionMars(){
+
+	private void setSkyConditionMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			String jInfo2 = jInfo.getString("atmo_opacity");
 			this.skyConditionMars = jInfo2;
-		} catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	private void setMarsIcon(){
+
+	private void setMarsIcon() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			String jInfo2 = jInfo.getString("atmo_opacity");
 			Image marsIcon;
-			if (jInfo2.equalsIgnoreCase("Sunny")){
+			if (jInfo2.equalsIgnoreCase("Sunny")) {
 				marsIcon = requestImage("01d");
 			} else {
 				marsIcon = requestImage("11d");
 				System.out.println("But it's always sunny on Mars!");
 			}
 			this.iconMars = marsIcon;
-		} catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	// Method to test if the City Name is correct and returns a valid JSON object
+	// Method to test if the City Name is correct and returns a valid JSON
+	// object
 	public static boolean testValidity(JSONObject object) {
-		try{
+		try {
 			int jInfo = object.getInt("cod");
-			if (jInfo == 404){
+			if (jInfo == 404) {
 				return false;
 			} else {
 				return true;
 			}
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -785,14 +766,14 @@ public class WeatherData {
 			URL url = new URL(imageURL);
 			Image image = ImageIO.read(url);
 			return image;
-		} catch (MalformedURLException e){
+		} catch (MalformedURLException e) {
 			System.out.println(e.getMessage());
-		} catch (IOException e){
+		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 		return null;
 	}
-	
+
 	// Method to request Mars Weather JSON data
 	private static JSONObject requestMarsData(String url) {
 		JSONObject json = new JSONObject();
@@ -809,7 +790,7 @@ public class WeatherData {
 			System.out.println(e.getMessage());
 		} catch (JSONException e) {
 			System.out.println(e.getMessage());
-		} 
+		}
 		return json;
 	}
 
@@ -832,12 +813,12 @@ public class WeatherData {
 					stream, Charset.forName("UTF-8")));
 			String jsondata = dataToString(reader);
 			json = new JSONObject(jsondata);
-			if (testValidity(json) && url.equals(currentURL)){
+			if (testValidity(json) && url.equals(currentURL)) {
 				try {
 					long jInfo = json.getLong("dt");
 					Time t = new Time(jInfo);
 					this.timeOfLastRequest = t.getConverted();
-				} catch (Exception e){
+				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 			}
@@ -865,9 +846,9 @@ public class WeatherData {
 		}
 		return jstring.toString();
 	}
-	
+
 	// Helper Test method for displaying icons
-	private static void iconTest(Image im){
+	private static void iconTest(Image im) {
 		JLabel lblimg = new JLabel(new ImageIcon(im));
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
@@ -878,14 +859,14 @@ public class WeatherData {
 	}
 
 	// Method to update the data
-	public void refreshAndUpdate(String city){
-		
+	public void refreshAndUpdate(String city) {
+
 		refreshCurrentJSONObject(city);
 		refreshForecast24hJSONObject(city);
 		refreshForecast5dJSONObject(city);
 		refreshMarsJSONObject();
-		
-		//Initialize Current Weather Variables
+
+		// Initialize Current Weather Variables
 		setCityName();
 		setSkyConditionCurrent();
 		setDescription();
@@ -899,22 +880,22 @@ public class WeatherData {
 		setWindDirection();
 		setHigh();
 		setLow();
-		
-		//Initialize 24 hour forecast variables
+
+		// Initialize 24 hour forecast variables
 		setTemp24h();
 		setSkyCondition24h();
 		setDescription24h();
 		setIcon24h();
-				
-		//Initialize 5 day forecast variables
+
+		// Initialize 5 day forecast variables
 		setTemp5d();
 		setSkyCondition5d();
 		setDescription5d();
 		setIcon5d();
 		setLow5d();
 		setHigh5d();
-				
-		//Initialize Mars variables
+
+		// Initialize Mars variables
 		setMinTempMars();
 		setMaxTempMars();
 		setWindSpeedMars();
@@ -924,135 +905,149 @@ public class WeatherData {
 		setSkyConditionMars();
 		setMarsIcon();
 	}
-	
+
 	// Main Test Method
-	
-	public static void main(String[] args) throws IOException{
-		
-		//Read from console
+
+	public static void main(String[] args) throws IOException {
+
+		// Read from console
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	        System.out.print("Enter City: ");
-	        String s = br.readLine();
-	     
-	    WeatherData test = new WeatherData(s);
-	    
+		System.out.print("Enter City: ");
+		String s = br.readLine();
+
+		WeatherData test = new WeatherData(s);
+
 		// Test cityName methods
 		System.out.println("City: " + test.getCityName());
-		
+
 		// Test skyCondition methods
 		System.out.println("Sky Condition: " + test.getSkyConditionCurrent());
-		
+
 		// Test description methods
 		System.out.println("Description: " + test.getDescription());
-		
+
 		// Test tempCurrent methods
-		System.out.println("Temperature: " + test.getTempCurrent() + " degrees Celsius");
-		
+		System.out.println("Temperature: " + test.getTempCurrent()
+				+ " degrees Celsius");
+
 		// Test sunset methods
 		System.out.println("Sunset: " + test.getSunset());
-		
+
 		// Test sunrise methods
 		System.out.println("Sunrise: " + test.getSunrise());
-		
+
 		// Test pressure methods
 		System.out.println("Pressure: " + test.getPressure() + " kPa");
-		
+
 		// Test humidity methods
 		System.out.println("Humidity: " + test.getHumidity() + "%");
-		
-		// Test windSpeed  methods
+
+		// Test windSpeed methods
 		System.out.println("Wind Speed: " + test.getWindSpeed() + " m/s ");
-		
-		// Test windDirection  methods
+
+		// Test windDirection methods
 		System.out.println("Wind Direction: " + test.getWindDirection());
-		
+
 		// Test high methods
 		System.out.println("High: " + test.getHigh());
-		
+
 		// Test low methods
 		System.out.println("Low: " + test.getLow());
-		
+
 		// Test icon methods
 		Image im = test.getIcon();
 		iconTest(im);
-		
+
 		// Test temp24h methods
 		double[] temp24array = test.getTemp24h();
-		for (int i = 0; i < 8; i++){
-			int j = 3*(i+1);
-			System.out.println("Temperature in " + j + " hours: " + temp24array[i] + " degrees Celsius");
+		for (int i = 0; i < 8; i++) {
+			int j = 3 * (i + 1);
+			System.out.println("Temperature in " + j + " hours: "
+					+ temp24array[i] + " degrees Celsius");
 		}
-		
+
 		// Test skyCondition24h & description24h methods
 		String[] skyCondition24array = test.getSkyCondition24h();
 		String[] description24array = test.getDescription24h();
-		for (int i = 0; i < 8; i++){
-			int j = 3*(i+1);
-			System.out.println("Sky Condition in " + j + " hours: " + skyCondition24array[i] + " (" + description24array[i] + ")");
+		for (int i = 0; i < 8; i++) {
+			int j = 3 * (i + 1);
+			System.out.println("Sky Condition in " + j + " hours: "
+					+ skyCondition24array[i] + " (" + description24array[i]
+					+ ")");
 		}
-		
+
 		// Test 24h icon array
 		Image[] icon24array = test.getIcon24h();
-		for (int i = 0; i < 8; i++){
+		for (int i = 0; i < 8; i++) {
 			iconTest(icon24array[i]);
 		}
-		
+
 		// Test temp5d methods
 		double[] temp5darray = test.getTemp5d();
-		for (int i = 0; i < 5; i++){
-			int j = i+1;
-			System.out.println("Temperature in " + j + " days: " + temp5darray[i] + " degrees Celsius");
+		for (int i = 0; i < 5; i++) {
+			int j = i + 1;
+			System.out.println("Temperature in " + j + " days: "
+					+ temp5darray[i] + " degrees Celsius");
 		}
-		
+
 		// Test skyCondition5d & description5d methods
 		String[] skyCondition5darray = test.getSkyCondition5d();
 		String[] description5darray = test.getDescription5d();
-		for (int i = 0; i < 5; i++){
-			int j = i+1;
-			System.out.println("Sky Condition in " + j + " days: " + skyCondition5darray[i] + " (" + description5darray[i] + ")");
+		for (int i = 0; i < 5; i++) {
+			int j = i + 1;
+			System.out.println("Sky Condition in " + j + " days: "
+					+ skyCondition5darray[i] + " (" + description5darray[i]
+					+ ")");
 		}
-				
+
 		// Test 5d icon array
 		Image[] icon5darray = test.getIcon5d();
-		for (int i = 0; i < 5; i++){
+		for (int i = 0; i < 5; i++) {
 			iconTest(icon5darray[i]);
 		}
-		
+
 		// Test low5d methods
 		double[] low5darray = test.getLow5d();
-		for (int i = 0; i < 5; i++){
-			int j = i+1;
-			System.out.println("Low in " + j + " days: " + low5darray[i] + " degrees Celsius");
+		for (int i = 0; i < 5; i++) {
+			int j = i + 1;
+			System.out.println("Low in " + j + " days: " + low5darray[i]
+					+ " degrees Celsius");
 		}
-				
+
 		// Test high5d methods
 		double[] high5darray = test.getTemp5d();
-		for (int i = 0; i < 5; i++){
-			int j = i+1;
-			System.out.println("High in " + j + " days: " + high5darray[i] + " degrees Celsius");
+		for (int i = 0; i < 5; i++) {
+			int j = i + 1;
+			System.out.println("High in " + j + " days: " + high5darray[i]
+					+ " degrees Celsius");
 		}
-		
+
 		// Test Mars Sky Condition
 		System.out.println("Mars Sky Condition: " + test.getSkyConditionMars());
-		
+
 		// Test Mars temp min & max
-		System.out.println("Mars Temperature >>> MIN: " + test.getMinTempMars() + " degrees Celsius, MAX: " + test.getMaxTempMars() + " degrees Celsius");
-		
+		System.out.println("Mars Temperature >>> MIN: " + test.getMinTempMars()
+				+ " degrees Celsius, MAX: " + test.getMaxTempMars()
+				+ " degrees Celsius");
+
 		// Test Mars Windspeed & direction
-		System.out.println("Mars Wind Speed: " + test.getWindSpeedMars() + " Direction: " + test.getWindDirectionMars());
-		
+		System.out.println("Mars Wind Speed: " + test.getWindSpeedMars()
+				+ " Direction: " + test.getWindDirectionMars());
+
 		// Test Pressure Mars
-		System.out.println("Mars Pressure: " + test.getPressureMars() + " units? ATM, kPa, hPa, ???");
-		
+		System.out.println("Mars Pressure: " + test.getPressureMars()
+				+ " units? ATM, kPa, hPa, ???");
+
 		// Test Humidity Mars
 		System.out.println("Mars Humidity: " + test.getHumidityMars() + "%");
-		
+
 		// Test timeOfLastRequest
-		System.out.println("Most Recent Update: " + test.getTimeOfLastRequest());
-		
+		System.out
+				.println("Most Recent Update: " + test.getTimeOfLastRequest());
+
 		// Test setMarsIcon
 		iconTest(test.getIconMars());
-		
+
 	}
 
 }
