@@ -1,21 +1,26 @@
 package team7;
 
-//import Preferences;
-//import WeatherData;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 
+import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JFrame;
 
-public class Currentweather {
-	
-	// Attributes
+import javax.swing.JFrame;// used in the test to be removed
+
+import javax.swing.WindowConstants;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
+
+public class Currentweather extends JPanel{
+
 	private WeatherData currentData;
-	private Preferences currentPrefs;
+	private WeatherPreferences currentPrefs;
 	private JPanel pane;
 	private JLabel image_l;
 	private JLabel sunrise_l;
@@ -30,19 +35,11 @@ public class Currentweather {
 	private JLabel humidity_l;
 	private JLabel airpressure_l;
 
-	public Currentweather(String city, Preferences prefs) {
-		this.currentData = new WeatherData(city);
-		this.currentPrefs = prefs;
+	public Currentweather(WeatherData data, WeatherPreferences prefs){
+		currentData = data;
+		currentPrefs = prefs;
 		initComponents();
 		createDisplay(prefs);
-	} 
-	
-	public JPanel getPanel(){
-		return pane;
-	}
-	
-	public Preferences getPreferences(){
-		return currentPrefs;
 	}
 
 	private void initComponents() {
@@ -63,6 +60,7 @@ public class Currentweather {
 				+ currentData.getDescription());
 		weatherdescription_l.setFont(minorfont);
 		this.skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
+		skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
 		skycondition_l.setFont(minorfont);
 		this.temp_l = new JLabel("Current Temperature: "
 				+ currentData.getTempCurrent());
@@ -70,6 +68,10 @@ public class Currentweather {
 		this.tempmax_l = new JLabel("High: " + currentData.getLow());
 		tempmax_l.setFont(minorfont);
 		this.tempmin_l = new JLabel("Low: " + currentData.getHigh());
+		//tempmax_l.setFont(minorfont);
+		tempmax_l = new JLabel("High:" + currentData.getLow());
+		tempmax_l.setFont(minorfont);
+		tempmin_l = new JLabel("Low:"+ currentData.getHigh());
 		tempmin_l.setFont(minorfont);
 		this.humidity_l = new JLabel("Humidity: " + currentData.getHumidity());
 		humidity_l.setFont(minorfont);
@@ -77,59 +79,90 @@ public class Currentweather {
 		airpressure_l.setFont(minorfont);
 		this.image_l = new JLabel(new ImageIcon(currentData.getIcon()));
 	}
+	
+	private void createDisplay(WeatherPreferences prefs){
+		GroupLayout panelayout = new GroupLayout(pane);
+		
+		ParallelGroup hmiddle = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+	      
+        hmiddle.addComponent(temp_l);
+        hmiddle.addComponent(tempmin_l);
+        hmiddle.addComponent(tempmax_l);
+        hmiddle.addGap(10);
+        hmiddle.addComponent(weatherdescription_l);
+        hmiddle.addComponent(skycondition_l);
+        hmiddle.addComponent(image_l);  
+        hmiddle.addGap(10);
+        hmiddle.addComponent(windspeed_l);
+        hmiddle.addComponent(winddirection_l);
+        hmiddle.addGap(10);
+        hmiddle.addComponent(sunrise_l);
+        hmiddle.addComponent(sunset_l);
+        hmiddle.addGap(10);
+        hmiddle.addComponent(humidity_l);
+        hmiddle.addComponent(airpressure_l);
+        
+        SequentialGroup toplabels = panelayout.createSequentialGroup();
+        SequentialGroup bottomlabels = panelayout.createSequentialGroup();
+        
+        toplabels.addComponent(temp_l);
+        toplabels.addComponent(tempmin_l);
+        toplabels.addComponent(tempmax_l);
+        toplabels.addComponent(skycondition_l);
+        toplabels.addComponent(image_l);
+        toplabels.addComponent(windspeed_l);
+        toplabels.addComponent(winddirection_l);
+        
+        bottomlabels.addComponent(sunrise_l);
+	    bottomlabels.addComponent(sunset_l);
+        bottomlabels.addComponent(humidity_l);
+        bottomlabels.addComponent(airpressure_l);
+        bottomlabels.addComponent(weatherdescription_l);
+        
+        ParallelGroup hGroup = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        ParallelGroup vGroup = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        
+        hGroup.addGroup(toplabels);
+        hGroup.addGroup(bottomlabels);
+        vGroup.addGroup(toplabels);
+        vGroup.addGroup(bottomlabels);
+      
+        panelayout.setHorizontalGroup(hGroup);
+        panelayout.setVerticalGroup(vGroup);
+        pane.setLayout(panelayout);
+        pane.validate();
+        pane.setVisible(true);
+        
+  }
+	private void applyPrefs(WeatherPreferences prefs){
+		
+		temp_l.setVisible(prefs.showTemperature());
+		tempmin_l.setVisible(prefs.showLow());
+	    tempmax_l.setVisible(prefs.showHigh());
+		image_l.setVisible(prefs.showIcon()); 
+		weatherdescription_l.setVisible(prefs.showDescription());
+		skycondition_l.setVisible(prefs.showSky());
+	    sunrise_l.setVisible(prefs.showSunrise());
+	    sunset_l.setVisible(prefs.showSunset());
+		windspeed_l.setVisible(prefs.showWindSpeed());
+		winddirection_l.setVisible(prefs.showWindDirection());	
+	    humidity_l.setVisible(prefs.showHumidity());
+		airpressure_l.setVisible(prefs.showPressure());
 
-	private void createDisplay(Preferences prefs) {
-
-		GridLayout panelayout = new GridLayout(0, 3);
-		pane.setLayout(panelayout);
-		if (prefs.showTemperature() == true) {
-			pane.add(temp_l);
-		}
-		if (prefs.showLow() == true) {
-			pane.add(tempmin_l);
-		}
-		if (prefs.showHigh() == true) {
-			pane.add(tempmax_l);
-		}
-		if (prefs.showIcon() == true) {
-			pane.add(image_l);
-		}
-		if (prefs.showDescription() == true) {
-			pane.add(weatherdescription_l);
-		}
-		if (prefs.showSky() == true) {
-			pane.add(skycondition_l);
-		}
-		if (prefs.showSunrise() == true) {
-			pane.add(sunrise_l);
-		}
-		if (prefs.showSunset() == true) {
-			pane.add(sunset_l);
-		}
-		if (prefs.showWindSpeed() == true) {
-			pane.add(windspeed_l);
-		}
-		if (prefs.showWindDirection() == true) {
-			pane.add(winddirection_l);
-		}
-		if (prefs.showHumidity() == true) {
-			pane.add(humidity_l);
-		}
-		if (prefs.showPressure() == true) {
-			pane.add(airpressure_l);
-		}
 	}
 
 	// Test
+
 	public static void main(String[] args){
-		
-		Preferences p = new Preferences();
-		Currentweather test = new Currentweather("London,ON", p);
 		JFrame frame = new JFrame();
-		frame.add(test.getPanel());
+		frame.setTitle("Weather for London, Canada");
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		WeatherPreferences prefs = new WeatherPreferences();
+		WeatherData data = new WeatherData("London,ca");
+		JPanel test = new Currentweather(data, prefs);
+		frame.add(test);
 		frame.setVisible(true);
 		frame.pack();
-		frame.setTitle("Weather for London, Canada");
+		
 	}
-	
 }
