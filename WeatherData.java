@@ -81,11 +81,13 @@ public class WeatherData {
 	private Image iconMars;
 
 	// Constructor
-	public WeatherData(String city) {
-		this.currentJSONObject = requestData(city, currentURL);
+	public WeatherData(InputTest test) {
+		String city = test.getCityName();
+		this.currentJSONObject = test.getCurrentWeather();
 		this.forecast24hJSONObject = requestData(city, forcast24hURL);
 		this.forecast5dJSONObject = requestData(city, forcast5dURL);
 		this.marsJSONObject = requestMarsData(marsURL);
+		this.timeOfLastRequest = test.getTime();
 
 		// Initialize Current Weather Variables
 		setCityName();
@@ -430,6 +432,7 @@ public class WeatherData {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
 			double jInfo2 = jInfo.getDouble("temp_max");
 			jInfo2 -= 273.15;
+			jInfo2 = Math.round(jInfo2 * 100.0) / 100.0;
 			this.high = jInfo2;
 		} catch (JSONException e) {
 			System.out.println(e.getMessage());
@@ -441,6 +444,7 @@ public class WeatherData {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
 			double jInfo2 = jInfo.getDouble("temp_min");
 			jInfo2 -= 273.15;
+			jInfo2 = Math.round(jInfo2 * 100.0) / 100.0;
 			this.low = jInfo2;
 		} catch (JSONException e) {
 			System.out.println(e.getMessage());
@@ -814,15 +818,6 @@ public class WeatherData {
 					stream, Charset.forName("UTF-8")));
 			String jsondata = dataToString(reader);
 			json = new JSONObject(jsondata);
-			if (testValidity(json) && url.equals(currentURL)) {
-				try {
-					long jInfo = json.getLong("dt");
-					Time t = new Time(jInfo);
-					this.timeOfLastRequest = t.getConverted();
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
 			stream.close();
 		} catch (MalformedURLException e) {
 			System.out.println(e.getMessage());
@@ -916,139 +911,146 @@ public class WeatherData {
 		System.out.print("Enter City: ");
 		String s = br.readLine();
 
-		WeatherData test = new WeatherData(s);
+		InputTest t = new InputTest(s);
 
-		// Test cityName methods
-		System.out.println("City: " + test.getCityName());
+		if (t.getValid()) {
+			WeatherData test = new WeatherData(t);
 
-		// Test skyCondition methods
-		System.out.println("Sky Condition: " + test.getSkyConditionCurrent());
+			// Test cityName methods
+			System.out.println("City: " + test.getCityName());
 
-		// Test description methods
-		System.out.println("Description: " + test.getDescription());
+			// Test skyCondition methods
+			System.out.println("Sky Condition: "
+					+ test.getSkyConditionCurrent());
 
-		// Test tempCurrent methods
-		System.out.println("Temperature: " + test.getTempCurrent()
-				+ " degrees Celsius");
+			// Test description methods
+			System.out.println("Description: " + test.getDescription());
 
-		// Test sunset methods
-		System.out.println("Sunset: " + test.getSunset());
-
-		// Test sunrise methods
-		System.out.println("Sunrise: " + test.getSunrise());
-
-		// Test pressure methods
-		System.out.println("Pressure: " + test.getPressure() + " kPa");
-
-		// Test humidity methods
-		System.out.println("Humidity: " + test.getHumidity() + "%");
-
-		// Test windSpeed methods
-		System.out.println("Wind Speed: " + test.getWindSpeed() + " m/s ");
-
-		// Test windDirection methods
-		System.out.println("Wind Direction: " + test.getWindDirection());
-
-		// Test high methods
-		System.out.println("High: " + test.getHigh());
-
-		// Test low methods
-		System.out.println("Low: " + test.getLow());
-
-		// Test icon methods
-		Image im = test.getIcon();
-		iconTest(im);
-
-		// Test temp24h methods
-		double[] temp24array = test.getTemp24h();
-		for (int i = 0; i < 8; i++) {
-			int j = 3 * (i + 1);
-			System.out.println("Temperature in " + j + " hours: "
-					+ temp24array[i] + " degrees Celsius");
-		}
-
-		// Test skyCondition24h & description24h methods
-		String[] skyCondition24array = test.getSkyCondition24h();
-		String[] description24array = test.getDescription24h();
-		for (int i = 0; i < 8; i++) {
-			int j = 3 * (i + 1);
-			System.out.println("Sky Condition in " + j + " hours: "
-					+ skyCondition24array[i] + " (" + description24array[i]
-					+ ")");
-		}
-
-		// Test 24h icon array
-		Image[] icon24array = test.getIcon24h();
-		for (int i = 0; i < 8; i++) {
-			iconTest(icon24array[i]);
-		}
-
-		// Test temp5d methods
-		double[] temp5darray = test.getTemp5d();
-		for (int i = 0; i < 5; i++) {
-			int j = i + 1;
-			System.out.println("Temperature in " + j + " days: "
-					+ temp5darray[i] + " degrees Celsius");
-		}
-
-		// Test skyCondition5d & description5d methods
-		String[] skyCondition5darray = test.getSkyCondition5d();
-		String[] description5darray = test.getDescription5d();
-		for (int i = 0; i < 5; i++) {
-			int j = i + 1;
-			System.out.println("Sky Condition in " + j + " days: "
-					+ skyCondition5darray[i] + " (" + description5darray[i]
-					+ ")");
-		}
-
-		// Test 5d icon array
-		Image[] icon5darray = test.getIcon5d();
-		for (int i = 0; i < 5; i++) {
-			iconTest(icon5darray[i]);
-		}
-
-		// Test low5d methods
-		double[] low5darray = test.getLow5d();
-		for (int i = 0; i < 5; i++) {
-			int j = i + 1;
-			System.out.println("Low in " + j + " days: " + low5darray[i]
+			// Test tempCurrent methods
+			System.out.println("Temperature: " + test.getTempCurrent()
 					+ " degrees Celsius");
+
+			// Test sunset methods
+			System.out.println("Sunset: " + test.getSunset());
+
+			// Test sunrise methods
+			System.out.println("Sunrise: " + test.getSunrise());
+
+			// Test pressure methods
+			System.out.println("Pressure: " + test.getPressure() + " kPa");
+
+			// Test humidity methods
+			System.out.println("Humidity: " + test.getHumidity() + "%");
+
+			// Test windSpeed methods
+			System.out.println("Wind Speed: " + test.getWindSpeed() + " m/s ");
+
+			// Test windDirection methods
+			System.out.println("Wind Direction: " + test.getWindDirection());
+
+			// Test high methods
+			System.out.println("High: " + test.getHigh() + " degrees Celsius");
+
+			// Test low methods
+			System.out.println("Low: " + test.getLow() + " degrees Celsius");
+
+			// Test icon methods
+			Image im = test.getIcon();
+			iconTest(im);
+
+			// Test temp24h methods
+			double[] temp24array = test.getTemp24h();
+			for (int i = 0; i < 8; i++) {
+				int j = 3 * (i + 1);
+				System.out.println("Temperature in " + j + " hours: "
+						+ temp24array[i] + " degrees Celsius");
+			}
+
+			// Test skyCondition24h & description24h methods
+			String[] skyCondition24array = test.getSkyCondition24h();
+			String[] description24array = test.getDescription24h();
+			for (int i = 0; i < 8; i++) {
+				int j = 3 * (i + 1);
+				System.out.println("Sky Condition in " + j + " hours: "
+						+ skyCondition24array[i] + " (" + description24array[i]
+						+ ")");
+			}
+
+			// Test 24h icon array
+			Image[] icon24array = test.getIcon24h();
+			for (int i = 0; i < 8; i++) {
+				iconTest(icon24array[i]);
+			}
+
+			// Test temp5d methods
+			double[] temp5darray = test.getTemp5d();
+			for (int i = 0; i < 5; i++) {
+				int j = i + 1;
+				System.out.println("Temperature in " + j + " days: "
+						+ temp5darray[i] + " degrees Celsius");
+			}
+
+			// Test skyCondition5d & description5d methods
+			String[] skyCondition5darray = test.getSkyCondition5d();
+			String[] description5darray = test.getDescription5d();
+			for (int i = 0; i < 5; i++) {
+				int j = i + 1;
+				System.out.println("Sky Condition in " + j + " days: "
+						+ skyCondition5darray[i] + " (" + description5darray[i]
+						+ ")");
+			}
+
+			// Test 5d icon array
+			Image[] icon5darray = test.getIcon5d();
+			for (int i = 0; i < 5; i++) {
+				iconTest(icon5darray[i]);
+			}
+
+			// Test low5d methods
+			double[] low5darray = test.getLow5d();
+			for (int i = 0; i < 5; i++) {
+				int j = i + 1;
+				System.out.println("Low in " + j + " days: " + low5darray[i]
+						+ " degrees Celsius");
+			}
+
+			// Test high5d methods
+			double[] high5darray = test.getTemp5d();
+			for (int i = 0; i < 5; i++) {
+				int j = i + 1;
+				System.out.println("High in " + j + " days: " + high5darray[i]
+						+ " degrees Celsius");
+			}
+
+			// Test Mars Sky Condition
+			System.out.println("Mars Sky Condition: "
+					+ test.getSkyConditionMars());
+
+			// Test Mars temp min & max
+			System.out.println("Mars Temperature >>> MIN: "
+					+ test.getMinTempMars() + " degrees Celsius, MAX: "
+					+ test.getMaxTempMars() + " degrees Celsius");
+
+			// Test Mars Windspeed & direction
+			System.out.println("Mars Wind Speed: " + test.getWindSpeedMars()
+					+ " Direction: " + test.getWindDirectionMars());
+
+			// Test Pressure Mars
+			System.out.println("Mars Pressure: " + test.getPressureMars()
+					+ " Pa");
+
+			// Test Humidity Mars
+			System.out
+					.println("Mars Humidity: " + test.getHumidityMars() + "%");
+
+			// Test timeOfLastRequest
+			System.out.println("Most Recent Update: "
+					+ test.getTimeOfLastRequest());
+
+			// Test setMarsIcon
+			iconTest(test.getIconMars());
+
 		}
-
-		// Test high5d methods
-		double[] high5darray = test.getTemp5d();
-		for (int i = 0; i < 5; i++) {
-			int j = i + 1;
-			System.out.println("High in " + j + " days: " + high5darray[i]
-					+ " degrees Celsius");
-		}
-
-		// Test Mars Sky Condition
-		System.out.println("Mars Sky Condition: " + test.getSkyConditionMars());
-
-		// Test Mars temp min & max
-		System.out.println("Mars Temperature >>> MIN: " + test.getMinTempMars()
-				+ " degrees Celsius, MAX: " + test.getMaxTempMars()
-				+ " degrees Celsius");
-
-		// Test Mars Windspeed & direction
-		System.out.println("Mars Wind Speed: " + test.getWindSpeedMars()
-				+ " Direction: " + test.getWindDirectionMars());
-
-		// Test Pressure Mars
-		System.out.println("Mars Pressure: " + test.getPressureMars()
-				+ " Pa");
-
-		// Test Humidity Mars
-		System.out.println("Mars Humidity: " + test.getHumidityMars() + "%");
-
-		// Test timeOfLastRequest
-		System.out
-				.println("Most Recent Update: " + test.getTimeOfLastRequest());
-
-		// Test setMarsIcon
-		iconTest(test.getIconMars());
-
 	}
 
 }
