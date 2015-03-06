@@ -16,7 +16,7 @@ import javax.swing.WindowConstants;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 
-public class Currentweather extends JPanel{
+public class Currentweather {
 
 	private WeatherData currentData;
 	private WeatherPreferences currentPrefs;
@@ -41,8 +41,12 @@ public class Currentweather extends JPanel{
 		creategridLayout();
 		//createLayout();
 		applyPrefs(prefs);
-		this.add(pane);
+		
 	}
+	public JPanel getPanel() {
+		return pane;
+	}
+
 	// helper method to convert celcius to fahrenheit
     private double convertctof(double temp){
 		double n = ((temp*1.8)+32);
@@ -192,22 +196,22 @@ public class Currentweather extends JPanel{
 
 	}
 
-	// Test
-
-	public static void main(String[] args){
-		
-		JFrame frame = new JFrame();
-		frame.setTitle("Weather for London, Canada");
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setPreferredSize(null);
-		WeatherPreferences prefs = new WeatherPreferences();
-		WeatherData data = new WeatherData("London,ca");
-		
-		System.out.println(data.getCityName());
-		JPanel test = new Currentweather(data, prefs);
-		frame.getContentPane().add(test);
-		System.out.println("finished");
-		frame.pack();
-		frame.show();
-	}
+//	// Test
+//
+//	public static void main(String[] args){
+//		
+//		JFrame frame = new JFrame();
+//		frame.setTitle("Weather for London, Canada");
+//		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//		frame.setPreferredSize(null);
+//		WeatherPreferences prefs = new WeatherPreferences();
+//		WeatherData data = new WeatherData("London,ca");
+//		
+//		System.out.println(data.getCityName());
+//		Currentweather test = new Currentweather(data, prefs);
+//		frame.getContentPane().add(test.getPanel());
+//		System.out.println("finished");
+//		frame.pack();
+//		frame.show();
+//	}
 }
