@@ -700,7 +700,8 @@ public class WeatherData {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
 			double jInfo2 = jInfo.getDouble("pressure");
-			this.pressureMars = jInfo2;
+			double jInfo3 = Math.round(jInfo2 * 100.0) / 100.0;
+			this.pressureMars = jInfo3;
 		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
@@ -1036,7 +1037,7 @@ public class WeatherData {
 
 		// Test Pressure Mars
 		System.out.println("Mars Pressure: " + test.getPressureMars()
-				+ " units? ATM, kPa, hPa, ???");
+				+ " Pa");
 
 		// Test Humidity Mars
 		System.out.println("Mars Humidity: " + test.getHumidityMars() + "%");
