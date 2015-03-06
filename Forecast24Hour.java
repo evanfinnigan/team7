@@ -21,8 +21,8 @@ public class Forecast24Hour {
 		private JLabel[] temp_l;
 		//private JLabel[] percentPrecipitation_l;
 
-		public Forecast24Hour(String city, Preferences prefs) {
-			this.data24h = new WeatherData(city);
+		public Forecast24Hour(WeatherData data, Preferences prefs) {
+			this.data24h = data;
 			this.currentPrefs = prefs;
 			initComponents();
 			createDisplay(prefs);
@@ -98,7 +98,8 @@ public class Forecast24Hour {
 		public static void main(String[] args){
 			
 			Preferences p = new Preferences();
-			Forecast24Hour test = new Forecast24Hour("London,ON", p);
+			WeatherData d = new WeatherData("London, Canada");
+			Forecast24Hour test = new Forecast24Hour(d, p);
 			JFrame frame = new JFrame();
 			frame.add(test.getPanel());
 			frame.setVisible(true);
