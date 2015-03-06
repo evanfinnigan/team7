@@ -13,7 +13,7 @@ import javax.swing.JToolBar;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class SearchBar implements DocumentListener,ActionListener{
+public class SearchBar extends JToolBar implements DocumentListener,ActionListener{
 	
 	final private static String DEG = "\u00b0";
     private	JLabel usermsg_l,status_l;
@@ -23,7 +23,7 @@ public class SearchBar implements DocumentListener,ActionListener{
     private JButton mars_b;
     private JToolBar tb;
     
-	public SearchBar(){
+	public SearchBar(WeatherPreferences prefs){
 		initComponents();
 		addActionListeners();    
 	}
@@ -83,12 +83,16 @@ public class SearchBar implements DocumentListener,ActionListener{
 				   	   if (test.getValid()){
 					   Location loc = new Location(new WeatherData(test),prefs);
 			           }
+				   	   else{
+				   		status_l.setText("Please check your spelling and try again..");   
+				   	   }
 			   }
-			   status_l.setText("Please check your spelling and try again..");
+			   status_l.setText("Enter a city to check the weather");
 		}
 		if ("Celcius".equals(e.getActionCommand())){
 		    	degf_rb.setSelected(false);
-		    	System.out.println("Celcius");  	
+		    	System.out.println("Celcius");
+		    	
 		}
 		if ("Fahrenheit".equals(e.getActionCommand())){
 			   degc_rb.setSelected(false);
