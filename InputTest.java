@@ -52,10 +52,12 @@ public class InputTest {
 			} else {
 				this.valid = true;
 				String cityname = currentWeather.getString("name");
+				JSONObject j = currentWeather.getJSONObject("sys");
+				String country = j.getString("country");
 				if (cityname.equalsIgnoreCase("")){
 					this.cityName = city;
 				} else {
-					this.cityName = cityname;
+					this.cityName = cityname + ", " + country;
 				}
 			}
 		} catch (JSONException e) {

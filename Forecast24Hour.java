@@ -62,7 +62,7 @@ public class Forecast24Hour {
 				sclabel[i].setFont(minorfont);
 				
 				templabel[i] = new JLabel("Temperature :"
-						+ tempArray[i]);
+						+ tempArray[i] + " C");
 				templabel[i].setFont(minorfont);
 				
 				imagelabel[i] = new JLabel(new ImageIcon(imgArray[i]));
@@ -78,19 +78,19 @@ public class Forecast24Hour {
 			
 			int j = 0;
 			
-			if (prefs.showDescription()) {
+			if (prefs.getShowDescription()) {
 				j++;
 			}
 			
-			if (prefs.showIcon()) {
+			if (prefs.getShowIcon()) {
 				j++;
 			}
 			
-			if (prefs.showTemperature()) {
+			if (prefs.getShowTemperature()) {
 				j++;
 			}
 			
-			if (prefs.showSky()) {
+			if (prefs.getShowSky()) {
 				j++;
 			}
 
@@ -99,19 +99,19 @@ public class Forecast24Hour {
 			pane.setLayout(panelayout);
 			for (int i = 0; i < 8; i++){
 				
-				if (prefs.showDescription()) {
+				if (prefs.getShowDescription()) {
 					pane.add(weatherdescription_l[i]);
 				}
 				
-				if (prefs.showIcon()) {
+				if (prefs.getShowIcon()) {
 					pane.add(image_l[i]);
 				}
 				
-				if (prefs.showTemperature()) {
+				if (prefs.getShowTemperature()) {
 					pane.add(temp_l[i]);
 				}
 				
-				if (prefs.showSky()) {
+				if (prefs.getShowSky()) {
 					pane.add(skycondition_l[i]);
 				}
 				

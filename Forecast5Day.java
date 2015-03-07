@@ -65,7 +65,7 @@ public class Forecast5Day {
 
 			sclabel[i] = new JLabel("  Description: " + descriptionArray[i]);
 
-			templabel[i] = new JLabel("Temperature: " + tempArray[i]);
+			templabel[i] = new JLabel("Temperature: " + tempArray[i] + " C");
 			templabel[i].setFont(minorfont);
 
 			highlabel[i] = new JLabel("High: " + highArray[i]);
@@ -87,27 +87,27 @@ public class Forecast5Day {
 		
 		int j = 0;
 		
-		if (prefs.showDescription()) {
+		if (prefs.getShowDescription()) {
 			j++;
 		}
 		
-		if (prefs.showIcon()) {
+		if (prefs.getShowIcon()) {
 			j++;
 		}
 		
-		if (prefs.showSky()) {
+		if (prefs.getShowSky()) {
 			j++;
 		}
 
-		if (prefs.showTemperature()) {
+		if (prefs.getShowTemperature()) {
 			j++;
 		}
 
-		if (prefs.showHigh()) {
+		if (prefs.getShowHigh()) {
 			j++;
 		}
 
-		if (prefs.showLow()) {
+		if (prefs.getShowLow()) {
 			j++;
 		}
 
@@ -115,27 +115,27 @@ public class Forecast5Day {
 		pane.setLayout(panelayout);
 		for (int i = 0; i < 5; i++) {
 
-			if (prefs.showDescription() == true) {
+			if (prefs.getShowDescription()) {
 				pane.add(weatherdescription_l[i]);
 			}
 			
-			if (prefs.showIcon() == true) {
+			if (prefs.getShowIcon()) {
 				pane.add(image_l[i]);
 			}
 			
-			if (prefs.showSky() == true) {
+			if (prefs.getShowSky()) {
 				pane.add(skycondition_l[i]);
 			}
 
-			if (prefs.showTemperature() == true) {
+			if (prefs.getShowTemperature()) {
 				pane.add(temp_l[i]);
 			}
 
-			if (prefs.showHigh() == true) {
+			if (prefs.getHigh()) {
 				pane.add(high_l[i]);
 			}
 
-			if (prefs.showLow() == true) {
+			if (prefs.getLow()) {
 				pane.add(low_l[i]);
 			}
 		}
