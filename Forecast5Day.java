@@ -84,60 +84,16 @@ public class Forecast5Day {
 	}
 
 	private void createDisplay(WeatherPreferences prefs) {
-		
-		int j = 0;
-		
-		if (prefs.getShowDescription()) {
-			j++;
-		}
-		
-		if (prefs.getShowIcon()) {
-			j++;
-		}
-		
-		if (prefs.getShowSky()) {
-			j++;
-		}
-
-		if (prefs.getShowTemperature()) {
-			j++;
-		}
-
-		if (prefs.getShowHigh()) {
-			j++;
-		}
-
-		if (prefs.getShowLow()) {
-			j++;
-		}
 
 		GridLayout panelayout = new GridLayout(0, 6);
 		pane.setLayout(panelayout);
 		for (int i = 0; i < 5; i++) {
-
-			if (prefs.getShowDescription()) {
-				pane.add(weatherdescription_l[i]);
-			}
-			
-			if (prefs.getShowIcon()) {
-				pane.add(image_l[i]);
-			}
-			
-			if (prefs.getShowSky()) {
-				pane.add(skycondition_l[i]);
-			}
-
-			if (prefs.getShowTemperature()) {
-				pane.add(temp_l[i]);
-			}
-
-			if (prefs.getHigh()) {
-				pane.add(high_l[i]);
-			}
-
-			if (prefs.getLow()) {
-				pane.add(low_l[i]);
-			}
+			pane.add(weatherdescription_l[i]);
+			pane.add(image_l[i]);
+			pane.add(skycondition_l[i]);
+			pane.add(temp_l[i]);
+			pane.add(high_l[i]);
+			pane.add(low_l[i]);
 		}
 
 	}

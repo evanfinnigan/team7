@@ -82,15 +82,14 @@ public class WeatherData {
 
 	// Constructor
 	public WeatherData(InputTest test) {
-		String city = test.getCityName();
+		this.cityName = test.getCityName();
 		this.currentJSONObject = test.getCurrentWeather();
-		this.forecast24hJSONObject = requestData(city, forcast24hURL);
-		this.forecast5dJSONObject = requestData(city, forcast5dURL);
+		this.forecast24hJSONObject = requestData(cityName, forcast24hURL);
+		this.forecast5dJSONObject = requestData(cityName, forcast5dURL);
 		this.marsJSONObject = requestMarsData(marsURL);
 		this.timeOfLastRequest = test.getTime();
 
 		// Initialize Current Weather Variables
-		setCityName();
 		setSkyConditionCurrent();
 		setDescription();
 		setTempCurrent();
@@ -294,18 +293,18 @@ public class WeatherData {
 		this.currentJSONObject = requestData(city, currentURL);
 	}
 
-	private void setCityName() {
-		try {
-			String jInfo = currentJSONObject.getString("name");
-			jInfo = jInfo
-					+ ", "
-					+ currentJSONObject.getJSONObject("sys").getString(
-							"country");
-			this.cityName = jInfo;
-		} catch (JSONException e) {
-			System.out.println(e.getMessage());
-		}
-	}
+//	private void setCityName() {
+//		try {
+//			String jInfo = currentJSONObject.getString("name");
+//			jInfo = jInfo
+//					+ ", "
+//					+ currentJSONObject.getJSONObject("sys").getString(
+//							"country");
+//			this.cityName = jInfo;
+//		} catch (JSONException e) {
+//			System.out.println(e.getMessage());
+//		}
+//	}
 
 	private void setSkyConditionCurrent() {
 		try {
@@ -863,7 +862,6 @@ public class WeatherData {
 		refreshMarsJSONObject();
 
 		// Initialize Current Weather Variables
-		setCityName();
 		setSkyConditionCurrent();
 		setDescription();
 		setTempCurrent();
