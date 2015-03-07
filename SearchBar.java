@@ -1,6 +1,6 @@
 package team7;
 
-import WeatherPrefs;
+
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -28,9 +28,9 @@ public class SearchBar extends JToolBar implements DocumentListener,ActionListen
     private JTextField searchfield_tf;
     private JButton mars_b;
     private JToolBar tb;
-    private WeatherPrefs currentprefs;
+    private WeatherPreferences currentprefs;
     
-	public SearchBar(WeatherPrefs prefs){
+	public SearchBar(WeatherPreferences prefs){
 		initComponents();
 		addActionListeners();
 		currentprefs = prefs;

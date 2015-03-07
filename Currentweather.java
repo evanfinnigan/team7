@@ -1,7 +1,7 @@
 package team7;
 
 
-import WeatherPrefs;
+
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,7 +23,7 @@ import temporary.WeatherData;
 public class Currentweather {
 
 	private WeatherData currentData;
-	private WeatherPrefs currentPrefs;
+	private WeatherPreferences currentPrefs;
 	private JPanel pane;
 	private JLabel image_l;
 	private JLabel sunrise_l;
@@ -38,7 +38,7 @@ public class Currentweather {
 	private JLabel humidity_l;
 	private JLabel airpressure_l;
 
-	public Currentweather(WeatherData data, WeatherPrefs prefs){
+	public Currentweather(WeatherData data, WeatherPreferences prefs){
 		this.currentData = data;
 		this.currentPrefs = prefs;
 		initComponents();
@@ -112,7 +112,7 @@ public class Currentweather {
 	}
 	
 	
-	public void applyPrefs(WeatherPrefs prefs){
+	public void applyPrefs(WeatherPreferences prefs){
 		
 		temp_l.setVisible(prefs.showTemperature());
 		tempmin_l.setVisible(prefs.showLow());

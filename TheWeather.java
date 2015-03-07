@@ -1,6 +1,6 @@
 package team7;
 
-import WeatherPrefs;
+import WeatherPreferences;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -124,7 +124,7 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
     	
     	}
     	
-	private void initMenu(WeatherPrefs p){
+	private void initMenu(WeatherPreferences p){
 		// create preferences menu
 	    menubar = new JMenuBar();
         view = new JMenu("View");

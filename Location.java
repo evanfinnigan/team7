@@ -1,9 +1,5 @@
 package team7;
 
-import Forecast24Hour;
-import Forecast5Day;
-import WeatherPrefs;
-
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -92,7 +88,7 @@ public class Location implements ActionListener{
 		}
 		locpane.validate();	
 	}
-	public void updateViewPreferences(WeatherPrefs prefs){
+	public void updateViewPreferences(WeatherPreferences prefs){
 		weather.applyPrefs(prefs);
 	}
 	
