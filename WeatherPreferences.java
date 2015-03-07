@@ -3,7 +3,7 @@ package team7;
 
 public class WeatherPreferences implements java.io.Serializable{
 
-	
+
 	private Location defaultLocation;
 	//private LocationList locationlist;
 	private int tempUnit, pressureUnit, windSpeedUnit;
@@ -77,6 +77,66 @@ public class WeatherPreferences implements java.io.Serializable{
 		this.windSpeedUnit = windSpd;
 	}
 
+	//Returns if the sky is showing (true) or hidden (false)
+	public boolean getShowSky() {
+		return this.showSky;
+	}
+
+	//Returns if the Temperature is showing (true) or hidden (false)
+	public boolean getShowTemperature() {
+		return this.showTemp;
+	}
+
+	//Returns if the Pressure is showing (true) or hidden (false)
+	public boolean getShowPressure() {
+		return this.showPressure;
+	}
+
+	//Returns if the Wind Speed is showing (true) or hidden (false)
+	public boolean getShowWindSpeed() {
+		return this.windSpeed;
+	}
+
+	//Returns if the Humidity is showing (true) or hidden (false)
+	public boolean getShowHumidity() {
+		return this.showHumidity;
+	}
+
+	//Returns if the Sunset is showing (true) or hidden (false)
+	public void getShowSunset() {
+		return this.showSunset;
+	}
+
+	//Returns if the Sunrise is showing (true) or hidden (false)
+	public void getShowSunrise() {
+		return this.showSunrise;
+	}
+
+	//Returns if the Wind Direction is showing (true) or hidden (false)
+	public void getShowWindDirection() {
+		return this.showWindDirection;
+	}
+
+	//Returns if the Icon is showing (true) or hidden (false)
+	public void getShowIcon(){
+		return this.showIcon;
+	}
+
+	//Returns if the Percentage of Percipitation is showing (true) or hidden (false)
+	public void getShowPOP() {
+		return this.showPOP;
+	}
+
+	//Returns if the temperature low is showing (true) or hidden (false)
+	public void getShowLow() {
+		return this.showLow;
+	}
+
+	//Returns if the temperature high is showing (true) or hidden (false)
+	public void getShowHigh() {
+		get this.showHigh;
+	}
+
 	//Hides or shows the sky. Default is shown
 	public void showSky(boolean set) {
 		this.showSky = set;
@@ -116,7 +176,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	public void showWindDirection(boolean set) {
 		this.showWindDirection = set;
 	}
-	
+
 	//Hides or shows the Current Weather Icon. Default is shown
 	public void showIcon(boolean set){
 		this.showIcon = set;
