@@ -89,7 +89,7 @@ public class Currentweather {
 		image_l = new JLabel(new ImageIcon(currentData.getIcon()));
 	}
 	private void creategridLayout(){
-		GridLayout glayout = new GridLayout(1,3);
+		GridLayout glayout = new GridLayout(0,6);
 		
 		pane.setLayout(glayout);
 		pane.add(temp_l);
