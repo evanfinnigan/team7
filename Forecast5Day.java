@@ -13,7 +13,6 @@ public class Forecast5Day {
 
 	// Attributes
 	private WeatherData data5d;
-	private WeatherPreferences currentPrefs;
 	private JPanel pane;
 	private JLabel[] image_l;
 	private JLabel[] weatherdescription_l;
@@ -23,19 +22,14 @@ public class Forecast5Day {
 	private JLabel[] high_l;
 	private JLabel[] low_l;
 
-	public Forecast5Day(WeatherData data, WeatherPreferences prefs) {
+	public Forecast5Day(WeatherData data) {
 		this.data5d = data;
-		this.currentPrefs = prefs;
 		initComponents();
-		createDisplay(prefs);
+		createDisplay();
 	}
 
 	public JPanel getPanel() {
 		return pane;
-	}
-
-	public WeatherPreferences getWeatherPreferences() {
-		return currentPrefs;
 	}
 
 	private void initComponents() {
@@ -83,7 +77,7 @@ public class Forecast5Day {
 		this.low_l = lowlabel;
 	}
 
-	private void createDisplay(WeatherPreferences prefs) {
+	private void createDisplay() {
 
 		GridLayout panelayout = new GridLayout(0, 6);
 		pane.setLayout(panelayout);
@@ -101,10 +95,9 @@ public class Forecast5Day {
 	// Test
 	public static void main(String[] args) {
 
-		WeatherPreferences p = new WeatherPreferences();
 		InputTest t = new InputTest("London, Canada");
 		WeatherData d = new WeatherData(t);
-		Forecast5Day test = new Forecast5Day(d, p);
+		Forecast5Day test = new Forecast5Day(d);
 		JFrame frame = new JFrame();
 		frame.add(test.getPanel());
 		frame.setVisible(true);

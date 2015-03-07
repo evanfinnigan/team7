@@ -13,7 +13,6 @@ public class Forecast24Hour {
 
 	// Attributes
 	private WeatherData data24h;
-	private WeatherPreferences currentPrefs;
 	private JPanel pane;
 	private JLabel[] image_l;
 	private JLabel[] weatherdescription_l;
@@ -22,19 +21,14 @@ public class Forecast24Hour {
 
 	// private JLabel[] percentPrecipitation_l;
 
-	public Forecast24Hour(WeatherData data, WeatherPreferences prefs) {
+	public Forecast24Hour(WeatherData data) {
 		this.data24h = data;
-		this.currentPrefs = prefs;
 		initComponents();
-		createDisplay(prefs);
+		createDisplay();
 	}
 
 	public JPanel getPanel() {
 		return pane;
-	}
-
-	public WeatherPreferences getWeatherPreferences() {
-		return currentPrefs;
 	}
 
 	private void initComponents() {
@@ -74,7 +68,7 @@ public class Forecast24Hour {
 		this.image_l = imagelabel;
 	}
 
-	private void createDisplay(WeatherPreferences prefs) {
+	private void createDisplay() {
 
 		GridLayout panelayout = new GridLayout(0, 4);
 
@@ -90,10 +84,9 @@ public class Forecast24Hour {
 	// Test
 	public static void main(String[] args) {
 
-		WeatherPreferences p = new WeatherPreferences();
 		InputTest t = new InputTest("London, Canada");
 		WeatherData d = new WeatherData(t);
-		Forecast24Hour test = new Forecast24Hour(d, p);
+		Forecast24Hour test = new Forecast24Hour(d);
 		JFrame frame = new JFrame();
 		frame.add(test.getPanel());
 		frame.setVisible(true);
