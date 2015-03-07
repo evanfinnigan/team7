@@ -84,6 +84,32 @@ public class Forecast5Day {
 	}
 
 	private void createDisplay(WeatherPreferences prefs) {
+		
+		int j = 0;
+		
+		if (prefs.showDescription()) {
+			j++;
+		}
+		
+		if (prefs.showIcon()) {
+			j++;
+		}
+		
+		if (prefs.showSky()) {
+			j++;
+		}
+
+		if (prefs.showTemperature()) {
+			j++;
+		}
+
+		if (prefs.showHigh()) {
+			j++;
+		}
+
+		if (prefs.showLow()) {
+			j++;
+		}
 
 		GridLayout panelayout = new GridLayout(0, 6);
 		pane.setLayout(panelayout);

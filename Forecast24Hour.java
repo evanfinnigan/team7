@@ -75,27 +75,45 @@ public class Forecast24Hour {
 		}
 
 		private void createDisplay(WeatherPreferences prefs) {
+			
+			int j = 0;
+			
+			if (prefs.showDescription()) {
+				j++;
+			}
+			
+			if (prefs.showIcon()) {
+				j++;
+			}
+			
+			if (prefs.showTemperature()) {
+				j++;
+			}
+			
+			if (prefs.showSky()) {
+				j++;
+			}
 
-			GridLayout panelayout = new GridLayout(0, 4);
+			GridLayout panelayout = new GridLayout(0, j);
+			
 			pane.setLayout(panelayout);
 			for (int i = 0; i < 8; i++){
 				
-				if (prefs.showDescription() == true) {
+				if (prefs.showDescription()) {
 					pane.add(weatherdescription_l[i]);
 				}
 				
-				if (prefs.showIcon() == true) {
+				if (prefs.showIcon()) {
 					pane.add(image_l[i]);
 				}
 				
-				if (prefs.showTemperature() == true) {
+				if (prefs.showTemperature()) {
 					pane.add(temp_l[i]);
 				}
 				
-				if (prefs.showSky() == true) {
+				if (prefs.showSky()) {
 					pane.add(skycondition_l[i]);
 				}
-				
 				
 			}
 		}
