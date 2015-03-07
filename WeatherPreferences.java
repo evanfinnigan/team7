@@ -1,4 +1,4 @@
-package Team7.team7;
+package team7.team7;
 
 public class WeatherPreferences implements java.io.Serializable{
 
@@ -11,9 +11,9 @@ public class WeatherPreferences implements java.io.Serializable{
 	private boolean windSpeed, showHumidity, showSunset, showSunrise;
 	private boolean showPOP, showLow, showHigh;
 
-	//Preferences Constructor
+	//WeatherPreferences Constructor
 	//Creates the default preferences. Everything is shown
-	public Preferences() {
+	public WeatherPreferences() {
 		this.defaultLocation = null;
 		//this.locationlist = null;
 		//Temperature Unit used as default is Celsius
