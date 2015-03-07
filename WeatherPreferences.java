@@ -1,4 +1,5 @@
-package team7.team7;
+
+package team7;
 
 public class WeatherPreferences implements java.io.Serializable{
 
@@ -136,5 +137,4 @@ public class WeatherPreferences implements java.io.Serializable{
 		this.showHigh = set;
 	}
 }	
-
 
