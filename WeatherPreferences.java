@@ -1,191 +1,140 @@
-package team7;
+package Team7.team7;
 
-public class WeatherPreferences {
+public class WeatherPreferences implements java.io.Serializable{
 
-	// Attributes
 	
-	//Current Weather Preferences
-	private boolean showTemperature;
-	private boolean showLow;
-	private boolean showHigh;
-	private boolean showDescription;
-	private boolean showIcon;
-	private boolean showSky;
-	private boolean showSunrise;
-	private boolean showSunset;
-	private boolean showWindSpeed;
-	private boolean showWindDirection;
-	private boolean showHumidity;
-	private boolean showPressure;
-	
-	// 24h Forecast Preferences
-	
-	// 5d Forecast Preferences
-	
-	// Mars Preferences
-	
-	// Constructor
-	Preferences(){
-		// Defaults for Current Weather
-		showTemperature(true);
-		showHigh(true);
-		showLow(true);
-		showDescription(true);
-		showIcon(true);
-		showDescription(true);
-		showSky(true);
-		showSunrise(true);
-		showSunset(true);
-		showWindSpeed(true);
-		showWindDirection(true);
-		showHumidity(true);
-		showPressure(true);
+	private Location defaultLocation;
+	//private LocationList locationlist;
+	private int tempUnit, pressureUnit, windSpeedUnit;
+	private boolean showSky, showTemp, showPressure;
+	private boolean showWindDirection, showIcon;
+	private boolean windSpeed, showHumidity, showSunset, showSunrise;
+	private boolean showPOP, showLow, showHigh;
+
+	//Preferences Constructor
+	//Creates the default preferences. Everything is shown
+	public Preferences() {
+		this.defaultLocation = null;
+		//this.locationlist = null;
+		//Temperature Unit used as default is Celsius
+		this.tempUnit = 0;
+		this.pressureUnit = 0;
+		this.windSpeedUnit = 0;
+		this.showSky = true;
+		this.showTemp = true;
+		this.showPressure = true;
+		this.windSpeed = true;
+		this.showHumidity = true;
+		this.showWindDirection = true;
+		this.showSunset = true;
+		this.showSunrise = true;
+		this.showIcon = true;
+		this.showPOP = true;
+		this.showLow = true;
+		this.showHigh = true;
 	}
 
-	// Getter & Setter Methods
-	
-	public void showTemperature(boolean b){
-		this.showTemperature = b;
-	}
-	
-	public boolean showTemperature() {
-		if (showTemperature == true){
-			return true;
-		} else {
-			return false;
-		}
+	//Gets the location information
+	public Location getLocation(){
+		return this.defaultLocation;
 	}
 
-	public void showLow(boolean b){
-		this.showLow = b;
+	//Sets the location
+	public void setLocation(Location newLocation) {
+		this.defaultLocation = newLocation;
+	}
+
+	//Returns the temperature Unit being used
+	//Celsius = 0, Fahrenheit = 1
+	//Default is celsius
+	public int getTempUnit(){
+		return this.tempUnit;
+	}
+
+	//Celsius = 0. Fahrenheit = 1
+	public void setTempUnit(int tempUn) {
+		this.tempUnit = tempUn;
+	}
+
+	//Returns the Pressure Unit
+	public int getPressure(){
+		return this.pressureUnit;
+	}
+
+	//Sets the pressure unit to be used
+	public void setPressureUnit(int pressUnit) {
+		this.pressureUnit = pressUnit;
+	}
+
+	//Gets the current wind sppeed unit
+	public int getWindSpeed(){
+		return this.windSpeedUnit;
+	}
+
+	//Sets the wind speed unit to be used
+	public void setWindSpeedUnit(int windSpd) {
+		this.windSpeedUnit = windSpd;
+	}
+
+	//Hides or shows the sky. Default is shown
+	public void showSky(boolean set) {
+		this.showSky = set;
+	}
+
+	//Hides or shows the Temperature. Default is shown
+	public void showTemperature(boolean set) {
+		this.showTemp = set;
+	}
+
+	//Hides or shows the Pressure. Default is shown
+	public void showPressure(boolean set) {
+		this.showPressure = set;
+	}
+
+	//Hides or shows the Wind Speed. Default is shown
+	public void showWindSpeed(boolean set) {
+		this.windSpeed = set;
+	}
+
+	//Hides or shows the Humidity. Default is shown
+	public void showHumidity(boolean set) {
+		this.showHumidity = set;
+	}
+
+	//Hides or shows the Sunset time. Default is shown
+	public void showSunset(boolean set) {
+		this.showSunset = set;
+	}
+
+	//Hides or shows the Sunrise time. Default is shown
+	public void showSunrise(boolean set) {
+		this.showSunrise = set;
+	}
+
+	//Hides or shows the Wind Direction. Default is shown
+	public void showWindDirection(boolean set) {
+		this.showWindDirection = set;
 	}
 	
-	public boolean showLow() {
-		if (showLow == true){
-			return true;
-		} else {
-			return false;
-		}
+	//Hides or shows the Current Weather Icon. Default is shown
+	public void showIcon(boolean set){
+		this.showIcon = set;
 	}
-	
-	public void showHigh(boolean b){
-		this.showHigh = b;
+
+	//Hides or shows the % of Precipitation. Default is shown
+	public void showPOP(boolean set) {
+		this.showPOP = set;
 	}
-	
-	public boolean showHigh() {
-		if (showHigh == true){
-			return true;
-		} else {
-			return false;
-		}
+
+	//Hides or shows the daily low temperature. Default is shown
+	public void showLow(boolean set) {
+		this.showLow = set;
 	}
-	
-	public void showDescription(boolean b){
-		this.showDescription = b;
+
+	//Hides or shows the daily high temperature. Default is shown
+	public void showHigh(boolean set) {
+		this.showHigh = set;
 	}
-	
-	public boolean showDescription() {
-		if (showDescription == true){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public void showIcon(boolean b){
-		this.showIcon = b;
-	}
-	
-	public boolean showIcon() {
-		if (showIcon == true){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public void showSky(boolean b){
-		this.showSky = b;
-	}
-	
-	public boolean showSky() {
-		if (showSky == true){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public void showSunrise(boolean b){
-		this.showSunrise = b;
-	}
-	
-	public boolean showSunrise() {
-		if (showSunrise == true){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public void showSunset(boolean b){
-		this.showSunset = b;
-	}
-	
-	public boolean showSunset() {
-		if (showSunset == true){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public void showWindSpeed(boolean b){
-		this.showWindSpeed = b;
-	}
-	
-	public boolean showWindSpeed() {
-		if (showWindSpeed == true){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public void showWindDirection(boolean b){
-		this.showWindDirection = b;
-	}
-	
-	public boolean showWindDirection() {
-		if (showWindDirection == true){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public void showHumidity(boolean b){
-		this.showHumidity = b;
-	}
-	
-	public boolean showHumidity() {
-		if (showHumidity == true){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public void showPressure(boolean b){
-		this.showPressure = b;
-	}
-	
-	public boolean showPressure() {
-		if (showPressure == true){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-}
+}	
+
+
