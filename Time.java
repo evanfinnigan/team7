@@ -24,7 +24,7 @@ public class Time {
 		utc = utc*1000;
 		TimeZone est = TimeZone.getTimeZone("EST");
 		Date date = new Date(utc);
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm a z");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
 		format.setTimeZone(est);
 		String converted = format.format(date);
 		return converted;
