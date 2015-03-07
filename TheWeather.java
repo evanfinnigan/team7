@@ -117,6 +117,7 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
     	tb.add(degc_rb);
     	tb.add(degf_rb);
     	tb.setFloatable(false);
+    	
     	backround.add(tb);
     	
     	}
@@ -137,10 +138,10 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 			item = new JCheckBoxMenuItem("Temp Low", p.getShowLow());
 			item.setMnemonic(KeyEvent.VK_L);
 		prefsmenu.add(item);	
-		    item = new JCheckBoxMenuItem("Wind speed", p.getShowWindSpeed());
+		    item = new JCheckBoxMenuItem("Wind Speed", p.getShowWindSpeed());
 		    item.setMnemonic(KeyEvent.VK_W);
 		prefsmenu.add(item);
-			item = new JCheckBoxMenuItem("Wind direction", p.getShowWindDirection());
+			item = new JCheckBoxMenuItem("Wind Direction", p.getShowWindDirection());
 			item.setMnemonic(KeyEvent.VK_D);
 		prefsmenu.add(item);
 			item = new JCheckBoxMenuItem("Icon", p.getShowIcon());
@@ -172,18 +173,18 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 	private void initWindow(){
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("WeatherDemo version 0.0");
-		backround = new JLabel(new ImageIcon("Weather_day.jpg"));
+		backround = new JLabel(new ImageIcon("/Users/Colin/Documents/workspace/A5/sandbox/CS2212/src/team7/Weather_day.jpg"));
 		add(backround);
 		setContentPane(backround);
 		setLayout(new GridLayout(0,1));
-		setSize(400,800);
+		setSize(800,0);
 	    initToolbarComponents();
     	System.out.println("toolbar init");
     	initMenu(currentprefs);
     	System.out.println("menu init");
     	addActionListeners();
     	System.out.println("adding actionlisteners");
-    	
+    	pack();
 	    
 	}
 	@Override
@@ -192,8 +193,47 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 		Iterator<JCheckBoxMenuItem> prefsiter = prefsmenu.iterator();
 		boolean didChange = false;
 		while (prefsiter.hasNext()){
-			if (source==prefsiter.next()){
+			JCheckBoxMenuItem item = prefsiter.next();
+			if (source==item){
 				didChange = true;
+				System.out.print(item.getState());
+				if (item.getText().equals("Temperature")){
+					
+					currentprefs.showTemperature(item.getState());
+				}
+				if (item.getText().equals("Temp High")){
+					currentprefs.showHigh(item.getState());
+				}
+				if (item.getText().equals("Temp Low")){
+					currentprefs.showLow(item.getState());
+				}
+				if (item.getText().equals("Wind Speed")){
+					currentprefs.showWindSpeed(item.getState());
+				}
+				if (item.getText().equals("Wind Direction")){
+					currentprefs.showWindDirection(item.getState());
+				}
+				if (item.getText().equals("Icon")){
+					currentprefs.showIcon(item.getState());
+				}
+				if (item.getText().equals("Sunrise")){
+					currentprefs.showSunrise(item.getState());
+				}
+				if (item.getText().equals("Sunset")){
+					currentprefs.showSunset(item.getState());
+				}
+				if (item.getText().equals("Sky Condition")){
+					currentprefs.showSky(item.getState());
+				}
+				if (item.getText().equals("Air Pressure")){
+					currentprefs.showPressure(item.getState());
+				}
+				if (item.getText().equals("Humidity")){
+					currentprefs.showHumidity(item.getState());
+				}
+				if (item.getText().equals("Description")){
+					currentprefs.showDescription(item.getState());
+				}
 			}
 		}
 		if (didChange==true){
