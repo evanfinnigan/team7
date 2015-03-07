@@ -17,7 +17,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	
 	private Location defaultLocation;
 	//private LocationList locationlist;
-	private int tempUnit, pressureUnit, windSpeedUnit;
+	private String tempUnit;
 	private boolean showSky, showTemp, showPressure;
 	private boolean showWindDirection, showIcon;
 	private boolean windSpeed, showHumidity, showSunset, showSunrise;
@@ -31,9 +31,7 @@ public class WeatherPreferences implements java.io.Serializable{
 		this.defaultLocation = null;
 		//this.locationlist = null;
 		//Temperature Unit used as default is Celsius
-		this.tempUnit = 0;
-		this.pressureUnit = 0;
-		this.windSpeedUnit = 0;
+		this.tempUnit = "C";
 		this.showSky = true;
 		this.showTemp = true;
 		this.showPressure = true;
@@ -62,33 +60,13 @@ public class WeatherPreferences implements java.io.Serializable{
 	//Returns the temperature Unit being used
 	//Celsius = 0, Fahrenheit = 1
 	//Default is celsius
-	public int getTempUnit(){
+	public String getTempUnit(){
 		return this.tempUnit;
 	}
 
 	//Celsius = 0. Fahrenheit = 1
-	public void setTempUnit(int tempUn) {
+	public void setTempUnit(String tempUn) {
 		this.tempUnit = tempUn;
-	}
-
-	//Returns the Pressure Unit
-	public int getPressure(){
-		return this.pressureUnit;
-	}
-
-	//Sets the pressure unit to be used
-	public void setPressureUnit(int pressUnit) {
-		this.pressureUnit = pressUnit;
-	}
-
-	//Gets the current wind sppeed unit
-	public int getWindSpeed(){
-		return this.windSpeedUnit;
-	}
-
-	//Sets the wind speed unit to be used
-	public void setWindSpeedUnit(int windSpd) {
-		this.windSpeedUnit = windSpd;
 	}
 
 	//Returns if the sky is showing (true) or hidden (false)
