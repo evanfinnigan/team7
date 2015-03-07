@@ -1,6 +1,8 @@
 package team7;
 
 
+import WeatherPrefs;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,10 +18,12 @@ import javax.swing.WindowConstants;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 
+import temporary.WeatherData;
+
 public class Currentweather {
 
 	private WeatherData currentData;
-	private WeatherPreferences currentPrefs;
+	private WeatherPrefs currentPrefs;
 	private JPanel pane;
 	private JLabel image_l;
 	private JLabel sunrise_l;
@@ -34,7 +38,7 @@ public class Currentweather {
 	private JLabel humidity_l;
 	private JLabel airpressure_l;
 
-	public Currentweather(WeatherData data, WeatherPreferences prefs){
+	public Currentweather(WeatherData data, WeatherPrefs prefs){
 		this.currentData = data;
 		this.currentPrefs = prefs;
 		initComponents();
@@ -59,8 +63,8 @@ public class Currentweather {
 		Font medfont = new Font("med", Font.PLAIN, 15);
 		Font smlfont = new Font("sml", Font.PLAIN, 10);
 		// create labels to display basic data
-		pane = new TransparentPanel();
-		pane.setPreferredSize(new Dimension(800,200)); 
+		pane = new JPanel();
+		//pane.setPreferredSize(new Dimension(600,200)); 
 		sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
 		sunrise_l.setFont(medfont);
 		sunset_l = new JLabel("Sunset: " + currentData.getSunset());
@@ -75,13 +79,13 @@ public class Currentweather {
 		skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
 		skycondition_l.setFont(medfont);
 		temp_l = new JLabel(currentData.getTempCurrent() +"\u00b0" + currentPrefs.getUnits());
-		temp_l.setFont(lrgfont);
+		temp_l.setFont(medfont);
 		tempmax_l = new JLabel("High: " + currentData.getHigh());
 		tempmax_l.setFont(medfont);
-		tempmax_l.setForeground(Color.RED);
+		//tempmax_l.setForeground(Color.RED);
 		tempmin_l = new JLabel("Low: " + currentData.getLow());
 		tempmin_l.setFont(medfont);
-		tempmin_l.setForeground(Color.BLUE);
+		//tempmin_l.setForeground(Color.BLUE);
 		humidity_l = new JLabel("Humidity: " + currentData.getHumidity());
 		humidity_l.setFont(medfont);
 		airpressure_l = new JLabel("Air Pressure: " + currentData.getPressure());
@@ -89,7 +93,7 @@ public class Currentweather {
 		image_l = new JLabel(new ImageIcon(currentData.getIcon()));
 	}
 	private void creategridLayout(){
-		GridLayout glayout = new GridLayout(0,6);
+		GridLayout glayout = new GridLayout(2,6);
 		
 		pane.setLayout(glayout);
 		pane.add(temp_l);
@@ -106,80 +110,9 @@ public class Currentweather {
 		pane.add(sunset_l);
 		pane.validate();
 	}
-	private void createLayout(){
-		
-		GroupLayout panelayout = new GroupLayout(pane);
-		panelayout.setAutoCreateContainerGaps(true);
-		panelayout.setAutoCreateGaps(true);
-		
-		ParallelGroup x_axis_left = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);  
-		ParallelGroup x_axis_middle = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-		ParallelGroup x_axis_right = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);  
-		
-		x_axis_left.addComponent(temp_l);
-	    x_axis_left.addComponent(weatherdescription_l);
-		x_axis_left.addComponent(skycondition_l);
-		x_axis_left.addComponent(image_l);
-		
-		x_axis_middle.addComponent(tempmax_l);
-		x_axis_middle.addComponent(tempmin_l);
-	    x_axis_middle.addComponent(windspeed_l);
-		x_axis_middle.addComponent(winddirection_l);
-		
-		x_axis_right.addComponent(humidity_l);
-		x_axis_right.addComponent(airpressure_l);
-		x_axis_right.addComponent(sunrise_l);
-		x_axis_right.addComponent(sunset_l);
 	
-        ParallelGroup y_axis_1 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        ParallelGroup y_axis_2 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        ParallelGroup y_axis_3 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        ParallelGroup y_axis_4 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        ParallelGroup y_axis_5 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        ParallelGroup y_axis_6 = panelayout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        
-        y_axis_1.addComponent(temp_l);
-     
-        y_axis_2.addComponent(tempmax_l);
-        y_axis_2.addComponent(sunrise_l);
-        y_axis_2.addComponent(skycondition_l);
-        
-        y_axis_3.addComponent(tempmin_l);
-        y_axis_3.addComponent(sunset_l);
-        
-        y_axis_4.addComponent(image_l);
-        
-        y_axis_5.addComponent(windspeed_l);
-        y_axis_5.addComponent(humidity_l);
-        y_axis_5.addComponent(weatherdescription_l);
-        
-        y_axis_6.addComponent(winddirection_l);
-        y_axis_6.addComponent(airpressure_l);
-        
-        
-        SequentialGroup hGroup = panelayout.createSequentialGroup();
-        SequentialGroup vGroup = panelayout.createSequentialGroup();
-         
-        hGroup.addGroup(x_axis_left);
-        hGroup.addGap(25);
-        hGroup.addGroup(x_axis_middle);
-        hGroup.addGap(25);
-        hGroup.addGroup(x_axis_right);
-        
-        vGroup.addGroup(y_axis_1);
-        vGroup.addGroup(y_axis_2);
-        vGroup.addGroup(y_axis_3);
-        vGroup.addGroup(y_axis_4);
-        vGroup.addGroup(y_axis_5);
-        vGroup.addGroup(y_axis_6);
-        
-        panelayout.setHorizontalGroup(hGroup);
-        panelayout.setVerticalGroup(vGroup);
-        pane.setLayout(panelayout);
-        pane.validate();
-  }
 	
-	private void applyPrefs(WeatherPreferences prefs){
+	public void applyPrefs(WeatherPrefs prefs){
 		
 		temp_l.setVisible(prefs.showTemperature());
 		tempmin_l.setVisible(prefs.showLow());
@@ -196,8 +129,8 @@ public class Currentweather {
 
 	}
 
-//	// Test
-//
+
+
 //	public static void main(String[] args){
 //		
 //		JFrame frame = new JFrame();
@@ -205,8 +138,8 @@ public class Currentweather {
 //		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 //		frame.setPreferredSize(null);
 //		WeatherPreferences prefs = new WeatherPreferences();
-//		WeatherData data = new WeatherData("London,ca");
-//		
+//		InputTest intest = new InputTest("London,ca");
+//		WeatherData data = new WeatherData(intest);
 //		System.out.println(data.getCityName());
 //		Currentweather test = new Currentweather(data, prefs);
 //		frame.getContentPane().add(test.getPanel());

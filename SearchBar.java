@@ -1,17 +1,23 @@
 package team7;
 
+import WeatherPrefs;
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import temporary.InputTest;
+import temporary.WeatherData;
 
 public class SearchBar extends JToolBar implements DocumentListener,ActionListener{
 	
@@ -22,10 +28,12 @@ public class SearchBar extends JToolBar implements DocumentListener,ActionListen
     private JTextField searchfield_tf;
     private JButton mars_b;
     private JToolBar tb;
+    private WeatherPrefs currentprefs;
     
-	public SearchBar(WeatherPreferences prefs){
+	public SearchBar(WeatherPrefs prefs){
 		initComponents();
-		addActionListeners();    
+		addActionListeners();
+		currentprefs = prefs;
 	}
 	private void addActionListeners(){
 		searchfield_tf.getDocument().addDocumentListener(this);
@@ -61,6 +69,8 @@ public class SearchBar extends JToolBar implements DocumentListener,ActionListen
 	searchfield_tf.setMinimumSize(new Dimension(125,30));
 	searchfield_tf.setMaximumSize(new Dimension(175,30));
 	
+	
+	
 	// create JToolBar
 	tb = new JToolBar();
 	// add components to toolbar
@@ -81,7 +91,7 @@ public class SearchBar extends JToolBar implements DocumentListener,ActionListen
 			   if (check!=null){
 				   	   InputTest test = new InputTest(check);
 				   	   if (test.getValid()){
-					   Location loc = new Location(new WeatherData(test),prefs);
+					   Location loc = new Location(new WeatherData(test),currentprefs);
 			           }
 				   	   else{
 				   		status_l.setText("Please check your spelling and try again..");   
