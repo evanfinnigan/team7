@@ -51,7 +51,12 @@ public class InputTest {
 				this.valid = false;
 			} else {
 				this.valid = true;
-				this.cityName = currentWeather.getString("name");
+				String cityname = currentWeather.getString("name");
+				if (cityname.equalsIgnoreCase("")){
+					this.cityName = city;
+				} else {
+					this.cityName = cityname;
+				}
 			}
 		} catch (JSONException e) {
 			System.out.println(e.getMessage());
