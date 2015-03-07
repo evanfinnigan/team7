@@ -1,5 +1,6 @@
 package team7;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -35,8 +36,7 @@ public class Forecast24Hour {
 	private void initComponents() {
 		// create labels to display basic data
 		this.pane = new JPanel();
-		Font mainfont = new Font("lrg", Font.PLAIN, 30);
-		Font minorfont = new Font("sml", Font.PLAIN, 15);
+		Font minorfont = new Font("sml", Font.PLAIN, 10);
 
 		JLabel[] wdlabel = new JLabel[8];
 		JLabel[] sclabel = new JLabel[8];
@@ -61,6 +61,7 @@ public class Forecast24Hour {
 			templabel[i].setFont(minorfont);
 
 			imagelabel[i] = new JLabel(new ImageIcon(imgArray[i]));
+			imagelabel[i].setSize(new Dimension(3,3));
 		}
 
 		this.weatherdescription_l = wdlabel;

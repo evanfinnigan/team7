@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import java.awt.Dimension;
 
 public class Forecast5Day {
 
@@ -36,7 +37,7 @@ public class Forecast5Day {
 	private void initComponents() {
 		// create labels to display basic data
 		this.pane = new JPanel();
-		Font minorfont = new Font("sml", Font.PLAIN, 15);
+		Font minorfont = new Font("sml", Font.PLAIN, 10);
 
 		JLabel[] wdlabel = new JLabel[5];
 		JLabel[] sclabel = new JLabel[5];
@@ -59,15 +60,19 @@ public class Forecast5Day {
 			wdlabel[i].setFont(minorfont);
 
 			sclabel[i] = new JLabel("  Description: " + descriptionArray[i]);
+			sclabel[i].setFont(minorfont);
 
 			templabel[i] = new JLabel("Temperature: " + tempArray[i] + " C");
 			templabel[i].setFont(minorfont);
 
 			highlabel[i] = new JLabel("High: " + highArray[i]);
+			highlabel[i].setFont(minorfont);
 
 			lowlabel[i] = new JLabel("Low: " + lowArray[i]);
+			lowlabel[i].setFont(minorfont);
 
 			imagelabel[i] = new JLabel(new ImageIcon(imgArray[i]));
+			imagelabel[i].setSize(new Dimension(3,3));
 		}
 
 		this.weatherdescription_l = wdlabel;
