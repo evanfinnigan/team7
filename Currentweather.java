@@ -1,8 +1,5 @@
 package team7;
 
-
-
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -18,7 +15,7 @@ import javax.swing.WindowConstants;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 
-import temporary.WeatherData;
+
 
 public class Currentweather {
 
@@ -78,7 +75,7 @@ public class Currentweather {
 		weatherdescription_l.setFont(medfont);
 		skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
 		skycondition_l.setFont(medfont);
-		temp_l = new JLabel(currentData.getTempCurrent() +"\u00b0" + currentPrefs.getUnits());
+		temp_l = new JLabel(currentData.getTempCurrent() +"\u00b0" + currentPrefs.getTempUnit());
 		temp_l.setFont(medfont);
 		tempmax_l = new JLabel("High: " + currentData.getHigh());
 		tempmax_l.setFont(medfont);
@@ -114,18 +111,18 @@ public class Currentweather {
 	
 	public void applyPrefs(WeatherPreferences prefs){
 		
-		temp_l.setVisible(prefs.showTemperature());
-		tempmin_l.setVisible(prefs.showLow());
-	    tempmax_l.setVisible(prefs.showHigh());
-		image_l.setVisible(prefs.showIcon()); 
-		weatherdescription_l.setVisible(prefs.showDescription());
-		skycondition_l.setVisible(prefs.showSky());
-	    sunrise_l.setVisible(prefs.showSunrise());
-	    sunset_l.setVisible(prefs.showSunset());
-		windspeed_l.setVisible(prefs.showWindSpeed());
-		winddirection_l.setVisible(prefs.showWindDirection());	
-	    humidity_l.setVisible(prefs.showHumidity());
-		airpressure_l.setVisible(prefs.showPressure());
+		temp_l.setVisible(prefs.getShowTemperature());
+		tempmin_l.setVisible(prefs.getShowLow());
+	    tempmax_l.setVisible(prefs.getShowHigh());
+		image_l.setVisible(prefs.getShowIcon()); 
+		weatherdescription_l.setVisible(prefs.getShowDescription());
+		skycondition_l.setVisible(prefs.getShowSky());
+	    sunrise_l.setVisible(prefs.getShowSunrise());
+	    sunset_l.setVisible(prefs.getShowSunset());
+		windspeed_l.setVisible(prefs.getShowWindSpeed());
+		winddirection_l.setVisible(prefs.getShowWindDirection());	
+	    humidity_l.setVisible(prefs.getShowHumidity());
+		airpressure_l.setVisible(prefs.getShowPressure());
 
 	}
 

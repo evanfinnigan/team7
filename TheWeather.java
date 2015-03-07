@@ -1,7 +1,5 @@
 package team7;
 
-import WeatherPreferences;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -30,8 +28,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import temporary.InputTest;
-import temporary.WeatherData;
+
 
 public class TheWeather extends JFrame implements ItemListener,ActionListener,DocumentListener{
 	// menu for view
@@ -131,40 +128,40 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
         view.setMnemonic(KeyEvent.VK_V);
         
 		prefsmenu = new LinkedList<JCheckBoxMenuItem>();
-		JCheckBoxMenuItem item = new JCheckBoxMenuItem("Temperature", p.showTemperature());
+		JCheckBoxMenuItem item = new JCheckBoxMenuItem("Temperature", p.getShowTemperature());
 			item.setMnemonic(KeyEvent.VK_T);
 		prefsmenu.add(item); 
-			item = new JCheckBoxMenuItem("Temp High", p.showHigh());
+			item = new JCheckBoxMenuItem("Temp High", p.getShowHigh());
 			item.setMnemonic(KeyEvent.VK_H);
 		prefsmenu.add(item);
-			item = new JCheckBoxMenuItem("Temp Low", p.showLow());
+			item = new JCheckBoxMenuItem("Temp Low", p.getShowLow());
 			item.setMnemonic(KeyEvent.VK_L);
 		prefsmenu.add(item);	
-		    item = new JCheckBoxMenuItem("Wind speed", p.showWindSpeed());
+		    item = new JCheckBoxMenuItem("Wind speed", p.getShowWindSpeed());
 		    item.setMnemonic(KeyEvent.VK_W);
 		prefsmenu.add(item);
-			item = new JCheckBoxMenuItem("Wind direction", p.showWindDirection());
+			item = new JCheckBoxMenuItem("Wind direction", p.getShowWindDirection());
 			item.setMnemonic(KeyEvent.VK_D);
 		prefsmenu.add(item);
-			item = new JCheckBoxMenuItem("Icon", p.showIcon());
+			item = new JCheckBoxMenuItem("Icon", p.getShowIcon());
 			item.setMnemonic(KeyEvent.VK_I);
 		prefsmenu.add(item); 
-			item = new JCheckBoxMenuItem("Sunrise", p.showSunrise());
+			item = new JCheckBoxMenuItem("Sunrise", p.getShowSunrise());
 			item.setMnemonic(KeyEvent.VK_R);
 		prefsmenu.add(item);
-			item = new JCheckBoxMenuItem("Sunset", p.showSunset());
+			item = new JCheckBoxMenuItem("Sunset", p.getShowSunset());
 			item.setMnemonic(KeyEvent.VK_S);
 		prefsmenu.add(item);
-			item = new JCheckBoxMenuItem("Air Pressure", p.showPressure());
+			item = new JCheckBoxMenuItem("Air Pressure", p.getShowPressure());
 			item.setMnemonic(KeyEvent.VK_A);
 		prefsmenu.add(item);
-			item = new JCheckBoxMenuItem("Humidity", p.showHumidity());
+			item = new JCheckBoxMenuItem("Humidity", p.getShowHumidity());
 			item.setMnemonic(KeyEvent.VK_H);
 		prefsmenu.add(item); 
-			item = new JCheckBoxMenuItem("Sky Condition", p.showSky());
+			item = new JCheckBoxMenuItem("Sky Condition", p.getShowSky());
 			item.setMnemonic(KeyEvent.VK_C);
 		prefsmenu.add(item);
-			item = new JCheckBoxMenuItem("Description", p.showDescription());
+			item = new JCheckBoxMenuItem("Description", p.getShowDescription());
 			item.setMnemonic(KeyEvent.VK_N);
 		prefsmenu.add(item);
 		
@@ -195,9 +192,9 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 		Iterator<JCheckBoxMenuItem> prefsiter = prefsmenu.iterator();
 		boolean didChange = false;
 		while (prefsiter.hasNext()){
-		if (source==prefsiter.next()){
-			didChange = true;
-		}
+			if (source==prefsiter.next()){
+				didChange = true;
+			}
 		}
 		if (didChange==true){
 			Iterator<Location> iter = locations.iterator();

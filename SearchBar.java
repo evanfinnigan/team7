@@ -16,8 +16,7 @@ import javax.swing.JToolBar;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import temporary.InputTest;
-import temporary.WeatherData;
+
 
 public class SearchBar extends JToolBar implements DocumentListener,ActionListener{
 	
