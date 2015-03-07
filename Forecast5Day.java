@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 public class Forecast5Day {
 
@@ -99,6 +100,7 @@ public class Forecast5Day {
 		WeatherData d = new WeatherData(t);
 		Forecast5Day test = new Forecast5Day(d);
 		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(test.getPanel());
 		frame.setVisible(true);
 		frame.pack();

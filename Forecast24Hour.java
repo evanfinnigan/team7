@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 public class Forecast24Hour {
 
@@ -88,6 +89,7 @@ public class Forecast24Hour {
 		WeatherData d = new WeatherData(t);
 		Forecast24Hour test = new Forecast24Hour(d);
 		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(test.getPanel());
 		frame.setVisible(true);
 		frame.pack();
