@@ -3,7 +3,18 @@ package team7;
 
 public class WeatherPreferences implements java.io.Serializable{
 
+	/**
+	 * @author Evan
+	 * 
+	 * A Preference class to control the application. 
+	 * Allows the user to hide and show certain elements of the application.
+	 * 
+	 * It does so by having getters and setters for each of the elements
+	 * 
+	 * 	
+	 */
 
+	
 	private Location defaultLocation;
 	//private LocationList locationlist;
 	private int tempUnit, pressureUnit, windSpeedUnit;
@@ -11,7 +22,9 @@ public class WeatherPreferences implements java.io.Serializable{
 	private boolean showWindDirection, showIcon;
 	private boolean windSpeed, showHumidity, showSunset, showSunrise;
 	private boolean showPOP, showLow, showHigh;
+	private boolean showDescription;
 
+	
 	//WeatherPreferences Constructor
 	//Creates the default preferences. Everything is shown
 	public WeatherPreferences() {
@@ -33,6 +46,7 @@ public class WeatherPreferences implements java.io.Serializable{
 		this.showPOP = true;
 		this.showLow = true;
 		this.showHigh = true;
+		this.showDescription = true;
 	}
 
 	//Gets the location information
@@ -103,38 +117,43 @@ public class WeatherPreferences implements java.io.Serializable{
 	}
 
 	//Returns if the Sunset is showing (true) or hidden (false)
-	public void getShowSunset() {
+	public boolean getShowSunset() {
 		return this.showSunset;
 	}
 
 	//Returns if the Sunrise is showing (true) or hidden (false)
-	public void getShowSunrise() {
+	public boolean getShowSunrise() {
 		return this.showSunrise;
 	}
 
 	//Returns if the Wind Direction is showing (true) or hidden (false)
-	public void getShowWindDirection() {
+	public boolean getShowWindDirection() {
 		return this.showWindDirection;
 	}
 
 	//Returns if the Icon is showing (true) or hidden (false)
-	public void getShowIcon(){
+	public boolean getShowIcon(){
 		return this.showIcon;
 	}
 
 	//Returns if the Percentage of Percipitation is showing (true) or hidden (false)
-	public void getShowPOP() {
+	public boolean getShowPOP() {
 		return this.showPOP;
 	}
 
 	//Returns if the temperature low is showing (true) or hidden (false)
-	public void getShowLow() {
+	public boolean getShowLow() {
 		return this.showLow;
 	}
 
 	//Returns if the temperature high is showing (true) or hidden (false)
-	public void getShowHigh() {
-		get this.showHigh;
+	public boolean getShowHigh() {
+		return this.showHigh;
+	}
+	
+	//Gets a string represented the weather
+	public boolean getShowDescription() {
+		return this.showDescription;
 	}
 
 	//Hides or shows the sky. Default is shown
@@ -195,6 +214,11 @@ public class WeatherPreferences implements java.io.Serializable{
 	//Hides or shows the daily high temperature. Default is shown
 	public void showHigh(boolean set) {
 		this.showHigh = set;
+	}
+	
+	//Hides or shows a string describing the weather
+	public void showDescription(boolean set) {
+		this.showDescription = set;
 	}
 }	
 
