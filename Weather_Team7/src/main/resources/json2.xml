@@ -2,7 +2,7 @@
 <Configuration status="WARN">
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %json{36} - %msg%n"/>
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %jsonmvn compile{36} - %msg%n"/>
 		</Console>
 		<File name="File1" fileName="target/TheWeather.log" bufferedIO="false"></File>
 	</Appenders>
