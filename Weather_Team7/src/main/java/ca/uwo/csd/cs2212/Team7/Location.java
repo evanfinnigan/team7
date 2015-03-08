@@ -1,7 +1,9 @@
-package team7;
+package team7.Weather_Team7.src.main.java.ca.uwo.csd.cs2212.Team7;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +16,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import javax.swing.WindowConstants;
+
+import javax.swing.ScrollPaneLayout;
+
 
 
 
@@ -33,6 +39,8 @@ public class Location implements ActionListener{
 		locpane = new JPanel();
 		name = data.getCityName();
 		JLabel locname_l = new JLabel(name);
+		
+		
 		
 		//locpane.add(locname_l);
 		
@@ -56,8 +64,13 @@ public class Location implements ActionListener{
 		//sh_longterm.setActionCommand("Show_long");
 		//locpane.add(sh_longterm);
 		//blong=true;
+		
+		
 		GroupLayout layout = new GroupLayout(locpane); 
 		locpane.setLayout(layout);
+		
+		
+		
 		
 		ParallelGroup horiz = layout.createParallelGroup();
 		SequentialGroup vert = layout.createSequentialGroup();

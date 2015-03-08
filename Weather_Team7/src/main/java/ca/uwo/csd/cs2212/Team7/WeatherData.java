@@ -1,4 +1,4 @@
-package team7;
+package team7.Weather_Team7.src.main.java.ca.uwo.csd.cs2212.Team7;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -135,37 +135,65 @@ public class WeatherData {
 	}
 
 	/**
-	 * gets the current location
+	 * Gets the current location
 	 * @returns JSONObject
 	 */
 	public JSONObject getCurrentJSONObject() {
 		return currentJSONObject;
 	}
 
+	/**
+	 * Gets the city name
+	 * @returns String representing the city name
+	 */
 	public String getCityName() {
 		return cityName;
 	}
 
+	/**
+	 * Gets the current sky condition
+	 * @returns String representing the current sky condition
+	 */
 	public String getSkyConditionCurrent() {
 		return skyConditionCurrent;
 	}
 
+	/**
+	 * Gets the description of the weather
+	 * @returns String representing weather description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Gets the current temperature
+	 * @returns String representing current temperature
+	 */
 	public double getTempCurrent() {
 		return tempCurrent;
 	}
 
+	/**
+	 * Gets the sunset time
+	 * @returns String representing sunset time
+	 */
 	public String getSunset() {
 		return sunset;
 	}
 
+	/**
+	 * Gets the sunrise time
+	 * @returns String representing sunrise time
+	 */
 	public String getSunrise() {
 		return sunrise;
 	}
 
+	/**
+	 * Gets the weather pressure 
+	 * @returns String representing sunset time
+	 */
 	public double getPressure() {
 		return pressure;
 	}

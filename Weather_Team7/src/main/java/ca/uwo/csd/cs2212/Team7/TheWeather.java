@@ -1,4 +1,4 @@
-package team7;
+package team7.Weather_Team7.src.main.java.ca.uwo.csd.cs2212.Team7;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -27,7 +27,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-import javax.swing.ScrollPaneLayout;
+
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
@@ -62,14 +62,30 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
     // user preferences 
     private WeatherPreferences currentprefs;
     private JPanel locpane;
+
     private JTabbedPane tabbed;
+
+
+    private JScrollPane scrollPane;
+   
+    
 
     public TheWeather(){
     	currentprefs = new WeatherPreferences();
     	locations = new LinkedList<Location>();
+    	scrollPane = new JScrollPane();
+    	
     	initWindow();
+    	add(scrollPane);
     	System.out.println("window init");
+
    }
+
+    	
+    	
+    	
+    
+
     
     private void addActionListeners(){
 		searchfield_tf.getDocument().addDocumentListener(this);
@@ -197,7 +213,11 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("WeatherDemo version 0.0");
 		locpane = new JPanel();
+
 		tabbed = new JTabbedPane();
+
+		
+
 	    initToolbarComponents();
 	    System.out.println(this.getWidth());
     	initMenu(currentprefs);

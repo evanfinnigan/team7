@@ -1,4 +1,4 @@
-package team7;
+package team7.Weather_Team7.src.main.java.ca.uwo.csd.cs2212.Team7;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;// used in the test to be removed
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
@@ -110,6 +111,8 @@ public class Currentweather {
 		pane.add(sunset_l);
 		//pane.setBounds(0, 0, 800, 600);
 		pane.validate();
+		
+		
 	}
 	
 	
@@ -131,19 +134,24 @@ public class Currentweather {
 	}
 
 
+
 	public static void main(String[] args){
 		
 		JFrame frame = new JFrame();
 		frame.setTitle("Weather for London, Canada");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(800,600));
 		WeatherPreferences prefs = new WeatherPreferences();
 		InputTest intest = new InputTest("London,ca");
 		WeatherData data = new WeatherData(intest);
 		System.out.println(data.getCityName());
 		Currentweather test = new Currentweather(data, prefs);
-		frame.add(test.getPanel());
+		frame.getContentPane().add(test.getPanel());
 		System.out.println("finished");
-		frame.setVisible(true);
 		frame.pack();
 	}
+
+
+
+
 }
