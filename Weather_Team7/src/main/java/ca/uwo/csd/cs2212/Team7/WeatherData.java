@@ -265,7 +265,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the 24hr sky conditions in an array 
-	 * @returns double array representing the 24hr sky conditions
+	 * @returns String array representing the 24hr sky conditions
 	 */
 	public String[] getSkyCondition24h() {
 		return skyCondition24h;
@@ -273,7 +273,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the 24hr temperatures in an array 
-	 * @returns double array representing the 24hr temperatures 
+	 * @returns String array representing the 24hr temperatures 
 	 */
 	public String[] getDescription24h() {
 		return description24h;
@@ -286,25 +286,42 @@ public class WeatherData {
 
 	/**
 	 * Gets the Images of 24hr temperatures in an array 
-	 * @returns double array representing the 24hr temperature icons 
+	 * @returns Image array representing the 24hr temperature icons 
 	 */
 	public Image[] getIcon24h() {
 		return icon24h;
 	}
 
 	// 5 day Forecast Getters
+	
+	/**
+	 * Gets the JSONObject of 5day weather
+	 * @return JSONObject of 5day weather forecast
+	 */
 	public JSONObject getForecast5dJSONObject() {
 		return forecast5dJSONObject;
 	}
 
+	/**
+	 * Gets the array of 5 day temperatures 
+	 * @return double array of 5 day temperatures 
+	 */
 	public double[] getTemp5d() {
 		return temp5d;
 	}
 
+	/**
+	 * Gets the 5day sky conditions of the weather
+	 * @return String array of 5days of sky conditions 
+	 */
 	public String[] getSkyCondition5d() {
 		return skyCondition5d;
 	}
 
+	/**
+	 * Gets the String array of 5day weather descriptions
+	 * @return String array of 5day descriptions of the weather
+	 */
 	public String[] getDescription5d() {
 		return description5d;
 	}
@@ -313,51 +330,100 @@ public class WeatherData {
 		return percentPrecipitation5d;
 	}
 
+	/**
+	 * Gets the Images of 5day temperatures in an array 
+	 * @returns Image array representing the 5day temperature icons 
+	 */
 	public Image[] getIcon5d() {
 		return icon5d;
 	}
 
+	/**
+	 * Gets array of 5day low temperatures
+	 * @returns double array representing the 5day low temperatures
+	 */
 	public double[] getLow5d() {
 		return low5d;
 	}
 
+	/**
+	 * Gets array of 5day high temperatures
+	 * @returns double array representing the 5day high temperatures
+	 */
 	public double[] getHigh5d() {
 		return high5d;
 	}
 
 	// Mars Getters
+	
+	/**
+	 * Gets JSONObject of Mars' weather info
+	 * @returns JSONObject consists of Mars' weather info
+	 */
 	public JSONObject getMarsJSONObject() {
 		return marsJSONObject;
 	}
 
+	/**
+	 * Gets the minimum temperature of Mars
+	 * @returns double representing the minimum temperature in Mars
+	 */
 	public double getMinTempMars() {
 		return minTempMars;
 	}
 
+	/**
+	 * Gets the maximum temperature of Mars
+	 * @returns double representing the maximum temperature in Mars
+	 */
 	public double getMaxTempMars() {
 		return maxTempMars;
 	}
 
+	/**
+	 * Gets the wind speed at Mars
+	 * @returns double representing the wind speed in Mars
+	 */
 	public double getWindSpeedMars() {
 		return windSpeedMars;
 	}
 
+	/**
+	 * Gets the wind direction in Mars
+	 * @returns String representing the wind direction in Mars
+	 */
 	public String getWindDirectionMars() {
 		return windDirectionMars;
 	}
 
+	/**
+	 * Gets the air pressure in Mars
+	 * @returns double representing the air pressure in Mars
+	 */
 	public double getPressureMars() {
 		return pressureMars;
 	}
 
+	/**
+	 * Gets the air humidity in Mars
+	 * @returns int representing the humidity in Mars
+	 */
 	public int getHumidityMars() {
 		return humidityMars;
 	}
 
+	/**
+	 * Gets the sky condition in Mars
+	 * @returns String representing the sky condition in Mars
+	 */
 	public String getSkyConditionMars() {
 		return skyConditionMars;
 	}
 
+	/**
+	 * Gets and Image representing the weather in Mars
+	 * @returns Image representing the weather in Mars
+	 */
 	public Image getIconMars() {
 		return iconMars;
 	}
