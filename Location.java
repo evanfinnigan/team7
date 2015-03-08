@@ -11,8 +11,10 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 
 
@@ -61,13 +63,17 @@ public class Location implements ActionListener{
 		SequentialGroup vert = layout.createSequentialGroup();
 		horiz.addComponent(locname_l);
 		
-		horiz.addComponent(weather.getPanel());
-		horiz.addComponent(shortterm.getPanel());
-		horiz.addComponent(longterm.getPanel());
+		JPanel p1 = weather.getPanel();
+		JPanel p2 = shortterm.getPanel();
+		JPanel p3 = longterm.getPanel();
+		
+		horiz.addComponent(p1);
+		horiz.addComponent(p2);
+		horiz.addComponent(p3);
 		vert.addComponent(locname_l);
-		vert.addComponent(weather.getPanel());
-		vert.addComponent(shortterm.getPanel());
-		vert.addComponent(longterm.getPanel());
+		vert.addComponent(p1);
+		vert.addComponent(p2);
+		vert.addComponent(p3);
 		layout.setHorizontalGroup(horiz);
 		layout.setVerticalGroup(vert);
 		
@@ -116,6 +122,20 @@ public class Location implements ActionListener{
 	public void updateViewPreferences(WeatherPreferences prefs){
 		weather.applyPrefs(prefs);
 	}
+	
+	// Test
+		public static void main(String[] args) {
+
+			InputTest t = new InputTest("London, Canada");
+			WeatherData d = new WeatherData(t);
+			Location test = new Location(d,new WeatherPreferences());
+			JFrame frame = new JFrame();
+			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+			frame.add(test.getPane());
+			frame.setVisible(true);
+			frame.pack();
+			frame.setTitle("Location Test");
+		}
 	
 	
 }

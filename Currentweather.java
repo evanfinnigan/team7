@@ -59,40 +59,42 @@ public class Currentweather {
 		// create fonts for text
 		Font lrgfont = new Font("lrg", Font.PLAIN, 24);
 		Font medfont = new Font("med", Font.PLAIN, 15);
-		Font smlfont = new Font("sml", Font.PLAIN, 10);
+		Font smlfont = new Font("sml", Font.PLAIN, 13);
 		// create labels to display basic data
 		pane = new JPanel(); 
 		sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
-		sunrise_l.setFont(medfont);
+		sunrise_l.setFont(smlfont);
 		sunset_l = new JLabel("Sunset: " + currentData.getSunset());
-		sunset_l.setFont(medfont);
+		sunset_l.setFont(smlfont);
 		windspeed_l = new JLabel("Wind Speed: " + currentData.getWindSpeed());
-		windspeed_l.setFont(medfont);
+		windspeed_l.setFont(smlfont);
 		winddirection_l = new JLabel("Wind Direction: "
 				+ currentData.getWindDirection());
-		winddirection_l.setFont(medfont);
+		winddirection_l.setFont(smlfont);
 		weatherdescription_l = new JLabel("" + currentData.getDescription());
-		weatherdescription_l.setFont(medfont);
+		weatherdescription_l.setFont(smlfont);
 		skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
-		skycondition_l.setFont(medfont);
+		skycondition_l.setFont(smlfont);
 		temp_l = new JLabel(currentData.getTempCurrent() +"\u00b0" + currentPrefs.getTempUnit());
-		temp_l.setFont(medfont);
+		temp_l.setFont(smlfont);
 		tempmax_l = new JLabel("High: " + currentData.getHigh());
-		tempmax_l.setFont(medfont);
+		tempmax_l.setFont(smlfont);
 		//tempmax_l.setForeground(Color.RED);
 		tempmin_l = new JLabel("Low: " + currentData.getLow());
-		tempmin_l.setFont(medfont);
+		tempmin_l.setFont(smlfont);
 		//tempmin_l.setForeground(Color.BLUE);
 		humidity_l = new JLabel("Humidity: " + currentData.getHumidity());
-		humidity_l.setFont(medfont);
+		humidity_l.setFont(smlfont);
 		airpressure_l = new JLabel("Air Pressure: " + currentData.getPressure());
-		airpressure_l.setFont(medfont);
+		airpressure_l.setFont(smlfont);
 		image_l = new JLabel(new ImageIcon(currentData.getIcon()));
+		image_l.setPreferredSize(new Dimension(10,10));
+		
 	}
 	
 	private void creategridLayout(){
 		GridLayout glayout = new GridLayout(0,6);
-		//pane.setLayout(glayout);
+		pane.setLayout(glayout);
 		
 		pane.add(temp_l);
 		pane.add(tempmin_l);
@@ -129,20 +131,19 @@ public class Currentweather {
 	}
 
 
-//	public static void main(String[] args){
-//		
-//		JFrame frame = new JFrame();
-//		frame.setTitle("Weather for London, Canada");
-//		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//		frame.setPreferredSize(new Dimension(800,600));
-//		WeatherPreferences prefs = new WeatherPreferences();
-//		InputTest intest = new InputTest("London,ca");
-//		WeatherData data = new WeatherData(intest);
-//		System.out.println(data.getCityName());
-//		Currentweather test = new Currentweather(data, prefs);
-//		frame.getContentPane().add(test.getPanel());
-//		System.out.println("finished");
-//		frame.pack();
-//		frame.show();
-//	}
+	public static void main(String[] args){
+		
+		JFrame frame = new JFrame();
+		frame.setTitle("Weather for London, Canada");
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		WeatherPreferences prefs = new WeatherPreferences();
+		InputTest intest = new InputTest("London,ca");
+		WeatherData data = new WeatherData(intest);
+		System.out.println(data.getCityName());
+		Currentweather test = new Currentweather(data, prefs);
+		frame.add(test.getPanel());
+		System.out.println("finished");
+		frame.setVisible(true);
+		frame.pack();
+	}
 }

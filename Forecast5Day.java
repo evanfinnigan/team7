@@ -37,7 +37,7 @@ public class Forecast5Day {
 	private void initComponents() {
 		// create labels to display basic data
 		this.pane = new JPanel();
-		Font minorfont = new Font("sml", Font.PLAIN, 10);
+		Font minorfont = new Font("sml", Font.PLAIN, 13);
 
 		JLabel[] wdlabel = new JLabel[5];
 		JLabel[] sclabel = new JLabel[5];
@@ -72,7 +72,7 @@ public class Forecast5Day {
 			lowlabel[i].setFont(minorfont);
 
 			imagelabel[i] = new JLabel(new ImageIcon(imgArray[i]));
-			imagelabel[i].setSize(new Dimension(3,3));
+			imagelabel[i].setPreferredSize(new Dimension(5,5));
 		}
 
 		this.weatherdescription_l = wdlabel;

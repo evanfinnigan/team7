@@ -33,7 +33,7 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
+import javax.swing.JTabbedPane;
 
 
 public class TheWeather extends JFrame implements ItemListener,ActionListener,DocumentListener{
@@ -62,15 +62,14 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
     // user preferences 
     private WeatherPreferences currentprefs;
     private JPanel locpane;
+    private JTabbedPane tabbed;
 
     public TheWeather(){
     	currentprefs = new WeatherPreferences();
     	locations = new LinkedList<Location>();
     	initWindow();
     	System.out.println("window init");
-    	
-    	
-    }
+   }
     
     private void addActionListeners(){
 		searchfield_tf.getDocument().addDocumentListener(this);
@@ -187,18 +186,18 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 	    	ParallelGroup hl = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
 	    	SequentialGroup vl = layout.createSequentialGroup();
 	    	hl.addComponent(tb);
-	    	hl.addComponent(locpane);
+	    	hl.addComponent(tabbed);
 	    	vl.addComponent(tb);
-	    	vl.addComponent(locpane);
+	    	vl.addComponent(tabbed);
 	    	layout.setHorizontalGroup(hl);
 	        layout.setVerticalGroup(vl);
-	       
-	    	
 	    }
+	 
 	private void initWindow(){
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("WeatherDemo version 0.0");
 		locpane = new JPanel();
+		tabbed = new JTabbedPane();
 	    initToolbarComponents();
 	    System.out.println(this.getWidth());
     	initMenu(currentprefs);
@@ -275,7 +274,8 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 				   	   InputTest test = new InputTest(check);
 				   	   if (test.getValid()){
 					   Location loc = new Location(new WeatherData(test),currentprefs);
-					   locpane.add(loc.getPane());
+					   JPanel p = loc.getPane();
+					   tabbed.add(loc.getName(),p);
 					   locations.add(loc);
 			           }
 				   	   else{
