@@ -448,6 +448,11 @@ public class WeatherData {
 //		}
 //	}
 
+	
+	/**
+	 * Setter for sky condition
+	 * @param skyConditionCurrent is to be set 
+	 */
 	private void setSkyConditionCurrent() {
 		try {
 			JSONArray jInfo = currentJSONObject.getJSONArray("weather");
@@ -459,6 +464,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for description
+	 * @param description is to be set 
+	 */
 	private void setDescription() {
 		try {
 			JSONArray jInfo = currentJSONObject.getJSONArray("weather");
@@ -470,6 +479,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for current temperature
+	 * @param tempCurrent is to be set 
+	 */
 	private void setTempCurrent() {
 		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
@@ -482,6 +495,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for Sunset
+	 * @param sunset is to be set 
+	 */
 	private void setSunset() {
 		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("sys");
@@ -493,6 +510,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for sunrise
+	 * @param sunrise is to be set 
+	 */
 	private void setSunrise() {
 		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("sys");
@@ -504,6 +525,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter pressure
+	 * @param pressure is to be set 
+	 */
 	private void setPressure() {
 		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
@@ -516,6 +541,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for humidity
+	 * @param humidity is to be set 
+	 */
 	private void setHumidity() {
 		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
