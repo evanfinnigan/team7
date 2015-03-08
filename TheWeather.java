@@ -12,6 +12,9 @@ import java.awt.event.KeyEvent;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -19,9 +22,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.ScrollPaneLayout;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
@@ -55,13 +61,14 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
     private JToolBar tb;
     // user preferences 
     private WeatherPreferences currentprefs;
-    private JLabel backround;
-    
+    private JPanel locpane;
+
     public TheWeather(){
     	currentprefs = new WeatherPreferences();
     	locations = new LinkedList<Location>();
     	initWindow();
     	System.out.println("window init");
+    	
     	
     }
     
@@ -77,6 +84,7 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
     		view.add(item);
         }
 	}
+   
     private void initToolbarComponents(){
     	status_l = new JLabel();	
     	 // create a label to prompt the user for a location
@@ -118,7 +126,7 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
     	tb.add(degf_rb);
     	tb.setFloatable(false);
     	
-    	backround.add(tb);
+    	//backround.add(tb);
     	
     	}
     	
@@ -170,20 +178,32 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
         setJMenuBar(menubar);
         
 	}
+	 private void createLayout(){
+	    	GroupLayout layout = new GroupLayout(getContentPane());
+	    	getContentPane().setLayout(layout);
+	    	getContentPane().setSize(800, 600);
+	    	//layout.setAutoCreateGaps(true);
+	    	//layout.setAutoCreateContainerGaps(true);
+	    	ParallelGroup hl = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+	    	SequentialGroup vl = layout.createSequentialGroup();
+	    	hl.addComponent(tb);
+	    	hl.addComponent(locpane);
+	    	vl.addComponent(tb);
+	    	vl.addComponent(locpane);
+	    	layout.setHorizontalGroup(hl);
+	        layout.setVerticalGroup(vl);
+	       
+	    	
+	    }
 	private void initWindow(){
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("WeatherDemo version 0.0");
-		backround = new JLabel(new ImageIcon("/Users/Colin/Documents/workspace/A5/sandbox/CS2212/src/team7/Weather_day.jpg"));
-		add(backround);
-		setContentPane(backround);
-		setLayout(new GridLayout(0,1));
-		setSize(800,0);
+		locpane = new JPanel();
 	    initToolbarComponents();
-    	System.out.println("toolbar init");
+	    System.out.println(this.getWidth());
     	initMenu(currentprefs);
-    	System.out.println("menu init");
     	addActionListeners();
-    	System.out.println("adding actionlisteners");
+    	createLayout();
     	pack();
 	    
 	}
@@ -255,7 +275,7 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 				   	   InputTest test = new InputTest(check);
 				   	   if (test.getValid()){
 					   Location loc = new Location(new WeatherData(test),currentprefs);
-					   this.add(loc.getPane());
+					   locpane.add(loc.getPane());
 					   locations.add(loc);
 			           }
 				   	   else{
@@ -300,6 +320,7 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 		// TODO Auto-generated method stub
 		
 	}
+	
 	public static void main(String[] args){
 		 //Schedule a job for the event dispatch thread:
 	       //creating and showing this application's GUI.

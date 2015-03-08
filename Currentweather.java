@@ -40,6 +40,7 @@ public class Currentweather {
 		this.currentPrefs = prefs;
 		initComponents();
 		creategridLayout();
+		
 		//createLayout();
 		applyPrefs(prefs);
 		
@@ -60,8 +61,7 @@ public class Currentweather {
 		Font medfont = new Font("med", Font.PLAIN, 15);
 		Font smlfont = new Font("sml", Font.PLAIN, 10);
 		// create labels to display basic data
-		pane = new JPanel();
-		//pane.setPreferredSize(new Dimension(600,200)); 
+		pane = new JPanel(); 
 		sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
 		sunrise_l.setFont(medfont);
 		sunset_l = new JLabel("Sunset: " + currentData.getSunset());
@@ -89,10 +89,11 @@ public class Currentweather {
 		airpressure_l.setFont(medfont);
 		image_l = new JLabel(new ImageIcon(currentData.getIcon()));
 	}
+	
 	private void creategridLayout(){
-		GridLayout glayout = new GridLayout(2,6);
+		GridLayout glayout = new GridLayout(0,6);
+		//pane.setLayout(glayout);
 		
-		pane.setLayout(glayout);
 		pane.add(temp_l);
 		pane.add(tempmin_l);
 		pane.add(tempmax_l);
@@ -105,6 +106,7 @@ public class Currentweather {
 		pane.add(airpressure_l);
 		pane.add(sunrise_l);
 		pane.add(sunset_l);
+		//pane.setBounds(0, 0, 800, 600);
 		pane.validate();
 	}
 	
@@ -127,13 +129,12 @@ public class Currentweather {
 	}
 
 
-
 //	public static void main(String[] args){
 //		
 //		JFrame frame = new JFrame();
 //		frame.setTitle("Weather for London, Canada");
 //		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//		frame.setPreferredSize(null);
+//		frame.setPreferredSize(new Dimension(800,600));
 //		WeatherPreferences prefs = new WeatherPreferences();
 //		InputTest intest = new InputTest("London,ca");
 //		WeatherData data = new WeatherData(intest);

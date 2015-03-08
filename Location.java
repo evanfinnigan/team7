@@ -1,11 +1,15 @@
 package team7;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,25 +31,46 @@ public class Location implements ActionListener{
 		locpane = new JPanel();
 		name = data.getCityName();
 		JLabel locname_l = new JLabel(name);
-		locpane.setLayout(new GridLayout(0,1));
-		locpane.add(locname_l);
+		
+		//locpane.add(locname_l);
 		
 		weather = new Currentweather(data, prefs);
 		shortterm = new Forecast24Hour(data);
 		longterm = new Forecast5Day(data);
 		
-		locpane.add(weather.getPanel());
+		//locpane.add(weather.getPanel());
+		
 		//sh_shortterm = new JButton("Show 24 hour forecast");
 		//locpane.add(sh_shortterm);
 		//sh_shortterm.setActionCommand("Show_short");
 		//bshort=true;
 		
-		locpane.add(shortterm.getPanel());
+		//locpane.add(shortterm.getPanel());
+		
 		//sh_longterm = new JButton("Show 5 day forecast");
-		locpane.add(longterm.getPanel());
+		
+		//locpane.add(longterm.getPanel());
+		
 		//sh_longterm.setActionCommand("Show_long");
 		//locpane.add(sh_longterm);
 		//blong=true;
+		GroupLayout layout = new GroupLayout(locpane); 
+		locpane.setLayout(layout);
+		
+		ParallelGroup horiz = layout.createParallelGroup();
+		SequentialGroup vert = layout.createSequentialGroup();
+		horiz.addComponent(locname_l);
+		
+		horiz.addComponent(weather.getPanel());
+		horiz.addComponent(shortterm.getPanel());
+		horiz.addComponent(longterm.getPanel());
+		vert.addComponent(locname_l);
+		vert.addComponent(weather.getPanel());
+		vert.addComponent(shortterm.getPanel());
+		vert.addComponent(longterm.getPanel());
+		layout.setHorizontalGroup(horiz);
+		layout.setVerticalGroup(vert);
+		
 	
 	}
 	public String getName(){
