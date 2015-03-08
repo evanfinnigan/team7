@@ -134,7 +134,10 @@ public class WeatherData {
 		return timeOfLastRequest;
 	}
 
-	// Current Weather Getters
+	/**
+	 * gets the current location
+	 * @returns JSONObject
+	 */
 	public JSONObject getCurrentJSONObject() {
 		return currentJSONObject;
 	}
