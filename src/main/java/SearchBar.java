@@ -1,4 +1,4 @@
-package team7.Weather_Team7.src.main.java.ca.uwo.csd.cs2212.Team7;
+package main.java;
 
 
 

@@ -1,4 +1,4 @@
-package team7.Weather_Team7.src.main.java.ca.uwo.csd.cs2212.Team7;
+package main.java;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -71,7 +71,6 @@ public class Location implements ActionListener{
 		
 		
 		
-		
 		ParallelGroup horiz = layout.createParallelGroup();
 		SequentialGroup vert = layout.createSequentialGroup();
 		horiz.addComponent(locname_l);
@@ -89,7 +88,6 @@ public class Location implements ActionListener{
 		vert.addComponent(p3);
 		layout.setHorizontalGroup(horiz);
 		layout.setVerticalGroup(vert);
-		
 	
 	}
 	public String getName(){

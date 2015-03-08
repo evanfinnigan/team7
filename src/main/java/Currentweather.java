@@ -1,4 +1,4 @@
-package team7.Weather_Team7.src.main.java.ca.uwo.csd.cs2212.Team7;
+package main.java;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -140,7 +140,6 @@ public class Currentweather {
 		JFrame frame = new JFrame();
 		frame.setTitle("Weather for London, Canada");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(800,600));
 		WeatherPreferences prefs = new WeatherPreferences();
 		InputTest intest = new InputTest("London,ca");
 		WeatherData data = new WeatherData(intest);
@@ -149,6 +148,7 @@ public class Currentweather {
 		frame.getContentPane().add(test.getPanel());
 		System.out.println("finished");
 		frame.pack();
+		frame.setVisible(true);
 	}
 
 
