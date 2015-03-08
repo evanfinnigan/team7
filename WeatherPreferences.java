@@ -14,7 +14,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * 	
 	 */
 
-	
+
 	private Location defaultLocation;
 	//private LocationList locationlist;
 	private String tempUnit;
@@ -24,9 +24,11 @@ public class WeatherPreferences implements java.io.Serializable{
 	private boolean showPOP, showLow, showHigh;
 	private boolean showDescription;
 
-	
-	//WeatherPreferences Constructor
-	//Creates the default preferences. Everything is shown
+	/**
+	 * WeatherPreferences Constructor
+	 * Creates the default preferences. 
+	 * Everything is shown as default
+	 */
 	public WeatherPreferences() {
 		this.defaultLocation = null;
 		//this.locationlist = null;
@@ -47,156 +49,244 @@ public class WeatherPreferences implements java.io.Serializable{
 		this.showDescription = true;
 	}
 
-	//Gets the location information
+	/**
+	 * gets the current location
+	 * @returns boolean
+	 */
 	public Location getLocation(){
 		return this.defaultLocation;
 	}
 
-	//Sets the location
+	/**
+	 * sets the current location
+	 * @returns
+	 */
 	public void setLocation(Location newLocation) {
 		this.defaultLocation = newLocation;
 	}
 
-	//Returns the temperature Unit being used
-	//Celsius = 0, Fahrenheit = 1
-	//Default is celsius
+	/**
+	 * getter for the temperature unit being used
+	 * @returns String
+	 */
 	public String getTempUnit(){
 		return this.tempUnit;
 	}
 
-	//Celsius = 0. Fahrenheit = 1
+	/**
+	 * Setter for the current temperature unit
+	 * @returns
+	 */
 	public void setTempUnit(String tempUn) {
 		this.tempUnit = tempUn;
 	}
 
-	//Returns if the sky is showing (true) or hidden (false)
+	/**
+	 * getter for showing the sky condition
+	 * @returns boolean
+	 */
 	public boolean getShowSky() {
 		return this.showSky;
 	}
 
-	//Returns if the Temperature is showing (true) or hidden (false)
+	/**
+	 * getter for showing current temperature
+	 * @returns boolean
+	 */
 	public boolean getShowTemperature() {
 		return this.showTemp;
 	}
 
-	//Returns if the Pressure is showing (true) or hidden (false)
+	/**
+	 * getter for show wind pressure
+	 * @returns boolean
+	 */
 	public boolean getShowPressure() {
 		return this.showPressure;
 	}
 
-	//Returns if the Wind Speed is showing (true) or hidden (false)
+	/**
+	 * getter for show wind speed
+	 * @returns boolean
+	 */
 	public boolean getShowWindSpeed() {
 		return this.windSpeed;
 	}
 
-	//Returns if the Humidity is showing (true) or hidden (false)
+	/**
+	 * getter for if the current humidity is showing
+	 * @returns boolean
+	 */
 	public boolean getShowHumidity() {
 		return this.showHumidity;
 	}
 
-	//Returns if the Sunset is showing (true) or hidden (false)
+	/**
+	 * getter for if the sunset time is showing
+	 * @returns boolean
+	 */
 	public boolean getShowSunset() {
 		return this.showSunset;
 	}
 
-	//Returns if the Sunrise is showing (true) or hidden (false)
+	/**
+	 * getter for if the sunrise time is showing
+	 * @returns boolean
+	 */
 	public boolean getShowSunrise() {
 		return this.showSunrise;
 	}
 
-	//Returns if the Wind Direction is showing (true) or hidden (false)
+	/**
+	 * getter for if the wind direction is showing
+	 * @returns boolean
+	 */
 	public boolean getShowWindDirection() {
 		return this.showWindDirection;
 	}
 
-	//Returns if the Icon is showing (true) or hidden (false)
+	/**
+	 * getter for if the current weather icon is showing
+	 * @returns boolean
+	 */
 	public boolean getShowIcon(){
 		return this.showIcon;
 	}
 
-	//Returns if the Percentage of Percipitation is showing (true) or hidden (false)
+	/**
+	 * getter for if the percentage of percipitation is showing
+	 * @returns boolean
+	 */
 	public boolean getShowPOP() {
 		return this.showPOP;
 	}
 
-	//Returns if the temperature low is showing (true) or hidden (false)
+	/**
+	 * getter for if the daily low is showing
+	 * @returns boolean
+	 */
 	public boolean getShowLow() {
 		return this.showLow;
 	}
 
-	//Returns if the temperature high is showing (true) or hidden (false)
+	/**
+	 * getter for if the daily high is showing
+	 * @returns boolean
+	 */
 	public boolean getShowHigh() {
 		return this.showHigh;
 	}
-	
-	//Gets a string represented the weather
-	public boolean getShowDescription() {
+
+	/**
+	 * getter for if the current humidity is showing
+	 * @returns String
+	 */
+	public String getShowDescription() {
 		return this.showDescription;
 	}
 
-	//Hides or shows the sky. Default is shown
-	public void showSky(boolean set) {
+	/**
+	 * setter to hide or show the sky condition
+	 * @returns
+	 */
+	public void setShowSky(boolean set) {
 		this.showSky = set;
 	}
 
-	//Hides or shows the Temperature. Default is shown
-	public void showTemperature(boolean set) {
+	/**
+	 * setter to hide or show the sky condition
+	 * @returns
+	 */
+	public void setShowTemperature(boolean set) {
 		this.showTemp = set;
 	}
 
-	//Hides or shows the Pressure. Default is shown
-	public void showPressure(boolean set) {
-		this.showPressure = set;
-	}
+	/**
+	 * setter to hide or show the pressure level
+	 * @returns
+	 */ is shown
+	 public void setShowPressure(boolean set) {
+		 this.showPressure = set;
+	 }
 
-	//Hides or shows the Wind Speed. Default is shown
-	public void showWindSpeed(boolean set) {
-		this.windSpeed = set;
-	}
+	 /**
+	  * setter to hide or show the current wind speed
+	  * @returns
+	  */
+	 public void setShowWindSpeed(boolean set) {
+		 this.windSpeed = set;
+	 }
 
-	//Hides or shows the Humidity. Default is shown
-	public void showHumidity(boolean set) {
-		this.showHumidity = set;
-	}
+	 /**
+	  * setter to hide or show the current humidity
+	  * @returns
+	  */
+	 public void setShowHumidity(boolean set) {
+		 this.showHumidity = set;
+	 }
 
-	//Hides or shows the Sunset time. Default is shown
-	public void showSunset(boolean set) {
-		this.showSunset = set;
-	}
+	 /**
+	  * setter to hide or show the sunset time
+	  * @returns
+	  */
+	 public void setShowSunset(boolean set) {
+		 this.showSunset = set;
+	 }
 
-	//Hides or shows the Sunrise time. Default is shown
-	public void showSunrise(boolean set) {
-		this.showSunrise = set;
-	}
+	 /**
+	  * setter to hide or show the current day's sunrise time
+	  * @returns
+	  */
+	 public void setShowSunrise(boolean set) {
+		 this.showSunrise = set;
+	 }
 
-	//Hides or shows the Wind Direction. Default is shown
-	public void showWindDirection(boolean set) {
-		this.showWindDirection = set;
-	}
+	 /**
+	  * setter to hide or show the current wind direction
+	  * @returns
+	  */
+	 public void setShowWindDirection(boolean set) {
+		 this.showWindDirection = set;
+	 }
 
-	//Hides or shows the Current Weather Icon. Default is shown
-	public void showIcon(boolean set){
-		this.showIcon = set;
-	}
+	 /**
+	  * setter to hide or show the current weather condition's icon
+	  * @returns
+	  */
+	 public void setShowIcon(boolean set){
+		 this.showIcon = set;
+	 }
 
-	//Hides or shows the % of Precipitation. Default is shown
-	public void showPOP(boolean set) {
-		this.showPOP = set;
-	}
+	 /**
+	  * setter to hide or show the current percentage of percipitation
+	  * @returns
+	  */
+	 public void setShowPOP(boolean set) {
+		 this.showPOP = set;
+	 }
 
-	//Hides or shows the daily low temperature. Default is shown
-	public void showLow(boolean set) {
-		this.showLow = set;
-	}
+	 /**
+	  * setter to hide or show the daily low temperature
+	  * @returns
+	  */
+	 public void setShowLow(boolean set) {
+		 this.showLow = set;
+	 }
 
-	//Hides or shows the daily high temperature. Default is shown
-	public void showHigh(boolean set) {
-		this.showHigh = set;
-	}
-	
-	//Hides or shows a string describing the weather
-	public void showDescription(boolean set) {
-		this.showDescription = set;
-	}
+	 /**
+	  * setter to hide or show the daily high temperature
+	  * @returns
+	  */
+	 public void setShowHigh(boolean set) {
+		 this.showHigh = set;
+	 }
+
+	 /**
+	  * setter to hide or show a string describing the current weather
+	  * @returns
+	  */
+	 public void setShowDescription(String set) {
+		 this.showDescription = set;
+	 }
 }	
 
