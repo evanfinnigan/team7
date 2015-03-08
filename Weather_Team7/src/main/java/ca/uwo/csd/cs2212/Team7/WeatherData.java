@@ -192,57 +192,102 @@ public class WeatherData {
 
 	/**
 	 * Gets the weather pressure 
-	 * @returns String representing sunset time
+	 * @returns String representing the weather pressure
 	 */
 	public double getPressure() {
 		return pressure;
 	}
 
+	/**
+	 * Gets the weather humidity
+	 * @returns String representing weather humidity
+	 */
 	public int getHumidity() {
 		return humidity;
 	}
 
+	/**
+	 * Gets the wind speed 
+	 * @returns String representing the wind speed 
+	 */
 	public double getWindSpeed() {
 		return windSpeed;
 	}
 
+	/**
+	 * Gets the wind direction
+	 * @returns String representing wind direction
+	 */
 	public String getWindDirection() {
 		return windDirection;
 	}
 
+	/**
+	 * Gets the low temperature 
+	 * @returns double representing low temperature
+	 */
 	public double getLow() {
 		return low;
 	}
 
+	/**
+	 * Gets the high temperature 
+	 * @returns double representing high temperature
+	 */
 	public double getHigh() {
 		return high;
 	}
 
+	/**
+	 * Gets the icon representing the weather
+	 * @returns Image representing the weather
+	 */
 	public Image getIcon() {
 		return icon;
 	}
 
-	// 24 hour Forecast Getters
+	
+	/**
+	 * Gets the JSONObject for 24hr temperature 
+	 * @returns JSONObject representing 24hr temperature
+	 */
 	public JSONObject getForecast24hJSONObject() {
 		return forecast24hJSONObject;
 	}
 
+	/**
+	 * Gets the 24hr temperatures in an array 
+	 * @returns double array representing the 24hr temperatures 
+	 */
 	public double[] getTemp24h() {
 		return temp24h;
 	}
 
+	/**
+	 * Gets the 24hr sky conditions in an array 
+	 * @returns double array representing the 24hr sky conditions
+	 */
 	public String[] getSkyCondition24h() {
 		return skyCondition24h;
 	}
 
+	/**
+	 * Gets the 24hr temperatures in an array 
+	 * @returns double array representing the 24hr temperatures 
+	 */
 	public String[] getDescription24h() {
 		return description24h;
 	}
 
+	
 	public int[] getPercentPreicipitation24h() {
 		return percentPrecipitation24h;
 	}
 
+	/**
+	 * Gets the Images of 24hr temperatures in an array 
+	 * @returns double array representing the 24hr temperature icons 
+	 */
 	public Image[] getIcon24h() {
 		return icon24h;
 	}
