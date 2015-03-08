@@ -219,40 +219,40 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 				System.out.print(item.getState());
 				if (item.getText().equals("Temperature")){
 					
-					currentprefs.showTemperature(item.getState());
+					currentprefs.setShowTemperature(item.getState());
 				}
 				if (item.getText().equals("Temp High")){
-					currentprefs.showHigh(item.getState());
+					currentprefs.setShowHigh(item.getState());
 				}
 				if (item.getText().equals("Temp Low")){
-					currentprefs.showLow(item.getState());
+					currentprefs.setShowLow(item.getState());
 				}
 				if (item.getText().equals("Wind Speed")){
-					currentprefs.showWindSpeed(item.getState());
+					currentprefs.setShowWindSpeed(item.getState());
 				}
 				if (item.getText().equals("Wind Direction")){
-					currentprefs.showWindDirection(item.getState());
+					currentprefs.setShowWindDirection(item.getState());
 				}
 				if (item.getText().equals("Icon")){
-					currentprefs.showIcon(item.getState());
+					currentprefs.setShowIcon(item.getState());
 				}
 				if (item.getText().equals("Sunrise")){
-					currentprefs.showSunrise(item.getState());
+					currentprefs.setShowSunrise(item.getState());
 				}
 				if (item.getText().equals("Sunset")){
-					currentprefs.showSunset(item.getState());
+					currentprefs.setShowSunset(item.getState());
 				}
 				if (item.getText().equals("Sky Condition")){
-					currentprefs.showSky(item.getState());
+					currentprefs.setShowSky(item.getState());
 				}
 				if (item.getText().equals("Air Pressure")){
-					currentprefs.showPressure(item.getState());
+					currentprefs.setShowPressure(item.getState());
 				}
 				if (item.getText().equals("Humidity")){
-					currentprefs.showHumidity(item.getState());
+					currentprefs.setShowHumidity(item.getState());
 				}
 				if (item.getText().equals("Description")){
-					currentprefs.showDescription(item.getState());
+					currentprefs.setShowDescription(item.getState());
 				}
 			}
 		}

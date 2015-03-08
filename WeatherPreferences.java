@@ -1,4 +1,3 @@
-
 package team7;
 
 public class WeatherPreferences implements java.io.Serializable{
@@ -181,7 +180,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * getter for if the current humidity is showing
 	 * @returns String
 	 */
-	public String getShowDescription() {
+	public boolean getShowDescription() {
 		return this.showDescription;
 	}
 
@@ -204,7 +203,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	/**
 	 * setter to hide or show the pressure level
 	 * @returns
-	 */ is shown
+	 */ 
 	 public void setShowPressure(boolean set) {
 		 this.showPressure = set;
 	 }
@@ -282,11 +281,10 @@ public class WeatherPreferences implements java.io.Serializable{
 	 }
 
 	 /**
-	  * setter to hide or show a string describing the current weather
+	  * setter to hide or show the description the current weather
 	  * @returns
 	  */
-	 public void setShowDescription(String set) {
+	 public void setShowDescription(boolean set) {
 		 this.showDescription = set;
 	 }
 }	
-
