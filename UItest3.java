@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
+import javax.swing.ScrollPaneLayout;
 
 import javax.swing.JLabel;
 
@@ -26,11 +28,13 @@ import java.awt.Font;
 import java.awt.Color;
 
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
 
 public class UItest3 extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel;
+	private JPanel forecast;
 	private Forecast5Day update;
 	private JTextField textField;
 
@@ -59,11 +63,14 @@ public class UItest3 extends JFrame {
 		setBounds(100, 100, 600, 700);
 		//this.setMinimumSize(new Dimension(int, int));
 		//this.setMaximumSize(new Dimension(int, int));
+		panel = new JPanel();
+		panel.setBounds(0, 433, 639, 254);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		setContentPane(panel);
 		contentPane.setLayout(null);
+		panel.setLayout(new GridLayout(0,1));
 		
 		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.setBounds(0, 0, 0, 0);
@@ -157,9 +164,7 @@ public class UItest3 extends JFrame {
 		lblHumudityVal.setBounds(451, 270, 131, 20);
 		contentPane.add(lblHumudityVal);
 		
-		panel = new JPanel();
-		panel.setBounds(0, 433, 639, 254);
-		contentPane.add(panel);
+		panel.add(contentPane);
 		
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
@@ -193,8 +198,10 @@ public class UItest3 extends JFrame {
 					
 					lblImg.setIcon(new ImageIcon(test.getIcon()));
 					
+					Location l = new Location(test,new WeatherPreferences());
+					forecast = l.getPane();
 					
-					
+					panel.add(forecast);
 					
 					
 					//update = new Forecast5Day(test);
