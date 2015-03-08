@@ -3,7 +3,7 @@ package team7;
 public class WeatherPreferences implements java.io.Serializable{
 
 	/**
-	 * @author Evan
+	 * @author Evan Kossman
 	 * 
 	 * A Preference class to control the application. 
 	 * Allows the user to hide and show certain elements of the application.
