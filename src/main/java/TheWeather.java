@@ -4,14 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
@@ -27,7 +31,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
@@ -210,13 +213,27 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
 	    }
 	 
 	private void initWindow(){
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setTitle("WeatherDemo version 0.0");
+		//setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		//setTitle("WeatherDemo version 0.0");
+		 //----------------------------
+		BufferedImage img = null;
+		try {
+			 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/day.jpg"));
+			// System.out.println("File " + img.toString());
+		} catch (Exception e) {
+			System.out.println("Cannot read file: " + e);
+		}
+		
+		BackgroundPanel background = new BackgroundPanel(img, BackgroundPanel.SCALED, 0.50f, 0.5f);
+		
+		this.setContentPane(background);	
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(200, 100);
+		this.setVisible(true);
+		
 		locpane = new JPanel();
 
 		tabbed = new JTabbedPane();
-
-		
 
 	    initToolbarComponents();
 	    System.out.println(this.getWidth());
@@ -224,7 +241,7 @@ public class TheWeather extends JFrame implements ItemListener,ActionListener,Do
     	addActionListeners();
     	createLayout();
     	pack();
-	    
+	   
 	}
 	@Override
 	public void itemStateChanged(ItemEvent ie) {
