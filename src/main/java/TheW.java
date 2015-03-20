@@ -43,6 +43,7 @@ public class TheW {
 	String selectedValue;
 	Currentweather current;
 	Forecast5Day longterm;
+	Forecast24Hour shortterm;
 
 	public TheW() {
 		
@@ -52,6 +53,7 @@ public class TheW {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 				   	 selectedValue = model.getSelectedItem().toString();
+				   	 
 				}
 			}
 		});
@@ -75,9 +77,11 @@ public class TheW {
 					
 					current = new Currentweather(w,p);
 					longterm = new Forecast5Day(w);
+					shortterm = new Forecast24Hour(w);
 					
 					tabbedPane.add("Current",current.getPanel());
 					tabbedPane.add("Long Term",longterm.getPanel());
+					tabbedPane.add("Short Term",shortterm.getPanel());
 					
 				} else {
 					System.out.println("Error");
