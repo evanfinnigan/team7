@@ -84,7 +84,7 @@ public class Currentweather {
 		tempmin_l = new JLabel("Low: " + currentData.getLow());
 		tempmin_l.setFont(smlfont);
 		//tempmin_l.setForeground(Color.BLUE);
-		humidity_l = new JLabel("Humidity: " + currentData.getHumidity());
+		humidity_l = new JLabel("Humidity: " + currentData.getHumidity() + "%");
 		humidity_l.setFont(smlfont);
 		airpressure_l = new JLabel("Air Pressure: " + currentData.getPressure());
 		airpressure_l.setFont(smlfont);
