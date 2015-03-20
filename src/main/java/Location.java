@@ -27,7 +27,7 @@ import javax.swing.ScrollPaneLayout;
 
 
 public class Location implements ActionListener{
-	private JPanel locpane;
+	private TransparentPanel locpane;
 	private String name;
 	private Currentweather weather;
 	private Forecast24Hour shortterm;
@@ -36,7 +36,7 @@ public class Location implements ActionListener{
 	private boolean bshort,blong;
 	
 	public Location(WeatherData data, WeatherPreferences prefs) {
-		locpane = new JPanel();
+		locpane = new TransparentPanel();
 		name = data.getCityName();
 		JLabel locname_l = new JLabel(name);
 		
@@ -93,7 +93,7 @@ public class Location implements ActionListener{
 	public String getName(){
 		return name;
 	}
-	public JPanel getPane(){
+	public TransparentPanel getPane(){
 		return locpane;
 	}
 	public Currentweather getCurrentweather(){

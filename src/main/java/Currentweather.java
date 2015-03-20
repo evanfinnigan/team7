@@ -22,7 +22,7 @@ public class Currentweather {
 
 	private WeatherData currentData;
 	private WeatherPreferences currentPrefs;
-	private JPanel pane;
+	private TransparentPanel pane;
 	private JLabel image_l;
 	private JLabel sunrise_l;
 	private JLabel sunset_l;
@@ -46,7 +46,7 @@ public class Currentweather {
 		applyPrefs(prefs);
 		
 	}
-	public JPanel getPanel() {
+	public TransparentPanel getPanel() {
 		return pane;
 	}
 
@@ -62,7 +62,7 @@ public class Currentweather {
 		Font medfont = new Font("med", Font.PLAIN, 15);
 		Font smlfont = new Font("sml", Font.PLAIN, 13);
 		// create labels to display basic data
-		pane = new JPanel(); 
+		pane = new TransparentPanel(); 
 		sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
 		sunrise_l.setFont(smlfont);
 		sunset_l = new JLabel("Sunset: " + currentData.getSunset());

@@ -15,7 +15,7 @@ public class Forecast5Day {
 
 	// Attributes
 	private WeatherData data5d;
-	private JPanel pane;
+	private TransparentPanel pane;
 	private JLabel[] image_l;
 	private JLabel[] weatherdescription_l;
 	private JLabel[] skycondition_l;
@@ -30,13 +30,13 @@ public class Forecast5Day {
 		createDisplay();
 	}
 
-	public JPanel getPanel() {
+	public TransparentPanel getPanel() {
 		return pane;
 	}
 
 	private void initComponents() {
 		// create labels to display basic data
-		this.pane = new JPanel();
+		this.pane = new TransparentPanel();
 		Font minorfont = new Font("sml", Font.PLAIN, 13);
 
 		JLabel[] wdlabel = new JLabel[5];
