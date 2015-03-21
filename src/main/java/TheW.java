@@ -1,6 +1,8 @@
 package main.java;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -40,6 +42,7 @@ public class TheW {
 	JTextField txtAdd = new JTextField(15);
 	JButton btnAdd = new JButton("Add");
 	JButton btnRemove = new JButton("Remove");
+	JButton tabRemove = new JButton("X");
 	String selectedValue;
 	Currentweather current;
 	Forecast5Day longterm;
@@ -57,6 +60,16 @@ public class TheW {
 				}
 			}
 		});
+		
+		tabRemove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Component selected = tabbedPane.getSelectedComponent();
+				if (selected != null) {
+					tabbedPane.remove(selected);
+				}
+			}
+		});
 
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
@@ -68,7 +81,6 @@ public class TheW {
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tabbedPane.removeAll();
 				InputTest t = new InputTest(txtAdd.getText());
 				if (t.getValid()){
 					model.addElement(t.getCityName());
@@ -79,9 +91,9 @@ public class TheW {
 					longterm = new Forecast5Day(w);
 					shortterm = new Forecast24Hour(w);
 					
-					tabbedPane.add("Current",current.getPanel());
-					tabbedPane.add("Long Term",longterm.getPanel());
-					tabbedPane.add("Short Term",shortterm.getPanel());
+					tabbedPane.add(t.getCityName() + ": Current",current.getPanel());
+					tabbedPane.add(t.getCityName() + ": Long Term",longterm.getPanel());
+					tabbedPane.add(t.getCityName() + ": Short Term",shortterm.getPanel());
 					
 				} else {
 					System.out.println("Error");
@@ -100,6 +112,7 @@ public class TheW {
 		panel.add(btnAdd);
 		panel.add(comboBox);
 		panel.add(btnRemove);
+		panel.add(tabRemove);
 		
 		
 		
@@ -108,11 +121,12 @@ public class TheW {
 	
 		
 		frame.setLayout(new BorderLayout());
+		frame.setPreferredSize(new Dimension(1000,350));
 		frame.add(panel, BorderLayout.NORTH);
-		frame.add(btn2, BorderLayout.SOUTH);
+		//frame.add(btn2, BorderLayout.SOUTH);
 		frame.add(tabbedPane, BorderLayout.CENTER);
-		frame.add(btn4, BorderLayout.WEST);
-		frame.add(btn5, BorderLayout.EAST);
+		//frame.add(btn4, BorderLayout.WEST);
+		//frame.add(btn5, BorderLayout.EAST);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
