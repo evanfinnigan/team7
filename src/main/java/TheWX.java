@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.util.Hashtable;
 
 import javax.swing.DefaultComboBoxModel;
@@ -17,6 +18,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -50,6 +54,8 @@ public class TheWX {
 	JLabel secondLabel = new JLabel("SecondTab");
 	//JLabel myloc = new JLabel("My Locations");
 	JTabbedPane tabbedPane = new JTabbedPane();
+	
+	JMenuBar menubar = new JMenuBar();
 
 	JComboBox<String> comboBox = new JComboBox<String>();
 	DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
@@ -70,6 +76,14 @@ public class TheWX {
 	
 	public TheWX() {
 
+		
+		JMenu file = new JMenu("File");
+		file.setMnemonic(KeyEvent.VK_F);
+		
+		JMenuItem eMenuItem = new JMenuItem("Exit");
+		eMenuItem.setMnemonic(KeyEvent.VK_E);
+		
+		
 		list.setModel(modelloc);
 		WeatherPreferences p = new WeatherPreferences();
 		locations = new Hashtable<String, WeatherData>();
@@ -78,6 +92,7 @@ public class TheWX {
 		list.setMaximumSize(new Dimension(100, 100));
 		//modelloc.setMinimumSize(new Dimension(100,100));
 		
+		//p.setShowPressure(false);
 		
 		boolean defaultSet = false;
 		// if(location list is empty)
@@ -176,9 +191,13 @@ public class TheWX {
 			public void actionPerformed(ActionEvent e) {
 
 				
-				mylocations.put(ref.getCityName(), ref);
-				modelloc.addElement(ref.getCityName());
-				
+				if(mylocations.contains(ref.getCityName())){
+					JOptionPane.showMessageDialog(frame, ref.getCityName() + " is already in your locations.");
+				}
+				else{
+					mylocations.put(ref.getCityName(), ref);
+					modelloc.addElement(ref.getCityName());
+				}
 				/*String a;
 				a = JOptionPane.showInputDialog("Save a Location");
 				InputTest t = new InputTest(a);
@@ -228,6 +247,13 @@ public class TheWX {
 				
 			}
 			});
+		
+		eMenuItem.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		        System.exit(0);
+		    }
+		});
 
 		firstPanel.add(firstLabel);
 		secondPanel.add(secondLabel);
@@ -244,7 +270,10 @@ public class TheWX {
 		panel.add(btnRemove);
 		panel.add(mylocadd);
 		
+		file.add(eMenuItem);
+		menubar.add(file);
 		
+		frame.setJMenuBar(menubar);
 
 		// frame.add(panel);
 

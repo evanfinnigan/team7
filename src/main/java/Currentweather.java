@@ -324,7 +324,7 @@ public class Currentweather {
 		tempmax_l.setBounds(470, 190, 50, 20);
 		
 		pane.add(lastupdate_l);
-		lastupdate_l.setBounds(20, 330, 200, 20);
+		lastupdate_l.setBounds(20, 310, 200, 20);
 		
 		/*pane.add(temp_l);
 		
