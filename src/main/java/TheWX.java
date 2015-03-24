@@ -1,6 +1,7 @@
 package main.java;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -8,17 +9,32 @@ import java.awt.event.ItemListener;
 import java.util.Hashtable;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
+
+
+
+
+
 
 public class TheWX {
 
+	UIDefaults uiDefaults = UIManager.getDefaults();
+	Color bgColor = new ColorUIResource(Color.BLUE);
+	
 	JFrame frame = new JFrame("BorderLayout");
 	JButton btn1 = new JButton("NORTH");
 	JLabel footer = new JLabel("Choose a city");
@@ -33,7 +49,7 @@ public class TheWX {
 	
 	JLabel firstLabel = new JLabel("FirstTab");
 	JLabel secondLabel = new JLabel("SecondTab");
-	
+	JLabel myloc = new JLabel("My Locations");
 	JTabbedPane tabbedPane = new JTabbedPane();
 	
 	JComboBox<String> comboBox = new JComboBox<String>();
@@ -47,9 +63,15 @@ public class TheWX {
 	Forecast24Hour shortterm;
 	
 	 Hashtable<String, WeatherData> locations;
+	 
+	 
+	 	JFrame locframe = new JFrame("Storage");
+	    JList<String> list = new JList<>();
+	    DefaultListModel<String> modelloc = new DefaultListModel<>();
 
 	public TheWX() {
 		
+		list.setModel(modelloc);
 		WeatherPreferences p = new WeatherPreferences();
 		locations = new Hashtable<String, WeatherData>();
 		
@@ -71,6 +93,8 @@ public class TheWX {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				model.removeElement(selectedValue);
+				//System.out.println(selectedValue.toString());
+				//locations.remove(selectedValue.toString());
 			}
 		});
 
@@ -89,18 +113,28 @@ public class TheWX {
 						
 						WeatherData w = new WeatherData(t);
 						model.addElement(t.getCityName());
+						//selectedValue = t.getCityName();
 						//model.setSelectedItem(t.getCityName());
 						locations.put(t.getCityName(),w);
+						
+						//list
+						modelloc.addElement(w.getCityName());
+						
 						change(w,p);
 						
 					}
 					
 				} else {
 					System.out.println("Error");
+					JOptionPane.showMessageDialog(frame, "Sorry there was an error please try again.");
 				}
 			}
 		});
 		
+		  list.getSelectionModel().addListSelectionListener(e -> {
+	            //WeatherData w = list.getSelectedValue();
+	            change(locations.get(list.getSelectedValue()),p);
+	        });
 		
 		firstPanel.add(firstLabel);
 		secondPanel.add(secondLabel);
@@ -112,7 +146,7 @@ public class TheWX {
 		panel.add(btnAdd);
 		panel.add(comboBox);
 		panel.add(btnRemove);
-		
+		panel.add(myloc);
 		
 		
 		//frame.add(panel);
@@ -121,13 +155,17 @@ public class TheWX {
 		
 		frame.setLayout(new BorderLayout());
 		frame.add(panel, BorderLayout.NORTH);
+	
 		//frame.add(footer, BorderLayout.SOUTH);
 		frame.add(tabbedPane, BorderLayout.CENTER);
 		//frame.add(btn4, BorderLayout.WEST);
-		//frame.add(btn5, BorderLayout.EAST);
+		
+		frame.add(new JScrollPane(list), BorderLayout.EAST);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
+		frame.setSize(900, 500);
+		frame.setResizable(false);
 		frame.setVisible(true);
 		
 
@@ -140,13 +178,28 @@ public class TheWX {
 		
 		tabbedPane.removeAll();
 		
+		try {
 		current = new Currentweather(w,p);
 		longterm = new Forecast5Day(w);
 		shortterm = new Forecast24Hour(w);
 		
-		tabbedPane.add("Current",current.getPanel());
-		tabbedPane.add("Long Term",longterm.getPanel());
-		tabbedPane.add("Short Term",shortterm.getPanel());
+	
+		
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(frame, "Sorry there was an error please try again.");
+		}
+		
+		
+		try{
+			tabbedPane.add("Current",current.getPanel());
+			tabbedPane.add("Long Term",longterm.getPanel());
+			tabbedPane.add("Short Term",shortterm.getPanel());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(frame, "Sorry there is a problem with the API");
+		}
+		
 		
 		footer.setText(w.getCityName());
 		
