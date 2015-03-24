@@ -203,6 +203,7 @@ public class Currentweather {
 	private JLabel humidity_l;
 	private JLabel airpressure_l;
 	private JLabel cityname;
+	private JLabel lastupdate_l;
 
 	public Currentweather(WeatherData data, WeatherPreferences prefs){
 		this.currentData = data;
@@ -233,6 +234,9 @@ public class Currentweather {
 		// create labels to display basic data
 		pane = new TransparentPanel(); 
 		
+		lastupdate_l = new JLabel("Last Update: " + currentData.getTimeOfLastRequest());
+		lastupdate_l.setFont(smlfont);
+		
 		sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
 		sunrise_l.setFont(medfont);
 		
@@ -251,7 +255,7 @@ public class Currentweather {
 		skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
 		skycondition_l.setFont(lrgfont);
 		
-		temp_l = new JLabel(currentData.getTempCurrent() +"\u00b0" + currentPrefs.getTempUnit());
+		temp_l = new JLabel((int)currentData.getTempCurrent() +"\u00b0" + currentPrefs.getTempUnit());
 		temp_l.setFont(sprlrgfont);
 		
 		tempmax_l = new JLabel("H:" +  (int)currentData.getHigh());
@@ -308,7 +312,7 @@ public class Currentweather {
 		sunset_l.setBounds(20, 215, 200, 20);
 		
 		pane.add(temp_l);
-		temp_l.setBounds(370, 90, 200, 40);
+		temp_l.setBounds(390, 90, 200, 40);
 		
 		pane.add(image_l);
 		image_l.setBounds(430, 145, 40, 40);
@@ -318,6 +322,9 @@ public class Currentweather {
 		
 		pane.add(tempmax_l);
 		tempmax_l.setBounds(470, 190, 50, 20);
+		
+		pane.add(lastupdate_l);
+		lastupdate_l.setBounds(20, 350, 200, 20);
 		
 		/*pane.add(temp_l);
 		
