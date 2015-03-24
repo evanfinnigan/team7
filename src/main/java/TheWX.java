@@ -33,11 +33,11 @@ public class TheWX {
 	UIDefaults uiDefaults = UIManager.getDefaults();
 	Color bgColor = new ColorUIResource(Color.BLUE);
 
-	JFrame frame = new JFrame("BorderLayout");
+	JFrame frame = new JFrame("Team7 WeatherApp");
 	JButton btn1 = new JButton("NORTH");
 	JLabel footer = new JLabel("Choose a city");
 	JButton btn3 = new JButton("CENTER");
-	JButton mylocadd = new JButton("+");
+	JButton mylocadd = new JButton("Add to My Locations");
 	JButton refresh = new JButton("Refresh");
 	// JButton btn5 = new JButton("EAST");
 
@@ -48,13 +48,13 @@ public class TheWX {
 
 	JLabel firstLabel = new JLabel("FirstTab");
 	JLabel secondLabel = new JLabel("SecondTab");
-	JLabel myloc = new JLabel("My Locations");
+	//JLabel myloc = new JLabel("My Locations");
 	JTabbedPane tabbedPane = new JTabbedPane();
 
 	JComboBox<String> comboBox = new JComboBox<String>();
 	DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 	JTextField txtAdd = new JTextField(15);
-	JButton btnAdd = new JButton("Add");
+	JButton btnAdd = new JButton("Search");
 	JButton btnRemove = new JButton("Remove");
 	String selectedValue;
 	Currentweather current;
@@ -84,8 +84,9 @@ public class TheWX {
 		while (!defaultSet) {
 			JOptionPane prompt = new JOptionPane();
 			String a;
-			
+			//prompt.getRootPane().setDefaultButton(JOptionPane);
 			a = JOptionPane.showInputDialog("Enter a Default Location:");
+			
 			InputTest t = new InputTest(a);
 			if (t.getValid()) {
 				WeatherData w = new WeatherData(t);
@@ -120,9 +121,24 @@ public class TheWX {
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				model.removeElement(selectedValue);
+				
+				int i =0;
+				//modelloc.addElement(ref.getCityName());
+				while(!modelloc.isEmpty()){
+				
+					if(modelloc.get(i).equals(ref.getCityName())) break;
+					i++;
+					
+				}
+				
+				modelloc.removeElementAt(i);
+				//mylocations.remove(ref.getCityName());
+				
+				//model.removeElement(selectedValue);
 				// System.out.println(selectedValue.toString());
 				// locations.remove(selectedValue.toString());
+				
+				
 			}
 		});
 
@@ -159,7 +175,11 @@ public class TheWX {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String a;
+				
+				mylocations.put(ref.getCityName(), ref);
+				modelloc.addElement(ref.getCityName());
+				
+				/*String a;
 				a = JOptionPane.showInputDialog("Save a Location");
 				InputTest t = new InputTest(a);
 				if (t.getValid()) {
@@ -182,7 +202,7 @@ public class TheWX {
 					System.out.println("Error");
 					JOptionPane.showMessageDialog(frame,
 							"Sorry there was an error please try again.");
-				}
+				}*/
 
 			}
 		});
@@ -201,7 +221,12 @@ public class TheWX {
 		
 		list.getSelectionModel().addListSelectionListener(e -> {
 			// WeatherData w = list.getSelectedValue();
+			try{
 				change(mylocations.get(list.getSelectedValue()), p);
+			}
+			catch(Exception b){
+				
+			}
 			});
 
 		firstPanel.add(firstLabel);
@@ -213,10 +238,13 @@ public class TheWX {
 		panel.add(txtAdd);
 		panel.add(btnAdd);
 		panel.add(comboBox);
-		panel.add(btnRemove);
-		panel.add(myloc);
-		panel.add(mylocadd);
+		
+		//panel.add(myloc);
 		panel.add(refresh);
+		panel.add(btnRemove);
+		panel.add(mylocadd);
+		
+		
 
 		// frame.add(panel);
 
@@ -237,6 +265,7 @@ public class TheWX {
 
 		list.setSize(100, 500);
 		locframe.setSize(100, 500);
+		frame.getRootPane().setDefaultButton(btnAdd);
 
 	}
 
