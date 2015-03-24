@@ -36,7 +36,7 @@ public class Forecast24Hour {
 	private void initComponents() {
 		// create labels to display basic data
 		this.pane = new TransparentPanel();
-		Font minorfont = new Font("sml", Font.PLAIN, 13);
+		Font minorfont = new Font("sml", Font.PLAIN, 15);
 
 		JLabel[] wdlabel = new JLabel[8];
 		JLabel[] sclabel = new JLabel[8];
@@ -50,14 +50,14 @@ public class Forecast24Hour {
 
 		for (int i = 0; i < 8; i++) {
 			int j = (i + 1) * 3;
-			wdlabel[i] = new JLabel("Conditions in " + j + " hours: "
+			wdlabel[i] = new JLabel(j + " hours: "
 					+ descriptionArray[i]);
 			wdlabel[i].setFont(minorfont);
 
-			sclabel[i] = new JLabel("    Sky:  " + skyConditionArray[i]);
+			sclabel[i] = new JLabel("Sky:  " + skyConditionArray[i]);
 			sclabel[i].setFont(minorfont);
 
-			templabel[i] = new JLabel("Temperature :" + tempArray[i] + " C");
+			templabel[i] = new JLabel(tempArray[i] + " C");
 			templabel[i].setFont(minorfont);
 
 			imagelabel[i] = new JLabel(new ImageIcon(imgArray[i]));

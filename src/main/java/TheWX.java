@@ -2,6 +2,7 @@ package main.java;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -201,7 +202,8 @@ public class TheWX {
 		}
 		
 		
-		footer.setText(w.getCityName());
+		footer.setText(" " + w.getCityName());
+		footer.setFont(new Font("lrg", Font.PLAIN, 24));
 		
 		frame.add(footer, BorderLayout.SOUTH);
 		

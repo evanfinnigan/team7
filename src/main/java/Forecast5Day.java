@@ -37,7 +37,7 @@ public class Forecast5Day {
 	private void initComponents() {
 		// create labels to display basic data
 		this.pane = new TransparentPanel();
-		Font minorfont = new Font("sml", Font.PLAIN, 13);
+		Font minorfont = new Font("sml", Font.PLAIN, 17);
 
 		JLabel[] wdlabel = new JLabel[5];
 		JLabel[] sclabel = new JLabel[5];
@@ -55,20 +55,20 @@ public class Forecast5Day {
 
 		for (int i = 0; i < 5; i++) {
 			int j = i + 1;
-			wdlabel[i] = new JLabel("Conditions in " + j + " days: "
+			wdlabel[i] = new JLabel( j + " days: "
 					+ skyConditionArray[i]);
 			wdlabel[i].setFont(minorfont);
 
-			sclabel[i] = new JLabel("  Description: " + descriptionArray[i]);
+			sclabel[i] = new JLabel(descriptionArray[i]);
 			sclabel[i].setFont(minorfont);
 
-			templabel[i] = new JLabel("Temperature: " + tempArray[i] + " C");
+			templabel[i] = new JLabel(tempArray[i] + " C");
 			templabel[i].setFont(minorfont);
 
-			highlabel[i] = new JLabel("High: " + highArray[i]);
+			highlabel[i] = new JLabel("H:" + highArray[i]);
 			highlabel[i].setFont(minorfont);
 
-			lowlabel[i] = new JLabel("Low: " + lowArray[i]);
+			lowlabel[i] = new JLabel("L:" + lowArray[i]);
 			lowlabel[i].setFont(minorfont);
 
 			imagelabel[i] = new JLabel(new ImageIcon(imgArray[i]));
