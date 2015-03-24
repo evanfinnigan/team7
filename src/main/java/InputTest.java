@@ -16,21 +16,24 @@ import org.json.JSONObject;
 public class InputTest {
 
 	final static String currentURL = "http://api.openweathermap.org/data/2.5/weather?q=";
+	final static String forcast5dURL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=5&q=";
+	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?q=";
 
 	boolean valid;
 	JSONObject currentWeather;
+	JSONObject forecast24h;
+	JSONObject forecast5d;
 	String cityName;
 	String timeOfLastRequest;
-	
 
 	public InputTest(String city) {
 		testCity(city);
 	}
 
-	public String getTime(){
+	public String getTime() {
 		return timeOfLastRequest;
 	}
-	
+
 	public boolean getValid() {
 		return valid;
 	}
@@ -39,28 +42,62 @@ public class InputTest {
 		return currentWeather;
 	}
 
+	public JSONObject getForecast24h() {
+		return forecast24h;
+	}
+
+	public JSONObject getForecast5d() {
+		return forecast5d;
+	}
+
 	public String getCityName() {
 		return cityName;
 	}
 
 	private void testCity(String city) {
-		this.currentWeather = requestData(city, currentURL);
 		try {
-			int jInfo = currentWeather.getInt("cod");
-			if (jInfo == 404) {
+			this.valid = true;
+			this.currentWeather = requestData(city, currentURL);
+			this.forecast24h = requestData(city, forcast24hURL);
+			this.forecast5d = requestData(city, forcast5dURL);
+
+			int cod = currentWeather.getInt("cod");
+			if (cod != 200) {
 				this.valid = false;
-			} else {
-				this.valid = true;
-				String cityname = currentWeather.getString("name");
-				JSONObject j = currentWeather.getJSONObject("sys");
-				String country = j.getString("country");
-				if (cityname.equalsIgnoreCase("")){
-					this.cityName = city;
-				} else {
-					this.cityName = cityname + ", " + country;
-				}
+				System.out.println("current weather code failure");
 			}
-		} catch (JSONException e) {
+			
+			cod = forecast24h.getInt("cod");
+			
+			if (cod != 200) {
+				this.valid = false;
+				System.out.println("24 hour forecast code failure");
+			}
+			
+			cod = forecast5d.getInt("cod");
+			
+			if (cod != 200) {
+				this.valid = false;
+				System.out.println("5 day forecast code failure");
+			}
+			
+			JSONArray a = forecast5d.getJSONArray("list");
+			
+			if (a.length() < 5) {
+				this.valid = false;
+				System.out.println("5 day forecast list is too short");
+			}
+
+			String citytest = currentWeather.getString("name");
+			String country = currentWeather.getJSONObject("sys").getString(
+					"country");
+			if (citytest.equals("")) {
+				this.cityName = city;
+			} else {
+				this.cityName = citytest + ", " + country;
+			}
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			this.valid = false;
 		}
@@ -75,12 +112,14 @@ public class InputTest {
 					stream, Charset.forName("UTF-8")));
 			String jsondata = dataToString(reader);
 			json = new JSONObject(jsondata);
-			try {
-				long jInfo = json.getLong("dt");
-				Time t = new Time(jInfo);
-				this.timeOfLastRequest = t.getConverted();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
+			if (url.equalsIgnoreCase(currentURL)) {
+				try {
+					int jInfo = json.getInt("dt");
+					Time t = new Time(jInfo);
+					this.timeOfLastRequest = t.getConverted();
+				} catch (Exception e) {
+					System.out.println("Time was not updated.");
+				}
 			}
 
 			stream.close();

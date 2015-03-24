@@ -28,7 +28,7 @@ public class WeatherData {
 
 	final static String currentURL = "http://api.openweathermap.org/data/2.5/weather?q=";
 	final static String forcast5dURL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=5&q=";
-	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?&q=";
+	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?q=";
 	final static String imgURL = "http://openweathermap.org/img/w/";
 	final static String marsURL = "http://marsweather.ingenology.com/v1/latest/?format=json";
 
@@ -84,8 +84,8 @@ public class WeatherData {
 	public WeatherData(InputTest test) {
 		this.cityName = test.getCityName();
 		this.currentJSONObject = test.getCurrentWeather();
-		this.forecast24hJSONObject = requestData(cityName, forcast24hURL);
-		this.forecast5dJSONObject = requestData(cityName, forcast5dURL);
+		this.forecast24hJSONObject = test.getForecast24h();
+		this.forecast5dJSONObject = test.getForecast5d();
 		this.marsJSONObject = requestMarsData(marsURL);
 		this.timeOfLastRequest = test.getTime();
 
