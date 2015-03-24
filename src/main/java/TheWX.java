@@ -169,7 +169,8 @@ public class TheWX {
 		frame.setResizable(false);
 		frame.setVisible(true);
 		
-
+		list.setSize(100,500);
+		locframe.setSize(100,500);
 		
 	}
 	
