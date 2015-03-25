@@ -191,7 +191,7 @@ public class TheWX {
 			public void actionPerformed(ActionEvent e) {
 
 				
-				if(mylocations.contains(ref.getCityName())){
+				if(mylocations.containsKey(ref.getCityName())){
 					JOptionPane.showMessageDialog(frame, ref.getCityName() + " is already in your locations.");
 				}
 				else{
