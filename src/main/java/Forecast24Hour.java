@@ -59,11 +59,13 @@ public class Forecast24Hour {
 		}
 		
 		int cnt = data24h.getCNT24h();
+		if (cnt > 8) {
+			cnt = 8;
+		}
 		
 		for (int i = 0; i < cnt; i++) {
 			int j = (i + 1) * 3;
-			wdlabel[i] = new JLabel(j + " hours: "
-					+ descriptionArray[i]);
+			wdlabel[i] = new JLabel(j + " hours: " + descriptionArray[i]);
 			wdlabel[i].setFont(minorfont);
 
 			sclabel[i] = new JLabel("Sky:  " + skyConditionArray[i]);
