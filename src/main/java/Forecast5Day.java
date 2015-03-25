@@ -67,7 +67,7 @@ public class Forecast5Day {
 			lowArray = data5d.getLow5d();
 		}
 		
-		int cnt = data5d.getCNT();
+		int cnt = data5d.getCNT5d();
 
 		for (int i = 0; i < cnt; i++) {
 			int j = i + 1;
@@ -145,7 +145,7 @@ public class Forecast5Day {
 	// Test
 	public static void main(String[] args) {
 
-		InputTest t = new InputTest("London, Canada");
+		InputTest t = new InputTest("London,CA");
 		WeatherData d = new WeatherData(t);
 		WeatherPreferences p = new WeatherPreferences();
 		Forecast5Day test = new Forecast5Day(d,p);

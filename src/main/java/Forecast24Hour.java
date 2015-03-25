@@ -58,7 +58,7 @@ public class Forecast24Hour {
 			tempArray = data24h.getTemp24h();
 		}
 		
-		int cnt = data24h.getCNT();
+		int cnt = data24h.getCNT24h();
 		
 		for (int i = 0; i < cnt; i++) {
 			int j = (i + 1) * 3;
@@ -116,7 +116,7 @@ public class Forecast24Hour {
 	// Test
 	public static void main(String[] args) {
 
-		InputTest t = new InputTest("London, Canada");
+		InputTest t = new InputTest("London,CA");
 		WeatherData d = new WeatherData(t);
 		WeatherPreferences p = new WeatherPreferences();
 		Forecast24Hour test = new Forecast24Hour(d,p);

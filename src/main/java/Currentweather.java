@@ -255,18 +255,34 @@ public class Currentweather {
 		skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
 		skycondition_l.setFont(lrgfont);
 		
-		temp_l = new JLabel((int)currentData.getTempCurrent() +"\u00b0" + currentPrefs.getTempUnit());
-		temp_l.setFont(sprlrgfont);
+		if (currentPrefs.getTempUnit().equalsIgnoreCase("F")) {
+			temp_l = new JLabel((int)currentData.getTempCurrentF() + "°F");
+			temp_l.setFont(sprlrgfont);
+			
+			tempmax_l = new JLabel("H:" +  (int)currentData.getHighF() + "°F");
+			tempmax_l.setFont(medfont);
+			
+			//tempmax_l.setForeground(Color.RED);
+			
+			tempmin_l = new JLabel("L:" + (int)currentData.getLowF() + "°F");
+			tempmin_l.setFont(medfont);
+			
+			//tempmin_l.setForeground(Color.BLUE);
+		} else {
+			temp_l = new JLabel((int)currentData.getTempCurrent() +"°C");
+			temp_l.setFont(sprlrgfont);
+			
+			tempmax_l = new JLabel("H:" +  (int)currentData.getHigh() + "°C");
+			tempmax_l.setFont(medfont);
+			
+			//tempmax_l.setForeground(Color.RED);
+			
+			tempmin_l = new JLabel("L:" + ( (int)(currentData.getLow())) + "°C");
+			tempmin_l.setFont(medfont);
+			
+			//tempmin_l.setForeground(Color.BLUE);
+		}
 		
-		tempmax_l = new JLabel("H:" +  (int)currentData.getHigh());
-		tempmax_l.setFont(medfont);
-		
-		//tempmax_l.setForeground(Color.RED);
-		
-		tempmin_l = new JLabel("L:" + ( (int)(currentData.getLow())));
-		tempmin_l.setFont(medfont);
-		
-		//tempmin_l.setForeground(Color.BLUE);
 		
 		humidity_l = new JLabel("Humidity: " + currentData.getHumidity() + "%");
 		humidity_l.setFont(medfont);

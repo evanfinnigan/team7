@@ -17,7 +17,7 @@ public class InputTest {
 
 	final static String currentURL = "http://api.openweathermap.org/data/2.5/weather?q=";
 	final static String forcast5dURL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=5&q=";
-	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?q=";
+	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?cnt=8&q=";
 
 	boolean valid;
 	JSONObject currentWeather;

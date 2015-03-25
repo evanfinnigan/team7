@@ -28,7 +28,7 @@ public class WeatherData {
 
 	final static String currentURL = "http://api.openweathermap.org/data/2.5/weather?q=";
 	final static String forcast5dURL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=5&q=";
-	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?q=";
+	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?cnt=8&q=";
 	final static String imgURL = "http://openweathermap.org/img/w/";
 	final static String marsURL = "http://marsweather.ingenology.com/v1/latest/?format=json";
 
@@ -56,7 +56,6 @@ public class WeatherData {
 	private double[] temp24h;
 	private String[] skyCondition24h;
 	private String[] description24h;
-	private int[] percentPrecipitation24h;
 	private Image[] icon24h;
 
 	// 5 day Forecast Attributes
@@ -69,7 +68,8 @@ public class WeatherData {
 	private double[] low5d;
 	private double[] high5d;
 	
-	private int cnt;
+	private int cnt5d;
+	private int cnt24h;
 
 	// Mars Weather Attributes
 	private JSONObject marsJSONObject;
@@ -110,6 +110,7 @@ public class WeatherData {
 		setSkyCondition24h();
 		setDescription24h();
 		setIcon24h();
+		setCNT24h();
 
 		// Initialize 5 day forecast variables
 		setTemp5d();
@@ -118,7 +119,7 @@ public class WeatherData {
 		setIcon5d();
 		setLow5d();
 		setHigh5d();
-		setCNT();
+		setCNT5d();
 
 		// Initialize Mars variables
 		setMinTempMars();
@@ -237,7 +238,7 @@ public class WeatherData {
 		return low;
 	}
 	
-	public double getLowCurrentF(){
+	public double getLowF(){
 		return (double)(low*1.8 + 32);
 	}
 
@@ -249,7 +250,7 @@ public class WeatherData {
 		return high;
 	}
 	
-	public double getHighCurrentF(){
+	public double getHighF(){
 		return (double)(high*1.8 + 32);
 	}
 
@@ -313,6 +314,10 @@ public class WeatherData {
 	 */
 	public Image[] getIcon24h() {
 		return icon24h;
+	}
+	
+	public int getCNT24h() {
+		return cnt24h;
 	}
 
 	// 5 day Forecast Getters
@@ -404,8 +409,8 @@ public class WeatherData {
 	/**
 	 * Gets number of available days for 5 day forecast
 	 */
-	public int getCNT(){
-		return cnt;
+	public int getCNT5d(){
+		return cnt5d;
 	}
 	
 	// Mars Getters
@@ -493,9 +498,6 @@ public class WeatherData {
 	// Setters
 
 	// Current Weather Setters
-	private void refreshCurrentJSONObject(String city) {
-		this.currentJSONObject = requestData(city, currentURL);
-	}
 
 //	private void setCityName() {
 //		try {
@@ -696,9 +698,6 @@ public class WeatherData {
 	}
 
 	// //24 hour Forecast Setters
-	private void refreshForecast24hJSONObject(String city) {
-		this.forecast24hJSONObject = requestData(city, forcast24hURL);
-	}
 
 	// get temperature for the next 24 hours in 3 hour increments
 	private void setTemp24h() {
@@ -770,12 +769,15 @@ public class WeatherData {
 		}
 	}
 
-	// private int[] percentPrecipitation24h;
-
-	// 5 day Forecast Setters
-	private void refreshForecast5dJSONObject(String city) {
-		this.forecast5dJSONObject = requestData(city, forcast5dURL);
+	private void setCNT24h(){
+		try {
+			this.cnt24h = forecast24hJSONObject.getInt("cnt");
+		} catch (JSONException e) {
+			System.out.println(e.getMessage());
+		}
 	}
+	
+	// private int[] percentPrecipitation24h;
 
 	private void setTemp5d() {
 		try {
@@ -882,9 +884,9 @@ public class WeatherData {
 		}
 	}
 
-	private void setCNT(){
+	private void setCNT5d(){
 		try {
-			this.cnt = forecast5dJSONObject.getInt("cnt");
+			this.cnt5d = forecast5dJSONObject.getInt("cnt");
 		} catch (JSONException e) {
 			System.out.println(e.getMessage());
 		}
@@ -893,9 +895,6 @@ public class WeatherData {
 	// private int[] percentPrecipitation5d;
 
 	// Mars Weather Setters
-	private void refreshMarsJSONObject() {
-		this.marsJSONObject = requestMarsData(marsURL);
-	}
 
 	private void setMinTempMars() {
 		try {
@@ -1047,40 +1046,6 @@ public class WeatherData {
 			stringBuilder.append((char) current);
 		}
 		return stringBuilder.toString();
-	}
-
-	// Method to request JSON data from OpenWeatherMap API
-	private JSONObject requestData(String city, String url) {
-		JSONObject json = new JSONObject();
-		try {
-			InputStream stream = new URL(url + "" + city).openStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					stream, Charset.forName("UTF-8")));
-			String jsondata = dataToString(reader);
-			json = new JSONObject(jsondata);
-			stream.close();
-		} catch (MalformedURLException e) {
-			System.out.println(e.getMessage());
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		} catch (JSONException e) {
-			System.out.println(e.getMessage());
-		}
-		return json;
-	}
-
-	// Helper Method dataToString for requestData
-	private static String dataToString(Reader rjson) throws IOException {
-		StringBuilder jstring = new StringBuilder();
-		int letter;
-		try {
-			while ((letter = rjson.read()) != -1) {
-				jstring.append((char) letter);
-			}
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		return jstring.toString();
 	}
 
 	// Helper Test method for displaying icons
