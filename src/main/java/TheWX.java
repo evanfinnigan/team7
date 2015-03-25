@@ -95,27 +95,26 @@ public class TheWX {
 		//p.setShowPressure(false);
 		
 		boolean defaultSet = false;
-		// if(location list is empty)
-		while (!defaultSet) {
-			JOptionPane prompt = new JOptionPane();
-			String a;
-			//prompt.getRootPane().setDefaultButton(JOptionPane);
-			a = JOptionPane.showInputDialog("Enter a Default Location:");
-			
-			InputTest t = new InputTest(a);
-			if (t.getValid()) {
-				WeatherData w = new WeatherData(t);
-				mylocations.put(t.getCityName(), w);
-				// list
-				modelloc.addElement(w.getCityName());
-				change(w,p);
-				defaultSet = true;
-			} else {
-				prompt.showMessageDialog(frame, "Try again!");
+		if (mylocations.isEmpty()){
+			while (!defaultSet) {
+				JOptionPane prompt = new JOptionPane();
+				String a;
+				//prompt.getRootPane().setDefaultButton(JOptionPane);
+				a = JOptionPane.showInputDialog("Enter a Default Location:");
+				
+				InputTest t = new InputTest(a);
+				if (t.getValid()) {
+					WeatherData w = new WeatherData(t);
+					mylocations.put(t.getCityName(), w);
+					// list
+					modelloc.addElement(w.getCityName());
+					change(w,p);
+					defaultSet = true;
+				} else {
+					prompt.showMessageDialog(frame, "Try again!");
+				}
 			}
 		}
-		
-		
 		
 		comboBox.setModel(model);
 		comboBox.addItemListener(new ItemListener() {
@@ -137,21 +136,28 @@ public class TheWX {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				int i =0;
-				//modelloc.addElement(ref.getCityName());
-				while(!modelloc.isEmpty()){
-				
-					if(modelloc.get(i).equals(ref.getCityName())) break;
-					i++;
+				try {
+					int i =0;
+					//modelloc.addElement(ref.getCityName());
+					while(!modelloc.isEmpty()){
+						
+						if(modelloc.get(i).equals(ref.getCityName())){
+							//System.out.println(ref.getCityName());
+							break;
+						}
+						i++;
+					}
 					
+					modelloc.removeElementAt(i);
+					mylocations.remove(ref.getCityName());
+					
+					//model.removeElement(selectedValue);
+					// System.out.println(selectedValue.toString());
+					// locations.remove(selectedValue.toString());
+					
+				} catch (Exception ex) {
+					//Do nothing
 				}
-				
-				modelloc.removeElementAt(i);
-				//mylocations.remove(ref.getCityName());
-				
-				//model.removeElement(selectedValue);
-				// System.out.println(selectedValue.toString());
-				// locations.remove(selectedValue.toString());
 				
 				
 			}
@@ -304,8 +310,8 @@ public class TheWX {
 
 		try {
 			current = new Currentweather(w, p);
-			longterm = new Forecast5Day(w);
-			shortterm = new Forecast24Hour(w);
+			longterm = new Forecast5Day(w, p);
+			shortterm = new Forecast24Hour(w, p);
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frame,

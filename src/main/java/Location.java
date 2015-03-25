@@ -45,8 +45,8 @@ public class Location implements ActionListener{
 		//locpane.add(locname_l);
 		
 		weather = new Currentweather(data, prefs);
-		shortterm = new Forecast24Hour(data);
-		longterm = new Forecast5Day(data);
+		shortterm = new Forecast24Hour(data, prefs);
+		longterm = new Forecast5Day(data, prefs);
 		
 		//locpane.add(weather.getPanel());
 		

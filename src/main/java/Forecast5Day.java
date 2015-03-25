@@ -15,6 +15,7 @@ public class Forecast5Day {
 
 	// Attributes
 	private WeatherData data5d;
+	private WeatherPreferences preferences;
 	private TransparentPanel pane;
 	private JLabel[] image_l;
 	private JLabel[] weatherdescription_l;
@@ -23,8 +24,10 @@ public class Forecast5Day {
 	private JLabel[] percentPrecipitation_l;
 	private JLabel[] high_l;
 	private JLabel[] low_l;
+	private int CNT;
 
-	public Forecast5Day(WeatherData data) {
+	public Forecast5Day(WeatherData data, WeatherPreferences p) {
+		this.preferences = p;
 		this.data5d = data;
 		initComponents();
 		createDisplay();
@@ -48,12 +51,25 @@ public class Forecast5Day {
 
 		String[] skyConditionArray = data5d.getSkyCondition5d();
 		String[] descriptionArray = data5d.getDescription5d();
-		double[] tempArray = data5d.getTemp5d();
 		Image[] imgArray = data5d.getIcon5d();
-		double[] highArray = data5d.getHigh5d();
-		double[] lowArray = data5d.getLow5d();
+		
+		double[] tempArray;
+		double[] highArray;
+		double[] lowArray;
+		
+		if (preferences.getTempUnit().equalsIgnoreCase("F")){
+			tempArray = data5d.getTemp5dF();
+			highArray = data5d.getHigh5dF();
+			lowArray = data5d.getLow5dF();
+		} else {
+			tempArray = data5d.getTemp5d();
+			highArray = data5d.getHigh5d();
+			lowArray = data5d.getLow5d();
+		}
+		
+		int cnt = data5d.getCNT();
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < cnt; i++) {
 			int j = i + 1;
 			wdlabel[i] = new JLabel( j + " days: "
 					+ skyConditionArray[i]);
@@ -62,17 +78,44 @@ public class Forecast5Day {
 			sclabel[i] = new JLabel(descriptionArray[i]);
 			sclabel[i].setFont(minorfont);
 
-			templabel[i] = new JLabel(tempArray[i] + " C");
-			templabel[i].setFont(minorfont);
+			if (preferences.getTempUnit().equalsIgnoreCase("F")){
+				templabel[i] = new JLabel(tempArray[i] + "°F");
+				templabel[i].setFont(minorfont);
 
-			highlabel[i] = new JLabel("H:" + highArray[i]);
-			highlabel[i].setFont(minorfont);
+				highlabel[i] = new JLabel("High:" + highArray[i] + "°F");
+				highlabel[i].setFont(minorfont);
 
-			lowlabel[i] = new JLabel("L:" + lowArray[i]);
-			lowlabel[i].setFont(minorfont);
+				lowlabel[i] = new JLabel("Low:" + lowArray[i] + "°F");
+				lowlabel[i].setFont(minorfont);
+			} else {
+				templabel[i] = new JLabel(tempArray[i] + "°C");
+				templabel[i].setFont(minorfont);
+
+				highlabel[i] = new JLabel("High: " + highArray[i] + "°C");
+				highlabel[i].setFont(minorfont);
+
+				lowlabel[i] = new JLabel("Low: " + lowArray[i] + "°C");
+				lowlabel[i].setFont(minorfont);
+			}
 
 			imagelabel[i] = new JLabel(new ImageIcon(imgArray[i]));
 			imagelabel[i].setPreferredSize(new Dimension(5,5));
+		}
+		
+		for (int i = cnt; i < 5; i++) {
+			int j = i + 1;
+			wdlabel[i] = new JLabel(j + " days:");
+			wdlabel[i].setFont(minorfont);
+			sclabel[i] = new JLabel(" Data ");
+			sclabel[i].setFont(minorfont);
+			templabel[i] = new JLabel("Unavailable");
+			templabel[i].setFont(minorfont);
+			highlabel[i] = new JLabel("-");
+			highlabel[i].setFont(minorfont);
+			lowlabel[i] = new JLabel("-");
+			lowlabel[i].setFont(minorfont);
+			imagelabel[i] = new JLabel("-");
+			imagelabel[i].setFont(minorfont);
 		}
 
 		this.weatherdescription_l = wdlabel;
@@ -81,6 +124,7 @@ public class Forecast5Day {
 		this.image_l = imagelabel;
 		this.high_l = highlabel;
 		this.low_l = lowlabel;
+		this.CNT = cnt;
 	}
 
 	private void createDisplay() {
@@ -103,7 +147,8 @@ public class Forecast5Day {
 
 		InputTest t = new InputTest("London, Canada");
 		WeatherData d = new WeatherData(t);
-		Forecast5Day test = new Forecast5Day(d);
+		WeatherPreferences p = new WeatherPreferences();
+		Forecast5Day test = new Forecast5Day(d,p);
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(test.getPanel());

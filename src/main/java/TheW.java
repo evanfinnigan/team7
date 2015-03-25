@@ -88,8 +88,8 @@ public class TheW {
 					WeatherPreferences p = new WeatherPreferences();
 					
 					current = new Currentweather(w,p);
-					longterm = new Forecast5Day(w);
-					shortterm = new Forecast24Hour(w);
+					longterm = new Forecast5Day(w,p);
+					shortterm = new Forecast24Hour(w,p);
 					
 					tabbedPane.add(t.getCityName() + ": Current",current.getPanel());
 					tabbedPane.add(t.getCityName() + ": Long Term",longterm.getPanel());

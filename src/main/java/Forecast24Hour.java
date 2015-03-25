@@ -15,16 +15,19 @@ public class Forecast24Hour {
 
 	// Attributes
 	private WeatherData data24h;
+	private WeatherPreferences preferences;
 	private TransparentPanel pane;
 	private JLabel[] image_l;
 	private JLabel[] weatherdescription_l;
 	private JLabel[] skycondition_l;
 	private JLabel[] temp_l;
+	private int CNT;
 
 	// private JLabel[] percentPrecipitation_l;
 
-	public Forecast24Hour(WeatherData data) {
+	public Forecast24Hour(WeatherData data, WeatherPreferences p) {
 		this.data24h = data;
+		this.preferences = p;
 		initComponents();
 		createDisplay();
 	}
@@ -45,10 +48,19 @@ public class Forecast24Hour {
 
 		String[] skyConditionArray = data24h.getSkyCondition24h();
 		String[] descriptionArray = data24h.getDescription24h();
-		double[] tempArray = data24h.getTemp24h();
 		Image[] imgArray = data24h.getIcon24h();
-
-		for (int i = 0; i < 8; i++) {
+		
+		double[] tempArray;
+		
+		if (preferences.getTempUnit().equalsIgnoreCase("F")){
+			tempArray = data24h.getTemp24hF();
+		} else {
+			tempArray = data24h.getTemp24h();
+		}
+		
+		int cnt = data24h.getCNT();
+		
+		for (int i = 0; i < cnt; i++) {
 			int j = (i + 1) * 3;
 			wdlabel[i] = new JLabel(j + " hours: "
 					+ descriptionArray[i]);
@@ -57,17 +69,35 @@ public class Forecast24Hour {
 			sclabel[i] = new JLabel("Sky:  " + skyConditionArray[i]);
 			sclabel[i].setFont(minorfont);
 
-			templabel[i] = new JLabel(tempArray[i] + " C");
-			templabel[i].setFont(minorfont);
+			if (preferences.getTempUnit().equalsIgnoreCase("F")){
+				templabel[i] = new JLabel(tempArray[i] + "°F");
+				templabel[i].setFont(minorfont);
+			} else {
+				templabel[i] = new JLabel(tempArray[i] + "°C");
+				templabel[i].setFont(minorfont);
+			}
 
 			imagelabel[i] = new JLabel(new ImageIcon(imgArray[i]));
 			imagelabel[i].setPreferredSize(new Dimension(5,5));
 		}
 
+		for (int i = cnt; i < 8; i++) {
+			int j = (i + 1)*3;
+			wdlabel[i] = new JLabel(j + " hours:");
+			wdlabel[i].setFont(minorfont);
+			sclabel[i] = new JLabel("-");
+			sclabel[i].setFont(minorfont);
+			templabel[i] = new JLabel("Unavailable");
+			templabel[i].setFont(minorfont);
+			imagelabel[i] = new JLabel("Data");
+			imagelabel[i].setFont(minorfont);
+		}
+		
 		this.weatherdescription_l = wdlabel;
 		this.skycondition_l = sclabel;
 		this.temp_l = templabel;
 		this.image_l = imagelabel;
+		this.CNT = cnt;
 	}
 
 	private void createDisplay() {
@@ -88,7 +118,8 @@ public class Forecast24Hour {
 
 		InputTest t = new InputTest("London, Canada");
 		WeatherData d = new WeatherData(t);
-		Forecast24Hour test = new Forecast24Hour(d);
+		WeatherPreferences p = new WeatherPreferences();
+		Forecast24Hour test = new Forecast24Hour(d,p);
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(test.getPanel());

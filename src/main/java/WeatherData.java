@@ -68,6 +68,8 @@ public class WeatherData {
 	private Image[] icon5d;
 	private double[] low5d;
 	private double[] high5d;
+	
+	private int cnt;
 
 	// Mars Weather Attributes
 	private JSONObject marsJSONObject;
@@ -116,6 +118,7 @@ public class WeatherData {
 		setIcon5d();
 		setLow5d();
 		setHigh5d();
+		setCNT();
 
 		// Initialize Mars variables
 		setMinTempMars();
@@ -173,6 +176,10 @@ public class WeatherData {
 	public double getTempCurrent() {
 		return tempCurrent;
 	}
+	
+	public double getTempCurrentF(){
+		return (double)(tempCurrent*1.8 + 32);
+	}
 
 	/**
 	 * Gets the sunset time
@@ -229,6 +236,10 @@ public class WeatherData {
 	public double getLow() {
 		return low;
 	}
+	
+	public double getLowCurrentF(){
+		return (double)(low*1.8 + 32);
+	}
 
 	/**
 	 * Gets the high temperature 
@@ -236,6 +247,10 @@ public class WeatherData {
 	 */
 	public double getHigh() {
 		return high;
+	}
+	
+	public double getHighCurrentF(){
+		return (double)(high*1.8 + 32);
 	}
 
 	/**
@@ -262,6 +277,14 @@ public class WeatherData {
 	public double[] getTemp24h() {
 		return temp24h;
 	}
+	
+	public double[] getTemp24hF(){
+		double[] d = new double[8];
+		for (int i = 0; i < 8; i++){
+			d[i] = temp24h[i]*1.8 + 32;
+		}
+		return d;
+	}
 
 	/**
 	 * Gets the 24hr sky conditions in an array 
@@ -280,9 +303,9 @@ public class WeatherData {
 	}
 
 	
-	public int[] getPercentPreicipitation24h() {
-		return percentPrecipitation24h;
-	}
+//	public int[] getPercentPreicipitation24h() {
+//		return percentPrecipitation24h;
+//	}
 
 	/**
 	 * Gets the Images of 24hr temperatures in an array 
@@ -308,6 +331,14 @@ public class WeatherData {
 	 */
 	public double[] getTemp5d() {
 		return temp5d;
+	}
+	
+	public double[] getTemp5dF(){
+		double[] d = new double[5];
+		for (int i = 0; i < 5; i++){
+			d[i] = temp5d[i]*1.8 + 32;
+		}
+		return d;
 	}
 
 	/**
@@ -345,6 +376,14 @@ public class WeatherData {
 	public double[] getLow5d() {
 		return low5d;
 	}
+	
+	public double[] getLow5dF(){
+		double[] d = new double[5];
+		for (int i = 0; i < 5; i++){
+			d[i] = low5d[i]*1.8 + 32;
+		}
+		return d;
+	}
 
 	/**
 	 * Gets array of 5day high temperatures
@@ -353,7 +392,22 @@ public class WeatherData {
 	public double[] getHigh5d() {
 		return high5d;
 	}
+	
+	public double[] getHigh5dF(){
+		double[] d = new double[5];
+		for (int i = 0; i < 5; i++){
+			d[i] = high5d[i]*1.8 + 32;
+		}
+		return d;
+	}
 
+	/**
+	 * Gets number of available days for 5 day forecast
+	 */
+	public int getCNT(){
+		return cnt;
+	}
+	
 	// Mars Getters
 	
 	/**
@@ -371,6 +425,10 @@ public class WeatherData {
 	public double getMinTempMars() {
 		return minTempMars;
 	}
+	
+	public double getMinMarsF(){
+		return (double)(minTempMars*1.8 + 32);
+	}
 
 	/**
 	 * Gets the maximum temperature of Mars
@@ -378,6 +436,10 @@ public class WeatherData {
 	 */
 	public double getMaxTempMars() {
 		return maxTempMars;
+	}
+	
+	public double getMaxMarsF(){
+		return (double)(maxTempMars*1.8 + 32);
 	}
 
 	/**
@@ -820,6 +882,14 @@ public class WeatherData {
 		}
 	}
 
+	private void setCNT(){
+		try {
+			this.cnt = forecast5dJSONObject.getInt("cnt");
+		} catch (JSONException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	// private int[] percentPrecipitation5d;
 
 	// Mars Weather Setters
@@ -1024,55 +1094,7 @@ public class WeatherData {
 		frame.setVisible(true);
 	}
 
-	// Method to update the data
-	public void refreshAndUpdate(String city) {
-
-		refreshCurrentJSONObject(city);
-		refreshForecast24hJSONObject(city);
-		refreshForecast5dJSONObject(city);
-		refreshMarsJSONObject();
-
-		// Initialize Current Weather Variables
-		setSkyConditionCurrent();
-		setDescription();
-		setTempCurrent();
-		setSunset();
-		setSunrise();
-		setIcon();
-		setPressure();
-		setHumidity();
-		setWindSpeed();
-		setWindDirection();
-		setHigh();
-		setLow();
-
-		// Initialize 24 hour forecast variables
-		setTemp24h();
-		setSkyCondition24h();
-		setDescription24h();
-		setIcon24h();
-
-		// Initialize 5 day forecast variables
-		setTemp5d();
-		setSkyCondition5d();
-		setDescription5d();
-		setIcon5d();
-		setLow5d();
-		setHigh5d();
-
-		// Initialize Mars variables
-		setMinTempMars();
-		setMaxTempMars();
-		setWindSpeedMars();
-		setWindDirectionMars();
-		setPressureMars();
-		setHumidityMars();
-		setSkyConditionMars();
-		setMarsIcon();
-	}
-
 	// Main Test Method
-
 	public static void main(String[] args) throws IOException {
 
 		// Read from console

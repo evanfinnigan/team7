@@ -84,8 +84,8 @@ public class InputTest {
 			JSONArray a = forecast5d.getJSONArray("list");
 			
 			if (a.length() < 5) {
-				this.valid = false;
-				System.out.println("5 day forecast list is too short");
+				this.valid = true;
+				System.out.println("Some data may be unavailable");
 			}
 
 			String citytest = currentWeather.getString("name");
