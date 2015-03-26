@@ -14,6 +14,7 @@ import java.util.Hashtable;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,7 +24,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -84,6 +84,17 @@ public class TheWX {
 		
 		JMenuItem eMenuItem = new JMenuItem("Exit");
 		eMenuItem.setMnemonic(KeyEvent.VK_E);
+		
+		JMenu preferences = new JMenu("Preferences");
+		preferences.setMnemonic(KeyEvent.VK_F);
+		
+		JCheckBoxMenuItem hideHumidity = new JCheckBoxMenuItem("Humidity",true);
+		JCheckBoxMenuItem hideWindDir = new JCheckBoxMenuItem("Wind Direction",true);
+		JCheckBoxMenuItem hideWindSpeed = new JCheckBoxMenuItem("Wind Speed",true);
+		JCheckBoxMenuItem hideAirPre = new JCheckBoxMenuItem("Air Pressure",true);
+		JCheckBoxMenuItem hideSunrise = new JCheckBoxMenuItem("Sunrise",true);
+		JCheckBoxMenuItem hideSunset = new JCheckBoxMenuItem("Sunset",true);
+		
 		
 		
 		list.setModel(modelloc);
@@ -282,6 +293,92 @@ public class TheWX {
 		        System.exit(0);
 		    }
 		});
+		
+		///PREFERENCES////
+		hideSunset.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		        if(p.getShowSunset()){
+		        	p.setShowSunset(false);
+		        	change(ref,p);
+		        }
+		        else{
+		        	p.setShowSunset(true);
+		        	change(ref,p);
+		        }
+		    }
+		});
+		
+		hideSunrise.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		        if(p.getShowSunrise()){
+		        	p.setShowSunrise(false);
+		        	change(ref,p);
+		        }
+		        else{
+		        	p.setShowSunrise(true);
+		        	change(ref,p);
+		        }
+		    }
+		});
+		
+		hideAirPre.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		        if(p.getShowPressure()){
+		        	p.setShowPressure(false);
+		        	change(ref,p);
+		        }
+		        else{
+		        	p.setShowPressure(true);
+		        	change(ref,p);
+		        }
+		    }
+		});
+		
+		hideWindSpeed.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		        if(p.getShowWindSpeed()){
+		        	p.setShowWindSpeed(false);
+		        	change(ref,p);
+		        }
+		        else{
+		        	p.setShowWindSpeed(true);
+		        	change(ref,p);
+		        }
+		    }
+		});
+		
+		hideWindDir.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		        if(p.getShowWindDirection()){
+		        	p.setShowWindDirection(false);
+		        	change(ref,p);
+		        }
+		        else{
+		        	p.setShowWindDirection(true);
+		        	change(ref,p);
+		        }
+		    }
+		});
+		
+		hideHumidity.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		        if(p.getShowHumidity()){
+		        	p.setShowHumidity(false);
+		        	change(ref,p);
+		        }
+		        else{
+		        	p.setShowHumidity(true);
+		        	change(ref,p);
+		        }
+		    }
+		});
+		
 
 		firstPanel.add(firstLabel);
 		secondPanel.add(secondLabel);
@@ -302,6 +399,19 @@ public class TheWX {
 		
 		file.add(eMenuItem);
 		menubar.add(file);
+		
+		preferences.add(hideHumidity);
+		preferences.add(hideWindDir);
+		preferences.add(hideWindSpeed);
+		preferences.add(hideAirPre);
+		preferences.add(hideSunrise);
+		preferences.add(hideSunset);
+		
+		
+		
+		
+		menubar.add(preferences);
+		
 		
 		frame.setJMenuBar(menubar);
 

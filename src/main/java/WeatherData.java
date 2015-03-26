@@ -31,7 +31,8 @@ public class WeatherData {
 	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?cnt=8&q=";
 	final static String imgURL = "http://openweathermap.org/img/w/";
 	final static String marsURL = "http://marsweather.ingenology.com/v1/latest/?format=json";
-
+	final static String appId = "c4b344fb48bf77d11a102795333fea60";
+	
 	// Attributes
 	private String timeOfLastRequest;
 
