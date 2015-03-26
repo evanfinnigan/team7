@@ -71,30 +71,33 @@ public class Forecast5Day {
 
 		for (int i = 0; i < cnt; i++) {
 			int j = i + 1;
-			wdlabel[i] = new JLabel( j + " days: "
-					+ skyConditionArray[i]);
+			
+			
+			wdlabel[i] = new JLabel( j + " days: " + skyConditionArray[i]);
+			//wdlabel[i] = new JLabel( j + " days: " + descriptionArray[i]);
 			wdlabel[i].setFont(minorfont);
 
-			sclabel[i] = new JLabel(descriptionArray[i]);
+			String temp = descriptionArray[i].substring(0, 1).toUpperCase() + descriptionArray[i].substring(1);
+			sclabel[i] = new JLabel(temp);
 			sclabel[i].setFont(minorfont);
 
 			if (preferences.getTempUnit().equalsIgnoreCase("F")){
-				templabel[i] = new JLabel(tempArray[i] + "캟");
+				templabel[i] = new JLabel(tempArray[i] + "째F");
 				templabel[i].setFont(minorfont);
 
-				highlabel[i] = new JLabel("High:" + highArray[i] + "캟");
+				highlabel[i] = new JLabel("High:" + (int) highArray[i] + "째F");
 				highlabel[i].setFont(minorfont);
 
-				lowlabel[i] = new JLabel("Low:" + lowArray[i] + "캟");
+				lowlabel[i] = new JLabel("Low:" + (int)lowArray[i] + "째F");
 				lowlabel[i].setFont(minorfont);
 			} else {
-				templabel[i] = new JLabel(tempArray[i] + "캜");
+				templabel[i] = new JLabel(tempArray[i] + "째C");
 				templabel[i].setFont(minorfont);
 
-				highlabel[i] = new JLabel("High: " + highArray[i] + "캜");
+				highlabel[i] = new JLabel("High: " + (int)highArray[i] + "째C");
 				highlabel[i].setFont(minorfont);
 
-				lowlabel[i] = new JLabel("Low: " + lowArray[i] + "캜");
+				lowlabel[i] = new JLabel("Low: " + (int)lowArray[i] + "째C");
 				lowlabel[i].setFont(minorfont);
 			}
 

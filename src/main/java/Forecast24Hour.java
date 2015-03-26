@@ -65,17 +65,19 @@ public class Forecast24Hour {
 		
 		for (int i = 0; i < cnt; i++) {
 			int j = (i + 1) * 3;
-			wdlabel[i] = new JLabel(j + " hours: " + descriptionArray[i]);
+			
+			String temp = descriptionArray[i].substring(0, 1).toUpperCase() + descriptionArray[i].substring(1);
+			wdlabel[i] = new JLabel(j + " hours: " + temp);
 			wdlabel[i].setFont(minorfont);
 
 			sclabel[i] = new JLabel("Sky:  " + skyConditionArray[i]);
 			sclabel[i].setFont(minorfont);
 
 			if (preferences.getTempUnit().equalsIgnoreCase("F")){
-				templabel[i] = new JLabel(tempArray[i] + "°F");
+				templabel[i] = new JLabel(tempArray[i] + "Â°F");
 				templabel[i].setFont(minorfont);
 			} else {
-				templabel[i] = new JLabel(tempArray[i] + "°C");
+				templabel[i] = new JLabel(tempArray[i] + "Â°C");
 				templabel[i].setFont(minorfont);
 			}
 
