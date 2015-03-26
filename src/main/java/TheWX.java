@@ -23,6 +23,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -43,6 +44,7 @@ public class TheWX {
 	JButton btn3 = new JButton("CENTER");
 	JButton mylocadd = new JButton("Add to My Locations");
 	JButton refresh = new JButton("Refresh");
+	JButton degree = new JButton("°F");
 	// JButton btn5 = new JButton("EAST");
 
 	JPanel panel = new JPanel();
@@ -244,6 +246,26 @@ public class TheWX {
 			}
 		});
 		
+		degree.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if(degree.getText().equals("°C")){
+					p.setTempUnit("C");
+					change(ref,p);
+					degree.setText("°F");
+				}
+				
+				else{
+					p.setTempUnit("F");
+					change(ref,p);
+					degree.setText("°C");
+				}
+				//mylocations.replace(ref.getCityName(),w);
+				
+			}
+		});
+		
 		list.getSelectionModel().addListSelectionListener(e -> {
 			// WeatherData w = list.getSelectedValue();
 			try{
@@ -267,6 +289,7 @@ public class TheWX {
 		// tabbedPane.add("Current",current.getPanel());
 		// tabbedPane.add("Long Term",secondPanel);
 
+		
 		panel.add(txtAdd);
 		panel.add(btnAdd);
 		panel.add(comboBox);
@@ -274,6 +297,7 @@ public class TheWX {
 		//panel.add(myloc);
 		panel.add(refresh);
 		panel.add(btnRemove);
+		panel.add(degree);
 		panel.add(mylocadd);
 		
 		file.add(eMenuItem);

@@ -334,10 +334,10 @@ public class Currentweather {
 		image_l.setBounds(430, 145, 40, 40);
 		
 		pane.add(tempmin_l);
-		tempmin_l.setBounds(400, 190, 50, 20);
+		tempmin_l.setBounds(400, 190, 55, 20);
 		
 		pane.add(tempmax_l);
-		tempmax_l.setBounds(470, 190, 50, 20);
+		tempmax_l.setBounds(470, 190, 55, 20);
 		
 		pane.add(lastupdate_l);
 		lastupdate_l.setBounds(20, 310, 200, 20);
@@ -392,7 +392,9 @@ public class Currentweather {
 		InputTest intest = new InputTest("Samandag");
 		WeatherData data = new WeatherData(intest);
 		System.out.println(data.getCityName());
+		prefs.setTempUnit("F");
 		Currentweather test = new Currentweather(data, prefs);
+		
 		frame.getContentPane().add(test.getPanel());
 		System.out.println("finished");
 		//frame.pack();
