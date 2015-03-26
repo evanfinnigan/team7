@@ -22,6 +22,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	private boolean windSpeed, showHumidity, showSunset, showSunrise;
 	private boolean showPOP, showLow, showHigh;
 	private boolean showDescription;
+	private int itemcounter;
 
 	/**
 	 * WeatherPreferences Constructor
@@ -46,6 +47,7 @@ public class WeatherPreferences implements java.io.Serializable{
 		this.showLow = true;
 		this.showHigh = true;
 		this.showDescription = true;
+		this.itemcounter = 6;
 	}
 
 	/**
