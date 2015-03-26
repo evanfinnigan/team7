@@ -82,22 +82,22 @@ public class Forecast5Day {
 			sclabel[i].setFont(minorfont);
 
 			if (preferences.getTempUnit().equalsIgnoreCase("F")){
-				templabel[i] = new JLabel(tempArray[i] + "째F");
+				templabel[i] = new JLabel(tempArray[i] + "캟");
 				templabel[i].setFont(minorfont);
 
-				highlabel[i] = new JLabel("High:" + (int) highArray[i] + "째F");
+				highlabel[i] = new JLabel("High:" + (int) highArray[i] + "캟");
 				highlabel[i].setFont(minorfont);
 
-				lowlabel[i] = new JLabel("Low:" + (int)lowArray[i] + "째F");
+				lowlabel[i] = new JLabel("Low:" + (int)lowArray[i] + "캟");
 				lowlabel[i].setFont(minorfont);
 			} else {
-				templabel[i] = new JLabel(tempArray[i] + "째C");
+				templabel[i] = new JLabel(tempArray[i] + "캜");
 				templabel[i].setFont(minorfont);
 
-				highlabel[i] = new JLabel("High: " + (int)highArray[i] + "째C");
+				highlabel[i] = new JLabel("High: " + (int)highArray[i] + "캜");
 				highlabel[i].setFont(minorfont);
 
-				lowlabel[i] = new JLabel("Low: " + (int)lowArray[i] + "째C");
+				lowlabel[i] = new JLabel("Low: " + (int)lowArray[i] + "캜");
 				lowlabel[i].setFont(minorfont);
 			}
 

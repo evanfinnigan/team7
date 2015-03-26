@@ -18,6 +18,7 @@ public class InputTest {
 	final static String currentURL = "http://api.openweathermap.org/data/2.5/weather?q=";
 	final static String forcast5dURL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=5&q=";
 	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?cnt=8&q=";
+	final static String appId = "c4b344fb48bf77d11a102795333fea60";
 
 	boolean valid;
 	JSONObject currentWeather;
@@ -107,7 +108,7 @@ public class InputTest {
 	private JSONObject requestData(String city, String url) {
 		JSONObject json = new JSONObject();
 		try {
-			InputStream stream = new URL(url + "" + city).openStream();
+			InputStream stream = new URL(url + "" + city + "&APPID=" + appId).openStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					stream, Charset.forName("UTF-8")));
 			String jsondata = dataToString(reader);

@@ -1,5 +1,7 @@
 package main.java;
 
+import java.util.LinkedList;
+
 public class WeatherPreferences implements java.io.Serializable{
 
 	/**
@@ -14,9 +16,10 @@ public class WeatherPreferences implements java.io.Serializable{
 	 */
 
 
-	private Location defaultLocation;
+	private String defaultLocation;
 	//private LocationList locationlist;
 	private String tempUnit;
+	private LinkedList locationlist;
 	private boolean showSky, showTemp, showPressure;
 	private boolean showWindDirection, showIcon;
 	private boolean windSpeed, showHumidity, showSunset, showSunrise;
@@ -31,6 +34,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 */
 	public WeatherPreferences() {
 		this.defaultLocation = null;
+		this.locationlist = null;
 		//this.locationlist = null;
 		//Temperature Unit used as default is Celsius
 		this.tempUnit = "C";
@@ -52,18 +56,33 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * gets the current location
-	 * @returns boolean
+	 * @returns string
 	 */
-	public Location getLocation(){
+	public String getLocation(){
 		return this.defaultLocation;
+	}
+	
+	/**
+	 * gets the list of locations
+	 */
+	public LinkedList getLocationList(){
+		return this.locationlist;
 	}
 
 	/**
 	 * sets the current location
 	 * @returns
 	 */
-	public void setLocation(Location newLocation) {
+	public void setLocation(String newLocation) {
 		this.defaultLocation = newLocation;
+		this.locationlist.addFirst(newLocation);
+	}
+	
+	/**
+	 * adds a location to the location list
+	 */
+	public void addLocation(String location) {
+		this.locationlist.add(location);
 	}
 
 	/**

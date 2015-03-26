@@ -9,6 +9,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Hashtable;
 
 import javax.swing.DefaultComboBoxModel;
@@ -35,6 +42,7 @@ import javax.swing.plaf.ColorUIResource;
 public class TheWX {
 
 	private WeatherData ref;
+	private WeatherPreferences p;
 	UIDefaults uiDefaults = UIManager.getDefaults();
 	Color bgColor = new ColorUIResource(Color.BLUE);
 
@@ -44,7 +52,7 @@ public class TheWX {
 	JButton btn3 = new JButton("CENTER");
 	JButton mylocadd = new JButton("Add to My Locations");
 	JButton refresh = new JButton("Refresh");
-	JButton degree = new JButton("째F");
+	JButton degree = new JButton("캟");
 	// JButton btn5 = new JButton("EAST");
 
 	JPanel panel = new JPanel();
@@ -54,9 +62,9 @@ public class TheWX {
 
 	JLabel firstLabel = new JLabel("FirstTab");
 	JLabel secondLabel = new JLabel("SecondTab");
-	//JLabel myloc = new JLabel("My Locations");
+	// JLabel myloc = new JLabel("My Locations");
 	JTabbedPane tabbedPane = new JTabbedPane();
-	
+
 	JMenuBar menubar = new JMenuBar();
 
 	JComboBox<String> comboBox = new JComboBox<String>();
@@ -75,60 +83,96 @@ public class TheWX {
 	JFrame locframe = new JFrame("Storage");
 	JList<String> list = new JList<>();
 	DefaultListModel<String> modelloc = new DefaultListModel<>();
-	
+
 	public TheWX() {
 
-		
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
-		
+
 		JMenuItem eMenuItem = new JMenuItem("Exit");
 		eMenuItem.setMnemonic(KeyEvent.VK_E);
-		
+
 		JMenu preferences = new JMenu("Preferences");
 		preferences.setMnemonic(KeyEvent.VK_F);
-		
-		JCheckBoxMenuItem hideHumidity = new JCheckBoxMenuItem("Humidity",true);
-		JCheckBoxMenuItem hideWindDir = new JCheckBoxMenuItem("Wind Direction",true);
-		JCheckBoxMenuItem hideWindSpeed = new JCheckBoxMenuItem("Wind Speed",true);
-		JCheckBoxMenuItem hideAirPre = new JCheckBoxMenuItem("Air Pressure",true);
-		JCheckBoxMenuItem hideSunrise = new JCheckBoxMenuItem("Sunrise",true);
-		JCheckBoxMenuItem hideSunset = new JCheckBoxMenuItem("Sunset",true);
-		
-		
-		
+
+		JCheckBoxMenuItem hideHumidity = new JCheckBoxMenuItem("Humidity", true);
+		JCheckBoxMenuItem hideWindDir = new JCheckBoxMenuItem("Wind Direction",
+				true);
+		JCheckBoxMenuItem hideWindSpeed = new JCheckBoxMenuItem("Wind Speed",
+				true);
+		JCheckBoxMenuItem hideAirPre = new JCheckBoxMenuItem("Air Pressure",
+				true);
+		JCheckBoxMenuItem hideSunrise = new JCheckBoxMenuItem("Sunrise", true);
+		JCheckBoxMenuItem hideSunset = new JCheckBoxMenuItem("Sunset", true);
+
 		list.setModel(modelloc);
-		WeatherPreferences p = new WeatherPreferences();
+
+		p = new WeatherPreferences();
+
+		File f = new File("save.dat");
+		if (f.exists()) {
+			try {
+				ObjectInputStream is = new ObjectInputStream(
+						new FileInputStream(f));
+				p = (WeatherPreferences) is.readObject();
+
+				is.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		if (!p.getShowHumidity())
+			hideHumidity.setSelected(false);
+		if (!p.getShowWindDirection())
+			hideWindDir.setSelected(false);
+		if (!p.getShowWindSpeed())
+			hideWindSpeed.setSelected(false);
+		if (!p.getShowPressure())
+			hideAirPre.setSelected(false);
+		if (!p.getShowSunrise())
+			hideSunrise.setSelected(false);
+		if (!p.getShowSunset())
+			hideSunset.setSelected(false);
+
 		locations = new Hashtable<String, WeatherData>();
 		mylocations = new Hashtable<String, WeatherData>();
-		
+
 		list.setMaximumSize(new Dimension(100, 100));
-		//modelloc.setMinimumSize(new Dimension(100,100));
-		
-		//p.setShowPressure(false);
-		
+		// modelloc.setMinimumSize(new Dimension(100,100));
+
+		// p.setShowPressure(false);
+
 		boolean defaultSet = false;
-		if (mylocations.isEmpty()){
+		if (p.getLocation() == null || p.getLocation().equals("")) {
 			while (!defaultSet) {
 				JOptionPane prompt = new JOptionPane();
 				String a;
-				//prompt.getRootPane().setDefaultButton(JOptionPane);
+				// prompt.getRootPane().setDefaultButton(JOptionPane);
 				a = JOptionPane.showInputDialog("Enter a Default Location:");
-				
+
 				InputTest t = new InputTest(a);
 				if (t.getValid()) {
 					WeatherData w = new WeatherData(t);
 					mylocations.put(t.getCityName(), w);
 					// list
-					modelloc.addElement(w.getCityName());
-					change(w,p);
+					modelloc.addElement(t.getCityName());
+					p.setLocation(t.getCityName());
+					change(w, p);
+					
 					defaultSet = true;
 				} else {
 					prompt.showMessageDialog(frame, "Try again!");
 				}
 			}
+		} else {
+			InputTest t = new InputTest(p.getLocation());
+			WeatherData w = new WeatherData(t);
+			change(w,p);
+			modelloc.addElement(t.getCityName());
+			mylocations.put(t.getCityName(),w);
 		}
-		
+
 		comboBox.setModel(model);
 		comboBox.addItemListener(new ItemListener() {
 			@Override
@@ -148,31 +192,30 @@ public class TheWX {
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				try {
-					int i =0;
-					//modelloc.addElement(ref.getCityName());
-					while(!modelloc.isEmpty()){
-						
-						if(modelloc.get(i).equals(ref.getCityName())){
-							//System.out.println(ref.getCityName());
+					int i = 0;
+					// modelloc.addElement(ref.getCityName());
+					while (!modelloc.isEmpty()) {
+
+						if (modelloc.get(i).equals(ref.getCityName())) {
+							// System.out.println(ref.getCityName());
 							break;
 						}
 						i++;
 					}
-					
+
 					modelloc.removeElementAt(i);
 					mylocations.remove(ref.getCityName());
-					
-					//model.removeElement(selectedValue);
+
+					// model.removeElement(selectedValue);
 					// System.out.println(selectedValue.toString());
 					// locations.remove(selectedValue.toString());
-					
+
 				} catch (Exception ex) {
-					//Do nothing
+					// Do nothing
 				}
-				
-				
+
 			}
 		});
 
@@ -209,38 +252,31 @@ public class TheWX {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				
-				if(mylocations.containsKey(ref.getCityName())){
-					JOptionPane.showMessageDialog(frame, ref.getCityName() + " is already in your locations.");
-				}
-				else{
+				if (mylocations.containsKey(ref.getCityName())) {
+					JOptionPane.showMessageDialog(frame, ref.getCityName()
+							+ " is already in your locations.");
+				} else {
 					mylocations.put(ref.getCityName(), ref);
 					modelloc.addElement(ref.getCityName());
 				}
-				/*String a;
-				a = JOptionPane.showInputDialog("Save a Location");
-				InputTest t = new InputTest(a);
-				if (t.getValid()) {
-
-					if(mylocations.containsKey(t.getCityName())){
-						change(mylocations.get(t.getCityName()),p);
-					}
-					
-					else{
-					WeatherData w = new WeatherData(t);
-
-					mylocations.put(t.getCityName(), w);
-
-					// list
-					modelloc.addElement(t.getCityName());
-					}
-					// change(w, p);
-
-				} else {
-					System.out.println("Error");
-					JOptionPane.showMessageDialog(frame,
-							"Sorry there was an error please try again.");
-				}*/
+				/*
+				 * String a; a = JOptionPane.showInputDialog("Save a Location");
+				 * InputTest t = new InputTest(a); if (t.getValid()) {
+				 * 
+				 * if(mylocations.containsKey(t.getCityName())){
+				 * change(mylocations.get(t.getCityName()),p); }
+				 * 
+				 * else{ WeatherData w = new WeatherData(t);
+				 * 
+				 * mylocations.put(t.getCityName(), w);
+				 * 
+				 * // list modelloc.addElement(t.getCityName()); } // change(w,
+				 * p);
+				 * 
+				 * } else { System.out.println("Error");
+				 * JOptionPane.showMessageDialog(frame,
+				 * "Sorry there was an error please try again."); }
+				 */
 
 			}
 		});
@@ -248,137 +284,143 @@ public class TheWX {
 		refresh.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				InputTest t = new InputTest(ref.getCityName());
 				WeatherData w = new WeatherData(t);
-				change(w,p);
-				mylocations.replace(ref.getCityName(),w);
-				
+				change(w, p);
+				mylocations.replace(ref.getCityName(), w);
+
 			}
 		});
-		
+
 		degree.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(degree.getText().equals("째C")){
+
+				if (degree.getText().equals("캜")) {
 					p.setTempUnit("C");
-					change(ref,p);
-					degree.setText("째F");
+					change(ref, p);
+					degree.setText("캟");
 				}
-				
-				else{
+
+				else {
 					p.setTempUnit("F");
-					change(ref,p);
-					degree.setText("째C");
+					change(ref, p);
+					degree.setText("캜");
 				}
-				//mylocations.replace(ref.getCityName(),w);
-				
+				// mylocations.replace(ref.getCityName(),w);
+
 			}
 		});
-		
+
 		list.getSelectionModel().addListSelectionListener(e -> {
 			// WeatherData w = list.getSelectedValue();
-			try{
-				change(mylocations.get(list.getSelectedValue()), p);
-			}
-			catch(Exception b){
-				
-			}
+				try {
+					change(mylocations.get(list.getSelectedValue()), p);
+				} catch (Exception b) {
+
+				}
 			});
-		
+
 		eMenuItem.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent event) {
-		        System.exit(0);
-		    }
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				String filename = "save.dat";
+				ObjectOutputStream os;
+				try {
+					os = new ObjectOutputStream(new FileOutputStream(filename));
+					os.writeObject(p);
+					os.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				System.exit(0);
+			}
 		});
-		
-		///PREFERENCES////
+
+		// /PREFERENCES////
 		hideSunset.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent event) {
-		        if(p.getShowSunset()){
-		        	p.setShowSunset(false);
-		        	change(ref,p);
-		        }
-		        else{
-		        	p.setShowSunset(true);
-		        	change(ref,p);
-		        }
-		    }
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				if (p.getShowSunset()) {
+					p.setShowSunset(false);
+					change(ref, p);
+				} else {
+					p.setShowSunset(true);
+					change(ref, p);
+				}
+			}
 		});
-		
+
 		hideSunrise.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent event) {
-		        if(p.getShowSunrise()){
-		        	p.setShowSunrise(false);
-		        	change(ref,p);
-		        }
-		        else{
-		        	p.setShowSunrise(true);
-		        	change(ref,p);
-		        }
-		    }
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				if (p.getShowSunrise()) {
+					p.setShowSunrise(false);
+					change(ref, p);
+				} else {
+					p.setShowSunrise(true);
+					change(ref, p);
+				}
+			}
 		});
-		
+
 		hideAirPre.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent event) {
-		        if(p.getShowPressure()){
-		        	p.setShowPressure(false);
-		        	change(ref,p);
-		        }
-		        else{
-		        	p.setShowPressure(true);
-		        	change(ref,p);
-		        }
-		    }
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				if (p.getShowPressure()) {
+					p.setShowPressure(false);
+					change(ref, p);
+				} else {
+					p.setShowPressure(true);
+					change(ref, p);
+				}
+			}
 		});
-		
+
 		hideWindSpeed.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent event) {
-		        if(p.getShowWindSpeed()){
-		        	p.setShowWindSpeed(false);
-		        	change(ref,p);
-		        }
-		        else{
-		        	p.setShowWindSpeed(true);
-		        	change(ref,p);
-		        }
-		    }
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				if (p.getShowWindSpeed()) {
+					p.setShowWindSpeed(false);
+					change(ref, p);
+				} else {
+					p.setShowWindSpeed(true);
+					change(ref, p);
+				}
+			}
 		});
-		
+
 		hideWindDir.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent event) {
-		        if(p.getShowWindDirection()){
-		        	p.setShowWindDirection(false);
-		        	change(ref,p);
-		        }
-		        else{
-		        	p.setShowWindDirection(true);
-		        	change(ref,p);
-		        }
-		    }
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				if (p.getShowWindDirection()) {
+					p.setShowWindDirection(false);
+					change(ref, p);
+				} else {
+					p.setShowWindDirection(true);
+					change(ref, p);
+				}
+			}
 		});
-		
+
 		hideHumidity.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent event) {
-		        if(p.getShowHumidity()){
-		        	p.setShowHumidity(false);
-		        	change(ref,p);
-		        }
-		        else{
-		        	p.setShowHumidity(true);
-		        	change(ref,p);
-		        }
-		    }
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				if (p.getShowHumidity()) {
+					p.setShowHumidity(false);
+					change(ref, p);
+				} else {
+					p.setShowHumidity(true);
+					change(ref, p);
+				}
+			}
 		});
-		
 
 		firstPanel.add(firstLabel);
 		secondPanel.add(secondLabel);
@@ -386,33 +428,28 @@ public class TheWX {
 		// tabbedPane.add("Current",current.getPanel());
 		// tabbedPane.add("Long Term",secondPanel);
 
-		
 		panel.add(txtAdd);
 		panel.add(btnAdd);
 		panel.add(comboBox);
-		
-		//panel.add(myloc);
+
+		// panel.add(myloc);
 		panel.add(refresh);
 		panel.add(btnRemove);
 		panel.add(degree);
 		panel.add(mylocadd);
-		
+
 		file.add(eMenuItem);
 		menubar.add(file);
-		
+
 		preferences.add(hideHumidity);
 		preferences.add(hideWindDir);
 		preferences.add(hideWindSpeed);
 		preferences.add(hideAirPre);
 		preferences.add(hideSunrise);
 		preferences.add(hideSunset);
-		
-		
-		
-		
+
 		menubar.add(preferences);
-		
-		
+
 		frame.setJMenuBar(menubar);
 
 		// frame.add(panel);

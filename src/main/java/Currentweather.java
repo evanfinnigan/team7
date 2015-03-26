@@ -252,28 +252,28 @@ public class Currentweather {
 		skycondition_l.setFont(lrgfont);
 
 		if (currentPrefs.getTempUnit().equalsIgnoreCase("F")) {
-			temp_l = new JLabel((int) currentData.getTempCurrentF() + "째F");
+			temp_l = new JLabel((int) currentData.getTempCurrentF() + "캟");
 			temp_l.setFont(sprlrgfont);
 
-			tempmax_l = new JLabel("H:" + (int) currentData.getHighF() + "째F");
+			tempmax_l = new JLabel("H:" + (int) currentData.getHighF() + "캟");
 			tempmax_l.setFont(medfont);
 
 			// tempmax_l.setForeground(Color.RED);
 
-			tempmin_l = new JLabel("L:" + (int) currentData.getLowF() + "째F");
+			tempmin_l = new JLabel("L:" + (int) currentData.getLowF() + "캟");
 			tempmin_l.setFont(medfont);
 
 			// tempmin_l.setForeground(Color.BLUE);
 		} else {
-			temp_l = new JLabel((int) currentData.getTempCurrent() + "째C");
+			temp_l = new JLabel((int) currentData.getTempCurrent() + "캜");
 			temp_l.setFont(sprlrgfont);
 
-			tempmax_l = new JLabel("H:" + (int) currentData.getHigh() + "째C");
+			tempmax_l = new JLabel("High: " + (int) currentData.getHigh() + "캜");
 			tempmax_l.setFont(medfont);
 
 			// tempmax_l.setForeground(Color.RED);
 
-			tempmin_l = new JLabel("L:" + ((int) (currentData.getLow())) + "째C");
+			tempmin_l = new JLabel("Low: " + ((int) (currentData.getLow())) + "캜");
 			tempmin_l.setFont(medfont);
 
 			// tempmin_l.setForeground(Color.BLUE);
@@ -357,10 +357,10 @@ public class Currentweather {
 		image_l.setBounds(430, 145, 40, 40);
 
 		pane.add(tempmin_l);
-		tempmin_l.setBounds(400, 190, 55, 20);
+		tempmin_l.setBounds(390, 190, 100, 20);
 
 		pane.add(tempmax_l);
-		tempmax_l.setBounds(470, 190, 55, 20);
+		tempmax_l.setBounds(490, 190, 100, 20);
 
 		pane.add(lastupdate_l);
 		lastupdate_l.setBounds(20, 310, 200, 20);
