@@ -11,6 +11,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -131,9 +133,9 @@ public class TheWX {
 		}
 
 		if (p.getTempUnit().equalsIgnoreCase("C")) {
-			degree.setText("*F");
+			degree.setText("\u00b0" + "F");
 		} else {
-			degree.setText("*C");
+			degree.setText("\u00b0" + "C");
 		}
 
 		if (!p.getShowHumidity())
@@ -181,13 +183,14 @@ public class TheWX {
 					}
 				} else {
 					defaultSet = false;
-					int confirm = prompt.showConfirmDialog(frame, "Exit program?");
+					int confirm = prompt.showConfirmDialog(frame,
+							"Exit program?");
 					if (confirm == 0) {
 						System.exit(0);
 					}
 				}
 			}
-			
+
 		} else {
 			InputTest t = new InputTest(p.getLocation());
 			WeatherData w = new WeatherData(t);
@@ -308,16 +311,16 @@ public class TheWX {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (degree.getText().equals("*C")) {
+				if (degree.getText().equals("\u00b0" + "C")) {
 					p.setTempUnit("C");
 					change(ref, p);
-					degree.setText("*F");
+					degree.setText("\u00b0" + "F");
 				}
 
 				else {
 					p.setTempUnit("F");
 					change(ref, p);
-					degree.setText("*C");
+					degree.setText("\u00b0" + "C");
 				}
 				// mylocations.replace(ref.getCityName(),w);
 
@@ -481,7 +484,57 @@ public class TheWX {
 		eastPane.setPreferredSize(new Dimension(80, 180));
 		frame.add(eastPane, BorderLayout.EAST);
 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new WindowListener() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				String filename = "save.dat";
+				ObjectOutputStream os;
+				try {
+					os = new ObjectOutputStream(new FileOutputStream(filename));
+					os.writeObject(p);
+					os.close();
+				} catch (FileNotFoundException ex) {
+					// TODO Auto-generated catch block
+					ex.printStackTrace();
+				} catch (IOException ex) {
+					// TODO Auto-generated catch block
+					ex.printStackTrace();
+				}
+
+				System.exit(0);
+			}
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+			}
+
+			@Override
+			public void windowClosed(WindowEvent e) {
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+
+			}
+		});
+		
 		frame.pack();
 		frame.setSize(900, 500);
 		frame.setResizable(false);
@@ -500,10 +553,11 @@ public class TheWX {
 
 		try {
 			time = w.getTimeOfLastRequest();
-			
+
 			current = new Currentweather(w, p, time);
 			longterm = new Forecast5Day(w, p);
 			shortterm = new Forecast24Hour(w, p);
+			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Long Term", longterm.getPanel());
 			tabbedPane.add("Short Term", shortterm.getPanel());
