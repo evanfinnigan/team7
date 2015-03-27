@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,6 +24,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -39,6 +41,8 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 
+import org.json.JSONException;
+
 public class TheWX {
 
 	private WeatherData ref;
@@ -53,6 +57,7 @@ public class TheWX {
 	JButton mylocadd = new JButton("Add to My Locations");
 	JButton refresh = new JButton("Refresh");
 	JButton degree = new JButton();
+	String time = "Unavailable";
 	// JButton btn5 = new JButton("EAST");
 
 	JPanel panel = new JPanel();
@@ -67,7 +72,7 @@ public class TheWX {
 
 	JMenuBar menubar = new JMenuBar();
 
-	//JComboBox<String> comboBox = new JComboBox<String>();
+	// JComboBox<String> comboBox = new JComboBox<String>();
 	DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 	JTextField txtAdd = new JTextField(15);
 	JButton btnAdd = new JButton("Search");
@@ -108,7 +113,6 @@ public class TheWX {
 		list.setModel(modelloc);
 
 		p = new WeatherPreferences();
-
 		File f = new File("save.dat");
 		if (f.exists()) {
 			try {
@@ -121,8 +125,8 @@ public class TheWX {
 				System.out.println(e.getMessage());
 			}
 		}
-		
-		if (p.getTempUnit().equalsIgnoreCase("C")){
+
+		if (p.getTempUnit().equalsIgnoreCase("C")) {
 			degree.setText("°F");
 		} else {
 			degree.setText("°C");
@@ -147,16 +151,12 @@ public class TheWX {
 		list.setMaximumSize(new Dimension(100, 100));
 		// modelloc.setMinimumSize(new Dimension(100,100));
 
-		// p.setShowPressure(false);
-
-		boolean defaultSet = false;
 		if (p.getLocation() == null || p.getLocation().equals("")) {
+			boolean defaultSet = false;
 			while (!defaultSet) {
 				JOptionPane prompt = new JOptionPane();
 				String a;
-				// prompt.getRootPane().setDefaultButton(JOptionPane);
-				a = JOptionPane.showInputDialog("Enter a Default Location:");
-
+				a = prompt.showInputDialog("Enter a Default Location:");
 				InputTest t = new InputTest(a);
 				if (t.getValid()) {
 					WeatherData w = new WeatherData(t);
@@ -174,27 +174,27 @@ public class TheWX {
 		} else {
 			InputTest t = new InputTest(p.getLocation());
 			WeatherData w = new WeatherData(t);
-			change(w,p);
+			change(w, p);
 			modelloc.addElement(t.getCityName());
-			mylocations.put(t.getCityName(),w);
+			mylocations.put(t.getCityName(), w);
 			list.setSelectedIndex(0);
 		}
 
-		//comboBox.setModel(model);
-		//comboBox.addItemListener(new ItemListener() {
-//			@Override
-//			public void itemStateChanged(ItemEvent e) {
-//				if (e.getStateChange() == ItemEvent.SELECTED) {
-//					selectedValue = model.getSelectedItem().toString();
-//
-//					if (!locations.isEmpty()) {
-//						change(locations
-//								.get(model.getSelectedItem().toString()), p);
-//					}
-//
-//				}
-//			}
-//		});
+		// comboBox.setModel(model);
+		// comboBox.addItemListener(new ItemListener() {
+		// @Override
+		// public void itemStateChanged(ItemEvent e) {
+		// if (e.getStateChange() == ItemEvent.SELECTED) {
+		// selectedValue = model.getSelectedItem().toString();
+		//
+		// if (!locations.isEmpty()) {
+		// change(locations
+		// .get(model.getSelectedItem().toString()), p);
+		// }
+		//
+		// }
+		// }
+		// });
 
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
@@ -232,9 +232,11 @@ public class TheWX {
 
 				InputTest t = new InputTest(txtAdd.getText());
 				if (t.getValid()) {
-
 					if (locations.containsKey(t.getCityName())) {
 						change(locations.get(t.getCityName()), p);
+						if (!mylocations.containsKey(t.getCityName())) {
+							list.clearSelection();
+						}
 					} else {
 
 						WeatherData w = new WeatherData(t);
@@ -242,6 +244,9 @@ public class TheWX {
 						// selectedValue = t.getCityName();
 						// model.setSelectedItem(t.getCityName());
 						locations.put(t.getCityName(), w);
+						if (!mylocations.containsKey(t.getCityName())) {
+							list.clearSelection();
+						}
 						change(w, p);
 
 					}
@@ -273,12 +278,12 @@ public class TheWX {
 		refresh.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				InputTest t = new InputTest(ref.getCityName());
-				WeatherData w = new WeatherData(t);
-				change(w, p);
-				mylocations.replace(ref.getCityName(), w);
-
+				if (t.getValid()) {
+					WeatherData w = new WeatherData(t);
+					change(w, p);
+					mylocations.replace(ref.getCityName(), w);
+				}
 			}
 		});
 
@@ -417,7 +422,6 @@ public class TheWX {
 		// tabbedPane.add("Current",current.getPanel());
 		// tabbedPane.add("Long Term",secondPanel);
 
-		
 		panel.add(refresh);
 		panel.add(txtAdd);
 		panel.add(btnAdd);
@@ -470,14 +474,17 @@ public class TheWX {
 		ref = w;
 
 		try {
-			current = new Currentweather(w, p);
+			time = w.getTimeOfLastRequest();
+			current = new Currentweather(w, p, time);
 			longterm = new Forecast5Day(w, p);
 			shortterm = new Forecast24Hour(w, p);
 			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Long Term", longterm.getPanel());
 			tabbedPane.add("Short Term", shortterm.getPanel());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(frame, "There was an issue. Try again.");
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(frame,
+					"There was an issue. Try again.");
 		}
 
 		footer.setText(" " + w.getCityName());

@@ -118,10 +118,13 @@ public class InputTest {
 			stream.close();
 		} catch (MalformedURLException e) {
 			System.out.println(e.getMessage());
+			this.valid = false;
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
+			this.valid = false;
 		} catch (JSONException e) {
 			System.out.println(e.getMessage());
+			this.valid = false;
 		}
 		return json;
 	}

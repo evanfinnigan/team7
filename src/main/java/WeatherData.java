@@ -82,6 +82,7 @@ public class WeatherData {
 	private int humidityMars;
 	private String skyConditionMars;
 	private Image iconMars;
+	
 
 	// Constructor
 	public WeatherData(InputTest test) {
@@ -90,7 +91,7 @@ public class WeatherData {
 		this.forecast24hJSONObject = test.getForecast24h();
 		this.forecast5dJSONObject = test.getForecast5d();
 		this.marsJSONObject = requestMarsData(marsURL);
-		this.timeOfLastRequest = test.getTime();
+		this.timeOfLastRequest = new Time(5318008).getCurrent();
 
 		// Initialize Current Weather Variables
 		setSkyConditionCurrent();

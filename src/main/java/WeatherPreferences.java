@@ -26,7 +26,8 @@ public class WeatherPreferences implements java.io.Serializable{
 	private boolean showPOP, showLow, showHigh;
 	private boolean showDescription;
 	private int itemcounter;
-
+	private String time;
+	
 	/**
 	 * WeatherPreferences Constructor
 	 * Creates the default preferences. 
@@ -52,8 +53,9 @@ public class WeatherPreferences implements java.io.Serializable{
 		this.showHigh = true;
 		this.showDescription = true;
 		this.itemcounter = 6;
+		
 	}
-
+	
 	/**
 	 * gets the current location
 	 * @returns string

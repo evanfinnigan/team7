@@ -182,6 +182,7 @@ public class Currentweather {
 	private WeatherData currentData;
 	private WeatherPreferences currentPrefs;
 	private TransparentPanel pane;
+	private String time = "Unavailable";
 	private JLabel image_l;
 	private JLabel sunrise_l;
 	private JLabel sunset_l;
@@ -201,6 +202,18 @@ public class Currentweather {
 	public Currentweather(WeatherData data, WeatherPreferences prefs) {
 		this.currentData = data;
 		this.currentPrefs = prefs;
+		initComponents();
+		creategridLayout();
+
+		// createLayout();
+		applyPrefs(prefs);
+
+	}
+	
+	public Currentweather(WeatherData data, WeatherPreferences prefs, String time) {
+		this.currentData = data;
+		this.currentPrefs = prefs;
+		this.time = time;
 		initComponents();
 		creategridLayout();
 
@@ -228,10 +241,8 @@ public class Currentweather {
 		// create labels to display basic data
 		pane = new TransparentPanel();
 		
-		Time t = new Time(5318008);
-		
 		lastupdate_l = new JLabel("Last Update: "
-				+ t.getCurrent());
+				+ time);
 		lastupdate_l.setFont(smlfont);
 
 		sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());

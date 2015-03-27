@@ -123,6 +123,7 @@ public class Forecast24Hour {
 		InputTest t = new InputTest("London,CA");
 		WeatherData d = new WeatherData(t);
 		WeatherPreferences p = new WeatherPreferences();
+		p.setTempUnit("F");
 		Forecast24Hour test = new Forecast24Hour(d,p);
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
