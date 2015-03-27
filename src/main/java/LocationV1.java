@@ -13,8 +13,8 @@ public class LocationV1 extends TransparentPanel {
 	private String name;
 	private WeatherData locdata;
 	private CW currentweather;
-	private CopyOfForecast24Hour shortterm;
-	private CopyOfForecast5Day longterm;
+	private Forecast24Hour shortterm;
+	private Forecast5Day longterm;
 	
 	/**
 	 * Create the Panel.
@@ -26,9 +26,9 @@ public class LocationV1 extends TransparentPanel {
 		currentweather.setMaximumSize(new Dimension(1024, 300));
 		currentweather.setMinimumSize(new Dimension(1024, 300));
 		currentweather.setPreferredSize(new Dimension(1024,300));
-		shortterm = new CopyOfForecast24Hour(data,prefs);
+		shortterm = new Forecast24Hour(data,prefs);
 		shortterm.setPreferredSize(new Dimension(1024,250));
-		longterm = new CopyOfForecast5Day(data,prefs);
+		longterm = new Forecast5Day(data,prefs);
 		longterm.setPreferredSize(new Dimension(1024,250));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -71,8 +71,8 @@ public class LocationV1 extends TransparentPanel {
 	}
 	public void refresh(WeatherPreferences prefs){
 		currentweather = new CW(locdata,prefs);
-		shortterm = new CopyOfForecast24Hour(locdata,prefs);
-		longterm = new CopyOfForecast5Day(locdata,prefs);
+		shortterm = new Forecast24Hour(locdata,prefs);
+		longterm = new Forecast5Day(locdata,prefs);
 		
 	}
 	public static void main(String[] args) {

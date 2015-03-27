@@ -1,13 +1,10 @@
 package main.java;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -15,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public class Forecast24Hour {
+public class Forecast24Hour extends TransparentPanel {
 
 	// Attributes
 	private WeatherData data24h;
@@ -37,13 +34,13 @@ public class Forecast24Hour {
 	}
 
 	public TransparentPanel getPanel() {
-		return pane;
+		return this;
 	}
 
 	private void initComponents() {
 		// create labels to display basic data
 		this.pane = new TransparentPanel();
-		Font minorfont = new Font("sml", Font.PLAIN, 15);
+		Font minorfont = new Font("sml", Font.PLAIN, 12);
 
 		JLabel[] wdlabel = new JLabel[8];
 		JLabel[] sclabel = new JLabel[8];
@@ -67,26 +64,21 @@ public class Forecast24Hour {
 			cnt = 8;
 		}
 		
-		Date date = new Date();
 		for (int i = 0; i < cnt; i++) {
-			date.setHours(date.getHours() + 3);
-			DateFormat format = new SimpleDateFormat("H:mm a");
-			TimeZone est = TimeZone.getTimeZone("America/Toronto");
-			format.setTimeZone(est);
-			String j = format.format(date);
+			int j = (i + 1) * 3;
 			
 			String temp = descriptionArray[i].substring(0, 1).toUpperCase() + descriptionArray[i].substring(1);
-			wdlabel[i] = new JLabel(j + ": " + temp);
+			wdlabel[i] = new JLabel(j + " hrs: " + temp);
 			wdlabel[i].setFont(minorfont);
 
 			sclabel[i] = new JLabel("Sky:  " + skyConditionArray[i]);
 			sclabel[i].setFont(minorfont);
 
 			if (preferences.getTempUnit().equalsIgnoreCase("F")){
-				templabel[i] = new JLabel((int)tempArray[i] + "\u00b0" + "F");
+				templabel[i] = new JLabel(tempArray[i] + "\u00b0" + "F");
 				templabel[i].setFont(minorfont);
 			} else {
-				templabel[i] = new JLabel((int)tempArray[i] + "\u00b0" + "C");
+				templabel[i] = new JLabel(tempArray[i] + "\u00b0" + "C");
 				templabel[i].setFont(minorfont);
 			}
 
@@ -95,7 +87,9 @@ public class Forecast24Hour {
 		}
 
 		for (int i = cnt; i < 8; i++) {
+			
 			int j = (i + 1)*3;
+			
 			wdlabel[i] = new JLabel(j + " hours:");
 			wdlabel[i].setFont(minorfont);
 			sclabel[i] = new JLabel("-");
@@ -105,7 +99,7 @@ public class Forecast24Hour {
 			imagelabel[i] = new JLabel("Data");
 			imagelabel[i].setFont(minorfont);
 		}
-		
+	
 		this.weatherdescription_l = wdlabel;
 		this.skycondition_l = sclabel;
 		this.temp_l = templabel;
@@ -115,31 +109,29 @@ public class Forecast24Hour {
 
 	private void createDisplay() {
 
-		GridLayout panelayout = new GridLayout(0, 4);
-
-		pane.setLayout(panelayout);
+		GridLayout panelayout = new GridLayout();
+		this.setLayout(panelayout);
+		TransparentPanel[] blocks = new TransparentPanel[8];
 		for (int i = 0; i < 8; i++) {
-			pane.add(weatherdescription_l[i]);
-			pane.add(image_l[i]);
-			pane.add(temp_l[i]);
-			pane.add(skycondition_l[i]);
+			blocks[i] = new Create24hourBlock(temp_l[i],image_l[i],skycondition_l[i],weatherdescription_l[i]);
 		}
-	}
+		this.add(new Layout24hour(blocks));
+}
+	
 
 	// Test
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 
-		InputTest t = new InputTest("London,CA");
+		InputTest t = new InputTest("paris");
 		WeatherData d = new WeatherData(t);
 		WeatherPreferences p = new WeatherPreferences();
-		p.setTempUnit("F");
-		Forecast24Hour test = new Forecast24Hour(d,p);
+		CopyOfForecast24Hour test = new CopyOfForecast24Hour(d,p);
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.add(test.getPanel());
+		frame.add(test);
 		frame.setVisible(true);
 		frame.pack();
 		frame.setTitle("24 Hour Weather Forecast for London, Canada");
-	}
+	}*/
 
 }

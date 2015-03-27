@@ -79,7 +79,7 @@ public class Create5dayBlock extends TransparentPanel {
 		InputTest t = new InputTest("tokyo");
 		WeatherData d = new WeatherData(t);
 		WeatherPreferences p = new WeatherPreferences();
-		CopyOfForecast5Day test = new CopyOfForecast5Day(d,p);
+		Forecast5Day test = new Forecast5Day(d,p);
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(test.getPanel());

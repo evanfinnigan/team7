@@ -30,7 +30,7 @@ public class Location implements ActionListener{
 	private TransparentPanel locpane;
 	private String name;
 	private CW weather;
-	private CopyOfForecast24Hour shortterm;
+	private Forecast24Hour shortterm;
 	private Forecast5Day longterm;
 	private JButton sh_shortterm, sh_longterm;
 	private boolean bshort,blong;
@@ -45,7 +45,7 @@ public class Location implements ActionListener{
 		//locpane.add(locname_l);
 		
 		weather = new CW(data, prefs);
-		shortterm = new CopyOfForecast24Hour(data, prefs);
+		shortterm = new Forecast24Hour(data, prefs);
 		longterm = new Forecast5Day(data, prefs);
 		
 		//locpane.add(weather.getPanel());
