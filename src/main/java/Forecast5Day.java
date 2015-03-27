@@ -73,8 +73,8 @@ public class Forecast5Day {
 			int j = i + 1;
 			
 			
-			wdlabel[i] = new JLabel( j + " days: " + skyConditionArray[i]);
-			//wdlabel[i] = new JLabel( j + " days: " + descriptionArray[i]);
+			//wdlabel[i] = new JLabel( j + " days: " + skyConditionArray[i]);
+			wdlabel[i] = new JLabel( j + " days: " + descriptionArray[i]);
 			wdlabel[i].setFont(minorfont);
 
 			String temp = descriptionArray[i].substring(0, 1).toUpperCase() + descriptionArray[i].substring(1);
@@ -132,12 +132,12 @@ public class Forecast5Day {
 
 	private void createDisplay() {
 
-		GridLayout panelayout = new GridLayout(0, 6);
+		GridLayout panelayout = new GridLayout(0, 5);
 		pane.setLayout(panelayout);
 		for (int i = 0; i < 5; i++) {
 			pane.add(weatherdescription_l[i]);
 			pane.add(image_l[i]);
-			pane.add(skycondition_l[i]);
+			//pane.add(skycondition_l[i]);
 			pane.add(temp_l[i]);
 			pane.add(high_l[i]);
 			pane.add(low_l[i]);
