@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,6 +21,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Hashtable;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -157,20 +160,30 @@ public class TheWX {
 				JOptionPane prompt = new JOptionPane();
 				String a;
 				a = prompt.showInputDialog("Enter a Default Location:");
-				InputTest t = new InputTest(a);
-				if (t.getValid()) {
-					WeatherData w = new WeatherData(t);
-					mylocations.put(t.getCityName(), w);
-					// list
-					modelloc.addElement(t.getCityName());
-					list.setSelectedIndex(0);
-					p.setLocation(t.getCityName());
-					change(w, p);
-					defaultSet = true;
+				if (a != null && a.length() > 0) {
+					InputTest t = new InputTest(a);
+
+					if (t.getValid()) {
+						WeatherData w = new WeatherData(t);
+						mylocations.put(t.getCityName(), w);
+						// list
+						modelloc.addElement(t.getCityName());
+						list.setSelectedIndex(0);
+						p.setLocation(t.getCityName());
+						change(w, p);
+						defaultSet = true;
+					} else {
+						prompt.showMessageDialog(frame, "Try again!");
+					}
 				} else {
-					prompt.showMessageDialog(frame, "Try again!");
+					defaultSet = false;
+					int confirm = prompt.showConfirmDialog(frame, "Exit program?");
+					if (confirm == 0) {
+						System.exit(0);
+					}
 				}
 			}
+			
 		} else {
 			InputTest t = new InputTest(p.getLocation());
 			WeatherData w = new WeatherData(t);
@@ -475,6 +488,7 @@ public class TheWX {
 
 		try {
 			time = w.getTimeOfLastRequest();
+			
 			current = new Currentweather(w, p, time);
 			longterm = new Forecast5Day(w, p);
 			shortterm = new Forecast24Hour(w, p);
