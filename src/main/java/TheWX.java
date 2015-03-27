@@ -160,10 +160,11 @@ public class TheWX {
 		list.setMaximumSize(new Dimension(100, 100));
 		// modelloc.setMinimumSize(new Dimension(100,100));
 
+		JOptionPane prompt = new JOptionPane();
 		if (p.getLocation() == null || p.getLocation().equals("")) {
 			boolean defaultSet = false;
 			while (!defaultSet) {
-				JOptionPane prompt = new JOptionPane();
+				
 				String a;
 				a = prompt.showInputDialog("Enter a Default Location:");
 				if (a != null && a.length() > 0) {
@@ -193,11 +194,15 @@ public class TheWX {
 
 		} else {
 			InputTest t = new InputTest(p.getLocation());
-			WeatherData w = new WeatherData(t);
-			change(w, p);
-			//modelloc.addElement(t.getCityName());
-			mylocations.put(t.getCityName(), w);
-			list.setSelectedIndex(0);
+			if (t.getValid()){
+				WeatherData w = new WeatherData(t);
+				change(w, p);
+				//modelloc.addElement(t.getCityName());
+				mylocations.put(t.getCityName(), w);
+				list.setSelectedIndex(0);
+			} else {
+				prompt.showMessageDialog(frame, "Try again!");
+			}
 		}
 
 		// comboBox.setModel(model);
