@@ -31,6 +31,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	private boolean showDescription;
 	private int itemcounter;
 	private String time;
+	private boolean showMars;
 	
 	private JList<String> list;
 	private DefaultListModel<String> modelloc;
@@ -59,6 +60,7 @@ public class WeatherPreferences implements java.io.Serializable{
 		this.showLow = true;
 		this.showHigh = true;
 		this.showDescription = true;
+		this.showMars = false;
 		this.itemcounter = 6;
 		
 		this.list = new JList<>();
@@ -223,6 +225,14 @@ public class WeatherPreferences implements java.io.Serializable{
 	public boolean getShowDescription() {
 		return showDescription;
 	}
+	
+	/**
+	 * getter for mars
+	 * @returns String
+	 */
+	public boolean getShowMars() {
+		return showMars;
+	}
 
 	/**
 	 * setter to hide or show the sky condition
@@ -327,4 +337,12 @@ public class WeatherPreferences implements java.io.Serializable{
 	 public void setShowDescription(boolean set) {
 		 this.showDescription = set;
 	 }
+	 
+	 /**
+		 * setter to hide or show mars
+		 * @returns
+		 */ 
+		 public void setShowMars(boolean set) {
+			 this.showMars = set;
+		 }
 }	

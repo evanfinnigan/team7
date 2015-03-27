@@ -63,7 +63,7 @@ public class TheWX {
 	JButton refresh = new JButton("Refresh");
 	JButton degree = new JButton();
 	String time = "Unavailable";
-	// JButton btn5 = new JButton("EAST");
+	JButton btnMars = new JButton("MARS!");
 
 	JPanel panel = new JPanel();
 
@@ -137,6 +137,7 @@ public class TheWX {
 		} else {
 			degree.setText("\u00b0" + "C");
 		}
+		
 
 		if (!p.getShowHumidity())
 			hideHumidity.setSelected(false);
@@ -179,6 +180,12 @@ public class TheWX {
 						p.setLocation(t.getCityName());
 						change(w, p);
 						defaultSet = true;
+						if (p.getShowMars()){
+							MarsPanel marspanel = new MarsPanel(w);
+							JPanel marsp = marspanel.getPanel();
+							tabbedPane.add("MARS WEATHER", marsp);
+							p.setShowMars(true);
+						}
 					} else {
 						prompt.showMessageDialog(frame, "Try again!");
 					}
@@ -200,6 +207,12 @@ public class TheWX {
 				//modelloc.addElement(t.getCityName());
 				mylocations.put(t.getCityName(), w);
 				list.setSelectedIndex(0);
+				if (p.getShowMars()){
+					MarsPanel marspanel = new MarsPanel(w);
+					JPanel marsp = marspanel.getPanel();
+					tabbedPane.add("MARS WEATHER", marsp);
+					p.setShowMars(true);
+				}
 			} else {
 				prompt.showMessageDialog(frame, "Try again!");
 			}
@@ -248,6 +261,30 @@ public class TheWX {
 					// Do nothing
 				}
 
+			}
+		});
+		
+		btnMars.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (p.getShowMars()){
+					p.setShowMars(false);
+					tabbedPane.remove(3);
+				} else {
+					InputTest t = new InputTest("Mars");
+					if (t.getValid()) {
+							WeatherData w = new WeatherData(t);
+							MarsPanel marspanel = new MarsPanel(w);
+							JPanel marsp = marspanel.getPanel();
+							tabbedPane.add("MARS WEATHER", marsp);
+							p.setShowMars(true);
+					} else {
+						System.out.println("Error");
+						JOptionPane.showMessageDialog(frame,
+								"Sorry there was an error please try again.");
+					}
+				}
 			}
 		});
 
@@ -455,6 +492,7 @@ public class TheWX {
 		// tabbedPane.add("Current",current.getPanel());
 		// tabbedPane.add("Long Term",secondPanel);
 
+		panel.add(btnMars);
 		panel.add(refresh);
 		panel.add(txtAdd);
 		panel.add(btnAdd);
@@ -563,9 +601,14 @@ public class TheWX {
 			longterm = new Forecast5Day(w, p);
 			shortterm = new Forecast24Hour(w, p);
 			tabbedPane.add("Current", current.getPanel());
-			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Long Term", longterm.getPanel());
 			tabbedPane.add("Short Term", shortterm.getPanel());
+			if (p.getShowMars()){
+				MarsPanel marspanel = new MarsPanel(w);
+				JPanel marsp = marspanel.getPanel();
+				tabbedPane.add("MARS WEATHER", marsp);
+				p.setShowMars(true);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(frame,
