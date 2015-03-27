@@ -190,6 +190,7 @@ public class TheWX {
 				WeatherData w = new WeatherData(t);
 				change(w, p);
 				mylocations.put(t.getCityName(), w);
+				modelloc.addElement(t.getCityName());
 				list.setSelectedIndex(0);
 				if (p.getShowMars()){
 					MarsPanel marspanel = new MarsPanel(w);
@@ -208,6 +209,7 @@ public class TheWX {
 
 				try {
 					int i = 0;
+					
 					while (!modelloc.isEmpty()) {
 
 						if (modelloc.get(i).equals(ref.getCityName())) {
@@ -218,9 +220,11 @@ public class TheWX {
 
 					modelloc.removeElementAt(i);
 					mylocations.remove(ref.getCityName());
+					if(modelloc.isEmpty()) btnRemove.setEnabled(false);
 
 				} catch (Exception ex) {
 					// Do nothing
+					
 				}
 			}
 		});
@@ -273,7 +277,7 @@ public class TheWX {
 
 				} else {
 					JOptionPane.showMessageDialog(frame,
-							"Sorry there was an error please try again.");
+							"Sorry, the city was not found!");
 				}
 			}
 		});
@@ -289,6 +293,7 @@ public class TheWX {
 					mylocations.put(ref.getCityName(), ref);
 					modelloc.addElement(ref.getCityName());
 					list.setSelectedValue(ref.getCityName(), true);
+					btnRemove.setEnabled(true);
 				}
 
 			}
@@ -440,8 +445,7 @@ public class TheWX {
 			}
 		});
 
-		// firstPanel.add(firstLabel);
-		// secondPanel.add(secondLabel);
+
 
 		panel.add(btnMars);
 		panel.add(refresh);
@@ -468,6 +472,7 @@ public class TheWX {
 		frame.add(panel, BorderLayout.NORTH);
 		frame.add(tabbedPane, BorderLayout.CENTER);
 		frame.add(footer, BorderLayout.SOUTH);
+		footer.setFont(new Font("lrg", Font.PLAIN, 24));
 
 		JScrollPane eastPane = new JScrollPane(list);
 		eastPane.setPreferredSize(new Dimension(100, 180));
@@ -561,7 +566,7 @@ public class TheWX {
 		}
 
 		footer.setText(" " + w.getCityName());
-		footer.setFont(new Font("lrg", Font.PLAIN, 24));
+		
 
 		
 
