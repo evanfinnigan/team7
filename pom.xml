@@ -22,7 +22,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>main.java.TheWeather</mainClass>
+							<mainClass>main.java.TheWX</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -37,7 +37,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>main.java.TheWeather</mainClass>
+							<mainClass>main.java.TheWX</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
