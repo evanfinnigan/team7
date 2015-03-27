@@ -29,8 +29,8 @@ import javax.swing.ScrollPaneLayout;
 public class Location implements ActionListener{
 	private TransparentPanel locpane;
 	private String name;
-	private Currentweather weather;
-	private Forecast24Hour shortterm;
+	private CW weather;
+	private CopyOfForecast24Hour shortterm;
 	private Forecast5Day longterm;
 	private JButton sh_shortterm, sh_longterm;
 	private boolean bshort,blong;
@@ -44,8 +44,8 @@ public class Location implements ActionListener{
 		
 		//locpane.add(locname_l);
 		
-		weather = new Currentweather(data, prefs);
-		shortterm = new Forecast24Hour(data, prefs);
+		weather = new CW(data, prefs);
+		shortterm = new CopyOfForecast24Hour(data, prefs);
 		longterm = new Forecast5Day(data, prefs);
 		
 		//locpane.add(weather.getPanel());
@@ -96,7 +96,7 @@ public class Location implements ActionListener{
 	public TransparentPanel getPane(){
 		return locpane;
 	}
-	public Currentweather getCurrentweather(){
+	public CW getCurrentweather(){
 		return weather;
 	}
 	@Override
