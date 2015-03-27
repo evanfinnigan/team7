@@ -4,6 +4,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -63,11 +67,16 @@ public class Forecast24Hour {
 			cnt = 8;
 		}
 		
+		Date date = new Date();
 		for (int i = 0; i < cnt; i++) {
-			int j = (i + 1) * 3;
+			date.setHours(date.getHours() + 3);
+			DateFormat format = new SimpleDateFormat("H:mm a");
+			TimeZone est = TimeZone.getTimeZone("America/Toronto");
+			format.setTimeZone(est);
+			String j = format.format(date);
 			
 			String temp = descriptionArray[i].substring(0, 1).toUpperCase() + descriptionArray[i].substring(1);
-			wdlabel[i] = new JLabel(j + " hours: " + temp);
+			wdlabel[i] = new JLabel(j + ": " + temp);
 			wdlabel[i].setFont(minorfont);
 
 			sclabel[i] = new JLabel("Sky:  " + skyConditionArray[i]);

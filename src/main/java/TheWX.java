@@ -165,12 +165,6 @@ public class TheWX {
 						p.setLocation(t.getCityName());
 						change(w, p);
 						defaultSet = true;
-						if (p.getShowMars()){
-							MarsPanel marspanel = new MarsPanel(w);
-							JPanel marsp = marspanel.getPanel();
-							tabbedPane.add("MARS WEATHER", marsp);
-							p.setShowMars(true);
-						}
 					} else {
 						prompt.showMessageDialog(frame, "Try again!");
 					}
@@ -192,12 +186,6 @@ public class TheWX {
 				mylocations.put(t.getCityName(), w);
 				modelloc.addElement(t.getCityName());
 				list.setSelectedIndex(0);
-				if (p.getShowMars()){
-					MarsPanel marspanel = new MarsPanel(w);
-					JPanel marsp = marspanel.getPanel();
-					tabbedPane.add("MARS WEATHER", marsp);
-					p.setShowMars(true);
-				}
 			} else {
 				prompt.showMessageDialog(frame, "Try again!");
 			}
