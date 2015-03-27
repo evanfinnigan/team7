@@ -265,28 +265,28 @@ public class Currentweather {
 		skycondition_l.setFont(lrgfont);
 
 		if (currentPrefs.getTempUnit().equalsIgnoreCase("F")) {
-			temp_l = new JLabel((int) currentData.getTempCurrentF() + "°F");
+			temp_l = new JLabel((int) currentData.getTempCurrentF() + "*F");
 			temp_l.setFont(sprlrgfont);
 
-			tempmax_l = new JLabel("High: " + (int) currentData.getHighF() + "°F");
+			tempmax_l = new JLabel("High: " + (int) currentData.getHighF() + "*F");
 			tempmax_l.setFont(medfont);
 
 			// tempmax_l.setForeground(Color.RED);
 
-			tempmin_l = new JLabel("Low: " + (int) currentData.getLowF() + "°F");
+			tempmin_l = new JLabel("Low: " + (int) currentData.getLowF() + "*F");
 			tempmin_l.setFont(medfont);
 
 			// tempmin_l.setForeground(Color.BLUE);
 		} else {
-			temp_l = new JLabel((int) currentData.getTempCurrent() + "°C");
+			temp_l = new JLabel((int) currentData.getTempCurrent() + "*C");
 			temp_l.setFont(sprlrgfont);
 
-			tempmax_l = new JLabel("High: " + (int) currentData.getHigh() + "°C");
+			tempmax_l = new JLabel("High: " + (int) currentData.getHigh() + "*C");
 			tempmax_l.setFont(medfont);
 
 			// tempmax_l.setForeground(Color.RED);
 
-			tempmin_l = new JLabel("Low: " + ((int) (currentData.getLow())) + "°C");
+			tempmin_l = new JLabel("Low: " + ((int) (currentData.getLow())) + "*C");
 			tempmin_l.setFont(medfont);
 
 			// tempmin_l.setForeground(Color.BLUE);

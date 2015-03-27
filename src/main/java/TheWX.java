@@ -127,9 +127,9 @@ public class TheWX {
 		}
 
 		if (p.getTempUnit().equalsIgnoreCase("C")) {
-			degree.setText("°F");
+			degree.setText("*F");
 		} else {
-			degree.setText("°C");
+			degree.setText("*C");
 		}
 
 		if (!p.getShowHumidity())
@@ -291,16 +291,16 @@ public class TheWX {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (degree.getText().equals("°C")) {
+				if (degree.getText().equals("*C")) {
 					p.setTempUnit("C");
 					change(ref, p);
-					degree.setText("°F");
+					degree.setText("*F");
 				}
 
 				else {
 					p.setTempUnit("F");
 					change(ref, p);
-					degree.setText("°C");
+					degree.setText("*C");
 				}
 				// mylocations.replace(ref.getCityName(),w);
 
