@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,6 +42,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -48,7 +50,7 @@ import javax.swing.plaf.ColorUIResource;
 
 import org.json.JSONException;
 
-public class TheWX {
+public class TheWXV2 {
 
 	private WeatherData ref;
 	private WeatherPreferences p;
@@ -84,8 +86,11 @@ public class TheWX {
 
 	private JButton btnMars = new JButton("MARS!");
 	
+	private JScrollPane scrollpane = new JScrollPane();
+	private JPanel mainpanel = new JPanel();
+	
 
-	public TheWX() {
+	public TheWXV2() {
 
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
@@ -433,7 +438,10 @@ public class TheWX {
 			}
 		});
 
+		mainpanel.setLayout(new GridLayout(0,1));
+		scrollpane = new JScrollPane(mainpanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
+		scrollpane.setViewportView(mainpanel);
 
 		panel.add(btnMars);
 		panel.add(refresh);
@@ -458,7 +466,7 @@ public class TheWX {
 		frame.setJMenuBar(menubar);
 		frame.setLayout(new BorderLayout());
 		frame.add(panel, BorderLayout.NORTH);
-		frame.add(tabbedPane, BorderLayout.CENTER);
+		frame.add(scrollpane, BorderLayout.CENTER);
 		frame.add(footer, BorderLayout.SOUTH);
 		footer.setFont(new Font("lrg", Font.PLAIN, 24));
 
@@ -519,7 +527,7 @@ public class TheWX {
 
 		frame.pack();
 		frame.setSize(1024, 500);
-		frame.setResizable(false);
+		//frame.setResizable(false);
 		frame.setVisible(true);
 
 		list.setSize(100, 500);
@@ -530,18 +538,23 @@ public class TheWX {
 
 	public void change(WeatherData w, WeatherPreferences p) {
 
-		tabbedPane.removeAll();
+		mainpanel.removeAll();
 		ref = w;
 
 		try {
 			time = w.getTimeOfLastRequest();
 
-			current = new Currentweather(w, p, time);
+			/*current = new Currentweather(w, p, time);
 			longterm = new Forecast5Day(w, p);
 			shortterm = new Forecast24Hour(w, p);
 			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Long Term", longterm.getPanel());
-			tabbedPane.add("Short Term", shortterm.getPanel());
+			tabbedPane.add("Short Term", shortterm.getPanel());*/
+			LocationV1 locv1 = new LocationV1(w,p);
+			
+			mainpanel.add(locv1);
+			
+			
 			if (p.getShowMars()){
 				MarsPanel marspanel = new MarsPanel(w);
 				JPanel marsp = marspanel.getPanel();
@@ -564,7 +577,7 @@ public class TheWX {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new TheWX();
+				new TheWXV2();
 			}
 		});
 	}
