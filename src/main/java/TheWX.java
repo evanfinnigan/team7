@@ -82,7 +82,7 @@ public class TheWX {
 
 	private JOptionPane prompt = new JOptionPane();
 
-	private JButton btnMars = new JButton();
+	private JButton btnMars = new JButton("MARS!");
 	
 
 	public TheWX() {
