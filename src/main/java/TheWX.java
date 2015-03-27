@@ -52,47 +52,38 @@ public class TheWX {
 
 	private WeatherData ref;
 	private WeatherPreferences p;
-	UIDefaults uiDefaults = UIManager.getDefaults();
-	Color bgColor = new ColorUIResource(Color.BLUE);
 
-	JFrame frame = new JFrame("Team7 WeatherApp");
-	JButton btn1 = new JButton("NORTH");
-	JLabel footer = new JLabel("Choose a city");
-	JButton btn3 = new JButton("CENTER");
-	JButton mylocadd = new JButton("Add to My Locations");
-	JButton refresh = new JButton("Refresh");
-	JButton degree = new JButton();
-	String time = "Unavailable";
-	JButton btnMars = new JButton("MARS!");
+	private JFrame frame = new JFrame("Team7 WeatherApp");
 
-	JPanel panel = new JPanel();
+	private JLabel footer = new JLabel("Choose a city");
+	private JButton mylocadd = new JButton("Add to My Locations");
+	private JButton refresh = new JButton("Refresh");
+	private JButton degree = new JButton();
+	private String time = "Unavailable";
 
-	JPanel firstPanel = new JPanel();
-	JPanel secondPanel = new JPanel();
-
-	JLabel firstLabel = new JLabel("FirstTab");
-	JLabel secondLabel = new JLabel("SecondTab");
-	// JLabel myloc = new JLabel("My Locations");
-	JTabbedPane tabbedPane = new JTabbedPane();
-
-	JMenuBar menubar = new JMenuBar();
-
-	// JComboBox<String> comboBox = new JComboBox<String>();
-	DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
-	JTextField txtAdd = new JTextField(15);
-	JButton btnAdd = new JButton("Search");
-	JButton btnRemove = new JButton("Remove");
-	String selectedValue;
-	Currentweather current;
-	Forecast5Day longterm;
-	Forecast24Hour shortterm;
-
-	Hashtable<String, WeatherData> locations;
-	Hashtable<String, WeatherData> mylocations;
-
+	private JPanel panel = new JPanel();
 	
-	JList<String> list = new JList<>();
-	//DefaultListModel<String> modelloc = new DefaultListModel<>();
+
+	private JTabbedPane tabbedPane = new JTabbedPane();
+
+	private JMenuBar menubar = new JMenuBar();
+
+	private JTextField txtAdd = new JTextField(15);
+	private JButton btnAdd = new JButton("Search");
+	private JButton btnRemove = new JButton("Remove");
+	private Currentweather current;
+	private Forecast5Day longterm;
+	private Forecast24Hour shortterm;
+
+	private Hashtable<String, WeatherData> locations;
+	private Hashtable<String, WeatherData> mylocations;
+
+	private JList<String> list = new JList<>();
+
+	private JOptionPane prompt = new JOptionPane();
+
+	private JButton btnMars = new JButton();
+	
 
 	public TheWX() {
 
@@ -115,20 +106,19 @@ public class TheWX {
 		JCheckBoxMenuItem hideSunrise = new JCheckBoxMenuItem("Sunrise", true);
 		JCheckBoxMenuItem hideSunset = new JCheckBoxMenuItem("Sunset", true);
 
-		
-		
-
 		p = new WeatherPreferences();
+
 		File f = new File("save.dat");
 		if (f.exists()) {
 			try {
 				ObjectInputStream is = new ObjectInputStream(
 						new FileInputStream(f));
 				p = (WeatherPreferences) is.readObject();
-
 				is.close();
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				prompt.showMessageDialog(frame,
+						"Sorry, could not load preferences.");
+				p = new WeatherPreferences();
 			}
 		}
 
@@ -154,20 +144,15 @@ public class TheWX {
 
 		locations = new Hashtable<String, WeatherData>();
 		mylocations = new Hashtable<String, WeatherData>();
-		
+
 		DefaultListModel<String> modelloc = p.getlist();
 		list.setModel(modelloc);
 
-		list.setMaximumSize(new Dimension(100, 100));
-		// modelloc.setMinimumSize(new Dimension(100,100));
-
-		JOptionPane prompt = new JOptionPane();
 		if (p.getLocation() == null || p.getLocation().equals("")) {
 			boolean defaultSet = false;
 			while (!defaultSet) {
-				
-				String a;
-				a = prompt.showInputDialog("Enter a Default Location:");
+
+				String a = prompt.showInputDialog("Enter a Default Location:");
 				if (a != null && a.length() > 0) {
 					InputTest t = new InputTest(a);
 
@@ -201,10 +186,9 @@ public class TheWX {
 
 		} else {
 			InputTest t = new InputTest(p.getLocation());
-			if (t.getValid()){
+			if (t.getValid()) {
 				WeatherData w = new WeatherData(t);
 				change(w, p);
-				//modelloc.addElement(t.getCityName());
 				mylocations.put(t.getCityName(), w);
 				list.setSelectedIndex(0);
 				if (p.getShowMars()){
@@ -218,33 +202,15 @@ public class TheWX {
 			}
 		}
 
-		// comboBox.setModel(model);
-		// comboBox.addItemListener(new ItemListener() {
-		// @Override
-		// public void itemStateChanged(ItemEvent e) {
-		// if (e.getStateChange() == ItemEvent.SELECTED) {
-		// selectedValue = model.getSelectedItem().toString();
-		//
-		// if (!locations.isEmpty()) {
-		// change(locations
-		// .get(model.getSelectedItem().toString()), p);
-		// }
-		//
-		// }
-		// }
-		// });
-
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				try {
 					int i = 0;
-					// modelloc.addElement(ref.getCityName());
 					while (!modelloc.isEmpty()) {
 
 						if (modelloc.get(i).equals(ref.getCityName())) {
-							// System.out.println(ref.getCityName());
 							break;
 						}
 						i++;
@@ -253,14 +219,9 @@ public class TheWX {
 					modelloc.removeElementAt(i);
 					mylocations.remove(ref.getCityName());
 
-					// model.removeElement(selectedValue);
-					// System.out.println(selectedValue.toString());
-					// locations.remove(selectedValue.toString());
-
 				} catch (Exception ex) {
 					// Do nothing
 				}
-
 			}
 		});
 		
@@ -302,9 +263,6 @@ public class TheWX {
 					} else {
 
 						WeatherData w = new WeatherData(t);
-						model.addElement(t.getCityName());
-						// selectedValue = t.getCityName();
-						// model.setSelectedItem(t.getCityName());
 						locations.put(t.getCityName(), w);
 						if (!mylocations.containsKey(t.getCityName())) {
 							list.clearSelection();
@@ -314,7 +272,6 @@ public class TheWX {
 					}
 
 				} else {
-					System.out.println("Error");
 					JOptionPane.showMessageDialog(frame,
 							"Sorry there was an error please try again.");
 				}
@@ -364,27 +321,24 @@ public class TheWX {
 					change(ref, p);
 					degree.setText("\u00b0" + "C");
 				}
-				// mylocations.replace(ref.getCityName(),w);
-
 			}
 		});
 
 		list.getSelectionModel().addListSelectionListener(e -> {
-			// WeatherData w = list.getSelectedValue();
-				try {
-					if (!mylocations.containsKey(list.getSelectedValue())){
-						InputTest t = new InputTest(list.getSelectedValue());
-						WeatherData w = new WeatherData(t);
-						mylocations.put(w.getCityName(),w);
-						change(w,p);
-					} else {
-						change(mylocations.get(list.getSelectedValue()), p);
-					}
-					
-				} catch (Exception b) {
-
+			try {
+				if (!mylocations.containsKey(list.getSelectedValue())) {
+					InputTest t = new InputTest(list.getSelectedValue());
+					WeatherData w = new WeatherData(t);
+					mylocations.put(w.getCityName(), w);
+					change(w, p);
+				} else {
+					change(mylocations.get(list.getSelectedValue()), p);
 				}
-			});
+
+			} catch (Exception b) {
+
+			}
+		});
 
 		eMenuItem.addActionListener(new ActionListener() {
 			@Override
@@ -486,11 +440,8 @@ public class TheWX {
 			}
 		});
 
-		firstPanel.add(firstLabel);
-		secondPanel.add(secondLabel);
-
-		// tabbedPane.add("Current",current.getPanel());
-		// tabbedPane.add("Long Term",secondPanel);
+		// firstPanel.add(firstLabel);
+		// secondPanel.add(secondLabel);
 
 		panel.add(btnMars);
 		panel.add(refresh);
@@ -513,18 +464,13 @@ public class TheWX {
 		menubar.add(preferences);
 
 		frame.setJMenuBar(menubar);
-
-		// frame.add(panel);
-
 		frame.setLayout(new BorderLayout());
 		frame.add(panel, BorderLayout.NORTH);
-
-		// frame.add(footer, BorderLayout.SOUTH);
 		frame.add(tabbedPane, BorderLayout.CENTER);
-		// frame.add(btn4, BorderLayout.WEST);
+		frame.add(footer, BorderLayout.SOUTH);
 
 		JScrollPane eastPane = new JScrollPane(list);
-		eastPane.setPreferredSize(new Dimension(80, 180));
+		eastPane.setPreferredSize(new Dimension(100, 180));
 		frame.add(eastPane, BorderLayout.EAST);
 
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -554,17 +500,17 @@ public class TheWX {
 
 			@Override
 			public void windowClosed(WindowEvent e) {
-				
+
 			}
 
 			@Override
 			public void windowDeactivated(WindowEvent e) {
-				
+
 			}
 
 			@Override
 			public void windowDeiconified(WindowEvent e) {
-				
+
 			}
 
 			@Override
@@ -577,14 +523,14 @@ public class TheWX {
 
 			}
 		});
-		
+
 		frame.pack();
 		frame.setSize(900, 500);
 		frame.setResizable(false);
 		frame.setVisible(true);
 
 		list.setSize(100, 500);
-		//locframe.setSize(100, 500);
+
 		frame.getRootPane().setDefaultButton(btnAdd);
 
 	}
@@ -610,15 +556,14 @@ public class TheWX {
 				p.setShowMars(true);
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(frame,
-					"There was an issue. Try again.");
+					"There was a problem. Please try again.");
 		}
 
 		footer.setText(" " + w.getCityName());
 		footer.setFont(new Font("lrg", Font.PLAIN, 24));
 
-		frame.add(footer, BorderLayout.SOUTH);
+		
 
 	}
 
