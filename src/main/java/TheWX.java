@@ -88,9 +88,9 @@ public class TheWX {
 	Hashtable<String, WeatherData> locations;
 	Hashtable<String, WeatherData> mylocations;
 
-	JFrame locframe = new JFrame("Storage");
+	
 	JList<String> list = new JList<>();
-	DefaultListModel<String> modelloc = new DefaultListModel<>();
+	//DefaultListModel<String> modelloc = new DefaultListModel<>();
 
 	public TheWX() {
 
@@ -113,7 +113,8 @@ public class TheWX {
 		JCheckBoxMenuItem hideSunrise = new JCheckBoxMenuItem("Sunrise", true);
 		JCheckBoxMenuItem hideSunset = new JCheckBoxMenuItem("Sunset", true);
 
-		list.setModel(modelloc);
+		
+		
 
 		p = new WeatherPreferences();
 		File f = new File("save.dat");
@@ -150,6 +151,9 @@ public class TheWX {
 
 		locations = new Hashtable<String, WeatherData>();
 		mylocations = new Hashtable<String, WeatherData>();
+		
+		DefaultListModel<String> modelloc = p.getlist();
+		list.setModel(modelloc);
 
 		list.setMaximumSize(new Dimension(100, 100));
 		// modelloc.setMinimumSize(new Dimension(100,100));
@@ -188,7 +192,7 @@ public class TheWX {
 			InputTest t = new InputTest(p.getLocation());
 			WeatherData w = new WeatherData(t);
 			change(w, p);
-			modelloc.addElement(t.getCityName());
+			//modelloc.addElement(t.getCityName());
 			mylocations.put(t.getCityName(), w);
 			list.setSelectedIndex(0);
 		}
@@ -323,7 +327,15 @@ public class TheWX {
 		list.getSelectionModel().addListSelectionListener(e -> {
 			// WeatherData w = list.getSelectedValue();
 				try {
-					change(mylocations.get(list.getSelectedValue()), p);
+					if (!mylocations.containsKey(list.getSelectedValue())){
+						InputTest t = new InputTest(list.getSelectedValue());
+						WeatherData w = new WeatherData(t);
+						mylocations.put(w.getCityName(),w);
+						change(w,p);
+					} else {
+						change(mylocations.get(list.getSelectedValue()), p);
+					}
+					
 				} catch (Exception b) {
 
 				}
@@ -476,7 +488,7 @@ public class TheWX {
 		frame.setVisible(true);
 
 		list.setSize(100, 500);
-		locframe.setSize(100, 500);
+		//locframe.setSize(100, 500);
 		frame.getRootPane().setDefaultButton(btnAdd);
 
 	}
