@@ -52,7 +52,7 @@ public class TheWX {
 	JButton btn3 = new JButton("CENTER");
 	JButton mylocadd = new JButton("Add to My Locations");
 	JButton refresh = new JButton("Refresh");
-	JButton degree = new JButton("°F");
+	JButton degree = new JButton();
 	// JButton btn5 = new JButton("EAST");
 
 	JPanel panel = new JPanel();
@@ -67,7 +67,7 @@ public class TheWX {
 
 	JMenuBar menubar = new JMenuBar();
 
-	JComboBox<String> comboBox = new JComboBox<String>();
+	//JComboBox<String> comboBox = new JComboBox<String>();
 	DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 	JTextField txtAdd = new JTextField(15);
 	JButton btnAdd = new JButton("Search");
@@ -121,6 +121,12 @@ public class TheWX {
 				System.out.println(e.getMessage());
 			}
 		}
+		
+		if (p.getTempUnit().equalsIgnoreCase("C")){
+			degree.setText("°F");
+		} else {
+			degree.setText("°C");
+		}
 
 		if (!p.getShowHumidity())
 			hideHumidity.setSelected(false);
@@ -157,9 +163,9 @@ public class TheWX {
 					mylocations.put(t.getCityName(), w);
 					// list
 					modelloc.addElement(t.getCityName());
+					list.setSelectedIndex(0);
 					p.setLocation(t.getCityName());
 					change(w, p);
-					
 					defaultSet = true;
 				} else {
 					prompt.showMessageDialog(frame, "Try again!");
@@ -171,23 +177,24 @@ public class TheWX {
 			change(w,p);
 			modelloc.addElement(t.getCityName());
 			mylocations.put(t.getCityName(),w);
+			list.setSelectedIndex(0);
 		}
 
-		comboBox.setModel(model);
-		comboBox.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					selectedValue = model.getSelectedItem().toString();
-
-					if (!locations.isEmpty()) {
-						change(locations
-								.get(model.getSelectedItem().toString()), p);
-					}
-
-				}
-			}
-		});
+		//comboBox.setModel(model);
+		//comboBox.addItemListener(new ItemListener() {
+//			@Override
+//			public void itemStateChanged(ItemEvent e) {
+//				if (e.getStateChange() == ItemEvent.SELECTED) {
+//					selectedValue = model.getSelectedItem().toString();
+//
+//					if (!locations.isEmpty()) {
+//						change(locations
+//								.get(model.getSelectedItem().toString()), p);
+//					}
+//
+//				}
+//			}
+//		});
 
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
@@ -235,7 +242,6 @@ public class TheWX {
 						// selectedValue = t.getCityName();
 						// model.setSelectedItem(t.getCityName());
 						locations.put(t.getCityName(), w);
-
 						change(w, p);
 
 					}
@@ -258,25 +264,8 @@ public class TheWX {
 				} else {
 					mylocations.put(ref.getCityName(), ref);
 					modelloc.addElement(ref.getCityName());
+					list.setSelectedValue(ref.getCityName(), true);
 				}
-				/*
-				 * String a; a = JOptionPane.showInputDialog("Save a Location");
-				 * InputTest t = new InputTest(a); if (t.getValid()) {
-				 * 
-				 * if(mylocations.containsKey(t.getCityName())){
-				 * change(mylocations.get(t.getCityName()),p); }
-				 * 
-				 * else{ WeatherData w = new WeatherData(t);
-				 * 
-				 * mylocations.put(t.getCityName(), w);
-				 * 
-				 * // list modelloc.addElement(t.getCityName()); } // change(w,
-				 * p);
-				 * 
-				 * } else { System.out.println("Error");
-				 * JOptionPane.showMessageDialog(frame,
-				 * "Sorry there was an error please try again."); }
-				 */
 
 			}
 		});
@@ -428,15 +417,13 @@ public class TheWX {
 		// tabbedPane.add("Current",current.getPanel());
 		// tabbedPane.add("Long Term",secondPanel);
 
+		
+		panel.add(refresh);
 		panel.add(txtAdd);
 		panel.add(btnAdd);
-		panel.add(comboBox);
-
-		// panel.add(myloc);
-		panel.add(refresh);
-		panel.add(btnRemove);
 		panel.add(degree);
 		panel.add(mylocadd);
+		panel.add(btnRemove);
 
 		file.add(eMenuItem);
 		menubar.add(file);
@@ -461,7 +448,9 @@ public class TheWX {
 		frame.add(tabbedPane, BorderLayout.CENTER);
 		// frame.add(btn4, BorderLayout.WEST);
 
-		frame.add(new JScrollPane(list), BorderLayout.EAST);
+		JScrollPane eastPane = new JScrollPane(list);
+		eastPane.setPreferredSize(new Dimension(80, 180));
+		frame.add(eastPane, BorderLayout.EAST);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
@@ -478,31 +467,23 @@ public class TheWX {
 	public void change(WeatherData w, WeatherPreferences p) {
 
 		tabbedPane.removeAll();
+		ref = w;
 
 		try {
 			current = new Currentweather(w, p);
 			longterm = new Forecast5Day(w, p);
 			shortterm = new Forecast24Hour(w, p);
-
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(frame,
-					"Sorry there was an error please try again.");
-		}
-
-		try {
 			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Long Term", longterm.getPanel());
 			tabbedPane.add("Short Term", shortterm.getPanel());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(frame,
-					"Sorry there is a problem with the API");
+			JOptionPane.showMessageDialog(frame, "There was an issue. Try again.");
 		}
 
 		footer.setText(" " + w.getCityName());
 		footer.setFont(new Font("lrg", Font.PLAIN, 24));
 
 		frame.add(footer, BorderLayout.SOUTH);
-		ref = w;
 
 	}
 

@@ -227,9 +227,11 @@ public class Currentweather {
 		Font smlfont = new Font("sml", Font.PLAIN, 13);
 		// create labels to display basic data
 		pane = new TransparentPanel();
-
+		
+		Time t = new Time(5318008);
+		
 		lastupdate_l = new JLabel("Last Update: "
-				+ currentData.getTimeOfLastRequest());
+				+ t.getCurrent());
 		lastupdate_l.setFont(smlfont);
 
 		sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
@@ -255,12 +257,12 @@ public class Currentweather {
 			temp_l = new JLabel((int) currentData.getTempCurrentF() + "°F");
 			temp_l.setFont(sprlrgfont);
 
-			tempmax_l = new JLabel("H:" + (int) currentData.getHighF() + "°F");
+			tempmax_l = new JLabel("High: " + (int) currentData.getHighF() + "°F");
 			tempmax_l.setFont(medfont);
 
 			// tempmax_l.setForeground(Color.RED);
 
-			tempmin_l = new JLabel("L:" + (int) currentData.getLowF() + "°F");
+			tempmin_l = new JLabel("Low: " + (int) currentData.getLowF() + "°F");
 			tempmin_l.setFont(medfont);
 
 			// tempmin_l.setForeground(Color.BLUE);

@@ -82,16 +82,16 @@ public class Forecast5Day {
 			sclabel[i].setFont(minorfont);
 
 			if (preferences.getTempUnit().equalsIgnoreCase("F")){
-				templabel[i] = new JLabel(tempArray[i] + "°F");
+				templabel[i] = new JLabel((int) tempArray[i] + "°F");
 				templabel[i].setFont(minorfont);
 
 				highlabel[i] = new JLabel("High:" + (int) highArray[i] + "°F");
 				highlabel[i].setFont(minorfont);
 
-				lowlabel[i] = new JLabel("Low:" + (int)lowArray[i] + "°F");
+				lowlabel[i] = new JLabel("Low:" + (int) lowArray[i] + "°F");
 				lowlabel[i].setFont(minorfont);
 			} else {
-				templabel[i] = new JLabel(tempArray[i] + "°C");
+				templabel[i] = new JLabel((int) tempArray[i] + "°C");
 				templabel[i].setFont(minorfont);
 
 				highlabel[i] = new JLabel("High: " + (int)highArray[i] + "°C");

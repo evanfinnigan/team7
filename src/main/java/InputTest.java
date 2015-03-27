@@ -113,15 +113,7 @@ public class InputTest {
 					stream, Charset.forName("UTF-8")));
 			String jsondata = dataToString(reader);
 			json = new JSONObject(jsondata);
-			if (url.equalsIgnoreCase(currentURL)) {
-				try {
-					int jInfo = json.getInt("dt");
-					Time t = new Time(jInfo);
-					this.timeOfLastRequest = t.getConverted();
-				} catch (Exception e) {
-					System.out.println("Time was not updated.");
-				}
-			}
+			
 
 			stream.close();
 		} catch (MalformedURLException e) {

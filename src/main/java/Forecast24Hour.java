@@ -74,10 +74,10 @@ public class Forecast24Hour {
 			sclabel[i].setFont(minorfont);
 
 			if (preferences.getTempUnit().equalsIgnoreCase("F")){
-				templabel[i] = new JLabel(tempArray[i] + "°F");
+				templabel[i] = new JLabel((int)tempArray[i] + "°F");
 				templabel[i].setFont(minorfont);
 			} else {
-				templabel[i] = new JLabel(tempArray[i] + "°C");
+				templabel[i] = new JLabel((int)tempArray[i] + "°C");
 				templabel[i].setFont(minorfont);
 			}
 

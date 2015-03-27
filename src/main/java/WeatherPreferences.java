@@ -19,7 +19,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	private String defaultLocation;
 	//private LocationList locationlist;
 	private String tempUnit;
-	private LinkedList locationlist;
+	private LinkedList<String> locationlist;
 	private boolean showSky, showTemp, showPressure;
 	private boolean showWindDirection, showIcon;
 	private boolean windSpeed, showHumidity, showSunset, showSunrise;
@@ -59,14 +59,14 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns string
 	 */
 	public String getLocation(){
-		return this.defaultLocation;
+		return defaultLocation;
 	}
 	
 	/**
 	 * gets the list of locations
 	 */
-	public LinkedList getLocationList(){
-		return this.locationlist;
+	public LinkedList<String> getLocationList(){
+		return locationlist;
 	}
 
 	/**
@@ -74,15 +74,14 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns
 	 */
 	public void setLocation(String newLocation) {
-		this.defaultLocation = newLocation;
-		this.locationlist.addFirst(newLocation);
+		defaultLocation = newLocation;
 	}
 	
 	/**
 	 * adds a location to the location list
 	 */
 	public void addLocation(String location) {
-		this.locationlist.add(location);
+		locationlist.add(location);
 	}
 
 	/**
@@ -90,7 +89,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns String
 	 */
 	public String getTempUnit(){
-		return this.tempUnit;
+		return tempUnit;
 	}
 
 	/**
@@ -106,7 +105,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowSky() {
-		return this.showSky;
+		return showSky;
 	}
 
 	/**
@@ -114,7 +113,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowTemperature() {
-		return this.showTemp;
+		return showTemp;
 	}
 
 	/**
@@ -122,7 +121,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowPressure() {
-		return this.showPressure;
+		return showPressure;
 	}
 
 	/**
@@ -130,7 +129,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowWindSpeed() {
-		return this.windSpeed;
+		return windSpeed;
 	}
 
 	/**
@@ -138,7 +137,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowHumidity() {
-		return this.showHumidity;
+		return showHumidity;
 	}
 
 	/**
@@ -146,7 +145,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowSunset() {
-		return this.showSunset;
+		return showSunset;
 	}
 
 	/**
@@ -154,7 +153,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowSunrise() {
-		return this.showSunrise;
+		return showSunrise;
 	}
 
 	/**
@@ -162,7 +161,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowWindDirection() {
-		return this.showWindDirection;
+		return showWindDirection;
 	}
 
 	/**
@@ -170,7 +169,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowIcon(){
-		return this.showIcon;
+		return showIcon;
 	}
 
 	/**
@@ -178,7 +177,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowPOP() {
-		return this.showPOP;
+		return showPOP;
 	}
 
 	/**
@@ -186,7 +185,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowLow() {
-		return this.showLow;
+		return showLow;
 	}
 
 	/**
@@ -194,7 +193,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns boolean
 	 */
 	public boolean getShowHigh() {
-		return this.showHigh;
+		return showHigh;
 	}
 
 	/**
@@ -202,7 +201,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	 * @returns String
 	 */
 	public boolean getShowDescription() {
-		return this.showDescription;
+		return showDescription;
 	}
 
 	/**
