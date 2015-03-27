@@ -144,6 +144,7 @@ public class CW extends TransparentPanel {
 					.addGap(553))
 		);
 		setLayout(groupLayout);
+		applyPrefs(prefs);
 		
 	}
 	public TransparentPanel getPanel() {
