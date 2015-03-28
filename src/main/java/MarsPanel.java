@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +16,7 @@ public class MarsPanel {
 		private WeatherData dataMars;
 		private WeatherPreferences currentPrefs;
 		private TransparentPanel pane;
+		private Image bg;
 		private JLabel image_l;
 		private JLabel wind_speed_l;
 		private JLabel wind_direction_l;
@@ -23,6 +25,7 @@ public class MarsPanel {
 		private JLabel min_temp_l;
 		private JLabel max_temp_l;
 		private JLabel pressure_l;
+		private BackgroundPanel bgpanel;
 
 		public MarsPanel(WeatherData data) {
 			this.dataMars = data;
@@ -34,9 +37,20 @@ public class MarsPanel {
 			return pane;
 		}
 		
+		public BackgroundPanel getBackgroundPanel(){
+			return bgpanel;
+		}
+		
 		private void initComponents() {
 			// create labels to display basic data
 			this.pane = new TransparentPanel();
+			try {
+				 bg = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/mars.jpg"));
+			} catch (Exception e) {
+				System.out.println("Cannot read file for clear.jpg: " + e);
+			}
+			this.bgpanel = new BackgroundPanel(bg);
+			
 			Font mainfont = new Font("lrg", Font.PLAIN, 30);
 			Font minorfont = new Font("sml", Font.PLAIN, 15);
 			
@@ -82,6 +96,7 @@ public class MarsPanel {
 			WeatherData d = new WeatherData(t);
 			MarsPanel test = new MarsPanel(d);
 			JFrame frame = new JFrame();
+			frame.setContentPane(test.getBackgroundPanel());
 			frame.add(test.getPanel());
 			frame.setVisible(true);
 			frame.pack();
