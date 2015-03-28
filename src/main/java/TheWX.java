@@ -57,6 +57,8 @@ public class TheWX {
 
 	private JFrame frame = new JFrame("Team7 WeatherApp");
 
+	private JPanel footerpanel = new JPanel();
+	
 	private JLabel footer = new JLabel("Choose a city");
 	private JButton mylocadd = new JButton("Add to My Locations");
 	private JButton refresh = new JButton("Refresh");
@@ -85,9 +87,15 @@ public class TheWX {
 	private JOptionPane prompt = new JOptionPane();
 
 	private JButton btnMars = new JButton("MARS!");
+
+	private BufferedImage img = null;
+	private BackgroundPanel background;
 	
+	private JScrollPane eastPane;
 
 	public TheWX() {
+		
+		
 		
 		
 		ImageIcon icon = new ImageIcon("cloud.jpg"); 
@@ -294,6 +302,14 @@ public class TheWX {
 
 			}
 		});
+		
+		txtAdd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				frame.getRootPane().setDefaultButton(btnAdd);
+			}
+		});
 
 		refresh.addActionListener(new ActionListener() {
 			@Override
@@ -462,26 +478,18 @@ public class TheWX {
 		preferences.add(hideSunset);
 
 		menubar.add(preferences);
-		BufferedImage img = null;
-		try {
-			 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/default.jpg"));
-			// System.out.println("File " + img.toString());
-		} catch (Exception e) {
-			System.out.println("Cannot read file: " + e);
-		}
-		BackgroundPanel background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+		
+		footerpanel.add(footer);
+		
 		frame.setJMenuBar(menubar);
 		frame.setLayout(new BorderLayout());
-		frame.setContentPane(background);
+		
 		frame.add(panel, BorderLayout.NORTH);
 		frame.add(tabbedPane, BorderLayout.CENTER);
-		frame.add(footer, BorderLayout.SOUTH);
+		frame.add(footerpanel, BorderLayout.SOUTH);
 		footer.setFont(new Font("lrg", Font.PLAIN, 24));
 		
-		panel.setBackground(new Color(0,0,0));
-		tabbedPane.setBackground(new Color(255,255,255));
-		
-		JScrollPane eastPane = new JScrollPane(list);
+		eastPane = new JScrollPane(list);
 		eastPane.setPreferredSize(new Dimension(100, 180));
 		frame.add(eastPane, BorderLayout.EAST);
 
@@ -544,7 +552,8 @@ public class TheWX {
 		list.setSize(100, 500);
 
 		frame.getRootPane().setDefaultButton(btnAdd);
-
+		
+		
 	}
 
 	public void change(WeatherData w, WeatherPreferences p) {
@@ -559,10 +568,51 @@ public class TheWX {
 			longterm = new Forecast5Day(w, p);
 			shortterm = new Forecast24Hour(w, p);
 			
-			JPanel temp = current.getPanel();
+			
+		
+			
+			System.out.println(w.getSkyConditionCurrent());
+			
+			if(w.getSkyConditionCurrent().equals("Clear")){
+				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/clear.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
+			
+			else if(w.getSkyConditionCurrent().equals("Clouds")){
+				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/fewclouds.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
+			
+			else if(w.getSkyConditionCurrent().equals("Rain")){
+				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/showerrain.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
+			
 			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Long Term", longterm.getPanel());
 			tabbedPane.add("Short Term", shortterm.getPanel());
+			
+			
+			
+			
 			if (p.getShowMars()){
 				MarsPanel marspanel = new MarsPanel(w);
 				JPanel marsp = marspanel.getPanel();
@@ -577,6 +627,14 @@ public class TheWX {
 		footer.setText(" " + w.getCityName());
 		
 
+		background.add(tabbedPane);
+		frame.add(footerpanel, BorderLayout.SOUTH);
+		frame.add(panel, BorderLayout.NORTH);
+		frame.add(tabbedPane, BorderLayout.CENTER);
+		eastPane = new JScrollPane(list);
+		eastPane.setPreferredSize(new Dimension(100, 180));
+		frame.add(eastPane, BorderLayout.EAST);
+		
 		
 
 	}
