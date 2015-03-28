@@ -462,9 +462,17 @@ public class TheWX {
 		preferences.add(hideSunset);
 
 		menubar.add(preferences);
-
+		BufferedImage img = null;
+		try {
+			 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/default.jpg"));
+			// System.out.println("File " + img.toString());
+		} catch (Exception e) {
+			System.out.println("Cannot read file: " + e);
+		}
+		BackgroundPanel background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
 		frame.setJMenuBar(menubar);
 		frame.setLayout(new BorderLayout());
+		frame.setContentPane(background);
 		frame.add(panel, BorderLayout.NORTH);
 		frame.add(tabbedPane, BorderLayout.CENTER);
 		frame.add(footer, BorderLayout.SOUTH);
