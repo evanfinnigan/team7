@@ -685,7 +685,7 @@ public class TheWX {
 			else if(w.getIconCode().equals("04d") || w.getIconCode().equals("04n")){
 				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/scatteredclouds.jpg"));
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/brokenclouds.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
@@ -696,7 +696,7 @@ public class TheWX {
 			else if(w.getIconCode().equals("09d") || w.getIconCode().equals("09n")){
 				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/scatteredclouds.jpg"));
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/showerrain.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
@@ -704,6 +704,62 @@ public class TheWX {
 				frame.setContentPane(background);
 			}
 			
+			else if(w.getIconCode().equals("10d") || w.getIconCode().equals("10n")){
+				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/rain.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+				current.setLabelColor(Color.WHITE);
+				shortterm.setLabelColor(Color.WHITE);
+				longterm.setLabelColor(Color.WHITE);
+			}
+			
+			else if(w.getIconCode().equals("11d") || w.getIconCode().equals("11n")){
+				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/thunderstorm.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
+			
+			else if(w.getIconCode().equals("13d") || w.getIconCode().equals("13n")){
+				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/snow.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
+			
+			else if(w.getIconCode().equals("50d") || w.getIconCode().equals("50n")){
+				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/clear.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
+			
+			else{
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/clear.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
 			
 			
 			tabbedPane.add("Current", current.getPanel());

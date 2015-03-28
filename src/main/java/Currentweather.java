@@ -234,7 +234,7 @@ public class Currentweather {
 
 	private void initComponents() {
 		// create fonts for text
-		Font sprlrgfont = new Font("lrg", Font.PLAIN, 44);
+		Font sprlrgfont = new Font("lrg", Font.PLAIN, 60);
 		Font lrgfont = new Font("lrg", Font.PLAIN, 24);
 		Font medfont = new Font("med", Font.PLAIN, 16);
 		Font smlfont = new Font("sml", Font.PLAIN, 13);
@@ -365,7 +365,7 @@ public class Currentweather {
 			if (show[i]) {
 				pane.add(labels[i]);
 				a++;
-				labels[i].setBounds(20, 115 + 20*a, 200, 20);
+				labels[i].setBounds(20, 115 + 20*a, 250, 20);
 			}
 		}
 		
@@ -388,16 +388,16 @@ public class Currentweather {
 //		sunset_l.setBounds(20, 195, 200, 20);
 
 		pane.add(temp_l);
-		temp_l.setBounds(390, 90, 200, 40);
+		temp_l.setBounds(480, 90, 200, 60);
 
 		pane.add(image_l);
-		image_l.setBounds(430, 145, 40, 40);
+		image_l.setBounds(430, 100, 40, 40);
 
 		pane.add(tempmin_l);
-		tempmin_l.setBounds(390, 190, 100, 20);
+		tempmin_l.setBounds(435, 190, 100, 20);
 
 		pane.add(tempmax_l);
-		tempmax_l.setBounds(490, 190, 100, 20);
+		tempmax_l.setBounds(535, 190, 100, 20);
 
 		pane.add(lastupdate_l);
 		lastupdate_l.setBounds(20, 310, 200, 20);
