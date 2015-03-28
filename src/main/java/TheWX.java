@@ -84,7 +84,7 @@ public class TheWX {
 	private Forecast5Day longterm;
 	private Forecast24Hour shortterm;
 
-	private Hashtable<String, WeatherData> locations;
+	//private Hashtable<String, WeatherData> locations;
 	private Hashtable<String, WeatherData> mylocations;
 
 	private JList<String> list = new JList<>();
@@ -161,7 +161,7 @@ public class TheWX {
 		if (!p.getShowSunset())
 			hideSunset.setSelected(false);
 
-		locations = new Hashtable<String, WeatherData>();
+		//locations = new Hashtable<String, WeatherData>();
 		mylocations = new Hashtable<String, WeatherData>();
 
 		DefaultListModel<String> modelloc = p.getlist();
@@ -217,8 +217,8 @@ public class TheWX {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				try {
-					int i = 0;
+			
+		 		int i = 0;
 					
 					while (!modelloc.isEmpty()) {
 
@@ -232,10 +232,7 @@ public class TheWX {
 					mylocations.remove(ref.getCityName());
 					if(modelloc.isEmpty()) btnRemove.setEnabled(false);
 
-				} catch (Exception ex) {
-					// Do nothing
-					
-				}
+				
 			}
 		});
 		
@@ -269,15 +266,15 @@ public class TheWX {
 
 				InputTest t = new InputTest(txtAdd.getText());
 				if (t.getValid()) {
-					if (locations.containsKey(t.getCityName())) {
-						change(locations.get(t.getCityName()), p);
+					if (mylocations.containsKey(t.getCityName())) {
+						change(mylocations.get(t.getCityName()), p);
 						if (!mylocations.containsKey(t.getCityName())) {
 							list.clearSelection();
 						}
 					} else {
 
 						WeatherData w = new WeatherData(t);
-						locations.put(t.getCityName(), w);
+						mylocations.put(t.getCityName(), w);
 						if (!mylocations.containsKey(t.getCityName())) {
 							list.clearSelection();
 						}
@@ -295,16 +292,40 @@ public class TheWX {
 		mylocadd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				int i=0;
+				boolean check = false;
+				
+				while (modelloc.size() > i) {
 
-				if (mylocations.containsKey(ref.getCityName())) {
+					
+					if (modelloc.get(i).equals(ref.getCityName())) {
+						check=true;
+						break;
+					}
+					i++;
+				}
+				
+				if(check){
 					JOptionPane.showMessageDialog(frame, ref.getCityName()
-							+ " is already in your locations.");
-				} else {
+						+ " is already in your locations.");
+				}
+				
+				else {
 					mylocations.put(ref.getCityName(), ref);
 					modelloc.addElement(ref.getCityName());
 					list.setSelectedValue(ref.getCityName(), true);
 					btnRemove.setEnabled(true);
-				}
+			}
+//				if (mylocations.containsKey(ref.getCityName())) {
+//					JOptionPane.showMessageDialog(frame, ref.getCityName()
+//							+ " is already in your locations.");
+//				} else {
+//					mylocations.put(ref.getCityName(), ref);
+//					modelloc.addElement(ref.getCityName());
+//					list.setSelectedValue(ref.getCityName(), true);
+//					btnRemove.setEnabled(true);
+//				}
 
 			}
 		});
@@ -347,9 +368,12 @@ public class TheWX {
 					InputTest t = new InputTest(list.getSelectedValue());
 					WeatherData w = new WeatherData(t);
 					mylocations.put(w.getCityName(), w);
+					combo.setSelectedIndex(-1);
 					change(w, p);
+					
 				} else {
 					change(mylocations.get(list.getSelectedValue()), p);
+					combo.setSelectedIndex(-1);
 				}
 
 			} catch (Exception b) {
@@ -460,15 +484,13 @@ public class TheWX {
 		combo.setModel(model);
 		combo.addItemListener(new ItemListener(){
 
-			
-
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getStateChange()==ItemEvent.SELECTED){
 					selectedValue = model.getSelectedItem().toString();
-					if (!locations.isEmpty()){
-						change(locations.get(model.getSelectedItem().toString()),p);
+					if (!mylocations.isEmpty()){
+						if(mylocations.containsKey(selectedValue))change(mylocations.get(model.getSelectedItem().toString()),p);
 					}
 				}
 			}
@@ -477,6 +499,9 @@ public class TheWX {
 			
 			
 		});
+		
+	
+		
 		combobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -484,13 +509,13 @@ public class TheWX {
 				InputTest t = new InputTest(combo.getEditor().getItem().toString());
 				System.out.println(combo.getEditor().getItem().toString());
 				if (t.getValid()) {
-					if (locations.containsKey(t.getCityName())) {
-						change(locations.get(t.getCityName()), p);
+					if (mylocations.containsKey(t.getCityName())) {
+						change(mylocations.get(t.getCityName()), p);
 						
 					} else {
 
 						WeatherData w = new WeatherData(t);
-						locations.put(t.getCityName(), w);
+						mylocations.put(t.getCityName(), w);
 						combo.addItem(t.getCityName());
 						change(w, p);
 
