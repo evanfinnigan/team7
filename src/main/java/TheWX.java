@@ -64,14 +64,19 @@ public class TheWX {
 	private JButton refresh = new JButton("Refresh");
 	private JButton degree = new JButton();
 	private String time = "Unavailable";
-
+	
 	private JPanel panel = new JPanel();
 	
 
 	private JTabbedPane tabbedPane = new JTabbedPane();
 
 	private JMenuBar menubar = new JMenuBar();
-
+	
+	private JComboBox<String> combo = new JComboBox<String>();
+	private DefaultComboBoxModel<String> model = new DefaultComboBoxModel();
+	private String selectedValue;
+	private JButton combobutton = new JButton("Search");
+	
 	private JTextField txtAdd = new JTextField(15);
 	private JButton btnAdd = new JButton("Search");
 	private JButton btnRemove = new JButton("Remove");
@@ -92,7 +97,8 @@ public class TheWX {
 	private BackgroundPanel background;
 	
 	private JScrollPane eastPane;
-
+	
+	
 	public TheWX() {
 		
 		
@@ -303,13 +309,7 @@ public class TheWX {
 			}
 		});
 		
-		txtAdd.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
 
-				frame.getRootPane().setDefaultButton(btnAdd);
-			}
-		});
 
 		refresh.addActionListener(new ActionListener() {
 			@Override
@@ -456,16 +456,66 @@ public class TheWX {
 				}
 			}
 		});
+		
+		combo.setModel(model);
+		combo.addItemListener(new ItemListener(){
 
+			
 
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				if (e.getStateChange()==ItemEvent.SELECTED){
+					selectedValue = model.getSelectedItem().toString();
+					if (!locations.isEmpty()){
+						change(locations.get(model.getSelectedItem().toString()),p);
+					}
+				}
+			}
+			
+			
+			
+			
+		});
+		combobutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
+				InputTest t = new InputTest(combo.getEditor().getItem().toString());
+				System.out.println(combo.getEditor().getItem().toString());
+				if (t.getValid()) {
+					if (locations.containsKey(t.getCityName())) {
+						change(locations.get(t.getCityName()), p);
+						
+					} else {
+
+						WeatherData w = new WeatherData(t);
+						locations.put(t.getCityName(), w);
+						combo.addItem(t.getCityName());
+						change(w, p);
+
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(frame,
+							"Sorry, the city was not found!");
+				}
+			}
+		});
+
+		combo.setEditable(true);
+		
 		panel.add(btnMars);
 		panel.add(refresh);
-		panel.add(txtAdd);
-		panel.add(btnAdd);
+		//panel.add(txtAdd);
+		//panel.add(btnAdd);
+		panel.add(combo);
+		panel.add(combobutton);
 		panel.add(degree);
 		panel.add(mylocadd);
 		panel.add(btnRemove);
+		
+		
 
 		file.add(eMenuItem);
 		menubar.add(file);
@@ -551,7 +601,7 @@ public class TheWX {
 
 		list.setSize(100, 500);
 
-		frame.getRootPane().setDefaultButton(btnAdd);
+		frame.getRootPane().setDefaultButton(combobutton);
 		
 		
 	}

@@ -14,7 +14,9 @@ public class Create24hourBlock extends TransparentPanel {
 	private JLabel details_l;
 	
 	/**
-	 * Create the panel.
+	 * Create a panel to represent one 3hour block of weather data
+	 * input labels containing the temperature, a weather icon, the sky condition and details  
+	 * 
 	 */
 	public Create24hourBlock(JLabel temp,JLabel icon, JLabel skycondition, JLabel details) {
 		

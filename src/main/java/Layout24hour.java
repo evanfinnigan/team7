@@ -11,6 +11,8 @@ public class Layout24hour extends TransparentPanel {
 
 	/**
 	 * Create the panel.
+	 * Input: array of transparent panels to be arranged in 
+	 * 1 row and 8 columns
 	 */
 	public Layout24hour(TransparentPanel[] blocks) {
 		

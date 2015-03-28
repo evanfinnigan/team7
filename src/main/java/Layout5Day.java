@@ -9,6 +9,8 @@ public class Layout5Day extends TransparentPanel {
 
 	/**
 	 * Create the panel.
+	 * Input: array of transparent panels to be arranged in 
+	 * 1 row and 5 columns
 	 */
 	public Layout5Day(TransparentPanel[] blocks) {
 		

@@ -121,7 +121,10 @@ public class Forecast24Hour extends TransparentPanel {
 		this.image_l = imagelabel;
 		this.CNT = cnt;
 	}
-
+	/*
+	 *  create the panel to display the 24 hour forecast
+	 *  
+	 */
 	private void createDisplay() {
 
 		GridLayout panelayout = new GridLayout();

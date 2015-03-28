@@ -17,8 +17,9 @@ public class LocationV1 extends TransparentPanel {
 	private Forecast5Day longterm;
 	
 	/**
-	 * Create the Panel.
-	 */
+	 * Create a Transparent Panel that contains the Current Weather, Short term and long term panels.
+	 * input: the current weather model and user preferences
+	 */ 
 	public LocationV1(WeatherData data, WeatherPreferences prefs) {
 		locdata = data;
 		name = data.getCityName();
@@ -57,34 +58,29 @@ public class LocationV1 extends TransparentPanel {
 		
 
 	}
+	/*
+	 * getter for the location's name
+	 */
 	public String getLocationName(){
 		return name;
 	}
+	/*
+	 * Convenience method for other classes 
+	 */
 	public TransparentPanel getPane(){
 		return this;
 	}
+	/*
+	 *  method that applies the user view preferences to the current weather panel
+	 */
 	public void updateViewPreferences(WeatherPreferences prefs){
 		currentweather.applyPrefs(prefs);
 	}
+	/*
+	 *  getter that returns the weatherdata model used to construct this location.
+	 */
 	public WeatherData getlocData(){
 		return locdata;
 	}
-	public void refresh(WeatherPreferences prefs){
-		currentweather = new CW(locdata,prefs);
-		shortterm = new Forecast24Hour(locdata,prefs);
-		longterm = new Forecast5Day(locdata,prefs);
-		
-	}
-	public static void main(String[] args) {
-
-		InputTest t = new InputTest("Vancouver");
-		WeatherData d = new WeatherData(t);
-		LocationV1 test = new LocationV1(d,new WeatherPreferences());
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.getContentPane().add(test);
-		frame.setVisible(true);
-		frame.pack();
-		frame.setTitle("Location Test");
-	}
+	
 }
