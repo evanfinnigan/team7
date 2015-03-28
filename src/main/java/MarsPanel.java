@@ -1,8 +1,12 @@
 package main.java;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -51,17 +55,35 @@ public class MarsPanel {
 			}
 			this.bgpanel = new BackgroundPanel(bg);
 			
-			Font mainfont = new Font("lrg", Font.PLAIN, 30);
+			Font mainfont = new Font("med", Font.PLAIN, 30);
 			Font minorfont = new Font("sml", Font.PLAIN, 15);
 			
-			JLabel minlabel = new JLabel("Min: " + dataMars.getMinTempMars());
-			JLabel maxlabel = new JLabel("Max: " + dataMars.getMaxTempMars());
+			JLabel minlabel = new JLabel("Min: " + dataMars.getMinTempMars() + "\u00b0" + "C");
+			minlabel.setFont(mainfont);
+			minlabel.setForeground(new Color(255,255,255));
+			JLabel maxlabel = new JLabel("Max: " + dataMars.getMaxTempMars() + "\u00b0" + "C");
+			maxlabel.setFont(mainfont);
+			maxlabel.setForeground(new Color(255,255,255));
 			JLabel windspeedlabel = new JLabel("Windspeed: " + dataMars.getWindSpeedMars());
+			windspeedlabel.setFont(mainfont);
+			windspeedlabel.setForeground(new Color(255,255,255));
 			JLabel winddirectionlabel = new JLabel("Wind Direction: " + dataMars.getWindDirectionMars());
+			winddirectionlabel.setFont(mainfont);
+			winddirectionlabel.setForeground(new Color(255,255,255));
 			JLabel pressurelabel = new JLabel("Pressure: " + dataMars.getPressure() + " Pa");
+			pressurelabel.setFont(mainfont);
+			pressurelabel.setForeground(new Color(255,255,255));
 			JLabel humiditylabel = new JLabel("Humidity: " + dataMars.getHumidityMars() + "%");
+			humiditylabel.setFont(mainfont);
+			humiditylabel.setForeground(new Color(255,255,255));
 			JLabel skylabel = new JLabel("Sky Condition: " + dataMars.getSkyConditionMars());
-			JLabel imagelabel = new JLabel(new ImageIcon(dataMars.getIconMars()));
+			skylabel.setFont(mainfont);
+			skylabel.setForeground(new Color(255,255,255));
+			ImageIcon icon = new ImageIcon(dataMars.getIconMars());
+			Image img = icon.getImage();
+			Image newimg = img.getScaledInstance(140, 140,  java.awt.Image.SCALE_SMOOTH);
+			icon = new ImageIcon(newimg);
+			JLabel imagelabel = new JLabel(icon);
 			
 			this.image_l = imagelabel;
 			this.wind_speed_l = windspeedlabel;
@@ -74,19 +96,25 @@ public class MarsPanel {
 		}
 
 		private void createDisplay() {
-
-			GridLayout panelayout = new GridLayout(2, 0);
 			
-			pane.setLayout(panelayout);
-			
+			pane.setLayout(null);
 			pane.add(sky_condition_mars_l);
+			sky_condition_mars_l.setBounds(40, 60, 500, 30);
 			pane.add(image_l);
+			image_l.setBounds(550, 90, 350, 350);
+			image_l.setSize(60,60);
 			pane.add(max_temp_l);
+			max_temp_l.setBounds(40, 100, 500, 30);
 			pane.add(min_temp_l);
+			min_temp_l.setBounds(40, 140, 500, 30);
 			pane.add(wind_speed_l);
+			wind_speed_l.setBounds(40, 180, 500, 30);
 			pane.add(wind_direction_l);
+			wind_direction_l.setBounds(40, 220, 500, 30);
 			pane.add(humidity_mars_l);
+			humidity_mars_l.setBounds(40, 260, 500, 30);
 			pane.add(pressure_l);
+			pressure_l.setBounds(40, 300, 500, 30);
 		}
 
 		// Test
@@ -96,6 +124,7 @@ public class MarsPanel {
 			WeatherData d = new WeatherData(t);
 			MarsPanel test = new MarsPanel(d);
 			JFrame frame = new JFrame();
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setContentPane(test.getBackgroundPanel());
 			frame.add(test.getPanel());
 			frame.setVisible(true);
