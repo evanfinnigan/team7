@@ -13,7 +13,13 @@ public class Create5dayBlock extends TransparentPanel {
 	private JLabel skycondition_l;
 	private JLabel weatherdescription_l;
 	/**
-	 * Create the panel.
+	 *  Constructor Create5DayBlock
+	 * @param temp JLabel to display the temperature
+	 * @param high JLabel for the temperature high
+	 * @param low JLabel for the temperature low
+	 * @param desc JLabel for the weather description
+	 * @param skycond JLabel for the skycondition
+	 * @param img JLabel for the icon 
 	 */
 	public Create5dayBlock(JLabel temp, JLabel high, JLabel low, JLabel desc, JLabel skycond, JLabel img) {
 		

@@ -24,7 +24,11 @@ public class Forecast24Hour extends TransparentPanel {
 	private JLabel[] temp_l;
 	
 
-	// private JLabel[] percentPrecipitation_l;
+ /**
+  * Forecast24Hour Constructor
+  * @param data WeatherData current weatherdata model
+  * @param p WeatherPreferences current user preferences
+  */
 
 	public Forecast24Hour(WeatherData data, WeatherPreferences p) {
 		this.data24h = data;
@@ -32,11 +36,16 @@ public class Forecast24Hour extends TransparentPanel {
 		initComponents();
 		createDisplay();
 	}
-
+   /**
+   * getter method which is a convenience method  
+   * @return TransparentPanel 
+   */
 	public TransparentPanel getPanel() {
 		return this;
 	}
-
+	/**
+	 *  private initialization method to be used by constructor
+	 */
 	private void initComponents() {
 		// create labels to display basic data
 		Font minorfont = new Font("sml", Font.PLAIN, 12);
@@ -114,9 +123,9 @@ public class Forecast24Hour extends TransparentPanel {
 		this.temp_l = templabel;
 		this.image_l = imagelabel;
 	}
-	/*
+	/**
 	 *  create the panel to display the 24 hour forecast
-	 *  
+	 *  used by the constructor
 	 */
 	private void createDisplay() {
 
@@ -132,9 +141,9 @@ public class Forecast24Hour extends TransparentPanel {
 		paininthebutt.setAlignmentY(TOP_ALIGNMENT);
 		this.add(paininthebutt);
 	}
-	/*
-	 * changes the label's text to the specified color
-	 * input: Color 
+	/**
+	 * Changes the label's text to the specified color
+	 * @param acolor color to change to
 	 */
 	public void setLabelColor(Color acolor){
 		for (int i=0;i<8;i++){

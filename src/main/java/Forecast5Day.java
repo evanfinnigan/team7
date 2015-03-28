@@ -24,17 +24,28 @@ public class Forecast5Day extends TransparentPanel{
 	private JLabel[] temp_l;
 	private JLabel[] high_l;
 	private JLabel[] low_l;
+	
+	/**
+	 *  Forecast5Day constructor
+	 * @param data WeatherData data model used to construct this object
+	 * @param p WeatherPreferences user preferences
+	 */
 	public Forecast5Day(WeatherData data, WeatherPreferences p) {
 		this.preferences = p;
 		this.data5d = data;
 		initComponents();
 		createDisplay();
 	}
-
+	/**
+	 * Convenience method
+	 * @return Forecast5day object which is a TransparentPanel
+	 */
 	public TransparentPanel getPanel() {
 		return this;
 	}
-
+	/**
+	 * Private method that initializes components 
+	 */
 	private void initComponents() {
 		// create labels to display basic data
 		
@@ -110,25 +121,25 @@ public class Forecast5Day extends TransparentPanel{
 		for (int i = cnt; i < 5; i++) {
 			int j = i + 1;
 			wdlabel[i] = new JLabel(j + " days:");
-			wdlabel[i].setForeground(Color.WHITE);
+		
 			
 			wdlabel[i].setFont(minorfont);
 			sclabel[i] = new JLabel(" Data ");
 			sclabel[i].setFont(minorfont);
-			sclabel[i].setForeground(Color.WHITE);
+			
 			
 			templabel[i] = new JLabel("Unavailable");
 			templabel[i].setFont(minorfont);
-			templabel[i].setForeground(Color.WHITE);
+			
 			highlabel[i] = new JLabel("-");
 			highlabel[i].setFont(minorfont);
-			highlabel[i].setForeground(Color.WHITE);
+			
 			lowlabel[i] = new JLabel("-");
 			lowlabel[i].setFont(minorfont);
-			lowlabel[i].setForeground(Color.WHITE);
+			
 			imagelabel[i] = new JLabel("-");
 			imagelabel[i].setFont(minorfont);
-			imagelabel[i].setForeground(Color.WHITE);
+			
 		}
 
 		this.weatherdescription_l = wdlabel;
@@ -139,9 +150,9 @@ public class Forecast5Day extends TransparentPanel{
 		this.low_l = lowlabel;
 	}
 	
-	/*
+	/**
 	 * changes the label's text to the specified color
-	 * input: Color 
+	 * @param acolor color to change the JLabels text to
 	 */
 	public void setLabelColor(Color acolor){
 		for (int i = 0; i < 5; i++) {
@@ -152,6 +163,9 @@ public class Forecast5Day extends TransparentPanel{
 			skycondition_l[i].setForeground(acolor);
 		}
 	}
+	/**
+	 *  private method used in constructor
+	 */
 	private void createDisplay() {
 
 		GridLayout panelayout = new GridLayout();
