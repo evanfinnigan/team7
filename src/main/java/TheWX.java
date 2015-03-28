@@ -26,6 +26,8 @@ import java.util.Hashtable;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
@@ -86,6 +88,9 @@ public class TheWX {
 	
 
 	public TheWX() {
+		
+		
+		ImageIcon icon = new ImageIcon("cloud.jpg"); 
 
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
@@ -184,7 +189,10 @@ public class TheWX {
 				WeatherData w = new WeatherData(t);
 				change(w, p);
 				mylocations.put(t.getCityName(), w);
-				modelloc.addElement(t.getCityName());
+				if (!modelloc.contains(t.getCityName())){
+					modelloc.addElement(t.getCityName());
+				}
+				
 				list.setSelectedIndex(0);
 			} else {
 				prompt.showMessageDialog(frame, "Try again!");
@@ -461,7 +469,10 @@ public class TheWX {
 		frame.add(tabbedPane, BorderLayout.CENTER);
 		frame.add(footer, BorderLayout.SOUTH);
 		footer.setFont(new Font("lrg", Font.PLAIN, 24));
-
+		
+		panel.setBackground(new Color(0,0,0));
+		tabbedPane.setBackground(new Color(255,255,255));
+		
 		JScrollPane eastPane = new JScrollPane(list);
 		eastPane.setPreferredSize(new Dimension(100, 180));
 		frame.add(eastPane, BorderLayout.EAST);
@@ -519,7 +530,7 @@ public class TheWX {
 
 		frame.pack();
 		frame.setSize(1024, 500);
-		frame.setResizable(false);
+		//frame.setResizable(false);
 		frame.setVisible(true);
 
 		list.setSize(100, 500);
@@ -539,6 +550,8 @@ public class TheWX {
 			current = new Currentweather(w, p, time);
 			longterm = new Forecast5Day(w, p);
 			shortterm = new Forecast24Hour(w, p);
+			
+			JPanel temp = current.getPanel();
 			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Long Term", longterm.getPanel());
 			tabbedPane.add("Short Term", shortterm.getPanel());
