@@ -12,6 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import java.awt.Dimension;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class Forecast5Day extends TransparentPanel{
 
@@ -70,12 +74,17 @@ public class Forecast5Day extends TransparentPanel{
 		}
 		
 		int cnt = data5d.getCNT5d();
-
+		
+		Date date = new Date();
 		for (int i = 0; i < cnt; i++) {
-			int j = i + 1;
+			date.setDate(date.getDate() + 1);
+			DateFormat format = new SimpleDateFormat("EEEEEEEE, MMMMMMMMM dd");
+			TimeZone est = TimeZone.getTimeZone("America/Toronto");
+			format.setTimeZone(est);
+			String j = format.format(date);
 			
 			
-			wdlabel[i] = new JLabel( j + " days: " + skyConditionArray[i]);
+			wdlabel[i] = new JLabel( j );
 			//wdlabel[i] = new JLabel( j + " days: " + descriptionArray[i]);
 			wdlabel[i].setFont(minorfont);
 
@@ -146,7 +155,7 @@ public class Forecast5Day extends TransparentPanel{
 		this.setLayout(panelayout);
 		TransparentPanel[] blocks = new TransparentPanel[5];
 		for (int i = 0; i < 5; i++) {
-			blocks[i] = new Create5dayBlock(temp_l[i], high_l[i], low_l[i],weatherdescription_l[i],skycondition_l[i],image_l[i]);
+			blocks[i] = new Create5dayBlock(weatherdescription_l[i], high_l[i], low_l[i], temp_l[i], skycondition_l[i],image_l[i]);
 		}
 	
 		this.add(new Layout5Day(blocks));
