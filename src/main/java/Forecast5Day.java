@@ -85,7 +85,6 @@ public class Forecast5Day extends TransparentPanel{
 			
 			
 			wdlabel[i] = new JLabel( j );
-			//wdlabel[i] = new JLabel( j + " days: " + descriptionArray[i]);
 			wdlabel[i].setFont(minorfont);
 
 			String temp = descriptionArray[i].substring(0, 1).toUpperCase() + descriptionArray[i].substring(1);
@@ -93,7 +92,7 @@ public class Forecast5Day extends TransparentPanel{
 			sclabel[i].setFont(minorfont);
 
 			if (preferences.getTempUnit().equalsIgnoreCase("F")){
-				templabel[i] = new JLabel(tempArray[i] + "\u00b0F");
+				templabel[i] = new JLabel((int)tempArray[i] + "\u00b0F");
 				templabel[i].setFont(minorfont);
 
 				highlabel[i] = new JLabel("High:" + (int) highArray[i] + "\u00b0" + "F");
