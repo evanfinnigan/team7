@@ -101,7 +101,7 @@ public class Forecast5Day extends TransparentPanel{
 				lowlabel[i] = new JLabel("Low:" + (int)lowArray[i] + "\u00b0"+"F");
 				lowlabel[i].setFont(minorfont);
 			} else {
-				templabel[i] = new JLabel(tempArray[i] + "\u00b0" +"C");
+				templabel[i] = new JLabel((int)tempArray[i] + "\u00b0" +"C");
 				templabel[i].setFont(minorfont);
 
 				highlabel[i] = new JLabel("High: " + (int)highArray[i] + "\u00b0" +"C");
