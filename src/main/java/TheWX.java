@@ -24,6 +24,8 @@ import java.io.ObjectOutputStream;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
@@ -43,6 +45,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -97,8 +100,7 @@ public class TheWX {
 	private BackgroundPanel background;
 	
 	private JScrollPane eastPane;
-	
-	
+
 	public TheWX() {
 		
 		
@@ -212,12 +214,14 @@ public class TheWX {
 				prompt.showMessageDialog(frame, "Try again!");
 			}
 		}
+		
+		
 
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-			
+			try{
 		 		int i = 0;
 					
 					while (!modelloc.isEmpty()) {
@@ -234,6 +238,10 @@ public class TheWX {
 
 				
 			}
+			catch(Exception a){
+				//Do nothing
+			}
+			} 
 		});
 		
 		btnMars.addActionListener(new ActionListener() {
@@ -488,9 +496,13 @@ public class TheWX {
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getStateChange()==ItemEvent.SELECTED){
+					
 					selectedValue = model.getSelectedItem().toString();
 					if (!mylocations.isEmpty()){
-						if(mylocations.containsKey(selectedValue))change(mylocations.get(model.getSelectedItem().toString()),p);
+						if(mylocations.containsKey(selectedValue)){
+							change(mylocations.get(model.getSelectedItem().toString()),p);
+							
+						}
 					}
 				}
 			}
@@ -528,6 +540,8 @@ public class TheWX {
 			}
 		});
 
+		
+		
 		combo.setEditable(true);
 		
 		panel.add(btnMars);
