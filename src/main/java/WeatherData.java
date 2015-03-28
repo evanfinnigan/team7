@@ -263,7 +263,20 @@ public class WeatherData {
 	public Image getIcon() {
 		return icon;
 	}
-
+	
+	/**
+	 * Gets the icon code
+	 */
+	public String getIconCode(){
+		try {
+			JSONArray jInfo = currentJSONObject.getJSONArray("weather");
+			JSONObject jInfo2 = jInfo.getJSONObject(0);
+			String jInfo3 = jInfo2.getString("icon");
+			return jInfo3;
+		} catch (JSONException e) {
+			return "";
+		}
+	}
 	
 	/**
 	 * Gets the JSONObject for 24hr temperature 
