@@ -241,6 +241,10 @@ public class Currentweather {
 		// create labels to display basic data
 		pane = new TransparentPanel();
 		
+		
+		
+		
+		
 		lastupdate_l = new JLabel("Last Update: "
 				+ time);
 		lastupdate_l.setFont(smlfont);
@@ -309,6 +313,7 @@ public class Currentweather {
 		// GridLayout glayout = new GridLayout(0,6);
 		pane.setLayout(null);
 
+	
 		// if(visible = true)
 		// skyconditionsetbounds(20, x, 200, 30)
 		// x= x+20
@@ -388,7 +393,8 @@ public class Currentweather {
 		 * pane.add(sunset_l);
 		 */
 		// pane.setBounds(0, 0, 800, 600);
-
+		
+		pane.setBackground(new Color(255,255,255));
 		pane.setSize(780, 375);
 		pane.validate();
 
