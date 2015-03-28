@@ -3,20 +3,15 @@ package main.java;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 public class Forecast24Hour extends TransparentPanel {
 
@@ -151,19 +146,5 @@ public class Forecast24Hour extends TransparentPanel {
 		skycondition_l[i].setForeground(acolor);
 		}
 	}
-	// Test
-	public static void main(String[] args) {
-
-		InputTest t = new InputTest("paris");
-		WeatherData d = new WeatherData(t);
-		WeatherPreferences p = new WeatherPreferences();
-		CopyOfForecast24Hour test = new CopyOfForecast24Hour(d, p);
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.add(test);
-		frame.setVisible(true);
-		frame.pack();
-		frame.setTitle("24 Hour Weather Forecast for London, Canada");
-	}
-
+	
 }

@@ -164,18 +164,10 @@ package main.java;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Group;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JFrame;// used in the test to be removed
-import javax.swing.SwingConstants;
+import javax.swing.JFrame; // used in the test to be removed
 import javax.swing.WindowConstants;
-import javax.swing.GroupLayout.ParallelGroup;
-import javax.swing.GroupLayout.SequentialGroup;
 
 public class Currentweather {
 
@@ -275,12 +267,9 @@ public class Currentweather {
 			tempmax_l = new JLabel("High: " + (int) currentData.getHighF() + "\u00b0" + "F");
 			tempmax_l.setFont(medfont);
 
-			// tempmax_l.setForeground(Color.RED);
-
 			tempmin_l = new JLabel("Low: " + (int) currentData.getLowF() + "\u00b0" + "F");
 			tempmin_l.setFont(medfont);
 
-			// tempmin_l.setForeground(Color.BLUE);
 		} else {
 			temp_l = new JLabel((int) currentData.getTempCurrent() + "\u00b0" + "C");
 			temp_l.setFont(sprlrgfont);
@@ -288,12 +277,10 @@ public class Currentweather {
 			tempmax_l = new JLabel("High: " + (int) currentData.getHigh() + "\u00b0" + "C");
 			tempmax_l.setFont(medfont);
 
-			// tempmax_l.setForeground(Color.RED);
 
 			tempmin_l = new JLabel("Low: " + ((int) (currentData.getLow())) + "\u00b0" + "C");
 			tempmin_l.setFont(medfont);
 
-			// tempmin_l.setForeground(Color.BLUE);
 		}
 
 		humidity_l = new JLabel("Humidity: " + currentData.getHumidity() + "%");
@@ -329,13 +316,7 @@ public class Currentweather {
 	}
 
 	private void creategridLayout() {
-		// GridLayout glayout = new GridLayout(0,6);
 		pane.setLayout(null);
-
-	
-		// if(visible = true)
-		// skyconditionsetbounds(20, x, 200, 30)
-		// x= x+20
 		
 		JLabel[] labels = new JLabel[6];
 		labels[0] = humidity_l;
@@ -368,25 +349,7 @@ public class Currentweather {
 				labels[i].setBounds(20, 115 + 20*a, 250, 20);
 			}
 		}
-		
-//		pane.add(humidity_l);
-//		humidity_l.setBounds(20, 115, 200, 20);
-//
-//		pane.add(winddirection_l);
-//		winddirection_l.setBounds(20, 115, 250, 20);
-//
-//		pane.add(windspeed_l);
-//		windspeed_l.setBounds(20, 135, 200, 20);
-//
-//		pane.add(airpressure_l);
-//		airpressure_l.setBounds(20, 155, 200, 20);
-//
-//		pane.add(sunrise_l);
-//		sunrise_l.setBounds(20, 175, 200, 20);
-//
-//		pane.add(sunset_l);
-//		sunset_l.setBounds(20, 195, 200, 20);
-
+	
 		pane.add(temp_l);
 		temp_l.setBounds(480, 90, 200, 60);
 
@@ -402,17 +365,6 @@ public class Currentweather {
 		pane.add(lastupdate_l);
 		lastupdate_l.setBounds(20, 310, 200, 20);
 
-		/*
-		 * pane.add(temp_l);
-		 * 
-		 * pane.add(tempmin_l); pane.add(tempmax_l); pane.add(image_l);
-		 * pane.add(skycondition_l); pane.add(weatherdescription_l);
-		 * pane.add(windspeed_l); pane.add(winddirection_l);
-		 * pane.add(humidity_l); pane.add(airpressure_l); pane.add(sunrise_l);
-		 * pane.add(sunset_l);
-		 */
-		// pane.setBounds(0, 0, 800, 600);
-		
 		pane.setBackground(new Color(255,255,255));
 		pane.setSize(780, 375);
 		pane.validate();
@@ -434,25 +386,6 @@ public class Currentweather {
 		humidity_l.setVisible(prefs.getShowHumidity());
 		airpressure_l.setVisible(prefs.getShowPressure());
 
-	}
-
-	public static void main(String[] args) {
-
-		JFrame frame = new JFrame();
-		frame.setTitle("Weather for London, Canada");
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		WeatherPreferences prefs = new WeatherPreferences();
-		InputTest intest = new InputTest("Samandag");
-		WeatherData data = new WeatherData(intest);
-		System.out.println(data.getCityName());
-		prefs.setTempUnit("F");
-		Currentweather test = new Currentweather(data, prefs);
-
-		frame.getContentPane().add(test.getPanel());
-		System.out.println("finished");
-		// frame.pack();
-		frame.setSize(690, 410);
-		frame.setVisible(true);
 	}
 
 }

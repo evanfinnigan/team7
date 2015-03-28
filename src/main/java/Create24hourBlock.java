@@ -1,12 +1,13 @@
 package main.java;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-
+/*
+ *  Class to create a transparent panel containing the data 
+ *  to be used in 1 of the 8 24hour blocks
+ * 
+ */
 public class Create24hourBlock extends TransparentPanel {
 	private JLabel temp_l;
 	private JLabel icon_l;

@@ -1,7 +1,6 @@
 package main.java;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;

@@ -1,16 +1,10 @@
 package main.java;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -56,7 +50,6 @@ public class MarsPanel {
 			this.bgpanel = new BackgroundPanel(bg);
 			
 			Font mainfont = new Font("med", Font.PLAIN, 30);
-			Font minorfont = new Font("sml", Font.PLAIN, 15);
 			
 			JLabel minlabel = new JLabel("Min: " + dataMars.getMinTempMars() + "\u00b0" + "C");
 			minlabel.setFont(mainfont);
@@ -115,21 +108,5 @@ public class MarsPanel {
 			humidity_mars_l.setBounds(40, 260, 500, 30);
 			pane.add(pressure_l);
 			pressure_l.setBounds(40, 300, 500, 30);
-		}
-
-		// Test
-		public static void main(String[] args){
-			
-			InputTest t = new InputTest("London, Canada");
-			WeatherData d = new WeatherData(t);
-			MarsPanel test = new MarsPanel(d);
-			JFrame frame = new JFrame();
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setContentPane(test.getBackgroundPanel());
-			frame.add(test.getPanel());
-			frame.setVisible(true);
-			frame.pack();
-			frame.setTitle("Weather on Mars");
-		}
-	
+		}	
 }

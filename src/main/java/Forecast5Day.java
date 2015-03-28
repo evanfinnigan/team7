@@ -6,11 +6,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
 import java.awt.Dimension;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,11 +22,8 @@ public class Forecast5Day extends TransparentPanel{
 	private JLabel[] weatherdescription_l;
 	private JLabel[] skycondition_l;
 	private JLabel[] temp_l;
-	private JLabel[] percentPrecipitation_l;
 	private JLabel[] high_l;
 	private JLabel[] low_l;
-	private int CNT;
-
 	public Forecast5Day(WeatherData data, WeatherPreferences p) {
 		this.preferences = p;
 		this.data5d = data;
@@ -55,7 +48,6 @@ public class Forecast5Day extends TransparentPanel{
 		JLabel[] highlabel = new JLabel[5];
 		JLabel[] lowlabel = new JLabel[5];
 
-		String[] skyConditionArray = data5d.getSkyCondition5d();
 		String[] descriptionArray = data5d.getDescription5d();
 		Image[] imgArray = data5d.getIcon5d();
 		
@@ -145,7 +137,6 @@ public class Forecast5Day extends TransparentPanel{
 		this.image_l = imagelabel;
 		this.high_l = highlabel;
 		this.low_l = lowlabel;
-		this.CNT = cnt;
 	}
 	
 	/*
@@ -171,21 +162,6 @@ public class Forecast5Day extends TransparentPanel{
 		}
 	
 		this.add(new Layout5Day(blocks));
-	}
-
-	// Test
-	public static void main(String[] args) {
-
-		InputTest t = new InputTest("paris");
-		WeatherData d = new WeatherData(t);
-		WeatherPreferences p = new WeatherPreferences();
-		Forecast5Day test = new Forecast5Day(d,p);
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.add(test);
-		frame.setVisible(true);
-		frame.pack();
-		frame.setTitle("5 Day Weather Forecast for London, Canada");
 	}
 
 }

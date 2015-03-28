@@ -1,12 +1,7 @@
 package main.java;
 
-import java.awt.Color;
-
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.GroupLayout;
-import javax.swing.WindowConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -73,18 +68,5 @@ public class Create5dayBlock extends TransparentPanel {
 		);
 		setLayout(groupLayout);
 			
-	}
-	public static void main(String[] args) {
-
-		InputTest t = new InputTest("tokyo");
-		WeatherData d = new WeatherData(t);
-		WeatherPreferences p = new WeatherPreferences();
-		Forecast5Day test = new Forecast5Day(d,p);
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.add(test.getPanel());
-		frame.setVisible(true);
-		frame.pack();
-		frame.setTitle("5 Day Weather Forecast for London, Canada");
 	}
 }
