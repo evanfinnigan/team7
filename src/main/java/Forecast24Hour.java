@@ -131,7 +131,10 @@ public class Forecast24Hour extends TransparentPanel {
 			blocks[i] = new Create24hourBlock(weatherdescription_l[i], temp_l[i], image_l[i],
 					skycondition_l[i]);
 		}
-		this.add(new Layout24hour(blocks));
+		TransparentPanel paininthebutt = new TransparentPanel();
+		paininthebutt = new Layout24hour(blocks);
+		paininthebutt.setAlignmentY(TOP_ALIGNMENT);
+		this.add(paininthebutt);
 	}
 
 	// Test
