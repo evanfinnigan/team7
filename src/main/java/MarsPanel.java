@@ -14,7 +14,7 @@ public class MarsPanel {
 	// Attributes
 		private WeatherData dataMars;
 		private WeatherPreferences currentPrefs;
-		private JPanel pane;
+		private TransparentPanel pane;
 		private JLabel image_l;
 		private JLabel wind_speed_l;
 		private JLabel wind_direction_l;
@@ -36,7 +36,7 @@ public class MarsPanel {
 		
 		private void initComponents() {
 			// create labels to display basic data
-			this.pane = new JPanel();
+			this.pane = new TransparentPanel();
 			Font mainfont = new Font("lrg", Font.PLAIN, 30);
 			Font minorfont = new Font("sml", Font.PLAIN, 15);
 			
