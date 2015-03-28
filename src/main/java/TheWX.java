@@ -646,9 +646,9 @@ public class TheWX {
 			
 		
 			
-			System.out.println(w.getSkyConditionCurrent());
+			//System.out.println(w.getSkyConditionCurrent());
 			
-			if(w.getSkyConditionCurrent().equals("Clear")){
+			if(w.getIconCode().equals("01d") || w.getIconCode().equals("01n")){
 				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
 				try {
 					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/clear.jpg"));
@@ -657,9 +657,10 @@ public class TheWX {
 				}
 				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
 				frame.setContentPane(background);
+				current.setLabelColor(Color.black);
 			}
 			
-			else if(w.getSkyConditionCurrent().equals("Clouds")){
+			else if(w.getIconCode().equals("02d") || w.getIconCode().equals("02n")){
 				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
 				try {
 					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/fewclouds.jpg"));
@@ -670,16 +671,40 @@ public class TheWX {
 				frame.setContentPane(background);
 			}
 			
-			else if(w.getSkyConditionCurrent().equals("Rain")){
+			else if(w.getIconCode().equals("03d") || w.getIconCode().equals("03n")){
 				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/showerrain.jpg"));
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/scatteredclouds.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
 				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
 				frame.setContentPane(background);
 			}
+			
+			else if(w.getIconCode().equals("04d") || w.getIconCode().equals("04n")){
+				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/scatteredclouds.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
+			
+			else if(w.getIconCode().equals("09d") || w.getIconCode().equals("09n")){
+				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				try {
+					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/scatteredclouds.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
+			
+			
 			
 			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Long Term", longterm.getPanel());
