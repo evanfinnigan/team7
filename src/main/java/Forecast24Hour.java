@@ -1,5 +1,6 @@
 package main.java;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
@@ -139,7 +140,17 @@ public class Forecast24Hour extends TransparentPanel {
 		paininthebutt.setAlignmentY(TOP_ALIGNMENT);
 		this.add(paininthebutt);
 	}
-
+	/*
+	 * changes the label's text to the specified color
+	 * input: Color 
+	 */
+	public void setLabelColor(Color acolor){
+		for (int i=0;i<8;i++){
+		temp_l[i].setForeground(acolor);
+		weatherdescription_l[i].setForeground(acolor);
+		skycondition_l[i].setForeground(acolor);
+		}
+	}
 	// Test
 	public static void main(String[] args) {
 

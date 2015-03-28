@@ -147,7 +147,20 @@ public class Forecast5Day extends TransparentPanel{
 		this.low_l = lowlabel;
 		this.CNT = cnt;
 	}
-
+	
+	/*
+	 * changes the label's text to the specified color
+	 * input: Color 
+	 */
+	public void setLabelColor(Color acolor){
+		for (int i = 0; i < 5; i++) {
+			weatherdescription_l[i].setForeground(acolor);
+			high_l[i].setForeground(acolor);
+			low_l[i].setForeground(acolor);
+			temp_l[i].setForeground(acolor);
+			skycondition_l[i].setForeground(acolor);
+		}
+	}
 	private void createDisplay() {
 
 		GridLayout panelayout = new GridLayout();

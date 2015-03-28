@@ -38,44 +38,44 @@ public class CW extends TransparentPanel {
 		Font smlfont = new Font("sml", Font.PLAIN, 13);
 		cityname = new JLabel(data.getCityName());
 		cityname.setFont(lrgfont);
-		cityname.setForeground(Color.WHITE);
+		
 		weatherdescription_l = new JLabel(data.getDescription());
 		weatherdescription_l.setFont(smlfont);
-		weatherdescription_l.setForeground(Color.WHITE);
+		
 		humidity_l = new JLabel("Humidity:" + data.getHumidity() +"%");
 		humidity_l.setFont(medfont);
-		humidity_l.setForeground(Color.WHITE);
+		
 		windspeed_l = new JLabel("Wind Speed:" + data.getWindSpeed());
 		windspeed_l.setFont(medfont);
-		windspeed_l.setForeground(Color.WHITE);
+		
 		winddirection_l = new JLabel("Wind Direction:" + data.getWindDirection());
 		winddirection_l.setFont(medfont);
-		winddirection_l.setForeground(Color.WHITE);
+		
 
 		airpressure_l = new JLabel("Air Pressure:" + data.getPressure());
 		airpressure_l.setFont(medfont);
-		airpressure_l.setForeground(Color.WHITE);
+	
 		temp_l = new JLabel("" + data.getTempCurrent() + "\u00b0" + prefs.getTempUnit());
 		temp_l.setFont(sprlrgfont);
-		temp_l.setForeground(Color.WHITE);
+		
 		tempmax_l = new JLabel("high:" + data.getHigh() + "\u00b0" + prefs.getTempUnit());
 		tempmax_l.setFont(medfont);
-		tempmax_l.setForeground(Color.WHITE);
+		
 		tempmin_l = new JLabel("low:" + data.getLow() + "\u00b0" + prefs.getTempUnit());
 		tempmin_l.setFont(medfont);
-		tempmin_l.setForeground(Color.WHITE);
+		
 		skycondition_l = new JLabel(data.getSkyConditionCurrent());
 		skycondition_l.setFont(lrgfont);
-		skycondition_l.setForeground(Color.WHITE);
+		
 		lastupdate_l = new JLabel("Time of Last Update:"+ data.getTimeOfLastRequest());
 		lastupdate_l.setFont(smlfont);
-		lastupdate_l.setForeground(Color.WHITE);
+		
 		sunrise_l = new JLabel("Sunrise:" + data.getSunrise());
 		sunrise_l.setFont(medfont);
-		sunrise_l.setForeground(Color.WHITE);
+		
 		sunset_l = new JLabel("Sunset:" + data.getSunset());
 		sunset_l.setFont(medfont);
-		sunset_l.setForeground(Color.WHITE);
+		
 		image_l = new JLabel(new ImageIcon(data.getIcon()));
 		
 		
@@ -150,7 +150,25 @@ public class CW extends TransparentPanel {
 	public TransparentPanel getPanel() {
 		return this;
 	}
-	
+	/*
+	 * changes the label's text to the specified color
+	 * input: Color 
+	 */
+	public void setLabelColor(Color acolor){
+		 sunrise_l.setForeground(acolor);;
+		 sunset_l.setForeground(acolor);;
+		 weatherdescription_l.setForeground(acolor);;
+		 skycondition_l.setForeground(acolor);;
+		 windspeed_l.setForeground(acolor);;
+		 winddirection_l.setForeground(acolor);;
+		 temp_l.setForeground(acolor);;
+		 tempmin_l.setForeground(acolor);;
+		 tempmax_l.setForeground(acolor);;
+		 humidity_l.setForeground(acolor);;
+		 airpressure_l.setForeground(acolor);;
+		 cityname.setForeground(acolor);;
+		 lastupdate_l.setForeground(acolor);;
+	}
 	public void applyPrefs(WeatherPreferences prefs) {
 
 		temp_l.setVisible(prefs.getShowTemperature());

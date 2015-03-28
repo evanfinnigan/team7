@@ -24,21 +24,21 @@ public class Create5dayBlock extends TransparentPanel {
 		
 		temp_l = new JLabel("t");
 		temp_l = temp;
-		temp_l.setForeground(Color.WHITE);
+		
 		high_l = new JLabel("h");
 		high_l = high;
-		high_l.setForeground(Color.WHITE);
+		
 	    low_l = new JLabel("l");
 		low_l = low;
-		low_l.setForeground(Color.WHITE);
+	
 	    image_l = new JLabel("img");
 		image_l =img;
 		skycondition_l = new JLabel("cond");
 		skycondition_l = skycond;
-		skycondition_l.setForeground(Color.WHITE);
+		
 		weatherdescription_l = new JLabel("desc");
 		weatherdescription_l = desc;
-		weatherdescription_l.setForeground(Color.WHITE);
+	
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

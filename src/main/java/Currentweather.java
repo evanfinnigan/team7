@@ -308,6 +308,25 @@ public class Currentweather {
 		cityname.setFont(lrgfont);
 
 	}
+	/*
+	 * changes the label's text to the specified color
+	 * input: Color 
+	 */
+	public void setLabelColor(Color acolor){
+		 sunrise_l.setForeground(acolor);;
+		 sunset_l.setForeground(acolor);;
+		 weatherdescription_l.setForeground(acolor);;
+		 skycondition_l.setForeground(acolor);;
+		 windspeed_l.setForeground(acolor);;
+		 winddirection_l.setForeground(acolor);;
+		 temp_l.setForeground(acolor);;
+		 tempmin_l.setForeground(acolor);;
+		 tempmax_l.setForeground(acolor);;
+		 humidity_l.setForeground(acolor);;
+		 airpressure_l.setForeground(acolor);;
+		 cityname.setForeground(acolor);;
+		 lastupdate_l.setForeground(acolor);;
+	}
 
 	private void creategridLayout() {
 		// GridLayout glayout = new GridLayout(0,6);

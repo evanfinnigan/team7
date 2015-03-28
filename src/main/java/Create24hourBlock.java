@@ -22,15 +22,15 @@ public class Create24hourBlock extends TransparentPanel {
 		
 		temp_l = new JLabel();
 		temp_l = temp;
-		temp_l.setForeground(Color.WHITE);
+		
 		icon_l = new JLabel();
 		icon_l = icon;
 		skycondition_l = new JLabel();
 		skycondition_l = skycondition;
-		skycondition_l.setForeground(Color.WHITE);
+		
 		details_l = new JLabel();
 		details_l = details;
-		details_l.setForeground(Color.WHITE);
+	
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
