@@ -1,6 +1,5 @@
 package main.java;
 import java.awt.*;
-import java.awt.image.*;
 import javax.swing.*;
 
 /*
@@ -27,6 +26,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *  Set image as the background with the SCALED style
+	 *  input Image image
 	 */
 	public BackgroundPanel(Image image)
 	{
@@ -35,6 +35,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *  Set image as the background with the specified style
+	 *  input Image image and an int representing the style
 	 */
 	public BackgroundPanel(Image image, int style)
 	{
@@ -44,7 +45,8 @@ public class BackgroundPanel extends JPanel
 	}
 
 	/*
-	 *  Set image as the backround with the specified style and alignment
+	 *  Set image as the background with the specified style and alignment
+	 *  input-> Image image background image, int style, float alignmentX,alignmentY
 	 */
 	public BackgroundPanel(Image image, int style, float alignmentX, float alignmentY)
 	{
@@ -57,6 +59,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *  Use the Paint interface to paint a background
+	 *  input-> Paint Object
 	 */
 	public BackgroundPanel(Paint painter)
 	{
@@ -66,6 +69,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *	Set the image used as the background
+	 *  input Image image-> image to be used as a background
 	 */
 	public void setImage(Image image)
 	{
@@ -75,6 +79,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *	Set the style used to paint the background image
+	 *	input: int 0=scaled,1=tiled,2=actual size
 	 */
 	public void setStyle(int style)
 	{
@@ -93,6 +98,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *  Specify the horizontal alignment of the image when using ACTUAL style
+	 *  input: float alignmentX
 	 */
 	public void setImageAlignmentX(float alignmentX)
 	{
@@ -102,6 +108,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *  Specify the horizontal alignment of the image when using ACTUAL style
+	 *  input: float alignmentY
 	 */
 	public void setImageAlignmentY(float alignmentY)
 	{
@@ -111,6 +118,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *  Override method so we can make the component transparent
+	 *  input JComponent component
 	 */
 	public void add(JComponent component)
 	{
@@ -131,6 +139,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *  Override method so we can make the component transparent
+	 *  input: JComponent and it's constraints
 	 */
 	public void add(JComponent component, Object constraints)
 	{
@@ -146,6 +155,7 @@ public class BackgroundPanel extends JPanel
 	 *  Controls whether components added to this panel should automatically
 	 *  be made transparent. That is, setOpaque(false) will be invoked.
 	 *  The default is set to true.
+	 *  input: boolean isTransparentAdd
 	 */
 	public void setTransparentAdd(boolean isTransparentAdd)
 	{
@@ -154,7 +164,7 @@ public class BackgroundPanel extends JPanel
 
 	/*
 	 *	Try to make the component transparent.
-	 *  For components that use renderers, like JTable, you will also need to
+	 *  For components that use a renderer, like JTable, you will also need to
 	 *  change the renderer to be transparent. An easy way to do this it to
 	 *  set the background of the table to a Color using an alpha value of 0.
 	 */

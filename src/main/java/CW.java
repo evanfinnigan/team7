@@ -4,13 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.WindowConstants;
 
 public class CW extends TransparentPanel {
 	private JLabel sunrise_l;
@@ -29,7 +26,7 @@ public class CW extends TransparentPanel {
 	private JLabel image_l;
 
 	/**
-	 * Create the panel.
+	 * Creates the current weather panel and arranges labels on a transparent panel.
 	 */
 	public CW(WeatherData data,WeatherPreferences prefs) {
 		Font sprlrgfont = new Font("lrg", Font.PLAIN, 44);
@@ -147,6 +144,10 @@ public class CW extends TransparentPanel {
 		applyPrefs(prefs);
 		
 	}
+	/*
+	 * Convenience getter 	
+	 * returns a CW object which is a TransparentPanel
+	 */
 	public TransparentPanel getPanel() {
 		return this;
 	}
@@ -169,6 +170,12 @@ public class CW extends TransparentPanel {
 		 cityname.setForeground(acolor);;
 		 lastupdate_l.setForeground(acolor);;
 	}
+	/*
+	 * apply preferences method
+	 * input: takes a WeatherPreferences object and applies preferences to 
+	 * the current weather panel
+	 * 
+	 */
 	public void applyPrefs(WeatherPreferences prefs) {
 
 		temp_l.setVisible(prefs.getShowTemperature());
@@ -185,22 +192,5 @@ public class CW extends TransparentPanel {
 		airpressure_l.setVisible(prefs.getShowPressure());
 
 	}
-	public static void main(String[] args) {
 
-		JFrame frame = new JFrame();
-		frame.setTitle("Weather for London, Canada");
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		WeatherPreferences prefs = new WeatherPreferences();
-		InputTest intest = new InputTest("Samandag");
-		WeatherData data = new WeatherData(intest);
-		System.out.println(data.getCityName());
-		prefs.setTempUnit("F");
-		CW test = new CW(data, prefs);
-
-		frame.getContentPane().add(test);
-		System.out.println("finished");
-		// frame.pack();
-		frame.setSize(690, 410);
-		frame.setVisible(true);
-	}
 }

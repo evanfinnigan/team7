@@ -51,7 +51,7 @@ public class LocationV1 extends TransparentPanel {
 					.addGap(5))
 		);
 		this.setLayout(groupLayout);
-		//locpane = new TransparentPanel();
+		
 		
 
 	}

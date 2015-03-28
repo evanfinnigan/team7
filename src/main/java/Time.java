@@ -39,13 +39,4 @@ public class Time {
 		return converted;
 	}
 	
-	// Test
-	public static void main(String[] args){
-		long utcExample = 1427599999;
-		Time t = new Time(utcExample);
-		System.out.println(t.getCurrent());
-		System.out.println(t.getConverted());
-		
-	}
-	
 }

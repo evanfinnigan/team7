@@ -18,12 +18,11 @@ public class Forecast24Hour extends TransparentPanel {
 	// Attributes
 	private WeatherData data24h;
 	private WeatherPreferences preferences;
-	private TransparentPanel pane;
 	private JLabel[] image_l;
 	private JLabel[] weatherdescription_l;
 	private JLabel[] skycondition_l;
 	private JLabel[] temp_l;
-	private int CNT;
+	
 
 	// private JLabel[] percentPrecipitation_l;
 
@@ -40,7 +39,6 @@ public class Forecast24Hour extends TransparentPanel {
 
 	private void initComponents() {
 		// create labels to display basic data
-		this.pane = new TransparentPanel();
 		Font minorfont = new Font("sml", Font.PLAIN, 12);
 
 		JLabel[] wdlabel = new JLabel[8];
@@ -73,8 +71,8 @@ public class Forecast24Hour extends TransparentPanel {
 			format.setTimeZone(est);
 			String j = format.format(date);
 
-			String temp = descriptionArray[i].substring(0, 1).toUpperCase()
-					+ descriptionArray[i].substring(1);
+			descriptionArray[i].substring(0, 1).toUpperCase();
+			descriptionArray[i].substring(1);
 			wdlabel[i] = new JLabel(j);
 			wdlabel[i].setFont(minorfont);
 
@@ -115,7 +113,6 @@ public class Forecast24Hour extends TransparentPanel {
 		this.skycondition_l = sclabel;
 		this.temp_l = templabel;
 		this.image_l = imagelabel;
-		this.CNT = cnt;
 	}
 	/*
 	 *  create the panel to display the 24 hour forecast

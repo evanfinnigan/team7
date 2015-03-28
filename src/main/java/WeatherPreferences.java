@@ -3,7 +3,6 @@ package main.java;
 import java.util.LinkedList;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JList;
 
 public class WeatherPreferences implements java.io.Serializable{
@@ -21,7 +20,6 @@ public class WeatherPreferences implements java.io.Serializable{
 
 
 	private String defaultLocation;
-	//private LocationList locationlist;
 	private String tempUnit;
 	private LinkedList<String> locationlist;
 	private boolean showSky, showTemp, showPressure;
@@ -29,8 +27,6 @@ public class WeatherPreferences implements java.io.Serializable{
 	private boolean windSpeed, showHumidity, showSunset, showSunrise;
 	private boolean showPOP, showLow, showHigh;
 	private boolean showDescription;
-	private int itemcounter;
-	private String time;
 	private boolean showMars;
 	
 	private JList<String> list;
@@ -61,8 +57,6 @@ public class WeatherPreferences implements java.io.Serializable{
 		this.showHigh = true;
 		this.showDescription = true;
 		this.showMars = false;
-		this.itemcounter = 6;
-		
 		this.list = new JList<>();
 		this.modelloc = new DefaultListModel<>();
 	}
