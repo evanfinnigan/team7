@@ -13,6 +13,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * 
+ * @author TEAM 7 CS-2212 2015
+ *
+ */
 public class Forecast5Day extends TransparentPanel{
 
 	// Attributes

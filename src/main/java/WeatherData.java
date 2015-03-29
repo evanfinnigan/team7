@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 
 /**
  * 
- * @author Team7 CS-2212 2015
+ * @author TEAM 7 CS-2212 2015
  *
  */
 

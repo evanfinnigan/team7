@@ -6,6 +6,11 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+/**
+ * 
+ * @author TEAM 7 CS-2212 2015
+ *
+ */
 public class Currentweather {
 
 	private WeatherData currentData;

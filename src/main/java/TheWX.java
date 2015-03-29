@@ -40,6 +40,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+/**
+ * 
+ * @author TEAM 7 CS-2212 2015
+ * The user interface class
+ *
+ */
 public class TheWX {
 
 	private WeatherData ref;
@@ -86,6 +92,9 @@ public class TheWX {
 	
 	private JScrollPane eastPane;
 
+	/**
+	 * Constructor for the TheWX class (User Interface)
+	 */
 	public TheWX() {
 
 
@@ -621,6 +630,11 @@ public class TheWX {
 		setAccessibility();
 	}
 
+	/**
+	 * Change method for repainting the items when called
+	 * @param w WeatherData
+	 * @param p WeatherPreferences
+	 */
 	public void change(WeatherData w, WeatherPreferences p) {
 
 		tabbedPane.removeAll();
@@ -844,6 +858,10 @@ public class TheWX {
 		frame.add(eastPane, BorderLayout.EAST);
 
 	}
+	
+	/**
+	 * Method for setting the accessibility items for ex: The mouse over explanations
+	 */
 	private void setAccessibility(){
 		btnMars.setToolTipText("click to check the weather on mars.");
 		combobutton.setToolTipText("Search for a forecast.");
