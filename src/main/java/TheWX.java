@@ -87,7 +87,7 @@ public class TheWX {
 	private Forecast5Day longterm;
 	private Forecast24Hour shortterm;
 
-	//private Hashtable<String, WeatherData> locations;
+	private Hashtable<String, WeatherData> locations;
 	private Hashtable<String, WeatherData> mylocations;
 
 	private JList<String> list = new JList<>();
@@ -163,7 +163,7 @@ public class TheWX {
 		if (!p.getShowSunset())
 			hideSunset.setSelected(false);
 
-		//locations = new Hashtable<String, WeatherData>();
+		locations = new Hashtable<String, WeatherData>();
 		mylocations = new Hashtable<String, WeatherData>();
 
 		DefaultListModel<String> modelloc = p.getlist();
@@ -180,6 +180,7 @@ public class TheWX {
 					if (t.getValid()) {
 						WeatherData w = new WeatherData(t);
 						mylocations.put(t.getCityName(), w);
+						
 						// list
 						modelloc.addElement(t.getCityName());
 						list.setSelectedIndex(0);
@@ -205,6 +206,7 @@ public class TheWX {
 				WeatherData w = new WeatherData(t);
 				change(w, p);
 				mylocations.put(t.getCityName(), w);
+				
 				if (!modelloc.contains(t.getCityName())){
 					modelloc.addElement(t.getCityName());
 				}
@@ -274,15 +276,15 @@ public class TheWX {
 
 				InputTest t = new InputTest(txtAdd.getText());
 				if (t.getValid()) {
-					if (mylocations.containsKey(t.getCityName())) {
-						change(mylocations.get(t.getCityName()), p);
+					if (locations.containsKey(t.getCityName())) {
+						change(locations.get(t.getCityName()), p);
 						if (!mylocations.containsKey(t.getCityName())) {
 							list.clearSelection();
 						}
 					} else {
 
 						WeatherData w = new WeatherData(t);
-						mylocations.put(t.getCityName(), w);
+						locations.put(t.getCityName(), w);
 						if (!mylocations.containsKey(t.getCityName())) {
 							list.clearSelection();
 						}
@@ -376,6 +378,7 @@ public class TheWX {
 					InputTest t = new InputTest(list.getSelectedValue());
 					WeatherData w = new WeatherData(t);
 					mylocations.put(w.getCityName(), w);
+					locations.put(w.getCityName(), w);
 					combo.setSelectedIndex(-1);
 					change(w, p);
 					
@@ -498,9 +501,9 @@ public class TheWX {
 				if (e.getStateChange()==ItemEvent.SELECTED){
 					
 					selectedValue = model.getSelectedItem().toString();
-					if (!mylocations.isEmpty()){
-						if(mylocations.containsKey(selectedValue)){
-							change(mylocations.get(model.getSelectedItem().toString()),p);
+					if (!locations.isEmpty()){
+						if(locations.containsKey(selectedValue)){
+							change(locations.get(model.getSelectedItem().toString()),p);
 							
 						}
 					}
@@ -521,13 +524,13 @@ public class TheWX {
 				InputTest t = new InputTest(combo.getEditor().getItem().toString());
 				System.out.println(combo.getEditor().getItem().toString());
 				if (t.getValid()) {
-					if (mylocations.containsKey(t.getCityName())) {
-						change(mylocations.get(t.getCityName()), p);
+					if (locations.containsKey(t.getCityName())) {
+						change(locations.get(t.getCityName()), p);
 						
 					} else {
 
 						WeatherData w = new WeatherData(t);
-						mylocations.put(t.getCityName(), w);
+						locations.put(t.getCityName(), w);
 						combo.addItem(t.getCityName());
 						change(w, p);
 
