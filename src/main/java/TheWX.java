@@ -4,13 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
@@ -24,16 +22,11 @@ import java.io.ObjectOutputStream;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -45,13 +38,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
-import javax.swing.plaf.ColorUIResource;
-
-import org.json.JSONException;
 
 public class TheWX {
 
@@ -75,7 +62,7 @@ public class TheWX {
 	private JMenuBar menubar = new JMenuBar();
 
 	private JComboBox<String> combo = new JComboBox<String>();
-	private DefaultComboBoxModel<String> model = new DefaultComboBoxModel();
+	private DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 	private String selectedValue;
 	private JButton combobutton = new JButton("Search");
 
@@ -91,27 +78,27 @@ public class TheWX {
 
 	private JList<String> list = new JList<>();
 
-	private JOptionPane prompt = new JOptionPane();
+	//private JOptionPane prompt = new JOptionPane();
 
 	private JButton btnMars = new JButton("MARS!");
 
 	private BufferedImage img = null;
 	private BackgroundPanel background;
-
+	
 	private JScrollPane eastPane;
 
 	public TheWX() {
 
-		ImageIcon icon = new ImageIcon("cloud.jpg");
 
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
-
+		file.setToolTipText("click file then exit to quit the program.");
 		JMenuItem eMenuItem = new JMenuItem("Exit");
 		eMenuItem.setMnemonic(KeyEvent.VK_E);
 
 		JMenu preferences = new JMenu("Preferences");
 		preferences.setMnemonic(KeyEvent.VK_F);
+		preferences.setToolTipText("Change view preferences.");
 
 		JCheckBoxMenuItem hideHumidity = new JCheckBoxMenuItem("Humidity", true);
 		JCheckBoxMenuItem hideWindDir = new JCheckBoxMenuItem("Wind Direction",
@@ -133,7 +120,7 @@ public class TheWX {
 				p = (WeatherPreferences) is.readObject();
 				is.close();
 			} catch (Exception e) {
-				prompt.showMessageDialog(frame,
+				JOptionPane.showMessageDialog(frame,
 						"Sorry, could not load preferences.");
 				p = new WeatherPreferences();
 			}
@@ -168,7 +155,7 @@ public class TheWX {
 			boolean defaultSet = false;
 			while (!defaultSet) {
 
-				String a = prompt.showInputDialog("Enter a Default Location:");
+				String a = JOptionPane.showInputDialog("Enter a Default Location:");
 				if (a != null && a.length() > 0) {
 					InputTest t = new InputTest(a);
 
@@ -183,11 +170,11 @@ public class TheWX {
 						change(w, p);
 						defaultSet = true;
 					} else {
-						prompt.showMessageDialog(frame, "Try again!");
+						JOptionPane.showMessageDialog(frame, "Try again!");
 					}
 				} else {
 					defaultSet = false;
-					int confirm = prompt.showConfirmDialog(frame,
+					int confirm = JOptionPane.showConfirmDialog(frame,
 							"Exit program?");
 					if (confirm == 0) {
 						System.exit(0);
@@ -208,7 +195,7 @@ public class TheWX {
 
 				list.setSelectedIndex(0);
 			} else {
-				prompt.showMessageDialog(frame, "Try again!");
+				JOptionPane.showMessageDialog(frame, "Try again!");
 			}
 		}
 
@@ -244,10 +231,26 @@ public class TheWX {
 
 				if (p.getShowMars()) {
 					p.setShowMars(false);
+					btnRemove.setEnabled(true);
+					mylocadd.setEnabled(true);
+					degree.setEnabled(true);
+					refresh.setEnabled(true);
+					combobutton.setEnabled(true);
+					combo.setEnabled(true);
+					list.setEnabled(true);
 					change(ref, p);
+					
 				} else {
 					p.setShowMars(true);
+					btnRemove.setEnabled(false);
+					mylocadd.setEnabled(false);
+					degree.setEnabled(false);
+					refresh.setEnabled(false);
+					combobutton.setEnabled(false);
+					combo.setEnabled(false);
 					change(ref, p);
+					footer.setText("Mars Weather");
+					list.setEnabled(false);
 				}
 			}
 		});
@@ -616,7 +619,7 @@ public class TheWX {
 		list.setSize(100, 500);
 
 		frame.getRootPane().setDefaultButton(combobutton);
-
+		setAccessibility();
 	}
 
 	public void change(WeatherData w, WeatherPreferences p) {
@@ -842,7 +845,17 @@ public class TheWX {
 		frame.add(eastPane, BorderLayout.EAST);
 
 	}
-
+	private void setAccessibility(){
+		btnMars.setToolTipText("click to check the weather on mars.");
+		combobutton.setToolTipText("Search for a forecast.");
+		degree.setToolTipText("Switch between " + "\u00b0" + "C" + " and " + "\u00b0" + "F.");
+		refresh.setToolTipText("Click to refresh weather data.");
+		mylocadd.setToolTipText("Add current city to my location list.");
+		btnRemove.setToolTipText("Remove selected city from my locations list.");
+		combo.setToolTipText("Enter city name here.");
+		
+		
+	}
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
