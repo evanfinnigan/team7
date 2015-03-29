@@ -8,11 +8,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class Layout5Day extends TransparentPanel {
 
 	/**
-	 * Create the panel.
-	 * Input: array of transparent panels to be arranged in 
-	 * 1 row and 5 columns
+	 * Constructor
+	 * @param blocks an array of transparent panels to be arranged in 1 row and 5 columns
 	 */
-	public Layout5Day(TransparentPanel[] blocks) {
+	 public Layout5Day(TransparentPanel[] blocks) {
 		
 		JPanel panel = new JPanel();
 		panel = blocks[0];

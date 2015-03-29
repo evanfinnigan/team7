@@ -15,8 +15,9 @@ public class LocationV1 extends TransparentPanel {
 	
 	/**
 	 * Create a Transparent Panel that contains the Current Weather, Short term and long term panels.
-	 * input: the current weather model and user preferences
-	 */ 
+	 * @param data WeatherData the current weather model
+	 * @param prefs WeatherPreferences and user preferences
+	 */
 	public LocationV1(WeatherData data, WeatherPreferences prefs) {
 		locdata = data;
 		name = data.getCityName();
@@ -55,26 +56,30 @@ public class LocationV1 extends TransparentPanel {
 		
 
 	}
-	/*
+	/**
 	 * getter for the location's name
+	 * @return String the locations name
 	 */
 	public String getLocationName(){
 		return name;
 	}
-	/*
-	 * Convenience method for other classes 
+	/**
+	 * Convenience method for other classes
+	 * @return TransparentPanel a LocationV1 object
 	 */
 	public TransparentPanel getPane(){
 		return this;
 	}
-	/*
-	 *  method that applies the user view preferences to the current weather panel
+	/**
+	 * method that applies the user view preferences to the current weather panel
+	 * @param prefs WeatherPreferences user display preferences
 	 */
 	public void updateViewPreferences(WeatherPreferences prefs){
 		currentweather.applyPrefs(prefs);
 	}
-	/*
-	 *  getter that returns the weatherdata model used to construct this location.
+	/**
+	 * getter for the location's WeatherData
+	 * @return WeatherData returns the WeatherData model used to construct this location.
 	 */
 	public WeatherData getlocData(){
 		return locdata;

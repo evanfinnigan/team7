@@ -1,14 +1,7 @@
 package main.java;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
@@ -19,12 +12,6 @@ import javax.swing.JPanel;
 
 import javax.swing.WindowConstants;
 
-import javax.swing.ScrollPaneLayout;
-
-
-
-
-
 
 public class Location implements ActionListener{
 	private TransparentPanel locpane;
@@ -34,42 +21,22 @@ public class Location implements ActionListener{
 	private Forecast5Day longterm;
 	private JButton sh_shortterm, sh_longterm;
 	private boolean bshort,blong;
-	
+	/**
+	 * Constructor for a Location Object
+	 * @param data WeatherData data model for this weather program
+	 * @param prefs WeatherPreferences current user display preferences
+	 */
 	public Location(WeatherData data, WeatherPreferences prefs) {
 		locpane = new TransparentPanel();
 		name = data.getCityName();
 		JLabel locname_l = new JLabel(name);
 		
-		
-		
-		//locpane.add(locname_l);
-		
 		weather = new CW(data, prefs);
 		shortterm = new Forecast24Hour(data, prefs);
 		longterm = new Forecast5Day(data, prefs);
 		
-		//locpane.add(weather.getPanel());
-		
-		//sh_shortterm = new JButton("Show 24 hour forecast");
-		//locpane.add(sh_shortterm);
-		//sh_shortterm.setActionCommand("Show_short");
-		//bshort=true;
-		
-		//locpane.add(shortterm.getPanel());
-		
-		//sh_longterm = new JButton("Show 5 day forecast");
-		
-		//locpane.add(longterm.getPanel());
-		
-		//sh_longterm.setActionCommand("Show_long");
-		//locpane.add(sh_longterm);
-		//blong=true;
-		
-		
 		GroupLayout layout = new GroupLayout(locpane); 
 		locpane.setLayout(layout);
-		
-		
 		
 		ParallelGroup horiz = layout.createParallelGroup();
 		SequentialGroup vert = layout.createSequentialGroup();
@@ -90,12 +57,24 @@ public class Location implements ActionListener{
 		layout.setVerticalGroup(vert);
 	
 	}
+	/**
+	 * getter for the location name
+	 * @return String which is the name of the location
+	 */
 	public String getName(){
 		return name;
 	}
+	/**
+	 * Getter 
+	 * @return TransparentPanel 
+	 */
 	public TransparentPanel getPane(){
 		return locpane;
 	}
+	/**
+	 * gets the current weather object
+	 * @return CW a current weather TransparentPanel
+	 */
 	public CW getCurrentweather(){
 		return weather;
 	}
@@ -130,23 +109,11 @@ public class Location implements ActionListener{
 		}
 		locpane.validate();	
 	}
+	/**
+	 * updates the current weather object with the user display preferences
+	 * @param prefs WeatherPreferences object 
+	 */
 	public void updateViewPreferences(WeatherPreferences prefs){
 		weather.applyPrefs(prefs);
 	}
-	
-	// Test
-		public static void main(String[] args) {
-
-			InputTest t = new InputTest("London, Canada");
-			WeatherData d = new WeatherData(t);
-			Location test = new Location(d,new WeatherPreferences());
-			JFrame frame = new JFrame();
-			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-			frame.add(test.getPane());
-			frame.setVisible(true);
-			frame.pack();
-			frame.setTitle("Location Test");
-		}
-	
-	
 }
