@@ -8,7 +8,7 @@ import javax.swing.JList;
 public class WeatherPreferences implements java.io.Serializable{
 
 	/**
-	 * @author Evan Kossman
+	 * @author TEAM 7 CS-2212 2015
 	 * 
 	 * A Preference class to control the application. 
 	 * Allows the user to hide and show certain elements of the application.

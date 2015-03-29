@@ -178,7 +178,7 @@ public class TheWX {
 						change(w, p);
 						defaultSet = true;
 					} else {
-						JOptionPane.showMessageDialog(frame, "Try again!");
+						JOptionPane.showMessageDialog(frame, "Could not find the city, please try again.");
 					}
 				} else {
 					defaultSet = false;
@@ -203,7 +203,7 @@ public class TheWX {
 
 				list.setSelectedIndex(0);
 			} else {
-				JOptionPane.showMessageDialog(frame, "Try again!");
+				JOptionPane.showMessageDialog(frame, "There was a problem please try again.");
 			}
 		}
 
@@ -509,7 +509,7 @@ public class TheWX {
 
 				InputTest t = new InputTest(combo.getEditor().getItem()
 						.toString());
-				System.out.println(combo.getEditor().getItem().toString());
+				//System.out.println(combo.getEditor().getItem().toString());
 				if (t.getValid()) {
 					if (locations.containsKey(t.getCityName())) {
 						change(locations.get(t.getCityName()), p);
@@ -728,6 +728,9 @@ public class TheWX {
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);
 				frame.setContentPane(background);
+				current.setLabelColor(Color.WHITE);
+				shortterm.setLabelColor(Color.WHITE);
+				longterm.setLabelColor(Color.WHITE);
 			}
 
 			else if (w.getIconCode().equals("10d")
