@@ -345,7 +345,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the Images of 24hr temperatures in an array 
-	 * @returns Image array representing the 24hr temperature icons 
+	 * @return Image array representing the 24hr temperature icons 
 	 */
 	public Image[] getIcon24h() {
 		return icon24h;
@@ -514,7 +514,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the air humidity in Mars
-	 * @returns int representing the humidity in Mars
+	 * @return int representing the humidity in Mars
 	 */
 	public int getHumidityMars() {
 		return humidityMars;
@@ -522,7 +522,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the sky condition in Mars
-	 * @returns String representing the sky condition in Mars
+	 * @return String representing the sky condition in Mars
 	 */
 	public String getSkyConditionMars() {
 		return skyConditionMars;
@@ -530,28 +530,13 @@ public class WeatherData {
 
 	/**
 	 * Gets and Image representing the weather in Mars
-	 * @returns Image representing the weather in Mars
+	 * @return Image representing the weather in Mars
 	 */
 	public Image getIconMars() {
 		return iconMars;
 	}
 
-	// Setters
 
-	// Current Weather Setters
-
-//	private void setCityName() {
-//		try {
-//			String jInfo = currentJSONObject.getString("name");
-//			jInfo = jInfo
-//					+ ", "
-//					+ currentJSONObject.getJSONObject("sys").getString(
-//							"country");
-//			this.cityName = jInfo;
-//		} catch (JSONException e) {
-//			System.out.println(e.getMessage());
-//		}
-//	}
 
 	
 	/**
@@ -660,6 +645,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for Wind Speed
+	 * @param windSpeed is to be set
+	 */
 	private void setWindSpeed() {
 		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("wind");
@@ -670,6 +659,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for Wind Direction
+	 * @param windDirection is to be set
+	 */	
 	private void setWindDirection() {
 		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("wind");
@@ -702,6 +695,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for high temperature
+	 * @param high is to be set
+	 */
 	private void setHigh() {
 		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
@@ -714,6 +711,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for low temperature
+	 * @param low is to be set
+	 */
 	private void setLow() {
 		try {
 			JSONObject jInfo = currentJSONObject.getJSONObject("main");
@@ -726,6 +727,10 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for icon
+	 * @param icon is to be set
+	 */
 	private void setIcon() {
 		try {
 			JSONArray jInfo = currentJSONObject.getJSONArray("weather");
@@ -741,6 +746,9 @@ public class WeatherData {
 	// //24 hour Forecast Setters
 
 	// get temperature for the next 24 hours in 3 hour increments
+	/**
+	 * Setter for Short Term Temperature
+	 */
 	private void setTemp24h() {
 		try {
 			double[] array = new double[8];
