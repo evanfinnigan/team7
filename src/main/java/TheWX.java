@@ -78,7 +78,6 @@ public class TheWX {
 
 	private JList<String> list = new JList<>();
 
-	//private JOptionPane prompt = new JOptionPane();
 
 	private JButton btnMars = new JButton("MARS!");
 
