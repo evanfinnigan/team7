@@ -61,25 +61,24 @@ public class TheWX {
 	private JFrame frame = new JFrame("Team7 WeatherApp");
 
 	private JPanel footerpanel = new JPanel();
-	
+
 	private JLabel footer = new JLabel("Choose a city");
 	private JButton mylocadd = new JButton("Add to My Locations");
 	private JButton refresh = new JButton("Refresh");
 	private JButton degree = new JButton();
 	private String time = "Unavailable";
-	
+
 	private JPanel panel = new JPanel();
-	
 
 	private JTabbedPane tabbedPane = new JTabbedPane();
 
 	private JMenuBar menubar = new JMenuBar();
-	
+
 	private JComboBox<String> combo = new JComboBox<String>();
 	private DefaultComboBoxModel<String> model = new DefaultComboBoxModel();
 	private String selectedValue;
 	private JButton combobutton = new JButton("Search");
-	
+
 	private JTextField txtAdd = new JTextField(15);
 	private JButton btnAdd = new JButton("Search");
 	private JButton btnRemove = new JButton("Remove");
@@ -98,15 +97,12 @@ public class TheWX {
 
 	private BufferedImage img = null;
 	private BackgroundPanel background;
-	
+
 	private JScrollPane eastPane;
 
 	public TheWX() {
-		
-		
-		
-		
-		ImageIcon icon = new ImageIcon("cloud.jpg"); 
+
+		ImageIcon icon = new ImageIcon("cloud.jpg");
 
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
@@ -148,7 +144,6 @@ public class TheWX {
 		} else {
 			degree.setText("\u00b0" + "C");
 		}
-		
 
 		if (!p.getShowHumidity())
 			hideHumidity.setSelected(false);
@@ -180,7 +175,7 @@ public class TheWX {
 					if (t.getValid()) {
 						WeatherData w = new WeatherData(t);
 						mylocations.put(t.getCityName(), w);
-						
+
 						// list
 						modelloc.addElement(t.getCityName());
 						list.setSelectedIndex(0);
@@ -206,26 +201,24 @@ public class TheWX {
 				WeatherData w = new WeatherData(t);
 				change(w, p);
 				mylocations.put(t.getCityName(), w);
-				
-				if (!modelloc.contains(t.getCityName())){
+
+				if (!modelloc.contains(t.getCityName())) {
 					modelloc.addElement(t.getCityName());
 				}
-				
+
 				list.setSelectedIndex(0);
 			} else {
 				prompt.showMessageDialog(frame, "Try again!");
 			}
 		}
-		
-		
 
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-			try{
-		 		int i = 0;
-					
+				try {
+					int i = 0;
+
 					while (!modelloc.isEmpty()) {
 
 						if (modelloc.get(i).equals(ref.getCityName())) {
@@ -236,36 +229,25 @@ public class TheWX {
 
 					modelloc.removeElementAt(i);
 					mylocations.remove(ref.getCityName());
-					if(modelloc.isEmpty()) btnRemove.setEnabled(false);
+					if (modelloc.isEmpty())
+						btnRemove.setEnabled(false);
 
-				
+				} catch (Exception a) {
+					// Do nothing
+				}
 			}
-			catch(Exception a){
-				//Do nothing
-			}
-			} 
 		});
-		
+
 		btnMars.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (p.getShowMars()){
+				if (p.getShowMars()) {
 					p.setShowMars(false);
-					tabbedPane.remove(3);
+					change(ref, p);
 				} else {
-					InputTest t = new InputTest("Mars");
-					if (t.getValid()) {
-							WeatherData w = new WeatherData(t);
-							MarsPanel marspanel = new MarsPanel(w);
-							JPanel marsp = marspanel.getPanel();
-							tabbedPane.add("MARS WEATHER", marsp);
-							p.setShowMars(true);
-					} else {
-						System.out.println("Error");
-						JOptionPane.showMessageDialog(frame,
-								"Sorry there was an error please try again.");
-					}
+					p.setShowMars(true);
+					change(ref, p);
 				}
 			}
 		});
@@ -302,45 +284,42 @@ public class TheWX {
 		mylocadd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				int i=0;
+
+				int i = 0;
 				boolean check = false;
-				
+
 				while (modelloc.size() > i) {
 
-					
 					if (modelloc.get(i).equals(ref.getCityName())) {
-						check=true;
+						check = true;
 						break;
 					}
 					i++;
 				}
-				
-				if(check){
+
+				if (check) {
 					JOptionPane.showMessageDialog(frame, ref.getCityName()
-						+ " is already in your locations.");
+							+ " is already in your locations.");
 				}
-				
+
 				else {
 					mylocations.put(ref.getCityName(), ref);
 					modelloc.addElement(ref.getCityName());
 					list.setSelectedValue(ref.getCityName(), true);
 					btnRemove.setEnabled(true);
-			}
-//				if (mylocations.containsKey(ref.getCityName())) {
-//					JOptionPane.showMessageDialog(frame, ref.getCityName()
-//							+ " is already in your locations.");
-//				} else {
-//					mylocations.put(ref.getCityName(), ref);
-//					modelloc.addElement(ref.getCityName());
-//					list.setSelectedValue(ref.getCityName(), true);
-//					btnRemove.setEnabled(true);
-//				}
+				}
+				// if (mylocations.containsKey(ref.getCityName())) {
+				// JOptionPane.showMessageDialog(frame, ref.getCityName()
+				// + " is already in your locations.");
+				// } else {
+				// mylocations.put(ref.getCityName(), ref);
+				// modelloc.addElement(ref.getCityName());
+				// list.setSelectedValue(ref.getCityName(), true);
+				// btnRemove.setEnabled(true);
+				// }
 
 			}
 		});
-		
-
 
 		refresh.addActionListener(new ActionListener() {
 			@Override
@@ -381,7 +360,7 @@ public class TheWX {
 					locations.put(w.getCityName(), w);
 					combo.setSelectedIndex(-1);
 					change(w, p);
-					
+
 				} else {
 					change(mylocations.get(list.getSelectedValue()), p);
 					combo.setSelectedIndex(-1);
@@ -491,42 +470,39 @@ public class TheWX {
 				}
 			}
 		});
-		
+
 		combo.setModel(model);
-		combo.addItemListener(new ItemListener(){
+		combo.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				if (e.getStateChange()==ItemEvent.SELECTED){
-					
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+
 					selectedValue = model.getSelectedItem().toString();
-					if (!locations.isEmpty()){
-						if(locations.containsKey(selectedValue)){
-							change(locations.get(model.getSelectedItem().toString()),p);
-							
+					if (!locations.isEmpty()) {
+						if (locations.containsKey(selectedValue)) {
+							change(locations.get(model.getSelectedItem()
+									.toString()), p);
+
 						}
 					}
 				}
 			}
-			
-			
-			
-			
+
 		});
-		
-	
-		
+
 		combobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				InputTest t = new InputTest(combo.getEditor().getItem().toString());
+				InputTest t = new InputTest(combo.getEditor().getItem()
+						.toString());
 				System.out.println(combo.getEditor().getItem().toString());
 				if (t.getValid()) {
 					if (locations.containsKey(t.getCityName())) {
 						change(locations.get(t.getCityName()), p);
-						
+
 					} else {
 
 						WeatherData w = new WeatherData(t);
@@ -543,21 +519,17 @@ public class TheWX {
 			}
 		});
 
-		
-		
 		combo.setEditable(true);
-		
+
 		panel.add(btnMars);
 		panel.add(refresh);
-		//panel.add(txtAdd);
-		//panel.add(btnAdd);
+		// panel.add(txtAdd);
+		// panel.add(btnAdd);
 		panel.add(combo);
 		panel.add(combobutton);
 		panel.add(degree);
 		panel.add(mylocadd);
 		panel.add(btnRemove);
-		
-		
 
 		file.add(eMenuItem);
 		menubar.add(file);
@@ -570,17 +542,17 @@ public class TheWX {
 		preferences.add(hideSunset);
 
 		menubar.add(preferences);
-		
+
 		footerpanel.add(footer);
-		
+
 		frame.setJMenuBar(menubar);
 		frame.setLayout(new BorderLayout());
-		
+
 		frame.add(panel, BorderLayout.NORTH);
 		frame.add(tabbedPane, BorderLayout.CENTER);
 		frame.add(footerpanel, BorderLayout.SOUTH);
 		footer.setFont(new Font("lrg", Font.PLAIN, 24));
-		
+
 		eastPane = new JScrollPane(list);
 		eastPane.setPreferredSize(new Dimension(100, 180));
 		frame.add(eastPane, BorderLayout.EAST);
@@ -638,14 +610,13 @@ public class TheWX {
 
 		frame.pack();
 		frame.setSize(1024, 500);
-		//frame.setResizable(false);
+		// frame.setResizable(false);
 		frame.setVisible(true);
 
 		list.setSize(100, 500);
 
 		frame.getRootPane().setDefaultButton(combobutton);
-		
-		
+
 	}
 
 	public void change(WeatherData w, WeatherPreferences p) {
@@ -659,142 +630,199 @@ public class TheWX {
 			current = new Currentweather(w, p, time);
 			longterm = new Forecast5Day(w, p);
 			shortterm = new Forecast24Hour(w, p);
-			
-			
-		
-			
-			//System.out.println(w.getSkyConditionCurrent());
-			
-			if(w.getIconCode().equals("01d") || w.getIconCode().equals("01n")){
-				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+
+			// System.out.println(w.getSkyConditionCurrent());
+
+			if (w.getIconCode().equals("01d") || w.getIconCode().equals("01n")) {
+				// background = new BackgroundPanel(img,BackgroundPanel.SCALED,
+				// 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/clear.jpg"));
+					img = ImageIO
+							.read(getClass().getClassLoader()
+									.getResourceAsStream(
+											"./resources/images/clear.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
 				frame.setContentPane(background);
 				current.setLabelColor(Color.black);
 			}
-			
-			else if(w.getIconCode().equals("02d") || w.getIconCode().equals("02n")){
-				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+
+			else if (w.getIconCode().equals("02d")
+					|| w.getIconCode().equals("02n")) {
+				// background = new BackgroundPanel(img,BackgroundPanel.SCALED,
+				// 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/fewclouds.jpg"));
+					img = ImageIO.read(getClass().getClassLoader()
+							.getResourceAsStream(
+									"./resources/images/fewclouds.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
 				frame.setContentPane(background);
 			}
-			
-			else if(w.getIconCode().equals("03d") || w.getIconCode().equals("03n")){
-				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+
+			else if (w.getIconCode().equals("03d")
+					|| w.getIconCode().equals("03n")) {
+				// background = new BackgroundPanel(img,BackgroundPanel.SCALED,
+				// 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/scatteredclouds.jpg"));
+					img = ImageIO.read(getClass().getClassLoader()
+							.getResourceAsStream(
+									"./resources/images/scatteredclouds.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
 				frame.setContentPane(background);
 			}
-			
-			else if(w.getIconCode().equals("04d") || w.getIconCode().equals("04n")){
-				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+
+			else if (w.getIconCode().equals("04d")
+					|| w.getIconCode().equals("04n")) {
+				// background = new BackgroundPanel(img,BackgroundPanel.SCALED,
+				// 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/brokenclouds.jpg"));
+					img = ImageIO.read(getClass().getClassLoader()
+							.getResourceAsStream(
+									"./resources/images/brokenclouds.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
 				frame.setContentPane(background);
 			}
-			
-			else if(w.getIconCode().equals("09d") || w.getIconCode().equals("09n")){
-				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+
+			else if (w.getIconCode().equals("09d")
+					|| w.getIconCode().equals("09n")) {
+				// background = new BackgroundPanel(img,BackgroundPanel.SCALED,
+				// 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/showerrain.jpg"));
+					img = ImageIO.read(getClass().getClassLoader()
+							.getResourceAsStream(
+									"./resources/images/showerrain.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
 				frame.setContentPane(background);
 			}
-			
-			else if(w.getIconCode().equals("10d") || w.getIconCode().equals("10n")){
-				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+
+			else if (w.getIconCode().equals("10d")
+					|| w.getIconCode().equals("10n")) {
+				// background = new BackgroundPanel(img,BackgroundPanel.SCALED,
+				// 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/rain.jpg"));
+					img = ImageIO
+							.read(getClass().getClassLoader()
+									.getResourceAsStream(
+											"./resources/images/rain.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
-				frame.setContentPane(background);
-				current.setLabelColor(Color.WHITE);
-				shortterm.setLabelColor(Color.WHITE);
-				longterm.setLabelColor(Color.WHITE);
-			}
-			
-			else if(w.getIconCode().equals("11d") || w.getIconCode().equals("11n")){
-				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
-				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/thunderstorm.jpg"));
-				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
-				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
-				frame.setContentPane(background);
-				current.setLabelColor(Color.WHITE);
-				shortterm.setLabelColor(Color.WHITE);
-				longterm.setLabelColor(Color.WHITE);
-			}
-			
-			else if(w.getIconCode().equals("13d") || w.getIconCode().equals("13n")){
-				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
-				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/snow.jpg"));
-				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
-				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
-				frame.setContentPane(background);
-			}
-			
-			else if(w.getIconCode().equals("50d") || w.getIconCode().equals("50n")){
-				//background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
-				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/mist.jpg"));
-				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
-				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
 				frame.setContentPane(background);
 				current.setLabelColor(Color.WHITE);
 				shortterm.setLabelColor(Color.WHITE);
 				longterm.setLabelColor(Color.WHITE);
 			}
-			
-			else{
+
+			else if (w.getIconCode().equals("11d")
+					|| w.getIconCode().equals("11n")) {
+				// background = new BackgroundPanel(img,BackgroundPanel.SCALED,
+				// 0.50f, 0.5f);
 				try {
-					 img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("./resources/images/clear.jpg"));
+					img = ImageIO.read(getClass().getClassLoader()
+							.getResourceAsStream(
+									"./resources/images/thunderstorm.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
-				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
+				frame.setContentPane(background);
+				current.setLabelColor(Color.WHITE);
+				shortterm.setLabelColor(Color.WHITE);
+				longterm.setLabelColor(Color.WHITE);
+			}
+
+			else if (w.getIconCode().equals("13d")
+					|| w.getIconCode().equals("13n")) {
+				// background = new BackgroundPanel(img,BackgroundPanel.SCALED,
+				// 0.50f, 0.5f);
+				try {
+					img = ImageIO
+							.read(getClass().getClassLoader()
+									.getResourceAsStream(
+											"./resources/images/snow.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
 				frame.setContentPane(background);
 			}
-			
-			
+
+			else if (w.getIconCode().equals("50d")
+					|| w.getIconCode().equals("50n")) {
+				// background = new BackgroundPanel(img,BackgroundPanel.SCALED,
+				// 0.50f, 0.5f);
+				try {
+					img = ImageIO
+							.read(getClass().getClassLoader()
+									.getResourceAsStream(
+											"./resources/images/mist.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
+				frame.setContentPane(background);
+				current.setLabelColor(Color.WHITE);
+				shortterm.setLabelColor(Color.WHITE);
+				longterm.setLabelColor(Color.WHITE);
+			}
+
+			else {
+				try {
+					img = ImageIO
+							.read(getClass().getClassLoader()
+									.getResourceAsStream(
+											"./resources/images/clear.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
+				frame.setContentPane(background);
+			}
+
 			tabbedPane.add("Current", current.getPanel());
 			tabbedPane.add("Long Term", longterm.getPanel());
 			tabbedPane.add("Short Term", shortterm.getPanel());
-			
-			
-			
-			
-			if (p.getShowMars()){
+
+			if (p.getShowMars()) {
+				tabbedPane.removeAll();
 				MarsPanel marspanel = new MarsPanel(w);
 				JPanel marsp = marspanel.getPanel();
+				try {
+					img = ImageIO
+							.read(getClass().getClassLoader()
+									.getResourceAsStream(
+											"./resources/images/mars.jpg"));
+				} catch (Exception e) {
+					System.out.println("Cannot read file for clear.jpg: " + e);
+				}
+				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
+						0.50f, 0.5f);
+				frame.setContentPane(background);
 				tabbedPane.add("MARS WEATHER", marsp);
 				p.setShowMars(true);
 			}
@@ -804,7 +832,6 @@ public class TheWX {
 		}
 
 		footer.setText(" " + w.getCityName());
-		
 
 		background.add(tabbedPane);
 		frame.add(footerpanel, BorderLayout.SOUTH);
@@ -813,8 +840,6 @@ public class TheWX {
 		eastPane = new JScrollPane(list);
 		eastPane.setPreferredSize(new Dimension(100, 180));
 		frame.add(eastPane, BorderLayout.EAST);
-		
-		
 
 	}
 
