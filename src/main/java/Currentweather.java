@@ -26,7 +26,6 @@ public class Currentweather {
 	private JLabel airpressure_l;
 	private JLabel cityname;
 	private JLabel lastupdate_l;
-	private int counter;
 
 	/**
 	 * Currentweather constructor
