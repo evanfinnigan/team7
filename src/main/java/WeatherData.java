@@ -21,8 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 
 /**
- * @author Evan
  * 
+ * @author Team7 CS-2212 2015
+ *
  */
 public class WeatherData {
 
@@ -84,7 +85,10 @@ public class WeatherData {
 	private Image iconMars;
 	
 
-	// Constructor
+	/**
+	 * Constructor for WeatherData
+	 * @param test InputTest 
+	 */
 	public WeatherData(InputTest test) {
 		this.cityName = test.getCityName();
 		this.currentJSONObject = test.getCurrentWeather();
@@ -135,14 +139,17 @@ public class WeatherData {
 	}
 
 	// Getters
-
+	/**
+	 * Gets the time of Last Request
+	 * @return String
+	 */
 	public String getTimeOfLastRequest() {
 		return timeOfLastRequest;
 	}
 
 	/**
 	 * Gets the current location
-	 * @returns JSONObject
+	 * @return JSONObject
 	 */
 	public JSONObject getCurrentJSONObject() {
 		return currentJSONObject;
@@ -150,7 +157,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the city name
-	 * @returns String representing the city name
+	 * @return String representing the city name
 	 */
 	public String getCityName() {
 		return cityName;
@@ -158,7 +165,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the current sky condition
-	 * @returns String representing the current sky condition
+	 * @return String representing the current sky condition
 	 */
 	public String getSkyConditionCurrent() {
 		return skyConditionCurrent;
@@ -174,19 +181,23 @@ public class WeatherData {
 
 	/**
 	 * Gets the current temperature
-	 * @returns String representing current temperature
+	 * @return String representing current temperature
 	 */
 	public double getTempCurrent() {
 		return tempCurrent;
 	}
 	
+	/**
+	 * Gets the current temperature
+	 * @return String representing current temperature
+	 */
 	public double getTempCurrentF(){
 		return (double)(tempCurrent*1.8 + 32);
 	}
 
 	/**
 	 * Gets the sunset time
-	 * @returns String representing sunset time
+	 * @return String representing sunset time
 	 */
 	public String getSunset() {
 		return sunset;
@@ -194,7 +205,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the sunrise time
-	 * @returns String representing sunrise time
+	 * @return String representing sunrise time
 	 */
 	public String getSunrise() {
 		return sunrise;
@@ -202,7 +213,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the weather pressure 
-	 * @returns String representing the weather pressure
+	 * @return String representing the weather pressure
 	 */
 	public double getPressure() {
 		return pressure;
@@ -210,7 +221,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the weather humidity
-	 * @returns String representing weather humidity
+	 * @return String representing weather humidity
 	 */
 	public int getHumidity() {
 		return humidity;
@@ -218,7 +229,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the wind speed 
-	 * @returns String representing the wind speed 
+	 * @return String representing the wind speed 
 	 */
 	public double getWindSpeed() {
 		return windSpeed;
@@ -226,7 +237,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the wind direction
-	 * @returns String representing wind direction
+	 * @return String representing wind direction
 	 */
 	public String getWindDirection() {
 		return windDirection;
@@ -234,38 +245,47 @@ public class WeatherData {
 
 	/**
 	 * Gets the low temperature 
-	 * @returns double representing low temperature
+	 * @return double representing low temperature
 	 */
 	public double getLow() {
 		return low;
 	}
 	
+	/**
+	 * Gets the low temperature in fahrenheit
+	 * @return double representing low temperature in fahrenheit
+	 */
 	public double getLowF(){
 		return (double)(low*1.8 + 32);
 	}
 
 	/**
 	 * Gets the high temperature 
-	 * @returns double representing high temperature
+	 * @return Gets the high temperature 
 	 */
 	public double getHigh() {
 		return high;
 	}
 	
+	/**
+	 * Gets the high temperature in fahrenheit
+	 * @return Gets the high temperature in fahrenheit
+	 */
 	public double getHighF(){
 		return (double)(high*1.8 + 32);
 	}
 
 	/**
 	 * Gets the icon representing the weather
-	 * @returns Image representing the weather
+	 * @return Image representing the weather
 	 */
 	public Image getIcon() {
 		return icon;
 	}
 	
 	/**
-	 * Gets the icon code
+	 * Returns String with the Icons file name
+	 * @return String
 	 */
 	public String getIconCode(){
 		try {
@@ -280,7 +300,7 @@ public class WeatherData {
 	
 	/**
 	 * Gets the JSONObject for 24hr temperature 
-	 * @returns JSONObject representing 24hr temperature
+	 * @return JSONObject representing 24hr temperature
 	 */
 	public JSONObject getForecast24hJSONObject() {
 		return forecast24hJSONObject;
@@ -288,7 +308,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the 24hr temperatures in an array 
-	 * @returns double array representing the 24hr temperatures 
+	 * @return double array representing the 24hr temperatures 
 	 */
 	public double[] getTemp24h() {
 		return temp24h;
@@ -304,7 +324,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the 24hr sky conditions in an array 
-	 * @returns String array representing the 24hr sky conditions
+	 * @return String array representing the 24hr sky conditions
 	 */
 	public String[] getSkyCondition24h() {
 		return skyCondition24h;
@@ -312,7 +332,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the 24hr temperatures in an array 
-	 * @returns String array representing the 24hr temperatures 
+	 * @return String array representing the 24hr temperatures 
 	 */
 	public String[] getDescription24h() {
 		return description24h;
@@ -377,13 +397,17 @@ public class WeatherData {
 		return description5d;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public int[] getPercentPreicipitation5d() {
 		return percentPrecipitation5d;
 	}
 
 	/**
 	 * Gets the Images of 5day temperatures in an array 
-	 * @returns Image array representing the 5day temperature icons 
+	 * @return Image array representing the 5day temperature icons 
 	 */
 	public Image[] getIcon5d() {
 		return icon5d;
@@ -391,12 +415,16 @@ public class WeatherData {
 
 	/**
 	 * Gets array of 5day low temperatures
-	 * @returns double array representing the 5day low temperatures
+	 * @return double array representing the 5day low temperatures
 	 */
 	public double[] getLow5d() {
 		return low5d;
 	}
 	
+	/**
+	 * Gets array of 5day low temperatures in fahrenheit
+	 * @return double array representing the 5day low temperatures in fahrenheit
+	 */
 	public double[] getLow5dF(){
 		double[] d = new double[5];
 		for (int i = 0; i < 5; i++){
@@ -407,12 +435,16 @@ public class WeatherData {
 
 	/**
 	 * Gets array of 5day high temperatures
-	 * @returns double array representing the 5day high temperatures
+	 * @return double array representing the 5day high temperatures
 	 */
 	public double[] getHigh5d() {
 		return high5d;
 	}
 	
+	/**
+	 * Gets array of 5day high temperatures in fahrenheit
+	 * @return double array representing the 5day high temperatures in fahrenheit
+	 */
 	public double[] getHigh5dF(){
 		double[] d = new double[5];
 		for (int i = 0; i < 5; i++){
@@ -423,6 +455,7 @@ public class WeatherData {
 
 	/**
 	 * Gets number of available days for 5 day forecast
+	 * @return int 
 	 */
 	public int getCNT5d(){
 		return cnt5d;
@@ -432,7 +465,7 @@ public class WeatherData {
 	
 	/**
 	 * Gets JSONObject of Mars' weather info
-	 * @returns JSONObject consists of Mars' weather info
+	 * @return JSONObject consists of Mars' weather info
 	 */
 	public JSONObject getMarsJSONObject() {
 		return marsJSONObject;
@@ -440,31 +473,24 @@ public class WeatherData {
 
 	/**
 	 * Gets the minimum temperature of Mars
-	 * @returns double representing the minimum temperature in Mars
+	 * @return double representing the minimum temperature in Mars
 	 */
 	public double getMinTempMars() {
 		return minTempMars;
 	}
 	
-	public double getMinMarsF(){
-		return (double)(minTempMars*1.8 + 32);
-	}
-
 	/**
 	 * Gets the maximum temperature of Mars
-	 * @returns double representing the maximum temperature in Mars
+	 * @return double representing the maximum temperature in Mars
 	 */
 	public double getMaxTempMars() {
 		return maxTempMars;
 	}
 	
-	public double getMaxMarsF(){
-		return (double)(maxTempMars*1.8 + 32);
-	}
 
 	/**
 	 * Gets the wind speed at Mars
-	 * @returns double representing the wind speed in Mars
+	 * @return double representing the wind speed in Mars
 	 */
 	public double getWindSpeedMars() {
 		return windSpeedMars;
@@ -472,7 +498,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the wind direction in Mars
-	 * @returns String representing the wind direction in Mars
+	 * @return String representing the wind direction in Mars
 	 */
 	public String getWindDirectionMars() {
 		return windDirectionMars;
@@ -480,7 +506,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the air pressure in Mars
-	 * @returns double representing the air pressure in Mars
+	 * @return double representing the air pressure in Mars
 	 */
 	public double getPressureMars() {
 		return pressureMars;

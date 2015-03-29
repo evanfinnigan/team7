@@ -10,9 +10,8 @@ import javax.swing.JPanel;
 
 public class MarsPanel {
 
-	// Attributes
+		// Attributes
 		private WeatherData dataMars;
-		private WeatherPreferences currentPrefs;
 		private TransparentPanel pane;
 		private Image bg;
 		private JLabel image_l;
@@ -24,21 +23,37 @@ public class MarsPanel {
 		private JLabel max_temp_l;
 		private JLabel pressure_l;
 		private BackgroundPanel bgpanel;
-
+		
+		/**
+		 * Constructor for the Mars Panel
+		 * @param data WeatherData object as input
+		 */
 		public MarsPanel(WeatherData data) {
 			this.dataMars = data;
 			initComponents();
 			createDisplay();
 		} 
 		
+		/**
+		 * Gets the JPanel (MarsPanel)
+		 * @return JPanel
+		 */
 		public JPanel getPanel(){
 			return pane;
 		}
 		
+		/**
+		 * Gets the BackgroundPanel
+		 * @return BackgroundPanel
+		 */
 		public BackgroundPanel getBackgroundPanel(){
 			return bgpanel;
 		}
 		
+		/**
+		 * Private method for the constructor
+		 * Initializes items on the panel
+		 */
 		private void initComponents() {
 			// create labels to display basic data
 			this.pane = new TransparentPanel();
@@ -88,6 +103,9 @@ public class MarsPanel {
 			this.pressure_l = pressurelabel;
 		}
 
+		/**
+		 * private method for creating the display
+		 */
 		private void createDisplay() {
 			
 			pane.setLayout(null);

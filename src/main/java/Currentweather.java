@@ -28,26 +28,24 @@ public class Currentweather {
 	private JLabel lastupdate_l;
 	private int counter;
 
-	/*
+	/**
 	 * Currentweather constructor
-	 * input: WeatherData data->data model for weather program, 
-	 * WeatherPreferences prefs-> user preferences for weather program
+	 * @param data WeatherData data model for weather program 
+	 * @param prefs WeatherPreferences for user preferences 
 	 */
 	public Currentweather(WeatherData data, WeatherPreferences prefs) {
 		this.currentData = data;
 		this.currentPrefs = prefs;
 		initComponents();
 		createLayout();
-
-		// createLayout();
 		applyPrefs(prefs);
-
 	}
-	/*
+	
+	/**
 	 * Currentweather constructor
-	 * input: WeatherData data->data model for weather program, 
-	 * WeatherPreferences prefs-> user preferences for weather program
-	 * String time -> current time in String format
+	 * @param data WeatherData data model for weather program
+	 * @param prefs WeatherPreferences for user preferences 
+	 * @param time String for current time in String format
 	 */
 	public Currentweather(WeatherData data, WeatherPreferences prefs, String time) {
 		this.currentData = data;
@@ -55,27 +53,32 @@ public class Currentweather {
 		this.time = time;
 		initComponents();
 		createLayout();
-
-		// createLayout();
 		applyPrefs(prefs);
 
 	}
 
+	/**
+	 * Gets the CurrentWeather panel 
+	 * @return pane TransparentPanel
+	 */
 	public TransparentPanel getPanel() {
 		return pane;
 	}
 
-	/* helper method to convert celcius to fahrenheit
-	 * input: temperature of type double in celcius units
-	 * output: temperature of type double in fahrenheit
+	
+	/**
+	 * Celcius to fahrenheit conversion
+	 * @param temp Temperature of type double in celcius units
+	 * @return Temperature of type double in fahrenheit
 	 */
 	private double convertctof(double temp) {
 		double n = ((temp * 1.8) + 32);
 		return n;
 	}
-	/*
+	
+	
+	/**
 	 * Initializes components to be used by the constructor 
-	 * 
 	 */
 	private void initComponents() {
 		// create fonts for text
@@ -148,9 +151,12 @@ public class Currentweather {
 		cityname.setFont(lrgfont);
 
 	}
-	/*
-	 * changes the label's text to the specified color
-	 * input: Color 
+	
+	
+	
+	/**
+	 * Changes the label's text to the specified color
+	 * @param acolor Color for labels text
 	 */
 	public void setLabelColor(Color acolor){
 		 sunrise_l.setForeground(acolor);;
@@ -167,9 +173,10 @@ public class Currentweather {
 		 cityname.setForeground(acolor);;
 		 lastupdate_l.setForeground(acolor);;
 	}
-	/*
+	
+	
+	/**
 	 * Creates the layout for the current weather
-	 * 
 	 */
 	private void createLayout() {
 		pane.setLayout(null);
@@ -226,11 +233,11 @@ public class Currentweather {
 		pane.validate();
 
 	}
-	/*
-	 * Apply preferences method
-	 * input: takes a WeatherPreferences object and applies preferences to 
-	 * the current weather panel
-	 * 
+	
+	
+	/**
+	 * Applies the preferences for Currentweather 
+	 * @param prefs WeatherPreferences object to apply preferences to the current weather panel
 	 */
 	public void applyPrefs(WeatherPreferences prefs) {
 

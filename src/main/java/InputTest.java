@@ -27,34 +27,66 @@ public class InputTest {
 	String cityName;
 	String timeOfLastRequest;
 
+	/**
+	 * Constructor takes a string(city name)
+	 * @param city User's input of city name to be tested later
+	 */
 	public InputTest(String city) {
 		testCity(city);
 	}
 
+	/**
+	 * Gets time of last request
+	 * @return timeOfLastRequest String
+	 */
 	public String getTime() {
 		return timeOfLastRequest;
 	}
 
+	/**
+	 * Returns true if the InputTest is valid, false otherwises
+	 * @return boolean checks if InputTest is valid
+	 */
 	public boolean getValid() {
 		return valid;
 	}
 
+	/**
+	 * Gets the CurrentWeather
+	 * @return JSONObject 
+	 */
 	public JSONObject getCurrentWeather() {
 		return currentWeather;
 	}
-
+	
+	/**
+	 * Gets the 24 Hour Forecast
+	 * @return JSONObject
+	 */
 	public JSONObject getForecast24h() {
 		return forecast24h;
 	}
-
+	
+	/**
+	 * Gets the 5 day Forecast
+	 * @return JSONObject
+	 */
 	public JSONObject getForecast5d() {
 		return forecast5d;
 	}
 
+	/**
+	 * Gets the City Name
+	 * @return String
+	 */
 	public String getCityName() {
 		return cityName;
 	}
 
+	/**
+	 * Tests if the requested data is complete
+	 * @param city String as the city name
+	 */
 	private void testCity(String city) {
 		try {
 			this.valid = true;
@@ -104,7 +136,12 @@ public class InputTest {
 		}
 	}
 
-	// Method to request JSON data from OpenWeatherMap API
+	/**
+	 * Method to request JSON data from OpenWeatherMap API
+	 * @param city String as the city name
+	 * @param url API URL
+	 * @return JSONObject with the input data 
+	 */
 	private JSONObject requestData(String city, String url) {
 		JSONObject json = new JSONObject();
 		try {
@@ -129,7 +166,13 @@ public class InputTest {
 		return json;
 	}
 
-	// Helper Method dataToString for requestData
+	 
+	/**
+	 * Helper Method for requesting data
+	 * @param rjson java.io.Reader
+	 * @return String of the data
+	 * @throws IOException
+	 */
 	private static String dataToString(Reader rjson) throws IOException {
 		StringBuilder jstring = new StringBuilder();
 		int letter;
