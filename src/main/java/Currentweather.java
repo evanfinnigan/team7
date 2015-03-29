@@ -214,7 +214,7 @@ public class Currentweather {
 		}
 	
 		pane.add(temp_l);
-		temp_l.setBounds(480, 90, 200, 60);
+		temp_l.setBounds(480, 90, 400, 60);
 
 		pane.add(image_l);
 		image_l.setBounds(430, 100, 40, 40);

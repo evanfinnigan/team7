@@ -769,6 +769,9 @@ public class TheWX {
 				}
 				background = new BackgroundPanel(img,BackgroundPanel.SCALED, 0.50f, 0.5f);
 				frame.setContentPane(background);
+				current.setLabelColor(Color.WHITE);
+				shortterm.setLabelColor(Color.WHITE);
+				longterm.setLabelColor(Color.WHITE);
 			}
 			
 			else{
