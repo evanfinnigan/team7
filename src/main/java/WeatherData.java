@@ -3,9 +3,6 @@ package main.java;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import javax.swing.*;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,24 +12,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.awt.Image;
-
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
 
 /**
  * 
  * @author Team7 CS-2212 2015
  *
  */
+
 public class WeatherData {
 
-	final static String currentURL = "http://api.openweathermap.org/data/2.5/weather?q=";
-	final static String forcast5dURL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=5&q=";
-	final static String forcast24hURL = "http://api.openweathermap.org/data/2.5/forecast?cnt=8&q=";
 	final static String imgURL = "http://openweathermap.org/img/w/";
 	final static String marsURL = "http://marsweather.ingenology.com/v1/latest/?format=json";
-	final static String appId = "c4b344fb48bf77d11a102795333fea60";
 	
 	// Attributes
 	private String timeOfLastRequest;
@@ -139,6 +130,7 @@ public class WeatherData {
 	}
 
 	// Getters
+	
 	/**
 	 * Gets the time of Last Request
 	 * @return String
@@ -338,11 +330,6 @@ public class WeatherData {
 		return description24h;
 	}
 
-	
-//	public int[] getPercentPreicipitation24h() {
-//		return percentPrecipitation24h;
-//	}
-
 	/**
 	 * Gets the Images of 24hr temperatures in an array 
 	 * @return Image array representing the 24hr temperature icons 
@@ -373,6 +360,10 @@ public class WeatherData {
 		return temp5d;
 	}
 	
+	/**
+	 * Gets the array of 5 day temperatures in Fahrenheit
+	 * @return double array of 5 day fahrenheit temperatures
+	 */
 	public double[] getTemp5dF(){
 		double[] d = new double[5];
 		for (int i = 0; i < 5; i++){
@@ -535,9 +526,6 @@ public class WeatherData {
 	public Image getIconMars() {
 		return iconMars;
 	}
-
-
-
 	
 	/**
 	 * Setter for sky condition
@@ -745,7 +733,6 @@ public class WeatherData {
 
 	// //24 hour Forecast Setters
 
-	// get temperature for the next 24 hours in 3 hour increments
 	/**
 	 * Setter for Short Term Temperature
 	 */
@@ -767,6 +754,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for short term forecast skycondition
+	 */
 	private void setSkyCondition24h() {
 		try {
 			String[] array = new String[8];
@@ -784,6 +774,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for short term weather descriptions
+	 */
 	private void setDescription24h() {
 		try {
 			String[] array = new String[8];
@@ -801,6 +794,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for short term icons
+	 */
 	private void setIcon24h() {
 		try {
 			Image[] array = new Image[8];
@@ -818,6 +814,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * setter for count (amount of data returned by the api)
+	 */
 	private void setCNT24h(){
 		try {
 			this.cnt24h = forecast24hJSONObject.getInt("cnt");
@@ -826,8 +825,11 @@ public class WeatherData {
 		}
 	}
 	
-	// private int[] percentPrecipitation24h;
-
+	// Long Term Forecast Setters
+	
+	/**
+	 * Setter for long term forecast temperature
+	 */
 	private void setTemp5d() {
 		try {
 			double[] array = new double[5];
@@ -846,6 +848,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for long term lows
+	 */
 	private void setLow5d() {
 		try {
 			double[] array = new double[5];
@@ -864,6 +869,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for long term highs
+	 */
 	private void setHigh5d() {
 		try {
 			double[] array = new double[5];
@@ -882,6 +890,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for long term sky conditions
+	 */
 	private void setSkyCondition5d() {
 		try {
 			String[] array = new String[5];
@@ -899,6 +910,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for long term descriptions
+	 */
 	private void setDescription5d() {
 		try {
 			String[] array = new String[5];
@@ -916,6 +930,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for long term icons
+	 */
 	private void setIcon5d() {
 		try {
 			Image[] array = new Image[5];
@@ -933,6 +950,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for long term count (number of days with data available)
+	 */
 	private void setCNT5d(){
 		try {
 			this.cnt5d = forecast5dJSONObject.getInt("cnt");
@@ -940,11 +960,12 @@ public class WeatherData {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	// private int[] percentPrecipitation5d;
 
 	// Mars Weather Setters
 
+	/**
+	 * Setter for mars minimum temperature
+	 */
 	private void setMinTempMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
@@ -956,6 +977,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for mars maximum temperature
+	 */
 	private void setMaxTempMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
@@ -967,6 +991,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for wind speed on mars
+	 */
 	private void setWindSpeedMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
@@ -978,6 +1005,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for wind direction on mars
+	 */
 	private void setWindDirectionMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
@@ -988,6 +1018,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for pressure on mars
+	 */
 	private void setPressureMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
@@ -999,6 +1032,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for humidity on mars
+	 */
 	private void setHumidityMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
@@ -1009,6 +1045,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for sky condition on mars
+	 */
 	private void setSkyConditionMars() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
@@ -1019,6 +1058,9 @@ public class WeatherData {
 		}
 	}
 
+	/**
+	 * Setter for icon on mars
+	 */
 	private void setMarsIcon() {
 		try {
 			JSONObject jInfo = marsJSONObject.getJSONObject("report");
@@ -1036,8 +1078,11 @@ public class WeatherData {
 		}
 	}
 
-	// Method to test if the City Name is correct and returns a valid JSON
-	// object
+	/**
+	 * Method to test validity of a JSONObject
+	 * @param JSONObject object
+	 * @return true if object is a valid JSON, false otherwise
+	 */
 	public static boolean testValidity(JSONObject object) {
 		try {
 			int jInfo = object.getInt("cod");
@@ -1053,6 +1098,11 @@ public class WeatherData {
 	}
 
 	// Method to request an image from Open Weather Map
+	/**
+	 * Method to request an Image from OpenWeatherMap API
+	 * @param info : image icon code
+	 * @return the image, or null if no image is available
+	 */
 	private static Image requestImage(String info) {
 		String imageURL = imgURL + info + ".png";
 		try {
@@ -1067,7 +1117,11 @@ public class WeatherData {
 		return null;
 	}
 
-	// Method to request Mars Weather JSON data
+	/**
+	 * Method to request Mars Weather JSON data
+	 * @param url : URL to request mars data
+	 * @return JSONObject representing the weather on Mars
+	 */
 	private static JSONObject requestMarsData(String url) {
 		JSONObject json = new JSONObject();
 		try {
@@ -1087,7 +1141,12 @@ public class WeatherData {
 		return json;
 	}
 
-	// Helper Method realAll for requestMarsData
+	/**
+	 * Helper method for requesting Mars Data
+	 * @param reader : BufferedReader
+	 * @return String representing the Mars JSONObject
+	 * @throws IOException
+	 */
 	private static String readAll(Reader reader) throws IOException {
 		StringBuilder stringBuilder = new StringBuilder();
 		int current;
@@ -1096,16 +1155,4 @@ public class WeatherData {
 		}
 		return stringBuilder.toString();
 	}
-
-	// Helper Test method for displaying icons
-	private static void iconTest(Image im) {
-		JLabel lblimg = new JLabel(new ImageIcon(im));
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		panel.add(lblimg);
-		frame.add(panel);
-		frame.pack();
-		frame.setVisible(true);
-	}
-
 }
