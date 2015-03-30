@@ -74,7 +74,7 @@ public class TheWX {
 
 	private JTextField txtAdd = new JTextField(15);
 	private JButton btnAdd = new JButton("Search");
-	private JButton btnRemove = new JButton("Remove");
+	private JButton btnRemove = new JButton("Remove from My Locations");
 	private Currentweather current;
 	private Forecast5Day longterm;
 	private Forecast24Hour shortterm;
@@ -85,7 +85,7 @@ public class TheWX {
 	private JList<String> list = new JList<>();
 
 
-	private JButton btnMars = new JButton("MARS!");
+	private JButton btnMars = new JButton("Show mars weather");
 
 	private BufferedImage img = null;
 	private BackgroundPanel background;
@@ -239,6 +239,7 @@ public class TheWX {
 
 				if (p.getShowMars()) {
 					p.setShowMars(false);
+					btnMars.setText("Show mars weather");
 					btnRemove.setEnabled(true);
 					mylocadd.setEnabled(true);
 					degree.setEnabled(true);
@@ -250,6 +251,7 @@ public class TheWX {
 					
 				} else {
 					p.setShowMars(true);
+					btnMars.setText("Hide mars weather");
 					btnRemove.setEnabled(false);
 					mylocadd.setEnabled(false);
 					degree.setEnabled(false);
@@ -531,14 +533,16 @@ public class TheWX {
 		});
 
 		combo.setEditable(true);
-
+		combo.setPreferredSize(new Dimension(150,30));
+		panel.setOpaque(false);
+		panel.add(degree);
 		panel.add(btnMars);
 		panel.add(refresh);
 		// panel.add(txtAdd);
 		// panel.add(btnAdd);
 		panel.add(combo);
 		panel.add(combobutton);
-		panel.add(degree);
+		
 		panel.add(mylocadd);
 		panel.add(btnRemove);
 
@@ -564,7 +568,12 @@ public class TheWX {
 		frame.add(footerpanel, BorderLayout.SOUTH);
 		footer.setFont(new Font("lrg", Font.PLAIN, 24));
 
+		JLabel ml = new JLabel("My Locations");
+		
+		ml.setForeground(Color.BLUE);
+		
 		eastPane = new JScrollPane(list);
+		eastPane.setColumnHeaderView(ml);
 		eastPane.setPreferredSize(new Dimension(100, 180));
 		frame.add(eastPane, BorderLayout.EAST);
 
@@ -675,7 +684,7 @@ public class TheWX {
 							.getResourceAsStream(
 									"./resources/images/fewclouds.jpg"));
 				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
+					System.out.println("Cannot read file for fewclouds.jpg: " + e);
 				}
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);
@@ -691,7 +700,7 @@ public class TheWX {
 							.getResourceAsStream(
 									"./resources/images/scatteredclouds.jpg"));
 				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
+					System.out.println("Cannot read file for scatteredclouds.jpg: " + e);
 				}
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);
@@ -707,7 +716,7 @@ public class TheWX {
 							.getResourceAsStream(
 									"./resources/images/brokenclouds.jpg"));
 				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
+					System.out.println("Cannot read file for brokenclouds.jpg: " + e);
 				}
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);
@@ -723,7 +732,7 @@ public class TheWX {
 							.getResourceAsStream(
 									"./resources/images/showerrain.jpg"));
 				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
+					System.out.println("Cannot read file for showerrain.jpg: " + e);
 				}
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);
@@ -743,7 +752,7 @@ public class TheWX {
 									.getResourceAsStream(
 											"./resources/images/rain.jpg"));
 				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
+					System.out.println("Cannot read file for rain.jpg: " + e);
 				}
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);
@@ -762,7 +771,7 @@ public class TheWX {
 							.getResourceAsStream(
 									"./resources/images/thunderstorm.jpg"));
 				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
+					System.out.println("Cannot read file for thunderstorm.jpg: " + e);
 				}
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);
@@ -782,7 +791,7 @@ public class TheWX {
 									.getResourceAsStream(
 											"./resources/images/snow.jpg"));
 				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
+					System.out.println("Cannot read file for snow.jpg: " + e);
 				}
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);
@@ -799,7 +808,7 @@ public class TheWX {
 									.getResourceAsStream(
 											"./resources/images/mist.jpg"));
 				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
+					System.out.println("Cannot read file for mist.jpg: " + e);
 				}
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);
@@ -837,7 +846,7 @@ public class TheWX {
 									.getResourceAsStream(
 											"./resources/images/mars.jpg"));
 				} catch (Exception e) {
-					System.out.println("Cannot read file for clear.jpg: " + e);
+					System.out.println("Cannot read file for mars.jpg: " + e);
 				}
 				background = new BackgroundPanel(img, BackgroundPanel.SCALED,
 						0.50f, 0.5f);

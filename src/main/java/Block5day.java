@@ -1,17 +1,31 @@
 package main.java;
 
+import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class Create5dayBlock extends TransparentPanel {
+public class Block5day extends TransparentPanel {
 	private JLabel temp_l;
 	private JLabel low_l;
 	private JLabel high_l;
 	private JLabel image_l;
 	private JLabel skycondition_l;
 	private JLabel weatherdescription_l;
+	
+	/**
+	 * default constructor
+	 */
+	public Block5day(){
+		temp_l = new JLabel();
+		low_l = new JLabel();
+		high_l = new JLabel();
+		image_l = new JLabel();
+		skycondition_l = new JLabel();
+		weatherdescription_l = new JLabel();
+	}
 	/**
 	 *  Constructor Create5DayBlock
 	 * @param temp JLabel to display the temperature
@@ -21,7 +35,7 @@ public class Create5dayBlock extends TransparentPanel {
 	 * @param skycond JLabel for the skycondition
 	 * @param img JLabel for the icon 
 	 */
-	public Create5dayBlock(JLabel temp, JLabel high, JLabel low, JLabel desc, JLabel skycond, JLabel img) {
+	public Block5day(JLabel temp, JLabel high, JLabel low, JLabel desc, JLabel skycond, JLabel img) {
 		
 		temp_l = new JLabel("t");
 		temp_l = temp;
@@ -74,5 +88,34 @@ public class Create5dayBlock extends TransparentPanel {
 		);
 		setLayout(groupLayout);
 			
+	}
+	/**
+	 * changes the block's labels foreground color
+	 * @param acolor Color
+	 */
+	public void setBlockLabelColor(Color acolor){
+		high_l.setForeground(acolor);
+		low_l.setForeground(acolor);
+		temp_l.setForeground(acolor);
+		skycondition_l.setForeground(acolor);
+		weatherdescription_l.setForeground(acolor);
+	}
+	public JLabel getTempHigh(){
+		return high_l;
+	}
+	public void setTempHigh(JLabel high){
+		this.high_l = high;
+	}
+	public JLabel getTempLow(){
+		return low_l;
+	}
+	public void setTempLow(JLabel low){
+		this.low_l = low;
+	}
+	public JLabel getTemp(){
+		return temp_l;
+	}
+	public void setTemp(JLabel temp){
+		this.temp_l = temp;
 	}
 }

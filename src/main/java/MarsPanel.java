@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class MarsPanel {
 
 		// Attributes
-		private WeatherData dataMars;
+		
 		private TransparentPanel pane;
 		private Image bg;
 		private JLabel image_l;
@@ -29,8 +29,8 @@ public class MarsPanel {
 		 * @param data WeatherData object as input
 		 */
 		public MarsPanel(WeatherData data) {
-			this.dataMars = data;
-			initComponents();
+			
+			initComponents(data);
 			createDisplay();
 		} 
 		
@@ -54,7 +54,7 @@ public class MarsPanel {
 		 * Private method for the constructor
 		 * Initializes items on the panel
 		 */
-		private void initComponents() {
+		private void initComponents(WeatherData data) {
 			// create labels to display basic data
 			this.pane = new TransparentPanel();
 			try {
@@ -66,28 +66,28 @@ public class MarsPanel {
 			
 			Font mainfont = new Font("med", Font.PLAIN, 30);
 			
-			JLabel minlabel = new JLabel("Min: " + dataMars.getMinTempMars() + "\u00b0" + "C");
+			JLabel minlabel = new JLabel("Min: " + data.getMinTempMars() + "\u00b0" + "C");
 			minlabel.setFont(mainfont);
 			minlabel.setForeground(new Color(255,255,255));
-			JLabel maxlabel = new JLabel("Max: " + dataMars.getMaxTempMars() + "\u00b0" + "C");
+			JLabel maxlabel = new JLabel("Max: " + data.getMaxTempMars() + "\u00b0" + "C");
 			maxlabel.setFont(mainfont);
 			maxlabel.setForeground(new Color(255,255,255));
-			JLabel windspeedlabel = new JLabel("Windspeed: " + dataMars.getWindSpeedMars());
+			JLabel windspeedlabel = new JLabel("Windspeed: " + data.getWindSpeedMars());
 			windspeedlabel.setFont(mainfont);
 			windspeedlabel.setForeground(new Color(255,255,255));
-			JLabel winddirectionlabel = new JLabel("Wind Direction: " + dataMars.getWindDirectionMars());
+			JLabel winddirectionlabel = new JLabel("Wind Direction: " + data.getWindDirectionMars());
 			winddirectionlabel.setFont(mainfont);
 			winddirectionlabel.setForeground(new Color(255,255,255));
-			JLabel pressurelabel = new JLabel("Pressure: " + dataMars.getPressure() + " Pa");
+			JLabel pressurelabel = new JLabel("Pressure: " + data.getPressure() + " Pa");
 			pressurelabel.setFont(mainfont);
 			pressurelabel.setForeground(new Color(255,255,255));
-			JLabel humiditylabel = new JLabel("Humidity: " + dataMars.getHumidityMars() + "%");
+			JLabel humiditylabel = new JLabel("Humidity: " + data.getHumidityMars() + "%");
 			humiditylabel.setFont(mainfont);
 			humiditylabel.setForeground(new Color(255,255,255));
-			JLabel skylabel = new JLabel("Sky Condition: " + dataMars.getSkyConditionMars());
+			JLabel skylabel = new JLabel("Sky Condition: " + data.getSkyConditionMars());
 			skylabel.setFont(mainfont);
 			skylabel.setForeground(new Color(255,255,255));
-			ImageIcon icon = new ImageIcon(dataMars.getIconMars());
+			ImageIcon icon = new ImageIcon(data.getIconMars());
 			Image img = icon.getImage();
 			Image newimg = img.getScaledInstance(140, 140,  java.awt.Image.SCALE_SMOOTH);
 			icon = new ImageIcon(newimg);
