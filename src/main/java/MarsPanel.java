@@ -64,7 +64,7 @@ public class MarsPanel {
 			}
 			this.bgpanel = new BackgroundPanel(bg);
 			
-			Font mainfont = new Font("med", Font.PLAIN, 30);
+			Font mainfont = new Font("med", Font.PLAIN, 24);
 			
 			JLabel minlabel = new JLabel("Min: " + data.getMinTempMars() + "\u00b0" + "C");
 			minlabel.setFont(mainfont);

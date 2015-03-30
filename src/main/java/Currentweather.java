@@ -12,9 +12,7 @@ import javax.swing.JLabel;
  *
  */
 public class Currentweather {
-
-	private WeatherData currentData;
-	private WeatherPreferences currentPrefs;
+	
 	private TransparentPanel pane;
 	private String time = "Unavailable";
 	private JLabel image_l;
@@ -38,10 +36,8 @@ public class Currentweather {
 	 * @param prefs WeatherPreferences for user preferences 
 	 */
 	public Currentweather(WeatherData data, WeatherPreferences prefs) {
-		this.currentData = data;
-		this.currentPrefs = prefs;
-		initComponents();
-		createLayout();
+		initComponents(data,prefs);
+		createLayout(prefs);
 		applyPrefs(prefs);
 	}
 	
@@ -52,11 +48,9 @@ public class Currentweather {
 	 * @param time String for current time in String format
 	 */
 	public Currentweather(WeatherData data, WeatherPreferences prefs, String time) {
-		this.currentData = data;
-		this.currentPrefs = prefs;
 		this.time = time;
-		initComponents();
-		createLayout();
+		initComponents(data,prefs);
+		createLayout(prefs);
 		applyPrefs(prefs);
 
 	}
@@ -84,7 +78,7 @@ public class Currentweather {
 	/**
 	 * Initializes components to be used by the constructor 
 	 */
-	private void initComponents() {
+	private void initComponents(WeatherData data, WeatherPreferences prefs) {
 		// create fonts for text
 		Font sprlrgfont = new Font("lrg", Font.PLAIN, 60);
 		Font lrgfont = new Font("lrg", Font.PLAIN, 24);
@@ -101,57 +95,57 @@ public class Currentweather {
 				+ time);
 		lastupdate_l.setFont(smlfont);
 
-		sunrise_l = new JLabel("Sunrise: " + currentData.getSunrise());
+		sunrise_l = new JLabel("Sunrise: " + data.getSunrise());
 		sunrise_l.setFont(medfont);
 
-		sunset_l = new JLabel("Sunset: " + currentData.getSunset());
+		sunset_l = new JLabel("Sunset: " + data.getSunset());
 		sunset_l.setFont(medfont);
 
-		windspeed_l = new JLabel("Wind Speed: " + currentData.getWindSpeed());
+		windspeed_l = new JLabel("Wind Speed: " + data.getWindSpeed());
 		windspeed_l.setFont(medfont);
 
 		winddirection_l = new JLabel("Wind Direction: "
-				+ currentData.getWindDirection());
+				+ data.getWindDirection());
 		winddirection_l.setFont(medfont);
 
-		weatherdescription_l = new JLabel("" + currentData.getDescription());
+		weatherdescription_l = new JLabel("" + data.getDescription());
 		weatherdescription_l.setFont(smlfont);
 
-		skycondition_l = new JLabel("" + currentData.getSkyConditionCurrent());
+		skycondition_l = new JLabel("" + data.getSkyConditionCurrent());
 		skycondition_l.setFont(lrgfont);
 
-		if (currentPrefs.getTempUnit().equalsIgnoreCase("F")) {
-			temp_l = new JLabel((int) currentData.getTempCurrentF() + "\u00b0" + "F");
+		if (prefs.getTempUnit().equalsIgnoreCase("F")) {
+			temp_l = new JLabel((int) data.getTempCurrentF() + "\u00b0" + "F");
 			temp_l.setFont(sprlrgfont);
 
-			tempmax_l = new JLabel("High: " + (int) currentData.getHighF() + "\u00b0" + "F");
+			tempmax_l = new JLabel("High: " + (int) data.getHighF() + "\u00b0" + "F");
 			tempmax_l.setFont(medfont);
 
-			tempmin_l = new JLabel("Low: " + (int) currentData.getLowF() + "\u00b0" + "F");
+			tempmin_l = new JLabel("Low: " + (int) data.getLowF() + "\u00b0" + "F");
 			tempmin_l.setFont(medfont);
 
 		} else {
-			temp_l = new JLabel((int) currentData.getTempCurrent() + "\u00b0" + "C");
+			temp_l = new JLabel((int) data.getTempCurrent() + "\u00b0" + "C");
 			temp_l.setFont(sprlrgfont);
 
-			tempmax_l = new JLabel("High: " + (int) currentData.getHigh() + "\u00b0" + "C");
+			tempmax_l = new JLabel("High: " + (int) data.getHigh() + "\u00b0" + "C");
 			tempmax_l.setFont(medfont);
 
 
-			tempmin_l = new JLabel("Low: " + ((int) (currentData.getLow())) + "\u00b0" + "C");
+			tempmin_l = new JLabel("Low: " + ((int) (data.getLow())) + "\u00b0" + "C");
 			tempmin_l.setFont(medfont);
 
 		}
 
-		humidity_l = new JLabel("Humidity: " + currentData.getHumidity() + "%");
+		humidity_l = new JLabel("Humidity: " + data.getHumidity() + "%");
 		humidity_l.setFont(medfont);
 
-		airpressure_l = new JLabel("Air Pressure: " + currentData.getPressure());
+		airpressure_l = new JLabel("Air Pressure: " + data.getPressure());
 		airpressure_l.setFont(medfont);
 
-		image_l = new JLabel(new ImageIcon(currentData.getIcon()));
+		image_l = new JLabel(new ImageIcon(data.getIcon()));
 		image_l.setPreferredSize(new Dimension(10, 10));
-		cityname = new JLabel(currentData.getCityName());
+		cityname = new JLabel(data.getCityName());
 		cityname.setFont(lrgfont);
 
 	}
@@ -182,7 +176,7 @@ public class Currentweather {
 	/**
 	 * Creates the layout for the current weather
 	 */
-	private void createLayout() {
+	private void createLayout(WeatherPreferences prefs) {
 		pane.setLayout(null);
 		
 		JLabel[] labels = new JLabel[6];
@@ -194,12 +188,12 @@ public class Currentweather {
 		labels[5] = sunset_l;
 		
 		Boolean[] show = new Boolean[6];
-		show[0] = currentPrefs.getShowHumidity();
-		show[1] = currentPrefs.getShowWindDirection();
-		show[2] = currentPrefs.getShowWindSpeed();
-		show[3] = currentPrefs.getShowPressure();
-		show[4] = currentPrefs.getShowSunrise();
-		show[5] = currentPrefs.getShowSunset();
+		show[0] = prefs.getShowHumidity();
+		show[1] = prefs.getShowWindDirection();
+		show[2] = prefs.getShowWindSpeed();
+		show[3] = prefs.getShowPressure();
+		show[4] = prefs.getShowSunrise();
+		show[5] = prefs.getShowSunset();
 
 		pane.add(cityname);
 		cityname.setBounds(20, 40, 250, 30);
