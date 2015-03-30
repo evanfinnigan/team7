@@ -91,6 +91,7 @@ public class TheWX {
 	private BackgroundPanel background;
 	
 	private JScrollPane eastPane;
+	private final static String imgFolder = "";
 
 	/**
 	 * Constructor for the TheWX class (User Interface)
@@ -665,7 +666,7 @@ public class TheWX {
 					img = ImageIO
 							.read(getClass().getClassLoader()
 									.getResourceAsStream(
-											"./resources/images/clear.jpg"));
+											imgFolder + "clear.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
@@ -682,7 +683,7 @@ public class TheWX {
 				try {
 					img = ImageIO.read(getClass().getClassLoader()
 							.getResourceAsStream(
-									"./resources/images/fewclouds.jpg"));
+									imgFolder + "fewclouds.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for fewclouds.jpg: " + e);
 				}
@@ -698,7 +699,7 @@ public class TheWX {
 				try {
 					img = ImageIO.read(getClass().getClassLoader()
 							.getResourceAsStream(
-									"./resources/images/scatteredclouds.jpg"));
+									imgFolder + "scatteredclouds.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for scatteredclouds.jpg: " + e);
 				}
@@ -714,7 +715,7 @@ public class TheWX {
 				try {
 					img = ImageIO.read(getClass().getClassLoader()
 							.getResourceAsStream(
-									"./resources/images/brokenclouds.jpg"));
+									imgFolder + "brokenclouds.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for brokenclouds.jpg: " + e);
 				}
@@ -730,7 +731,7 @@ public class TheWX {
 				try {
 					img = ImageIO.read(getClass().getClassLoader()
 							.getResourceAsStream(
-									"./resources/images/showerrain.jpg"));
+									imgFolder + "showerrain.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for showerrain.jpg: " + e);
 				}
@@ -750,7 +751,7 @@ public class TheWX {
 					img = ImageIO
 							.read(getClass().getClassLoader()
 									.getResourceAsStream(
-											"./resources/images/rain.jpg"));
+											imgFolder + "rain.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for rain.jpg: " + e);
 				}
@@ -769,7 +770,7 @@ public class TheWX {
 				try {
 					img = ImageIO.read(getClass().getClassLoader()
 							.getResourceAsStream(
-									"./resources/images/thunderstorm.jpg"));
+									imgFolder + "thunderstorm.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for thunderstorm.jpg: " + e);
 				}
@@ -789,7 +790,7 @@ public class TheWX {
 					img = ImageIO
 							.read(getClass().getClassLoader()
 									.getResourceAsStream(
-											"./resources/images/snow.jpg"));
+											imgFolder + "snow.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for snow.jpg: " + e);
 				}
@@ -806,7 +807,7 @@ public class TheWX {
 					img = ImageIO
 							.read(getClass().getClassLoader()
 									.getResourceAsStream(
-											"./resources/images/mist.jpg"));
+											imgFolder + "mist.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for mist.jpg: " + e);
 				}
@@ -823,7 +824,7 @@ public class TheWX {
 					img = ImageIO
 							.read(getClass().getClassLoader()
 									.getResourceAsStream(
-											"./resources/images/clear.jpg"));
+											"resources//clear.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for clear.jpg: " + e);
 				}
@@ -844,7 +845,7 @@ public class TheWX {
 					img = ImageIO
 							.read(getClass().getClassLoader()
 									.getResourceAsStream(
-											"./resources/images/mars.jpg"));
+											imgFolder + "mars.jpg"));
 				} catch (Exception e) {
 					System.out.println("Cannot read file for mars.jpg: " + e);
 				}
