@@ -867,6 +867,10 @@ public class TheWX {
 		frame.add(panel, BorderLayout.NORTH);
 		frame.add(tabbedPane, BorderLayout.CENTER);
 		eastPane = new JScrollPane(list);
+        JLabel ml = new JLabel("My Locations");
+		
+		ml.setForeground(Color.BLUE);
+		eastPane.setColumnHeaderView(ml);
 		eastPane.setPreferredSize(new Dimension(100, 180));
 		frame.add(eastPane, BorderLayout.EAST);
 
