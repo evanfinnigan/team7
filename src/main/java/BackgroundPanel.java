@@ -49,8 +49,8 @@ public class BackgroundPanel extends JPanel
 	 *  Set image as the background with the specified style and alignment
 	 *  @param image Image background image, 
 	 *  @param style int 
-	 *  @param alignmentX 
-	 *  @param alignmentY
+	 *  @param alignmentX float alignment for x direction
+	 *  @param alignmentY float alignment for y direction
 	 */
 	public BackgroundPanel(Image image, int style, float alignmentX, float alignmentY)
 	{
