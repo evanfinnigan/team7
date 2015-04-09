@@ -21,7 +21,7 @@ public class Forecast5Day extends TransparentPanel{
 	/**
 	 *  Forecast5Day constructor
 	 * @param data WeatherData data model used to construct this object
-	 * @param p WeatherPreferences user preferences
+	 * @param preferences WeatherPreferences user preferences
 	 */
 	public Forecast5Day(WeatherData data, WeatherPreferences preferences) {
 		initComponents(data,preferences);

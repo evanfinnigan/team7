@@ -69,7 +69,7 @@ public class Panel5day extends TransparentPanel {
 	}
 	 /**
 	  * changes the Labels foreground color in each of the 5 day Blocks
-	  * @param acolor
+	  * @param acolor Color.awt ex. Color.WHITE
 	  */
 	 public void setPanelLabelColor(Color acolor){
 		 panelday1.setBlockLabelColor(acolor);
@@ -81,7 +81,7 @@ public class Panel5day extends TransparentPanel {
 	 }
 	 /**
 	  * updates the Temperature labels in each of the 5 day blocks 
-	  * @param JLabel[] temperaturearray
+	  * @param temperaturearray JLabel[]
 	  */
 	 public void updateTemp(JLabel[] temperaturearray){
 		 panelday1.setTemp(temperaturearray[0]);

@@ -76,7 +76,7 @@ public class Block24hour extends TransparentPanel {
 	}
 	/**
 	 * Sets the Block's labels foreground color
-	 * @param acolor
+	 * @param acolor a color Color.awt
 	 */
 	public void setBlockLabelColor(Color acolor){
 		temp_l.setForeground(acolor);
@@ -86,7 +86,7 @@ public class Block24hour extends TransparentPanel {
 	}
 	/**
 	 * Sets the temp_l label to JLabel passed as input 
-	 * @param JLabel new temperature label
+	 * @param tempnew JLabel new temperature label
 	 */
 	public void setTemp(JLabel tempnew){
 		this.temp_l = tempnew;

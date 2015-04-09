@@ -22,7 +22,7 @@ public class Forecast24Hour extends TransparentPanel {
  /**
   * Forecast24Hour Constructor
   * @param data WeatherData current weatherdata model
-  * @param p WeatherPreferences current user preferences
+  * @param preferences WeatherPreferences current user preferences
   */
 
 	public Forecast24Hour(WeatherData data, WeatherPreferences preferences) {

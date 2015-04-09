@@ -109,7 +109,7 @@ public class Block5day extends TransparentPanel {
 	}
 	/**
 	 * setter for TempHigh
-	 * @param JLabel high
+	 * @param high JLabel containing the high temperature
 	 */
 	public void setTempHigh(JLabel high){
 		this.high_l = high;
@@ -123,7 +123,7 @@ public class Block5day extends TransparentPanel {
 	}
 	/**
 	 * setter for temp low
-	 * @param JLabel low
+	 * @param low JLabel containing temperature low
 	 */
 	public void setTempLow(JLabel low){
 		this.low_l = low;

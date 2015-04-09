@@ -26,7 +26,7 @@ public class BackgroundPanel extends JPanel
 
 	/**
 	 *  Set image as the background with the SCALED style
-	 *  @param input Image image
+	 *  @param image Image 
 	 */
 	public BackgroundPanel(Image image)
 	{
@@ -35,7 +35,8 @@ public class BackgroundPanel extends JPanel
 
 	/**
 	 *  Set image as the background with the specified style
-	 *  @param input Image image and an int representing the style
+	 *  @param image Image 
+	 *  @param style int an int representing the style
 	 */
 	public BackgroundPanel(Image image, int style)
 	{
@@ -46,7 +47,10 @@ public class BackgroundPanel extends JPanel
 
 	/**
 	 *  Set image as the background with the specified style and alignment
-	 *  @param input-> Image image background image, int style, float alignmentX,alignmentY
+	 *  @param image Image background image, 
+	 *  @param style int 
+	 *  @param alignmentX 
+	 *  @param alignmentY
 	 */
 	public BackgroundPanel(Image image, int style, float alignmentX, float alignmentY)
 	{
