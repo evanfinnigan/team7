@@ -7,6 +7,7 @@ Welcome to the Team 7 repository for our Weather app!
 This program is a weather application that allows the user to search for weather forecasts in different cities across the world. The project is implemented using java and uses the swing class. The weather forecasts are provided by OpenWeatherMap.org. Our program uses the JSON lightweight data-exchange format to retrieve data from OpenWeatherMap.org. 
 
 JSON website can be found at http://json.org/
+
 OpenWeatherMap.org website at http://openweathermap.org/
 
 Install
@@ -21,12 +22,17 @@ java -jar target/team7-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 Otherwise these links below will take you to the download pages for JDK8 and Maven.
 
-You can download the latest version of Java here: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+You can download the latest version of Java here:
+
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
 You can download maven here:
+
 https://maven.apache.org/download.cgi
 
 Usage
 A short video showing how to use program can be found on youtube at:
+
 https://www.youtube.com/watch?v=_UxUvmQ-K-U&feature=youtu.be
 
 Documentation
