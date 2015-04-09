@@ -97,6 +97,11 @@ public class Panel24hour extends TransparentPanel {
 		setLayout(groupLayout);
 
 	}
+	
+	/**
+	 * Sets the JLabels txt to the color supplied
+	 * @param acolor Color.awt
+	 */
 	public void setPanelLabelColor(Color acolor){
 		 panel_24hr.setBlockLabelColor(acolor);
 		 panel_21hr.setBlockLabelColor(acolor);
@@ -108,6 +113,10 @@ public class Panel24hour extends TransparentPanel {
 		 panel_3hr.setBlockLabelColor(acolor);
 		 this.repaint();
 	}
+	/**
+	 * updates the temperatures for each 3hr panel
+	 * @param temparray Array of size 8 of JLabels
+	 */
 	public void updateTemp(JLabel[] temparray){
 		 panel_24hr.setTemp(temparray[7]);
 		 panel_21hr.setTemp(temparray[6]);

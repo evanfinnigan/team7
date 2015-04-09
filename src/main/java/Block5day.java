@@ -100,21 +100,45 @@ public class Block5day extends TransparentPanel {
 		skycondition_l.setForeground(acolor);
 		weatherdescription_l.setForeground(acolor);
 	}
+	/**
+	 * Getter for Temp High
+	 * @return JLabel
+	 */
 	public JLabel getTempHigh(){
 		return high_l;
 	}
+	/**
+	 * setter for TempHigh
+	 * @param JLabel high
+	 */
 	public void setTempHigh(JLabel high){
 		this.high_l = high;
 	}
+	/**
+	 * getter for temp low
+	 * @return JLabel
+	 */
 	public JLabel getTempLow(){
 		return low_l;
 	}
+	/**
+	 * setter for temp low
+	 * @param JLabel low
+	 */
 	public void setTempLow(JLabel low){
 		this.low_l = low;
 	}
+	/**
+	 * getter for temp
+	 * @return JLabel temp
+	 */
 	public JLabel getTemp(){
 		return temp_l;
 	}
+	/**
+	 * setter for temp label
+	 * @param temp JLabel
+	 */
 	public void setTemp(JLabel temp){
 		this.temp_l = temp;
 	}
