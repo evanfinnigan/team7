@@ -5,6 +5,7 @@ Welcome to the Team 7 repository for our Weather app!
 
 
 This program is a weather application that allows the user to search for weather forecasts in different cities across the world. The project is implemented using java and uses the swing class. The weather forecasts are provided by OpenWeatherMap.org. Our program uses the JSON lightweight data-exchange format to retrieve data from OpenWeatherMap.org. 
+
 JSON website can be found at http://json.org/
 OpenWeatherMap.org website at http://openweathermap.org/
 
