@@ -9,16 +9,26 @@ public class Time {
 	// Attributes
 	private String convertedTimeData;
 	
-	// Constructor
+	/**
+	 * Constructor for a time object
+	 * @param rawTimeData
+	 */
 	public Time(long rawTimeData){
 		this.convertedTimeData = formatTime(rawTimeData);
 	}
 	
-	// Methods
+	/**
+	 * Method to get the converted time as a pretty string
+	 * @return converted time 
+	 */
 	public String getConverted(){
 		return convertedTimeData;
 	}
 	
+	/**
+	 * Mthod to get the current time
+	 * @return current time as string
+	 */
 	public String getCurrent(){
 		Date date = new Date();
 		DateFormat format = new SimpleDateFormat("h:mm a z ");
@@ -28,7 +38,11 @@ public class Time {
 		return converted;
 	}
 	
-	//Format time
+	/**
+	 * Method to format the time to a pretty string
+	 * @param utc
+	 * @return nicely formatted time string
+	 */
 	private static String formatTime(long utc){
 		utc = utc*1000;
 		TimeZone est = TimeZone.getTimeZone("America/Toronto");
