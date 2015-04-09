@@ -72,7 +72,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	
 	/**
 	 * gets the current location
-	 * @returns string
+	 * @return String
 	 */
 	public String getLocation(){
 		return defaultLocation;
@@ -80,6 +80,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	
 	/**
 	 * gets the list of locations
+	 * @return LinkedList<String>
 	 */
 	public LinkedList<String> getLocationList(){
 		return locationlist;
@@ -87,7 +88,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * sets the current location
-	 * @returns
+	 * @param newLocation String name of location
 	 */
 	public void setLocation(String newLocation) {
 		defaultLocation = newLocation;
@@ -95,6 +96,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	
 	/**
 	 * adds a location to the location list
+	 * @param location String name of location
 	 */
 	public void addLocation(String location) {
 		locationlist.add(location);
@@ -102,7 +104,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for the temperature unit being used
-	 * @returns String
+	 * @return String
 	 */
 	public String getTempUnit(){
 		return tempUnit;
@@ -110,7 +112,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * Setter for the current temperature unit
-	 * @returns
+	 * @param tempUn temp unit char "C" or "F"
 	 */
 	public void setTempUnit(String tempUn) {
 		this.tempUnit = tempUn;
@@ -118,7 +120,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for showing the sky condition
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowSky() {
 		return showSky;
@@ -126,7 +128,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for showing current temperature
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowTemperature() {
 		return showTemp;
@@ -134,7 +136,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for show wind pressure
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowPressure() {
 		return showPressure;
@@ -142,7 +144,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for show wind speed
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowWindSpeed() {
 		return windSpeed;
@@ -150,7 +152,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for if the current humidity is showing
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowHumidity() {
 		return showHumidity;
@@ -158,7 +160,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for if the sunset time is showing
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowSunset() {
 		return showSunset;
@@ -166,7 +168,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for if the sunrise time is showing
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowSunrise() {
 		return showSunrise;
@@ -174,7 +176,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for if the wind direction is showing
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowWindDirection() {
 		return showWindDirection;
@@ -182,7 +184,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for if the current weather icon is showing
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowIcon(){
 		return showIcon;
@@ -190,7 +192,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for if the percentage of percipitation is showing
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowPOP() {
 		return showPOP;
@@ -198,7 +200,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for if the daily low is showing
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowLow() {
 		return showLow;
@@ -206,7 +208,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for if the daily high is showing
-	 * @returns boolean
+	 * @return boolean
 	 */
 	public boolean getShowHigh() {
 		return showHigh;
@@ -214,7 +216,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * getter for if the current humidity is showing
-	 * @returns String
+	 * @return String
 	 */
 	public boolean getShowDescription() {
 		return showDescription;
@@ -222,7 +224,7 @@ public class WeatherPreferences implements java.io.Serializable{
 	
 	/**
 	 * getter for mars
-	 * @returns String
+	 * @return String
 	 */
 	public boolean getShowMars() {
 		return showMars;
@@ -230,7 +232,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * setter to hide or show the sky condition
-	 * @returns
+	 * @param set boolean
 	 */
 	public void setShowSky(boolean set) {
 		this.showSky = set;
@@ -238,7 +240,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * setter to hide or show the sky condition
-	 * @returns
+	 * @param set boolean
 	 */
 	public void setShowTemperature(boolean set) {
 		this.showTemp = set;
@@ -246,7 +248,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	/**
 	 * setter to hide or show the pressure level
-	 * @returns
+	 * @param set boolean
 	 */ 
 	 public void setShowPressure(boolean set) {
 		 this.showPressure = set;
@@ -254,7 +256,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the current wind speed
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowWindSpeed(boolean set) {
 		 this.windSpeed = set;
@@ -262,7 +264,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the current humidity
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowHumidity(boolean set) {
 		 this.showHumidity = set;
@@ -270,7 +272,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the sunset time
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowSunset(boolean set) {
 		 this.showSunset = set;
@@ -278,7 +280,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the current day's sunrise time
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowSunrise(boolean set) {
 		 this.showSunrise = set;
@@ -286,7 +288,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the current wind direction
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowWindDirection(boolean set) {
 		 this.showWindDirection = set;
@@ -294,7 +296,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the current weather condition's icon
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowIcon(boolean set){
 		 this.showIcon = set;
@@ -302,7 +304,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the current percentage of percipitation
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowPOP(boolean set) {
 		 this.showPOP = set;
@@ -310,7 +312,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the daily low temperature
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowLow(boolean set) {
 		 this.showLow = set;
@@ -318,7 +320,7 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the daily high temperature
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowHigh(boolean set) {
 		 this.showHigh = set;
@@ -326,15 +328,15 @@ public class WeatherPreferences implements java.io.Serializable{
 
 	 /**
 	  * setter to hide or show the description the current weather
-	  * @returns
+	  * @param set boolean
 	  */
 	 public void setShowDescription(boolean set) {
 		 this.showDescription = set;
 	 }
 	 
-	 /**
+	     /**
 		 * setter to hide or show mars
-		 * @returns
+		 * @param set boolean
 		 */ 
 		 public void setShowMars(boolean set) {
 			 this.showMars = set;

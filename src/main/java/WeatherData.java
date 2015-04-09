@@ -165,7 +165,7 @@ public class WeatherData {
 
 	/**
 	 * Gets the description of the weather
-	 * @returns String representing weather description
+	 * @return String representing weather description
 	 */
 	public String getDescription() {
 		return description;
@@ -389,8 +389,8 @@ public class WeatherData {
 	}
 
 	/**
-	 *
-	 * @return
+	 * Getter for 5day precipitation
+	 * @return int[] array  
 	 */
 	public int[] getPercentPreicipitation5d() {
 		return percentPrecipitation5d;
@@ -1080,7 +1080,7 @@ public class WeatherData {
 
 	/**
 	 * Method to test validity of a JSONObject
-	 * @param JSONObject object
+	 * @param object JSONObject object
 	 * @return true if object is a valid JSON, false otherwise
 	 */
 	public static boolean testValidity(JSONObject object) {
